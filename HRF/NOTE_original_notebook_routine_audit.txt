@@ -1,0 +1,22 @@
+Basic original-notebook routine audit
+=====================================
+
+I scanned the uploaded original notebook for simple ClearAll[...] routine names and
+compared them with the current development files.  The graph drawing routine
+`drawGraphFromPySecDecInput` was missing and has now been restored in
+HiddenRegionFinder.wl.
+
+The following names also appear in the original notebook but are not present as
+standalone public routines in the current development files:
+
+  checkBoundaryListAgainstReference
+  classifyHiddenRegionLocations
+  findVariableRelabeling
+  interestingBoundaryStratumQ
+  internalValences
+
+These look like older notebook-only diagnostic/comparison helpers rather than
+routines needed by the current 03--08 development examples.  I have not imported
+them blindly because some of their logic may have been superseded by the newer
+boundary/scaling summary tables.  If any of them is needed again, it should be
+ported deliberately and tested against the current data structures.

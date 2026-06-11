@@ -1,0 +1,123 @@
+Notebook[{
+Cell["Comparison of the last coverage criterion", "Title"],
+Cell["This notebook checks whether the last coverage criterion makes a difference. It counts a variable as covered if it appears either in an F_SL monomial at W_SL or in a surviving U+F_obs monomial at W_HR. It also compares this against the stricter post-cancellation-only coverage test.", "Text"],
+Cell[BoxData["$HRFScalingReport = False;\nGet[NotebookDirectory[]<>\"HiddenRegionFinder.wl\"];"], "Input"],
+Cell["Run the five-point spacelike-collinear example. If the example has already been run in this kernel, you may skip this cell and run only the summary cells below.", "Text"],
+Cell[BoxData["Get[NotebookDirectory[]<>\"03_FivePoint_Spacelike_Collinear.wl\"];"], "Input"],
+Cell["Helper functions", "Section"],
+Cell[BoxData["
+ClearAll[
+  hrfData, hrfAccepted, hrfSelectedCandidate, hrfSafeComplement,
+  hrfLastCriterionRow, hrfLastCriterionSummary,
+  hrfCasesWhereLastCriterionMatters, hrfCoverageCaseReport,
+  hrfAllCoverageRows, hrfScalingVectorSummary
+];
+
+hrfData[row_Association] := Lookup[row, \"CoverageLPScalingData\", <||>];
+
+hrfAccepted[row_Association] := Module[{d = hrfData[row]},
+  If[AssociationQ[d], Lookup[d, \"AcceptedCandidateDiagnostics\", {}], {}]
+];
+
+hrfSelectedCandidate[row_Association] := Module[{acc = hrfAccepted[row]},
+  If[acc === {}, <||>, First[acc]]
+];
+
+hrfSafeComplement[a_, b_] := Quiet @ Check[Complement[a, b], Missing[\"NotLists\"]];
+
+hrfLastCriterionRow[row_Association, label_:Automatic, pos_:Automatic] := Module[
+  {d, c, postVars, fslVars, fullVars, missingPost, missingFull, onlyFSL, scaling},
+  d = hrfData[row];
+  c = hrfSelectedCandidate[row];
+  postVars = Lookup[c, \"VariablesInPostCancellationLeadingSupport\", {}];
+  fslVars = Lookup[c, \"VariablesCoveredByFSLAtWSL\", {}];
+  fullVars = Lookup[c, \"VariablesCoveredByLeadingRegionMonomials\", {}];
+  missingPost = Lookup[c, \"VariablesMissingFromPostCancellationLeadingSupport\", Missing[\"NoKey\"]];
+  If[missingPost === Missing[\"NoKey\"],
+    missingPost = hrfSafeComplement[Lookup[row, \"RemainingVars\", {}], postVars]
+  ];
+  missingFull = Lookup[c, \"VariablesMissingFromLeadingRegionCoverage\", Missing[\"NoKey\"]];
+  onlyFSL = hrfSafeComplement[fslVars, postVars];
+  scaling = If[AssociationQ[d], Lookup[d, \"Scaling\", Missing[\"NoScaling\"]], Missing[\"NoData\"]];
+  <|
+    \"Set\" -> label,
+    \"Position\" -> pos,
+    \"GraphIndex\" -> Lookup[row, \"GraphIndex\", Missing[\"NoGraphIndex\"]],
+    \"ZeroVars\" -> Lookup[row, \"ZeroVars\", Missing[\"InteriorOrMissing\"]],
+    \"RemainingVars\" -> Lookup[row, \"RemainingVars\", Missing[\"NoRemainingVars\"]],
+    \"SelectedScaling\" -> scaling,
+    \"CandidateCount\" -> If[AssociationQ[d], Lookup[d, \"CandidateCount\", Missing[\"NoCandidateCount\"]], Missing[\"NoData\"]],
+    \"AcceptedCount\" -> If[AssociationQ[d], Lookup[d, \"AcceptedCount\", Missing[\"NoAcceptedCount\"]], Missing[\"NoData\"]],
+    \"W_SL\" -> Lookup[c, \"FSLWeight\", Missing[\"NoSelectedCandidate\"]],
+    \"W_HR\" -> Lookup[c, \"PostCancellationLeadingWeight\", Missing[\"NoSelectedCandidate\"]],
+    \"Gap\" -> Lookup[c, \"HierarchyGapPostLPminusFSL\", Missing[\"NoSelectedCandidate\"]],
+    \"UnitGapQ\" -> Lookup[c, \"UnitGapQ\", Missing[\"NoSelectedCandidate\"]],
+    \"FSLUniformQ\" -> Lookup[c, \"FSLUniformQ\", Missing[\"NoSelectedCandidate\"]],
+    \"HierarchyQ\" -> Lookup[c, \"HiddenDominatesPostCancellationLPQ\", Missing[\"NoSelectedCandidate\"]],
+    \"PostCancellationOnlyCoverageQ\" -> Lookup[c, \"PostCancellationLeadingCoverageQ\", Missing[\"NoSelectedCandidate\"]],
+    \"LastCriterionCoverageQ\" -> Lookup[c, \"LeadingRegionCoverageQ\", Missing[\"NoSelectedCandidate\"]],
+    \"MissingIfPostOnly\" -> missingPost,
+    \"MissingWithLastCriterion\" -> missingFull,
+    \"CoveredOnlyByFSLAtWSL\" -> onlyFSL,
+    \"FSLVariablesAtWSL\" -> fslVars,
+    \"PostCancellationVariablesAtWHR\" -> postVars,
+    \"AllCoveredVariables\" -> fullVars,
+    \"FailedConditions\" -> Lookup[c, \"FailedConditions\", Missing[\"NoSelectedCandidate\"]]
+  |>
+];
+
+hrfLastCriterionSummary[rows_List, label_:Automatic] := Dataset @ Table[
+  hrfLastCriterionRow[rows[[i]], label, i],
+  {i, Length[rows]}
+];
+
+hrfAllCoverageRows[] := Join[
+  Table[hrfLastCriterionRow[InteriorScalingData2Loop7Prop[[i]], \"Interior7\", i], {i, Length[InteriorScalingData2Loop7Prop]}],
+  Table[hrfLastCriterionRow[InteriorScalingData2Loop8Prop[[i]], \"Interior8\", i], {i, Length[InteriorScalingData2Loop8Prop]}],
+  Table[hrfLastCriterionRow[BoundaryScalingData2Loop7Prop[[i]], \"Boundary7\", i], {i, Length[BoundaryScalingData2Loop7Prop]}],
+  Table[hrfLastCriterionRow[BoundaryScalingData2Loop8Prop[[i]], \"Boundary8\", i], {i, Length[BoundaryScalingData2Loop8Prop]}]
+];
+
+hrfCasesWhereLastCriterionMatters[] := Dataset @ Select[
+  hrfAllCoverageRows[],
+  TrueQ[#PostCancellationOnlyCoverageQ === False && #LastCriterionCoverageQ === True] ||
+    (ListQ[#CoveredOnlyByFSLAtWSL] && #CoveredOnlyByFSLAtWSL =!= {}) &
+];
+
+hrfScalingVectorSummary[] := Dataset @ CountsBy[
+  Select[hrfAllCoverageRows[], ListQ[#SelectedScaling] &],
+  {#Set, #SelectedScaling} &
+];
+
+hrfCoverageCaseReport[rows_List, pos_Integer:1, n_Integer:10] := Module[{row, d, acc, c, near},
+  row = rows[[pos]];
+  d = hrfData[row];
+  acc = hrfAccepted[row];
+  c = hrfSelectedCandidate[row];
+  near = If[AssociationQ[d], Lookup[d, \"NearMissDiagnostics\", {}], {}];
+  Dataset @ {
+    <|\"Section\" -> \"Row\", \"Data\" -> KeyTake[row, {\"GraphIndex\", \"ZeroVars\", \"RemainingVars\"}]|>,
+    <|\"Section\" -> \"SelectedCriterionSummary\", \"Data\" -> hrfLastCriterionRow[row, \"case\", pos]|>,
+    <|\"Section\" -> \"SelectedCandidateFull\", \"Data\" -> c|>,
+    <|\"Section\" -> \"FirstAcceptedCandidates\", \"Data\" -> Take[acc, UpTo[n]]|>,
+    <|\"Section\" -> \"FirstNearMisses\", \"Data\" -> Take[near, UpTo[n]]|>
+  }
+];
+"], "Input"],
+Cell["Compact summaries", "Section"],
+Cell["These four tables show selected scaling, candidate counts, hierarchy gap, and whether coverage comes only from post-cancellation W_HR monomials or also needs F_SL monomials at W_SL.", "Text"],
+Cell[BoxData["hrfLastCriterionSummary[InteriorScalingData2Loop7Prop, \"Interior7\"]"], "Input"],
+Cell[BoxData["hrfLastCriterionSummary[InteriorScalingData2Loop8Prop, \"Interior8\"]"], "Input"],
+Cell[BoxData["hrfLastCriterionSummary[BoundaryScalingData2Loop7Prop, \"Boundary7\"]"], "Input"],
+Cell[BoxData["hrfLastCriterionSummary[BoundaryScalingData2Loop8Prop, \"Boundary8\"]"], "Input"],
+Cell["Did the last criterion make a difference?", "Section"],
+Cell["This table lists cases where post-cancellation-only coverage fails, or where some variable is covered only by an F_SL monomial at W_SL. A non-empty table means the last criterion changed the interpretation and may change accepted candidates.", "Text"],
+Cell[BoxData["hrfCasesWhereLastCriterionMatters[]"], "Input"],
+Cell["Scaling-vector counts", "Section"],
+Cell["This counts selected scaling vectors by data set, useful for spotting unexpected changes such as all variables scaling uniformly.", "Text"],
+Cell[BoxData["hrfScalingVectorSummary[]"], "Input"],
+Cell["Detailed case inspection", "Section"],
+Cell["Change the list and position index to inspect a particular case. The report includes the full selected candidate, first accepted candidates, and near-misses.", "Text"],
+Cell[BoxData["hrfCoverageCaseReport[InteriorScalingData2Loop7Prop, 1]"], "Input"],
+Cell[BoxData["hrfCoverageCaseReport[BoundaryScalingData2Loop8Prop, 1]"], "Input"]
+}]

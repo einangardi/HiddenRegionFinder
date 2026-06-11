@@ -1,0 +1,108 @@
+Notebook[{
+Cell["Coverage-scaling constraint debugging", "Title"],
+Cell["This notebook is meant to debug the new scaling criterion. Run the package/example cells first, then inspect individual graph/case entries without recomputing everything repeatedly.", "Text"],
+Cell[BoxData["Get[NotebookDirectory[]<>\"HiddenRegionFinder.wl\"];"], "Input"],
+Cell["Optional: run the full five-point example. This may take some time. If you already ran it in this kernel, skip this cell.", "Text"],
+Cell[BoxData["Get[NotebookDirectory[]<>\"03_FivePoint_Spacelike_Collinear.wl\"];"], "Input"],
+Cell["Helpers for reading the scaling diagnostics.", "Section"],
+Cell[BoxData["
+ClearAll[hrfScalingData, hrfShortCandidate, hrfScalingSummary, hrfScalingCaseReport, hrfAcceptedCandidates, hrfNearMisses];
+
+hrfScalingData[row_Association] := Lookup[row, \"CoverageLPScalingData\", <||>];
+
+hrfShortCandidate[c_Association] := KeyTake[c, {
+  \"ScalingVector\", \"VariableScaling\",
+  \"FSLWeight\", \"ULeadingWeight\", \"HierarchyGapUminusFSL\", \"UnitGapQ\",
+  \"FSLComponentsUniformQ\", \"FSLComponentsCommonWeightQ\",
+  \"HiddenDominatesUQ\", \"HiddenDominatesFObsQ\",
+  \"FSLLeadingSupport\", \"FSLMissingVariables\",
+  \"VariablesInLeadingSupport\", \"VariablesMissingFromLeadingSupport\",
+  \"LeadingSupportCoverageQ\", \"AcceptedQ\", \"FailedConditions\"
+}];
+
+hrfScalingSummary[rows_List] := Dataset @ Table[
+  Module[{row = rows[[i]], data, acc, first},
+    data = hrfScalingData[row];
+    acc = If[AssociationQ[data], Lookup[data, \"AcceptedCandidateDiagnostics\", {}], {}];
+    first = If[acc === {}, <||>, First[acc]];
+    <|
+      \"Position\" -> i,
+      \"GraphIndex\" -> Lookup[row, \"GraphIndex\", Missing[\"NoGraphIndex\"]],
+      \"ZeroVars\" -> Lookup[row, \"ZeroVars\", Missing[\"NoZeroVars\"]],
+      \"RemainingVars\" -> Lookup[row, \"RemainingVars\", Missing[\"NoRemainingVars\"]],
+      \"CandidateCount\" -> If[AssociationQ[data], Lookup[data, \"CandidateCount\", Missing[\"NoCandidateCount\"]], Missing[\"NoData\"]],
+      \"AcceptedCount\" -> If[AssociationQ[data], Lookup[data, \"AcceptedCount\", Missing[\"NoAcceptedCount\"]], Missing[\"NoData\"]],
+      \"SelectedScaling\" -> If[AssociationQ[data], Lookup[data, \"Scaling\", Missing[\"NoScaling\"]], Missing[\"NoData\"]],
+      \"SelectedGap\" -> Lookup[first, \"HierarchyGapUminusFSL\", Missing[\"NoAcceptedCandidate\"]],
+      \"SelectedUnitGapQ\" -> Lookup[first, \"UnitGapQ\", Missing[\"NoAcceptedCandidate\"]],
+      \"SelectedFSLMissingVars\" -> Lookup[first, \"FSLMissingVariables\", Missing[\"NoAcceptedCandidate\"]],
+      \"SelectedMissingLeadingVars\" -> Lookup[first, \"VariablesMissingFromLeadingSupport\", Missing[\"NoAcceptedCandidate\"]]
+    |>
+  ],
+  {i, Length[rows]}
+];
+
+hrfAcceptedCandidates[rows_List, pos_Integer:1, n_Integer:20] := Module[{data, acc},
+  data = hrfScalingData[rows[[pos]]];
+  acc = If[AssociationQ[data], Lookup[data, \"AcceptedCandidateDiagnostics\", {}], {}];
+  Dataset[hrfShortCandidate /@ Take[acc, UpTo[n]]]
+];
+
+hrfNearMisses[rows_List, pos_Integer:1, n_Integer:20] := Module[{data, miss},
+  data = hrfScalingData[rows[[pos]]];
+  miss = If[AssociationQ[data], Lookup[data, \"NearMissDiagnostics\", {}], {}];
+  Dataset[hrfShortCandidate /@ Take[miss, UpTo[n]]]
+];
+
+hrfScalingCaseReport[rows_List, pos_Integer:1, n_Integer:12] := Module[{row, data, acc, miss, first},
+  row = rows[[pos]];
+  data = hrfScalingData[row];
+  acc = If[AssociationQ[data], Lookup[data, \"AcceptedCandidateDiagnostics\", {}], {}];
+  miss = If[AssociationQ[data], Lookup[data, \"NearMissDiagnostics\", {}], {}];
+  first = If[acc === {}, <||>, First[acc]];
+  <|
+    \"Row\" -> KeyTake[row, {\"GraphIndex\", \"ZeroVars\", \"RemainingVars\"}],
+    \"Criteria\" -> Lookup[data, \"Criteria\", <||>],
+    \"CandidateCount\" -> Lookup[data, \"CandidateCount\", Missing[\"NoCandidateCount\"]],
+    \"AcceptedCount\" -> Lookup[data, \"AcceptedCount\", Missing[\"NoAcceptedCount\"]],
+    \"SelectedScaling\" -> Lookup[data, \"Scaling\", Missing[\"NoScaling\"]],
+    \"SelectedCandidateDiagnostics\" -> hrfShortCandidate[first],
+    \"FirstAcceptedCandidates\" -> (hrfShortCandidate /@ Take[acc, UpTo[n]]),
+    \"FirstNearMisses\" -> (hrfShortCandidate /@ Take[miss, UpTo[n]])
+  |>
+];
+"], "Input"],
+Cell["Summaries for the computed 7- and 8-propagator scaling data.", "Section"],
+Cell[BoxData["hrfScalingSummary[InteriorScalingData2Loop7Prop]"], "Input"],
+Cell[BoxData["hrfScalingSummary[InteriorScalingData2Loop8Prop]"], "Input"],
+Cell[BoxData["hrfScalingSummary[BoundaryScalingData2Loop7Prop]"], "Input"],
+Cell[BoxData["hrfScalingSummary[BoundaryScalingData2Loop8Prop]"], "Input"],
+Cell["Inspect one case in detail. Change the position index as needed. For example, position 1 of InteriorScalingData2Loop7Prop corresponds to the first 7-propagator graph.", "Section"],
+Cell[BoxData["hrfScalingCaseReport[InteriorScalingData2Loop7Prop, 1]"], "Input"],
+Cell[BoxData["hrfAcceptedCandidates[InteriorScalingData2Loop7Prop, 1, 30]"], "Input"],
+Cell[BoxData["hrfNearMisses[InteriorScalingData2Loop7Prop, 1, 30]"], "Input"],
+Cell["Raw ingredients for checking the mathematical constraints on one case.", "Section"],
+Cell[BoxData["
+case = InteriorScalingData2Loop7Prop[[1]];
+data = case[\"CoverageLPScalingData\"];
+<|
+  \"Variables\" -> case[\"RemainingVars\"],
+  \"U\" -> case[\"U\"],
+  \"FSL\" -> case[\"FSL\"],
+  \"Obstruction\" -> case[\"Obstruction\"],
+  \"SelectedScaling\" -> data[\"Scaling\"],
+  \"SelectedDiagnostics\" -> hrfShortCandidate[First[data[\"AcceptedCandidateDiagnostics\"]]]
+|>
+"], "Input"],
+Cell["Test a manually chosen scaling vector against the same criteria. Edit v below.", "Section"],
+Cell[BoxData["
+v = {-1, -1, -1, -1, -1, -1, -1};
+coverageConstraintDiagnosticFromRows[
+  v,
+  polynomialExponentRows[#, case[\"RemainingVars\"]]& /@ DeleteCases[Flatten[{case[\"FSL\"]}], 0],
+  polynomialExponentRows[case[\"U\"], case[\"RemainingVars\"]],
+  {},
+  case[\"RemainingVars\"]
+] // hrfShortCandidate
+"], "Input"]
+}, WindowTitle->"Coverage scaling debug"]

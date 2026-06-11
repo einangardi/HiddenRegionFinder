@@ -1,0 +1,13 @@
+Notebook[{
+Cell["Graph drawings for selected topologies", "Title"],
+Cell["This notebook displays the seed graph and the opened 7- and 8-propagator topologies.  Internal edges are labelled x0,x1,... in the same convention as the scaling vectors.", "Text"],
+Cell[BoxData["$HRFScalingReport = False;\nGet[NotebookDirectory[]<>\"HiddenRegionFinder.wl\"];\nGet[NotebookDirectory[]<>\"03_FivePoint_Spacelike_Collinear.wl\"];"], "Input"],
+Cell["Seed topology", "Section"],
+Cell[BoxData["Seed5ptGraphDrawing"], "Input"],
+Cell["Seven-propagator topologies", "Section"],
+Cell[BoxData["Table[\n  Column[{GraphDrawings2Loop7Prop[[i, \"TopologyTeX\"]], GraphDrawings2Loop7Prop[[i, \"Graph\"]]}],\n  {i, Length[GraphDrawings2Loop7Prop]}\n]"], "Input"],
+Cell["Eight-propagator topologies", "Section"],
+Cell[BoxData["Table[\n  Column[{GraphDrawings2Loop8Prop[[i, \"TopologyTeX\"]], GraphDrawings2Loop8Prop[[i, \"Graph\"]]}],\n  {i, Length[GraphDrawings2Loop8Prop]}\n]"], "Input"],
+Cell["Only topologies with hidden regions", "Section"],
+Cell[BoxData["hidden7 = DeleteDuplicates[Lookup[TopologyHiddenRegionRows2Loop7Prop, \"Topology\"]];\nhidden8 = DeleteDuplicates[Lookup[TopologyHiddenRegionRows2Loop8Prop, \"Topology\"]];\n\nColumn[Join[\n  {Style[\"7-propagator hidden-region topologies\", Bold]},\n  Table[\n    With[{row = FirstCase[GraphDrawings2Loop7Prop, r_ /; r[\"TopologyName\"] === top]},\n      Column[{row[\"TopologyTeX\"], row[\"Graph\"]}]\n    ],\n    {top, hidden7}\n  ],\n  {Style[\"8-propagator hidden-region topologies\", Bold]},\n  Table[\n    With[{row = FirstCase[GraphDrawings2Loop8Prop, r_ /; r[\"TopologyName\"] === top]},\n      Column[{row[\"TopologyTeX\"], row[\"Graph\"]}]\n    ],\n    {top, hidden8}\n  ]\n]]"], "Input"]
+}]

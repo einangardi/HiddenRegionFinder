@@ -1,0 +1,22 @@
+Notebook[{
+Cell["Topology hidden-region summary", "Title"],
+Cell["This notebook produces a compact table for the five-point spacelike-collinear descendants.  The topology label is G_ab, where a records the opening of the p3 four-point vertex and b records the opening of the p5 four-point vertex.  Each entry is bullet, s, t, or u.", "Text"],
+Cell[BoxData["$HRFScalingReport = False;\nGet[NotebookDirectory[]<>\"HiddenRegionFinder.wl\"];"], "Input"],
+Cell["Run the five-point example.  This populates the topology labels and the interior/boundary scaling summaries.", "Text"],
+Cell[BoxData["Get[NotebookDirectory[]<>\"03_FivePoint_Spacelike_Collinear.wl\"];"], "Input"],
+Cell["Topology labels", "Section"],
+Cell[BoxData["TopologySummary2Loop7Prop // Dataset"], "Input"],
+Cell[BoxData["TopologySummary2Loop8Prop // Dataset"], "Input"],
+Cell["Hidden-region rows only", "Section"],
+Cell[BoxData["TopologyHiddenRegionRows2Loop7Prop // Dataset"], "Input"],
+Cell[BoxData["TopologyHiddenRegionRows2Loop8Prop // Dataset"], "Input"],
+Cell["All topology/region rows, including absent interior regions", "Section"],
+Cell[BoxData["TopologyRegionScalingSummary2Loop7Prop // Dataset"], "Input"],
+Cell[BoxData["TopologyRegionScalingSummary2Loop8Prop // Dataset"], "Input"],
+Cell["Paper-oriented reduced tables", "Section"],
+Cell[BoxData["ClearAll[paperRegionRow, paperRegionTable];\npaperRegionRow[row_Association] := <|\n  \"Topology\" -> row[\"TopologyTeX\"],\n  \"GraphIndex\" -> row[\"GraphIndex\"],\n  \"Region\" -> row[\"RegionType\"],\n  \"ZeroVars\" -> row[\"ZeroVars\"],\n  \"HiddenRegionQ\" -> row[\"HiddenRegionQ\"],\n  \"ScalingVector\" -> row[\"ScalingVector\"],\n  \"W_SL\" -> row[\"WSL\"],\n  \"W_HR\" -> row[\"WHR\"],\n  \"Gap\" -> row[\"GapWHRminusWSL\"]\n|>;\npaperRegionTable[rows_] := paperRegionRow /@ rows;"], "Input"],
+Cell[BoxData["PaperHiddenRegionTable2Loop7Prop = paperRegionTable[TopologyHiddenRegionRows2Loop7Prop];\nPaperHiddenRegionTable2Loop7Prop // Dataset"], "Input"],
+Cell[BoxData["PaperHiddenRegionTable2Loop8Prop = paperRegionTable[TopologyHiddenRegionRows2Loop8Prop];\nPaperHiddenRegionTable2Loop8Prop // Dataset"], "Input"],
+Cell["Optional exports", "Section"],
+Cell[BoxData["Export[NotebookDirectory[]<>\"TopologyHiddenRegionRows2Loop7Prop.csv\", Normal[PaperHiddenRegionTable2Loop7Prop]];\nExport[NotebookDirectory[]<>\"TopologyHiddenRegionRows2Loop8Prop.csv\", Normal[PaperHiddenRegionTable2Loop8Prop]];"], "Input"]
+}]

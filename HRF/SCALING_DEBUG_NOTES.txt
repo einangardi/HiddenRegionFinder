@@ -1,0 +1,77 @@
+HiddenRegionFinder scaling debug notes
+======================================
+
+This development version implements the post-cancellation Lee--Pomeransky
+coverage criterion discussed on 2026-06-09.
+
+The main routine is
+
+    findCoverageLPScaling[FSL, U, vars, maxAbs, FObs]
+
+where FSL denotes the pre-cancellation superleading polynomial and FObs denotes
+the part of F that survives after the FSL cancellation.  In the current example
+file, FObs is passed as the obstruction polynomial stored by the obstruction scan.
+
+Mathematical criteria used by the scan
+--------------------------------------
+For an integer scaling vector alpha with components in {-maxAbs,...,0}, excluding
+the zero vector:
+
+1. FSL cancellation condition:
+   all monomials in FSL must have the same alpha-weight.  This is checked before
+   cancellation, because the cancellation can only occur between terms of equal
+   scaling.
+
+2. Hidden hierarchy condition:
+   the common FSL weight must be smaller/more singular than the first surviving
+   Lee--Pomeransky weight of U + FObs.
+
+3. Post-cancellation coverage condition:
+   after removing the cancelled superleading contribution, compute the leading
+   monomials of U + FObs.  Every active Feynman parameter must occur in at least
+   one of these post-cancellation leading monomials.
+
+The unit gap w_LP - w_FSL == 1 is reported but not imposed.
+
+Useful output keys
+------------------
+For an object such as
+
+    InteriorScalingData2Loop7Prop[[1, "CoverageLPScalingData"]]
+
+inspect:
+
+    ["Scaling"]
+    ["AcceptedCount"]
+    ["Criteria"]
+    ["AcceptedCandidateDiagnostics"] // Dataset
+    ["NearMissDiagnostics"] // Dataset
+    ["Diagnostics"]
+
+In particular, candidate diagnostics include:
+
+    "ScalingVector"
+    "FSLMonomialWeights"
+    "FSLUniformWeightQ"
+    "FSLWeight"
+    "PostCancellationLeadingWeight"
+    "HierarchyGapPostLPminusFSL"
+    "UnitGapQ"
+    "VariablesInPostCancellationLeadingSupport"
+    "VariablesMissingFromPostCancellationLeadingSupport"
+    "PostCancellationLeadingCoverageQ"
+    "FailedConditions"
+
+Runtime reporting
+-----------------
+General timing/echo output is disabled in the example.  The only intentional
+run-time output is from the scaling stage.  It prints the graph/case being
+processed and, when a candidate is accepted, a one-line summary:
+
+    coverage scaling: accepted=... selected=... wFSL=... wLP=... gap=... missing=...
+
+Set
+
+    $HRFScalingReport = False;
+
+before running the example to suppress even that output.
