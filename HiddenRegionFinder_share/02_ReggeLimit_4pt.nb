@@ -1,0 +1,68 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+(*** Wolfram Notebook File ***)
+
+Notebook[{
+Cell[CellGroupData[{
+Cell["Regge-limit 4-point examples", "Title",ExpressionUUID->"ecfa5b80-6082-4462-9d3b-439eeee77469"],
+Cell["Evaluate cells in order from the top. Use a fresh kernel for the setup cell.", "Text",ExpressionUUID->"a7ffe80b-a25f-4c09-84bc-17a6b4fa7f71"],
+Cell["Setup", "Section",ExpressionUUID->"1099c1b4-6d6e-4de2-9af4-1b51a0356574"],
+Cell[CellGroupData[{
+Cell["$HRFExample02Report = False;
+$HRFScalingReport = False;
+$HRFRunEx02SuperCrownBoundary = True;
+$HRFRunEx02HyperCrownBoundaries = True;
+Get[FileNameJoin[{NotebookDirectory[], \"HiddenRegionFinder.wl\"}]];
+Get[FileNameJoin[{NotebookDirectory[], \"02_Forward_Regge_2to2_Massless.wl\"}]];", "Input", CellLabel->"In[1]:=",ExpressionUUID->"ff6281f6-a93a-4050-9e11-de95e0065cba"]
+}, Open  ]],
+Cell["Regge channel conventions", "Section",ExpressionUUID->"539c88d7-a84f-4cac-b874-42d570be6abc"],
+Cell[CellGroupData[{
+Cell["hrfEx02ChannelLegend[]", "Input", CellLabel->"In[2]:=",ExpressionUUID->"32ef39fc-0dcc-4102-b5e8-4ee216dd017a"]
+}, Open  ]],
+Cell["Diagrams", "Section",ExpressionUUID->"8fb94466-d57d-4cd1-86ad-22236cfb51b6"],
+Cell[CellGroupData[{
+Cell["hrfEx02DrawDiagram[CrownInternalEdges, CrownExternalEdges]", "Input", CellLabel->"In[3]:=",ExpressionUUID->"8d25bd02-7d5a-4409-abe4-9344f95bfc44"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["hrfEx02DrawDiagram[SuperCrownInternalEdges, CrownExternalEdges]", "Input", CellLabel->"In[4]:=",ExpressionUUID->"2ae8b996-76fe-4c84-b661-de957be87c84"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["hrfEx02DrawDiagram[HyperCrownInternalEdges, CrownExternalEdges]", "Input", CellLabel->"In[5]:=",ExpressionUUID->"a05d91a6-7527-4e21-ab76-604cbfbfb605"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["hrfEx02DrawDiagram[DBInternalEdges, DBExternalEdges]", "Input", CellLabel->"In[6]:=",ExpressionUUID->"5216d871-3a03-4fc7-99cd-ca838fe050a2"]
+}, Open  ]],
+Cell["Interior comparison tables", "Section",ExpressionUUID->"1eb99b9d-f426-436d-8dd1-a2f719431af3"],
+Cell[CellGroupData[{
+Cell["hrfEx02InteriorComparisonDisplay[\"Crown\"]", "Input", CellLabel->"In[7]:=",ExpressionUUID->"e182cae5-c285-4ed6-93ec-f1cfb491a6de"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["hrfEx02InteriorComparisonDisplay[\"SuperCrown\"]", "Input", CellLabel->"In[8]:=",ExpressionUUID->"31d83e68-b9e3-4d37-b60a-17756bf53c67"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["hrfEx02InteriorComparisonDisplay[\"HyperCrown\"]", "Input", CellLabel->"In[9]:=",ExpressionUUID->"777e735a-d4f2-4dc5-9fa9-afd46a138320"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["hrfEx02InteriorComparisonDisplay[\"Diving Beetle\"]", "Input", CellLabel->"In[10]:=",ExpressionUUID->"c3ddd10e-f221-4ea1-ac7b-58ede41abd25"]
+}, Open  ]],
+Cell["Boundary comparison tables", "Section",ExpressionUUID->"469f9d32-380f-467c-82a9-f3df1688981d"],
+Cell[CellGroupData[{
+Cell["hrfEx02BoundaryComparisonDisplay[\"SuperCrown\"]", "Input", CellLabel->"In[11]:=",ExpressionUUID->"dfa3903c-e651-4710-bb21-a66a9d66e78b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["hrfEx02BoundaryComparisonDisplay[\"HyperCrown\"]", "Input", CellLabel->"In[12]:=",ExpressionUUID->"22ee9d2e-d2d8-4714-933e-7f501c241b92"]
+}, Open  ]],
+Cell["Difference flags and narrative", "Section",ExpressionUUID->"a046abaf-9a6f-4988-a3cc-5e0a4dd9fe28"],
+Cell[CellGroupData[{
+Cell["hrfEx02DisplayComparisonTable[Ex02ReggeOnlyFlags]", "Input", CellLabel->"In[13]:=",ExpressionUUID->"fa3b69f2-f28b-436a-8035-83d2e3c7515f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["Ex02ComparisonNarrative", "Input", CellLabel->"In[14]:=",ExpressionUUID->"6e644d5a-4c0f-47d2-a351-18cd2ac0e126"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1200, 900},
+ShowCellTags->False,
+CellLabelAutoDelete->True,
+WindowTitle->"Regge-limit 4-point examples",
+StyleDefinitions->"Default.nb"
+]

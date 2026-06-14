@@ -1,0 +1,59 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+(*** Wolfram Notebook File ***)
+
+Notebook[{
+Cell[CellGroupData[{
+Cell["Wide-angle 4-point examples", "Title",ExpressionUUID->"c0b26a98-e939-4087-8435-97844571e522"],
+Cell["Evaluate cells in order from the top. Use a fresh kernel for the setup cell.", "Text",ExpressionUUID->"1130f8bf-0c4c-4469-b178-caef3c54c6fa"],
+Cell["Setup", "Section",ExpressionUUID->"cca4d07d-48c7-484f-9b9c-2a9b646554f1"],
+Cell[CellGroupData[{
+Cell["$HRFExample01Report = False;
+$HRFScalingReport = False;
+$HRFRunHyperCrownBoundaryScansOnLoad = True;
+$HRFRunSuperCrownBoundaryScanOnLoad = True;
+$HRFRunDivingBeetleDiagnosticsOnLoad = True;
+Get[FileNameJoin[{NotebookDirectory[], \"HiddenRegionFinder.wl\"}]];
+Get[FileNameJoin[{NotebookDirectory[], \"01_WideAngle_2to2_OffShell.wl\"}]];", "Input", CellLabel->"In[1]:=",ExpressionUUID->"bd051c00-02d2-491d-ac3b-7870ac4ccfc3"]
+}, Open  ]],
+Cell["Diagrams", "Section",ExpressionUUID->"fdf08ab8-b3a4-49c1-b20a-205e363602ba"],
+Cell[CellGroupData[{
+Cell["drawGraphFromPySecDecInput[CrownInternalEdges, CrownExternalEdges]", "Input", CellLabel->"In[2]:=",ExpressionUUID->"0a86e7d3-867e-4fb8-ae75-3bb1f9bb5a4a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["drawGraphFromPySecDecInput[SuperCrownInternalEdges, CrownExternalEdges]", "Input", CellLabel->"In[3]:=",ExpressionUUID->"c42b50a1-ef55-46b6-8849-18d76008b00e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["drawGraphFromPySecDecInput[HyperCrownInternalEdges, CrownExternalEdges]", "Input", CellLabel->"In[4]:=",ExpressionUUID->"b2de671a-7d14-4dcb-80f4-7870ee043430"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["drawGraphFromPySecDecInput[DBInternalEdges, CrownExternalEdges]", "Input", CellLabel->"In[5]:=",ExpressionUUID->"ec880677-03fc-4a59-a08b-f62ae17d036a"]
+}, Open  ]],
+Cell["Interior region-study tables", "Section",ExpressionUUID->"23703e65-8b89-4258-9dff-deaca274155f"],
+Cell[CellGroupData[{
+Cell["hrfHyperCrownRegionStudyTable[]", "Input", CellLabel->"In[6]:=",ExpressionUUID->"ad9194e7-7d3a-48fd-affc-e67d197cc524"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["hrfDivingBeetleRegionStudyTable[]", "Input", CellLabel->"In[7]:=",ExpressionUUID->"bb6e4853-515c-430a-86e9-fdce3a4e063e"]
+}, Open  ]],
+Cell["Boundary outcome tables", "Section",ExpressionUUID->"8b91eb84-a600-44db-a429-7c9292cb8f38"],
+Cell[CellGroupData[{
+Cell["hrfEx01BoundaryOutcomeTable[HyperCrownBoundaryCandidateScans]", "Input", CellLabel->"In[8]:=",ExpressionUUID->"522ef2ba-be8e-4545-98d6-28d7ff805944"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["If[ValueQ[DBBoundaryOutcomeTable], DBBoundaryOutcomeTable, \"Diving Beetle boundary scan not run\"]", "Input", CellLabel->"In[9]:=",ExpressionUUID->"2bda5432-b638-48c4-a870-e2ed3d1dbfb1"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["hrfDivingBeetleFailureNarrative[]", "Input", CellLabel->"In[10]:=",ExpressionUUID->"2fee350a-ae2d-4746-92b9-bb47e2cc6d07"]
+}, Open  ]],
+Cell["Channel obstruction attempts (HyperCrown)", "Section",ExpressionUUID->"7a560c44-cc19-463c-b49d-033761ffb52b"],
+Cell[CellGroupData[{
+Cell["hrfHyperCrownChannelAttemptTable[]", "Input", CellLabel->"In[11]:=",ExpressionUUID->"639830b7-0244-4f76-921f-2c8d9caa3937"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1200, 900},
+ShowCellTags->False,
+CellLabelAutoDelete->True,
+WindowTitle->"Wide-angle 4-point examples",
+StyleDefinitions->"Default.nb"
+]

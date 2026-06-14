@@ -1,0 +1,55 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+(*** Wolfram Notebook File ***)
+
+Notebook[{
+Cell[CellGroupData[{
+Cell["Spacelike collinear 5-point examples", "Title",ExpressionUUID->"f1a6243b-e21c-4951-8813-9b11460acf7a"],
+Cell["Evaluate cells in order from the top. Use a fresh kernel for the setup cell.", "Text",ExpressionUUID->"6b6c77e2-8b42-4c95-98f5-721e53318914"],
+Cell["Setup", "Section",ExpressionUUID->"63de441f-50a2-412e-8c53-6df560970cbb"],
+Cell[CellGroupData[{
+Cell["$HRFExampleVerbose = False;
+$HRFVerboseScaling = False;
+$HRFScalingReport = False;
+Get[FileNameJoin[{NotebookDirectory[], \"HiddenRegionFinder.wl\"}]];
+Get[FileNameJoin[{NotebookDirectory[], \"03_FivePoint_Spacelike_Collinear.wl\"}]];", "Input", CellLabel->"In[1]:=",ExpressionUUID->"f70802a8-55f3-4cab-b2ba-75914275e266"]
+}, Open  ]],
+Cell["Seed and ThreeLoopVertex topology", "Section",ExpressionUUID->"2207b999-5af9-4d48-948f-6bbc3662280a"],
+Cell[CellGroupData[{
+Cell["drawGraphFromPySecDecInput[seedInternalLines, seedExternalLines]", "Input", CellLabel->"In[2]:=",ExpressionUUID->"eca9f504-5b76-4c97-b565-e4a6c197bdfc"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["drawGraphFromPySecDecInput[ThreeLoopVertexInternalLines, seedExternalLines]", "Input", CellLabel->"In[3]:=",ExpressionUUID->"ae8b4fc4-c22c-4a43-a34e-d1d4ac5904bf"]
+}, Open  ]],
+Cell["Seven-propagator summary tables", "Section",ExpressionUUID->"37200cbb-a5ca-4105-94e3-e156902332e6"],
+Cell[CellGroupData[{
+Cell["TopologyHiddenRegionTable2Loop7Prop", "Input", CellLabel->"In[4]:=",ExpressionUUID->"3216c712-73bf-4537-914d-0e69b658fa1c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["TopologyRegionScalingTable2Loop7Prop", "Input", CellLabel->"In[5]:=",ExpressionUUID->"87990cf8-5027-4462-8231-093c89a34f0d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["TopologyScalingCoverageTable2Loop7Prop", "Input", CellLabel->"In[6]:=",ExpressionUUID->"e5ad9bdc-2375-433c-a87d-517823f54de4"]
+}, Open  ]],
+Cell["Eight-propagator summary tables", "Section",ExpressionUUID->"44da6856-2890-49d7-b9eb-deb7be595a55"],
+Cell[CellGroupData[{
+Cell["TopologyHiddenRegionTable2Loop8Prop", "Input", CellLabel->"In[7]:=",ExpressionUUID->"cc2312da-4115-453d-bb4b-3b912d768474"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["TopologyRegionScalingTable2Loop8Prop", "Input", CellLabel->"In[8]:=",ExpressionUUID->"b362ca16-5ed1-45f2-abf7-79b63b7098b6"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell["TopologyScalingCoverageTable2Loop8Prop", "Input", CellLabel->"In[9]:=",ExpressionUUID->"cbd6a93b-2e11-450e-9f09-148d7ae122fd"]
+}, Open  ]],
+Cell["Export tables (optional)", "Section",ExpressionUUID->"3b57b2a9-2e56-4771-8102-4d45ec1761a2"],
+Cell[CellGroupData[{
+Cell["Export[FileNameJoin[{NotebookDirectory[], \"TopologyHiddenRegionRows2Loop7Prop.csv\"}], Normal[TopologyHiddenRegionTable2Loop7Prop]];
+Export[FileNameJoin[{NotebookDirectory[], \"TopologyHiddenRegionRows2Loop8Prop.csv\"}], Normal[TopologyHiddenRegionTable2Loop8Prop]];", "Input", CellLabel->"In[10]:=",ExpressionUUID->"18c69954-7baa-4035-ba31-50ec3a634823"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1200, 900},
+ShowCellTags->False,
+CellLabelAutoDelete->True,
+WindowTitle->"Spacelike collinear 5-point examples",
+StyleDefinitions->"Default.nb"
+]
