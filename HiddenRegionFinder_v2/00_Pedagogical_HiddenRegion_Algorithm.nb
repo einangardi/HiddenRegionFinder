@@ -1,0 +1,2250 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     97195,       2242]
+NotebookOptionsPosition[     86122,       2088]
+NotebookOutlinePosition[     86601,       2106]
+CellTagsIndexPosition[     86558,       2103]
+WindowTitle->Pedagogical HiddenRegionFinder Algorithm
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Pedagogical walk-through of the HiddenRegionFinder algorithm", "Title",ExpressionUUID->"22423fa9-5c0f-4b73-9db2-306d56033a51"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.990184678082456*^9, 
+  3.990184736451333*^9}},ExpressionUUID->"15c5ebc4-cd4b-4d10-895e-\
+c85655ede6aa"],
+
+Cell["\<\
+Steps in Hidden Region Finder Algorithm:  
+factor discovery, 
+admissibility checks, 
+generator products, 
+obstruction extraction by polynomial division, 
+scaling-constraint diagnostics. 
+\
+\>", "Text",
+ CellChangeTimes->{{3.990184631228118*^9, 3.990184675328023*^9}, {
+  3.9901847261301117`*^9, 
+  3.9901847331057262`*^9}},ExpressionUUID->"599ac353-d8bd-4ec1-b539-\
+0d99a1ae6c74"],
+
+Cell[CellGroupData[{
+
+Cell["Setup", "Section",ExpressionUUID->"576c5f60-7af5-47ae-ad35-697d2cb4d3d5"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Get", "[", 
+   RowBox[{
+    RowBox[{"NotebookDirectory", "[", "]"}], 
+    "<>", "\"\<HiddenRegionFinder.wl\>\""}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"$HRFScalingReport", " ", "=", " ", "False"}], ";"}]}], "Input",Expr\
+essionUUID->"60e324d3-c5ba-42ac-9640-e5c0c2decd49"],
+
+Cell["", "Text",
+ CellChangeTimes->{{3.990184982128841*^9, 
+  3.990184982350482*^9}},ExpressionUUID->"65231a95-630e-4d7f-8f13-\
+00fc90958a19"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{" ", "\n", 
+  RowBox[{
+   RowBox[{"Get", "[", 
+    RowBox[{
+     RowBox[{"NotebookDirectory", "[", "]"}], 
+     "<>", "\"\<03_FivePoint_Spacelike_Collinear.wl\>\""}], "]"}], ";"}], 
+  " "}]], "Input",
+ CellChangeTimes->{{3.9901849641701803`*^9, 3.990184978322044*^9}},
+ CellLabel->"In[34]:=",ExpressionUUID->"93703ad1-0d44-47f7-8ba4-b32f5bbda43d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 7-prop graph \"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["scaling interior 7-prop graph ", 1, "/", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990184990517466*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"24ba418c-f1b1-4609-a93e-53e938f2ac85"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 7-prop graph \"\>", "\[InvisibleSpace]", "2", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["scaling interior 7-prop graph ", 2, "/", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185014449424*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"16815cb5-acd0-4a83-b41f-31a2618abbcb"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "104", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "279935", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 104, "/", 279935, 
+   " selected=", {-2, -1, -2, -2, -2, -1, -2}, " wFSL=", -5, " wLP=", -4, 
+   " gap=", 1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185038412177*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"cdb87918-e4b7-4071-adc5-973a8b61b975"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 7-prop graph \"\>", "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["scaling interior 7-prop graph ", 3, "/", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185038431821*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"cbd4373b-03e8-4231-b945-25213a5be4ab"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 7-prop graph \"\>", "\[InvisibleSpace]", "4", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["scaling interior 7-prop graph ", 4, "/", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185062312255*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"da37e5b0-230a-42a8-86b2-a3672011e0b3"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 7-prop graph \"\>", "\[InvisibleSpace]", "5", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["scaling interior 7-prop graph ", 5, "/", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185062312832*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"54d57497-9ec8-48e4-a105-c91460ce5033"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "109", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "279935", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", "0"}], "}"}], 
+   "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 109, "/", 279935, 
+   " selected=", {-2, -1, -2, -2, -2, -1, 0}, " wFSL=", -5, " wLP=", -4, 
+   " gap=", 1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185086447982*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"03e70b13-7c61-443e-b42d-502aaf5d2b9e"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 7-prop graph \"\>", "\[InvisibleSpace]", "6", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["scaling interior 7-prop graph ", 6, "/", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185086468361*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"8bc372dc-f96a-4e04-a9d6-a90f1f95d7df"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 8-prop graph \"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "9"}],
+  SequenceForm["scaling interior 8-prop graph ", 1, "/", 9],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185086468896*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"12e503a1-e1d0-407d-a792-d8ddcd813a84"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 8-prop graph \"\>", "\[InvisibleSpace]", "2", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "9"}],
+  SequenceForm["scaling interior 8-prop graph ", 2, "/", 9],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185086469248*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"a8683daf-fb3e-4d78-8c89-8950b607ce47"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 8-prop graph \"\>", "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "9"}],
+  SequenceForm["scaling interior 8-prop graph ", 3, "/", 9],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185086469605*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"352a4dcf-460c-419f-8066-135fb90bbfff"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 8-prop graph \"\>", "\[InvisibleSpace]", "4", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "9"}],
+  SequenceForm["scaling interior 8-prop graph ", 4, "/", 9],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185086469943*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"a34f1782-a034-475b-a67c-c52e9b55742a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 8-prop graph \"\>", "\[InvisibleSpace]", "5", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "9"}],
+  SequenceForm["scaling interior 8-prop graph ", 5, "/", 9],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185086470271*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"d7fa96c6-e01f-4ebd-a8b4-29d3cd3a2452"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 8-prop graph \"\>", "\[InvisibleSpace]", "6", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "9"}],
+  SequenceForm["scaling interior 8-prop graph ", 6, "/", 9],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185086470594*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"36223931-a409-48a6-ac74-234a4536c5ff"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 8-prop graph \"\>", "\[InvisibleSpace]", "7", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "9"}],
+  SequenceForm["scaling interior 8-prop graph ", 7, "/", 9],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185086470912*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"2891190c-9a17-4f91-95f3-19e5a59d31c0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 8-prop graph \"\>", "\[InvisibleSpace]", "8", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "9"}],
+  SequenceForm["scaling interior 8-prop graph ", 8, "/", 9],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185086471223*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"e553bab1-ef29-49c4-9463-e1882fa74ce3"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling interior 8-prop graph \"\>", "\[InvisibleSpace]", "9", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "9"}],
+  SequenceForm["scaling interior 8-prop graph ", 9, "/", 9],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185086471541*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"4a969741-4bd4-4042-982b-5e2f1235bbf2"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 7-prop case \"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["scaling boundary 7-prop case ", 1, "/", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185086471857*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"600c5567-babf-45e9-b4f3-676cbb1a4054"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901850902358313`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"8b60fe5c-a50f-4e85-bdf5-c816875bf9ca"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 7-prop case \"\>", "\[InvisibleSpace]", "2", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["scaling boundary 7-prop case ", 2, "/", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185090244788*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"ff09bd8d-830b-4524-a658-579845a8ad76"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901850942609997`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"aca52ba7-b60f-40e1-a648-19f81b713fec"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 7-prop case \"\>", "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["scaling boundary 7-prop case ", 3, "/", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.99018509427209*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"bf7b1478-7f81-4ee7-9bed-4ac7cab7fa9b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901850982266197`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"98003df4-a2c0-495a-bc4e-dc4d296c5edc"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 7-prop case \"\>", "\[InvisibleSpace]", "4", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["scaling boundary 7-prop case ", 4, "/", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185098238678*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"ad0ec0cf-678d-40c5-b3bb-7c5834e7e0e7"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185102142499*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"6cff81d6-ad93-4479-8838-03c3fc9388f0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 7-prop case \"\>", "\[InvisibleSpace]", "5", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["scaling boundary 7-prop case ", 5, "/", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185102153302*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"418369b7-f156-445a-bff2-c747b4931f82"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901851060846367`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"35d08757-4600-4b77-8e2d-75561f821f63"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 7-prop case \"\>", "\[InvisibleSpace]", "6", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "6"}],
+  SequenceForm["scaling boundary 7-prop case ", 6, "/", 6],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901851060957193`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"81f8c20d-f116-4e74-9a12-cd25f613e496"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185109951502*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"cb38512d-7da0-44db-8617-5f9f5fc6941b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 8-prop case \"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["scaling boundary 8-prop case ", 1, "/", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901851099605503`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"a4261e0b-2352-4df5-83e5-39029264296f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901851138780613`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"050cfec3-1ce0-4726-a72a-5aa4ce31332b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 8-prop case \"\>", "\[InvisibleSpace]", "2", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["scaling boundary 8-prop case ", 2, "/", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901851138867702`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"8661ada2-bae1-4b4d-b469-fda5c09b7665"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185117867704*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"50185bd9-f7bc-4ef3-91fd-599669438da1"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 8-prop case \"\>", "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["scaling boundary 8-prop case ", 3, "/", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.99018511786838*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"8552b9e9-729f-4668-9791-b31c14dd47ba"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "104", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "279935", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 104, "/", 279935, 
+   " selected=", {-2, -1, -2, -2, -2, -1, -2}, " wFSL=", -5, " wLP=", -4, 
+   " gap=", 1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185142849234*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"fbee518e-231d-477c-84ce-8681ac206c65"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 8-prop case \"\>", "\[InvisibleSpace]", "4", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["scaling boundary 8-prop case ", 4, "/", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185142869445*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"34db9764-fc87-4f8f-92d6-b8188373fe13"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185146731412*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"c3dfe778-6cb2-4adf-ba02-86d68ba46a05"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 8-prop case \"\>", "\[InvisibleSpace]", "5", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["scaling boundary 8-prop case ", 5, "/", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901851467360992`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"d0e920d3-c1b0-4a64-8b3e-b913eeacaea7"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901851507463503`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"58312241-9ba2-40df-a43e-244cd889762c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 8-prop case \"\>", "\[InvisibleSpace]", "6", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["scaling boundary 8-prop case ", 6, "/", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185150760151*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"9df8cc0d-354e-43cc-8eb0-5f31b2428cdd"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185154788419*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"34866279-3907-4847-860d-83e049a11392"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 8-prop case \"\>", "\[InvisibleSpace]", "7", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["scaling boundary 8-prop case ", 7, "/", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185154801963*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"91933d26-1ef6-4df3-ac5e-0e25b7a66a7e"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "104", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "279935", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 104, "/", 279935, 
+   " selected=", {-2, -1, -2, -2, -2, -1, -2}, " wFSL=", -5, " wLP=", -4, 
+   " gap=", 1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185179324939*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"13a3e85c-54e0-480a-9bb7-954ae606f676"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 8-prop case \"\>", "\[InvisibleSpace]", "8", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["scaling boundary 8-prop case ", 8, "/", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901851793452682`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"d3f1c5b6-7ec2-4c5d-a22b-b4baac5ba7ca"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.99018518330665*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"fdb84492-381a-45e1-8bab-621afccb7338"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 8-prop case \"\>", "\[InvisibleSpace]", "9", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["scaling boundary 8-prop case ", 9, "/", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901851833219843`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"09107454-8410-4716-995e-83199c7ac49f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901851874539833`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"1335da55-552e-4ca5-aa08-f6b92b5ebabe"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 8-prop case \"\>", "\[InvisibleSpace]", "10", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["scaling boundary 8-prop case ", 10, "/", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185187468845*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"6f541020-af50-43e3-b466-4c92a2d6a613"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185191568193*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"90c40caf-e552-4f12-aeb8-b8d9366473d8"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 8-prop case \"\>", "\[InvisibleSpace]", "11", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["scaling boundary 8-prop case ", 11, "/", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185191581543*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"3cbc5da4-328f-42b5-bf2f-d92611b2966b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "104", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "279935", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 104, "/", 279935, 
+   " selected=", {-2, -1, -2, -2, -2, -1, -2}, " wFSL=", -5, " wLP=", -4, 
+   " gap=", 1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185216630319*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"e6e1a69e-0537-4cf9-b5af-c134f2f0fca2"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"scaling boundary 8-prop case \"\>", "\[InvisibleSpace]", "12", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "12"}],
+  SequenceForm["scaling boundary 8-prop case ", 12, "/", 12],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9901852166503897`*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"3fff9005-dc30-464a-88da-84fd059721ae"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"coverage scaling: accepted=\"\>", "\[InvisibleSpace]", "100", 
+   "\[InvisibleSpace]", "\<\"/\"\>", "\[InvisibleSpace]", "46655", 
+   "\[InvisibleSpace]", "\<\" selected=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "2"}], ",", 
+     RowBox[{"-", "1"}]}], "}"}], "\[InvisibleSpace]", "\<\" wFSL=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "5"}], "\[InvisibleSpace]", "\<\" wLP=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"-", "4"}], "\[InvisibleSpace]", "\<\" gap=\"\>", "\[InvisibleSpace]",
+    "1", "\[InvisibleSpace]", "\<\" missing=\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm[
+  "coverage scaling: accepted=", 100, "/", 46655, 
+   " selected=", {-2, -1, -2, -2, -2, -1}, " wFSL=", -5, " wLP=", -4, " gap=",
+    1, " missing=", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.990185220597632*^9},
+ CellLabel->
+  "During evaluation of \
+In[34]:=",ExpressionUUID->"d8efad6b-7e4b-4b39-8c34-18c12185bae9"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Layer I: From a graph to U, F, and P", "Section",ExpressionUUID->"eb3452ed-6fd5-4d02-9c69-57bc97aa9be2"],
+
+Cell["\<\
+The graph input follows the pySecDec convention used throughout the package. \
+Internal lines are labelled by masses and endpoint vertices. External lines \
+are labelled by momenta and the vertex to which they attach.\
+\>", "Text",ExpressionUUID->"d43eb0f6-a9c4-4a74-bdb6-7ad8a66065f5"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"seedInternalLines", " ", "=", " ", 
+  RowBox[{"{", "\n", "  ", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"\"\<0\>\"", ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", " ", "3"}], "}"}]}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"\"\<0\>\"", ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", " ", "5"}], "}"}]}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"\"\<0\>\"", ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", " ", "3"}], "}"}]}], "}"}], ",", "\n", "  ", 
+    RowBox[{"{", 
+     RowBox[{"\"\<0\>\"", ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", " ", "5"}], "}"}]}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"\"\<0\>\"", ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"3", ",", " ", "4"}], "}"}]}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"\"\<0\>\"", ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"4", ",", " ", "5"}], "}"}]}], "}"}]}], "\n", "}"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"seedExternalLines", " ", "=", " ", 
+    RowBox[{"{", " ", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"p1", ",", " ", "1"}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"p2", ",", " ", "2"}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"p3", ",", " ", "3"}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"p4", ",", " ", "4"}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"p5", ",", " ", "5"}], "}"}]}], "}"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"seedInternalLines", ",", " ", "seedExternalLines"}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.99018490965084*^9, 3.99018494214678*^9}},
+ CellLabel->"In[35]:=",ExpressionUUID->"71ace6e9-291c-4e4a-80fd-498e7a3f0f50"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"0\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "3"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"0\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "5"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"0\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"0\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "5"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"0\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "4"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"0\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{"4", ",", "5"}], "}"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.990184793187677*^9, 3.99018480302897*^9}, {
+   3.9901849177349577`*^9, 3.990184944080584*^9}, 3.990185327935318*^9},
+ CellLabel->"Out[35]=",ExpressionUUID->"5bca58d6-bb4e-448a-99d6-7a91c2cfc5f4"],
+
+Cell[BoxData[
+ GraphicsBox[
+  NamespaceBox["NetworkGraphics",
+   DynamicModuleBox[{Typeset`graph = HoldComplete[
+     Graph[{1, 3, 5, 2, 4, "ext1", "ext2", "ext3", "ext4", "ext5"}, {
+      Null, {{1, 2}, {1, 3}, {4, 2}, {4, 3}, {2, 5}, {5, 3}, {1, 6}, {4, 7}, {
+       2, 8}, {5, 9}, {3, 10}}}, {
+      EdgeLabels -> {
+        UndirectedEdge[1, 5] -> "x1", UndirectedEdge[2, 5] -> "x3", 
+         UndirectedEdge[2, 3] -> "x2", UndirectedEdge[4, 5] -> "x5", 
+         UndirectedEdge[3, "ext3"] -> "p3", UndirectedEdge[5, "ext5"] -> "p5",
+          UndirectedEdge[1, "ext1"] -> "p1", UndirectedEdge[4, "ext4"] -> 
+         "p4", UndirectedEdge[2, "ext2"] -> "p2", UndirectedEdge[3, 4] -> 
+         "x4", UndirectedEdge[1, 3] -> "x0"}, 
+       GraphLayout -> {"SpringElectricalEmbedding"}, ImageSize -> Large, 
+       VertexLabels -> {"Name"}}]]}, 
+    TagBox[GraphicsGroupBox[{
+       {Hue[0.6, 0.7, 0.7], Opacity[0.7], CapForm["Round"], {
+         {Arrowheads[0.], 
+          ArrowBox[{{2.4370551341350857`, 1.4134818291673426`}, {
+           1.5459992463191312`, 0.9727047175019767}}, 0.03328060602778854]}, 
+         InsetBox["\<\"x0\"\>", {1.9915271902271083, 1.1930932733346595}, 
+          ImageScaled[{0.5, 0.5}],
+          BaseStyle->"Graphics"]}, {
+         {Arrowheads[0.], 
+          ArrowBox[{{2.4370551341350857`, 1.4134818291673426`}, {
+           1.545628513387913, 1.854500011971954}}, 0.03328060602778854]}, 
+         InsetBox["\<\"x1\"\>", {1.9913418237614993, 1.6339909205696483}, 
+          ImageScaled[{0.5, 0.5}],
+          BaseStyle->"Graphics"]}, {
+         {Arrowheads[0.], 
+          ArrowBox[{{2.4370551341350857`, 1.4134818291673426`}, {
+           3.435112957116278, 1.413070861832212}}, 0.03328060602778854]}, 
+         InsetBox["\<\"p1\"\>", {2.936084045625682, 1.4132763454997774}, 
+          ImageScaled[{0.5, 0.5}],
+          BaseStyle->"Graphics"]}, {
+         {Arrowheads[0.], 
+          ArrowBox[{{1.5459992463191312`, 0.9727047175019767}, {
+           0.7982257021486261, 1.8819733514411052`}}, 0.03328060602778854]}, 
+         InsetBox["\<\"x2\"\>", {1.1721124742338787, 1.427339034471541}, 
+          ImageScaled[{0.5, 0.5}],
+          BaseStyle->"Graphics"]}, {
+         {Arrowheads[0.], 
+          ArrowBox[{{1.5459992463191312`, 0.9727047175019767}, {
+           0.7982715706962289, 0.9446433864094788}}, 0.03328060602778854]}, 
+         InsetBox["\<\"x4\"\>", {1.17213540850768, 0.9586740519557277}, 
+          ImageScaled[{0.5, 0.5}],
+          BaseStyle->"Graphics"]}, {
+         {Arrowheads[0.], 
+          ArrowBox[{{1.5459992463191312`, 0.9727047175019767}, {
+           1.8515314224722186`, 0.}}, 0.03328060602778854]}, 
+         InsetBox["\<\"p3\"\>", {1.698765334395675, 0.48635235875098837}, 
+          ImageScaled[{0.5, 0.5}],
+          BaseStyle->"Graphics"]}, {
+         {Arrowheads[0.], 
+          ArrowBox[{{1.545628513387913, 1.854500011971954}, {
+           0.7982257021486261, 1.8819733514411052`}}, 0.03328060602778854]}, 
+         InsetBox["\<\"x3\"\>", {1.1719271077682696, 1.8682366817065295}, 
+          ImageScaled[{0.5, 0.5}],
+          BaseStyle->"Graphics"]}, {
+         {Arrowheads[0.], 
+          ArrowBox[{{1.545628513387913, 1.854500011971954}, {
+           0.7982715706962289, 0.9446433864094788}}, 0.03328060602778854]}, 
+         InsetBox["\<\"x5\"\>", {1.171950042042071, 1.3995716991907163}, 
+          ImageScaled[{0.5, 0.5}],
+          BaseStyle->"Graphics"]}, {
+         {Arrowheads[0.], 
+          ArrowBox[{{1.545628513387913, 1.854500011971954}, {
+           1.8514657418379599`, 2.82700794897882}}, 0.03328060602778854]}, 
+         InsetBox["\<\"p5\"\>", {1.6985471276129365, 2.340753980475387}, 
+          ImageScaled[{0.5, 0.5}],
+          BaseStyle->"Graphics"]}, {
+         {Arrowheads[0.], 
+          ArrowBox[{{0.7982257021486261, 1.8819733514411052`}, {0., 
+           2.507112601755966}}, 0.03328060602778854]}, 
+         InsetBox["\<\"p2\"\>", {0.39911285107431305, 2.1945429765985356}, 
+          ImageScaled[{0.5, 0.5}],
+          BaseStyle->"Graphics"]}, {
+         {Arrowheads[0.], 
+          ArrowBox[{{0.7982715706962289, 0.9446433864094788}, {
+           0.00031785418083374317`, 0.31901980011210096`}}, 
+           0.03328060602778854]}, 
+         InsetBox["\<\"p4\"\>", {0.3992947124385313, 0.6318315932607899}, 
+          ImageScaled[{0.5, 0.5}],
+          BaseStyle->"Graphics"]}}, 
+       {Hue[0.6, 0.5, 1.], EdgeForm[{GrayLevel[0], Opacity[
+        0.7]}], {
+         DiskBox[{2.4370551341350857`, 1.4134818291673426`}, 
+          0.03328060602778854], 
+         InsetBox["1", {2.4476735571664965, 1.458848585916935}, ImageScaled[{0.3290764024869395, -0.23026373579220905}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{1.5459992463191312`, 0.9727047175019767}, 
+          0.03328060602778854], 
+         InsetBox["3", {1.5191373167335576, 0.9346346470451158}, ImageScaled[{0.9323935510317172, 1.11280977229984}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{1.545628513387913, 1.854500011971954}, 0.03328060602778854],
+          InsetBox["5", {1.518758475108793, 1.892564359707457}, ImageScaled[{0.9325240757874151, -0.11271765427825098}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{0.7982257021486261, 1.8819733514411052`}, 
+          0.03328060602778854], 
+         InsetBox["2", {0.765674907676998, 1.8486365953764172}, ImageScaled[{1.02396658868653, 1.0366181267346462}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{0.7982715706962289, 0.9446433864094788}, 
+          0.03328060602778854], 
+         InsetBox["4", {0.7657019141197796, 0.9779617146409918}, ImageScaled[{1.0242702099307732, -0.036321495913731794}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{3.435112957116278, 1.413070861832212}, 0.03328060602778854],
+          InsetBox["\<\"ext1\"\>", {3.4817058016052242, 1.413051676433636}, 
+          ImageScaled[{-0.24999993641796625, 0.5003088252685576}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{0., 2.507112601755966}, 0.03328060602778854], 
+         InsetBox["\<\"ext2\"\>", {-0.036682265758425356, 2.535840722204038}, 
+          ImageScaled[{1.0904704314202731, 0.03756657817761877}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{1.8515314224722186`, 0.}, 0.03328060602778854], 
+         InsetBox["\<\"ext3\"\>", {1.8654939182131032, -0.04445157183201123}, 
+          ImageScaled[{0.27524722878029384, 1.215532103982108}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{0.00031785418083374317`, 0.31901980011210096`}, 
+          0.03328060602778854], 
+         InsetBox["\<\"ext4\"\>", {-0.036348851329029944, 0.2902718222231501},
+           ImageScaled[{1.090219959796145, 0.9627530648825969}],
+          BaseStyle->"Graphics"]}, {
+         DiskBox[{1.8514657418379599`, 2.82700794897882}, 
+          0.03328060602778854], 
+         InsetBox["\<\"ext5\"\>", {1.8654434978539307, 2.8714547245920032}, 
+          ImageScaled[{0.2750015857964845, -0.21545489977070065}],
+          BaseStyle->"Graphics"]}}}],
+     MouseAppearanceTag["NetworkGraphics"]],
+    AllowKernelInitialization->False]],
+  DefaultBaseStyle->"NetworkGraphics",
+  FormatType->TraditionalForm,
+  FrameTicks->None,
+  ImageSize->Large]], "Output",
+ CellChangeTimes->{{3.990184793187677*^9, 3.99018480302897*^9}, {
+   3.9901849177349577`*^9, 3.990184944080584*^9}, 3.990185328128771*^9},
+ CellLabel->"Out[37]=",ExpressionUUID->"dc22dfec-a78a-4d8a-ae4c-f7735c31b4b0"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"Clear", "[", 
+   RowBox[{"{", 
+    RowBox[{"Useed", ",", "Fseed"}], "}"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.9901848226348457`*^9, 3.9901848451473083`*^9}},
+ CellLabel->"In[24]:=",ExpressionUUID->"d44ed293-5b88-4f20-9456-47e78562911d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"Useed", ",", "Fseed"}], "}"}], "=", 
+   RowBox[{"toCyclicMandelstams", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\"\<U\>\"", ",", "\"\<F\>\""}], "}"}], "/.", 
+     RowBox[{"SymanzikUF", "[", 
+      RowBox[{"seedInternalLines", ",", " ", "seedExternalLines"}], "]"}]}], 
+    "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"Pseed", " ", "=", " ", 
+   RowBox[{"Expand", "[", 
+    RowBox[{"Useed", " ", "+", " ", "Fseed"}], "]"}]}], ";"}], "\n", 
+ RowBox[{"<|", 
+  RowBox[{
+   RowBox[{"\"\<U\>\"", " ", "->", " ", "Useed"}], ",", " ", 
+   RowBox[{"\"\<F\>\"", " ", "->", " ", "Fseed"}], ",", " ", 
+   RowBox[{"\"\<P\>\"", " ", "->", " ", "Pseed"}]}], "|>"}]}], "Input",
+ CellChangeTimes->{
+  3.9901848696642523`*^9, {3.990185342685527*^9, 3.990185407845858*^9}, {
+   3.990185453370759*^9, 3.990185474767404*^9}, {3.9901855565905313`*^9, 
+   3.990185563870162*^9}},
+ CellLabel->"In[50]:=",ExpressionUUID->"8f2b2dba-1bf5-4bd1-85da-f31d6800b676"],
+
+Cell[BoxData[
+ RowBox[{"\[LeftAssociation]", 
+  RowBox[{
+   RowBox[{"\<\"U\"\>", "\[Rule]", 
+    RowBox[{
+     RowBox[{"x0", " ", "x2"}], "+", 
+     RowBox[{"x1", " ", "x2"}], "+", 
+     RowBox[{"x0", " ", "x3"}], "+", 
+     RowBox[{"x1", " ", "x3"}], "+", 
+     RowBox[{"x0", " ", "x4"}], "+", 
+     RowBox[{"x1", " ", "x4"}], "+", 
+     RowBox[{"x2", " ", "x4"}], "+", 
+     RowBox[{"x3", " ", "x4"}], "+", 
+     RowBox[{"x0", " ", "x5"}], "+", 
+     RowBox[{"x1", " ", "x5"}], "+", 
+     RowBox[{"x2", " ", "x5"}], "+", 
+     RowBox[{"x3", " ", "x5"}]}]}], ",", 
+   RowBox[{"\<\"F\"\>", "\[Rule]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", "s12"}], " ", "x1", " ", "x2", " ", "x4"}], "-", 
+     RowBox[{"s23", " ", "x1", " ", "x2", " ", "x4"}], "+", 
+     RowBox[{"s45", " ", "x1", " ", "x2", " ", "x4"}], "+", 
+     RowBox[{"s23", " ", "x0", " ", "x3", " ", "x4"}], "+", 
+     RowBox[{"s45", " ", "x1", " ", "x3", " ", "x4"}], "+", 
+     RowBox[{"s34", " ", "x0", " ", "x2", " ", "x5"}], "-", 
+     RowBox[{"s12", " ", "x1", " ", "x2", " ", "x5"}], "-", 
+     RowBox[{"s15", " ", "x1", " ", "x2", " ", "x5"}], "+", 
+     RowBox[{"s34", " ", "x1", " ", "x2", " ", "x5"}], "+", 
+     RowBox[{"s15", " ", "x0", " ", "x3", " ", "x5"}]}]}], ",", 
+   RowBox[{"\<\"P\"\>", "\[Rule]", 
+    RowBox[{
+     RowBox[{"x0", " ", "x2"}], "+", 
+     RowBox[{"x1", " ", "x2"}], "+", 
+     RowBox[{"x0", " ", "x3"}], "+", 
+     RowBox[{"x1", " ", "x3"}], "+", 
+     RowBox[{"x0", " ", "x4"}], "+", 
+     RowBox[{"x1", " ", "x4"}], "+", 
+     RowBox[{"x2", " ", "x4"}], "-", 
+     RowBox[{"s12", " ", "x1", " ", "x2", " ", "x4"}], "-", 
+     RowBox[{"s23", " ", "x1", " ", "x2", " ", "x4"}], "+", 
+     RowBox[{"s45", " ", "x1", " ", "x2", " ", "x4"}], "+", 
+     RowBox[{"x3", " ", "x4"}], "+", 
+     RowBox[{"s23", " ", "x0", " ", "x3", " ", "x4"}], "+", 
+     RowBox[{"s45", " ", "x1", " ", "x3", " ", "x4"}], "+", 
+     RowBox[{"x0", " ", "x5"}], "+", 
+     RowBox[{"x1", " ", "x5"}], "+", 
+     RowBox[{"x2", " ", "x5"}], "+", 
+     RowBox[{"s34", " ", "x0", " ", "x2", " ", "x5"}], "-", 
+     RowBox[{"s12", " ", "x1", " ", "x2", " ", "x5"}], "-", 
+     RowBox[{"s15", " ", "x1", " ", "x2", " ", "x5"}], "+", 
+     RowBox[{"s34", " ", "x1", " ", "x2", " ", "x5"}], "+", 
+     RowBox[{"x3", " ", "x5"}], "+", 
+     RowBox[{"s15", " ", "x0", " ", "x3", " ", "x5"}]}]}]}], 
+  "\[RightAssociation]"}]], "Output",
+ CellChangeTimes->{{3.9901848100516853`*^9, 3.990184870684692*^9}, 
+   3.990184920797387*^9, 3.9901849590408916`*^9, {3.990185332100358*^9, 
+   3.990185346462941*^9}, {3.990185396997788*^9, 3.9901854081828003`*^9}, 
+   3.9901855645599194`*^9},
+ CellLabel->"Out[52]=",ExpressionUUID->"ceb6fb90-9a41-40b4-87f5-ab68eb1c7f2a"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Layer II: Cancellation factors f_i", "Section",ExpressionUUID->"9237de5b-5a79-4576-a091-bec741733ef3"],
+
+Cell["\<\
+The LaTeX notes define cancellation factors as non-monomial factors appearing \
+in derivatives of the strict leading polynomial F0, or, in the extended \
+version, in coefficients of independent kinematic structures inside those \
+derivatives. The package implements this distinction by derivativeFactors and \
+derivativeFactorsExtended.\
+\>", "Text",ExpressionUUID->"3c64710c-82ae-4b26-9078-78d9db3dda61"],
+
+Cell["\<\
+Toy example: use a simple polynomial whose derivative with respect to x4 \
+contains two binomial factors. This is not a physical graph; it is only a \
+transparent algebraic test of the factor/generator/obstruction machinery.\
+\>", "Text",ExpressionUUID->"daab650d-84c6-4a06-9d2c-ac6b2c0bb98c"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"toyVars", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+    "x0", ",", " ", "x1", ",", " ", "x2", ",", " ", "x3", ",", " ", "x4"}], 
+    "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"toyKinVars", " ", "=", " ", 
+   RowBox[{"{", "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"toyKinAssumptions", " ", "=", " ", "True"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"toyF0", " ", "=", " ", 
+    RowBox[{"Expand", "[", 
+     RowBox[{
+      RowBox[{"x4", " ", 
+       RowBox[{"(", 
+        RowBox[{"x0", " ", "-", " ", "x1"}], ")"}], " ", 
+       RowBox[{"(", 
+        RowBox[{"x2", " ", "-", " ", "x3"}], ")"}]}], " ", "+", " ", 
+      RowBox[{"x0", " ", "x2"}]}], "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{"<|", "\n", "  ", 
+  RowBox[{
+   RowBox[{"\"\<F0\>\"", " ", "->", " ", "toyF0"}], ",", "\n", "  ", 
+   RowBox[{"\"\<DerivativeFactors\>\"", " ", "->", " ", 
+    RowBox[{"derivativeFactors", "[", 
+     RowBox[{"toyF0", ",", " ", "toyVars"}], "]"}]}], ",", "\n", "  ", 
+   RowBox[{"\"\<SafeCancellationFactors\>\"", " ", "->", " ", 
+    RowBox[{
+     RowBox[{"safeCancellationFactors", "[", 
+      RowBox[{
+      "toyF0", ",", " ", "toyVars", ",", " ", "toyKinAssumptions", ",", " ", 
+       "toyKinVars"}], "]"}], "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}]}], "\n", "|>"}]}], "Input",ExpressionUUI\
+D->"d57d6e75-a1fe-4fc9-816e-7b4cdd53f849"],
+
+Cell["\<\
+The package keeps only binomial factors that pass positiveCompatibleQ. \
+Internally this uses Reduce with x_e>0 and the chosen kinematic assumptions.\
+\>", "Text",ExpressionUUID->"2bc99fc8-9f61-43ef-a2fe-17b3bf8da7b9"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"factorData", " ", "=", " ", 
+   RowBox[{"safeCancellationFactors", "[", 
+    RowBox[{
+    "toyF0", ",", " ", "toyVars", ",", " ", "toyKinAssumptions", ",", " ", 
+     "toyKinVars"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"toySafeFactors", " ", "=", " ", 
+   RowBox[{"factorData", "[", 
+    RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\n", 
+ RowBox[{"AssociationThread", "[", 
+  RowBox[{"toySafeFactors", ",", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"positiveCompatibleQ", "[", 
+      RowBox[{
+      "#", ",", " ", "toyVars", ",", " ", "toyKinAssumptions", ",", " ", 
+       "toyKinVars"}], "]"}], " ", "&"}], " ", "/@", " ", 
+    "toySafeFactors"}]}], "]"}]}], "Input",ExpressionUUID->"fae4ff32-f2af-\
+4f40-a6e6-e8ed7a3531e3"],
+
+Cell["\<\
+Important implementation audit: the current production routine tests \
+individual factors for positivity. The stricter simultaneous-admissibility \
+condition for a subset S is included here as an audit helper, but it is not \
+currently used as a hard gate in findObstructions.\
+\>", "Text",ExpressionUUID->"fc454970-0eb1-4390-9aa7-c75e74860d8f"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "hrfAdmissibleSubsetQ", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"hrfAdmissibleSubsetQ", "[", 
+     RowBox[{
+     "S_", ",", " ", "vars_", ",", " ", "kinAssumptions_", ",", " ", 
+      "kinVars_"}], "]"}], " ", ":=", " ", 
+    RowBox[{
+     RowBox[{"Reduce", "[", "\n", "  ", 
+      RowBox[{
+       RowBox[{"kinAssumptions", " ", "&&", " ", 
+        RowBox[{"And", " ", "@@", " ", 
+         RowBox[{"Thread", "[", 
+          RowBox[{"vars", " ", ">", " ", "0"}], "]"}]}], " ", "&&", " ", 
+        RowBox[{"And", " ", "@@", " ", 
+         RowBox[{"Thread", "[", 
+          RowBox[{"S", " ", "==", " ", "0"}], "]"}]}]}], ",", "\n", "  ", 
+       RowBox[{"Join", "[", 
+        RowBox[{"vars", ",", " ", "kinVars"}], "]"}], ",", " ", "Reals"}], 
+      "\n", "]"}], " ", "=!=", " ", "False"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"Subsets", "[", 
+   RowBox[{"toySafeFactors", ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", " ", 
+      RowBox[{"Length", "[", "toySafeFactors", "]"}]}], "}"}]}], "]"}], " ", "/.",
+   " ", 
+  RowBox[{"S_List", " ", ":>", " ", 
+   RowBox[{"<|", 
+    RowBox[{
+     RowBox[{"\"\<Subset\>\"", " ", "->", " ", "S"}], ",", " ", 
+     RowBox[{"\"\<SimultaneouslyAdmissibleQ\>\"", " ", "->", " ", 
+      RowBox[{"hrfAdmissibleSubsetQ", "[", 
+       RowBox[{
+       "S", ",", " ", "toyVars", ",", " ", "toyKinAssumptions", ",", " ", 
+        "toyKinVars"}], "]"}]}]}], "|>"}]}]}]}], "Input",ExpressionUUID->\
+"2ba41796-014f-40d1-8cb5-bb9070bc3e97"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Layer III: Generator products g_k and the cancellation ideal", "Section",ExpressionUUID->"fa9c23b3-a13f-4923-8cd1-534e166cba6c"],
+
+Cell["\<\
+The generators of the cancellation ideal are not the individual factors f_i. \
+They are products of factors, g_k=Product[f_i, {i in S_k}], as in the current \
+LaTeX notes. The package can use a single full product or scan pair-sector \
+products.\
+\>", "Text",ExpressionUUID->"53475ef9-19d3-4de4-be81-32fc69614a75"],
+
+Cell[BoxData[
+ RowBox[{"<|", "\n", "  ", 
+  RowBox[{
+   RowBox[{"\"\<SafeFactors\>\"", " ", "->", " ", "toySafeFactors"}], ",", 
+   "\n", "  ", 
+   RowBox[{"\"\<PairSectorGenerators\>\"", " ", "->", " ", 
+    RowBox[{"pairSectorGenerators", "[", "toySafeFactors", "]"}]}], ",", "\n",
+    "  ", 
+   RowBox[{"\"\<CandidateGeneratorSets_SingleProduct\>\"", " ", "->", " ", 
+    RowBox[{"candidateGeneratorSets", "[", "toySafeFactors", "]"}]}], ",", 
+   "\n", "  ", 
+   RowBox[{"\"\<CandidateGeneratorSets_Diagnostic\>\"", " ", "->", " ", 
+    RowBox[{"candidateGeneratorSetsDiagnostic", "[", 
+     RowBox[{"toySafeFactors", ",", " ", "2"}], "]"}]}]}], "\n", 
+  "|>"}]], "Input",ExpressionUUID->"5bb25052-5390-4d39-956c-da764d3a4b73"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Layer IV: Obstruction as a remainder after division by generator products\
+\>", "Section",ExpressionUUID->"af7dea1a-b14f-4a2a-bba3-4a31b2615397"],
+
+Cell["\<\
+For a chosen generator set G, obstructionByOriginalTermsGeneral searches for \
+a subset of original monomials of F0 whose removal makes the remainder lie in \
+the ideal <G>. The implementation introduces binary variables b_i selecting \
+obstruction monomials and computes PolynomialReduce[F0 - Sum[b_i m_i], G, \
+allVars][[2]]. It then imposes that all coefficients of this remainder \
+vanish, with b_i in {0,1}.\
+\>", "Text",ExpressionUUID->"671498c1-e7ab-4f9b-a01e-ee41af6c3e51"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"toyGenerators", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"Times", " ", "@@", " ", "toySafeFactors"}], "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"toyObs", " ", "=", " ", 
+   RowBox[{"obstructionByOriginalTermsGeneral", "[", 
+    RowBox[{
+    "toyF0", ",", " ", "toyGenerators", ",", " ", "toyVars", ",", " ", 
+     "toyKinVars", ",", " ", "8"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"toyUse", " ", "=", " ", 
+   RowBox[{"generatorUseData", "[", 
+    RowBox[{
+     RowBox[{"toyObs", "[", "\"\<Superleading\>\"", "]"}], ",", " ", 
+     "toyGenerators", ",", " ", "toyVars", ",", " ", "toyKinVars"}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{"<|", "\n", "  ", 
+  RowBox[{
+   RowBox[{"\"\<Generators\>\"", " ", "->", " ", "toyGenerators"}], ",", "\n",
+    "  ", 
+   RowBox[{"\"\<ObstructionTerms\>\"", " ", "->", " ", 
+    RowBox[{"toyObs", "[", "\"\<ObstructionTerms\>\"", "]"}]}], ",", "\n", 
+   "  ", 
+   RowBox[{"\"\<F_Obs\>\"", " ", "->", " ", 
+    RowBox[{"toyObs", "[", "\"\<Obstruction\>\"", "]"}]}], ",", "\n", "  ", 
+   RowBox[{"\"\<F_SL\>\"", " ", "->", " ", 
+    RowBox[{"toyObs", "[", "\"\<Superleading\>\"", "]"}]}], ",", "\n", "  ", 
+   RowBox[{"\"\<PolynomialReduceQuotients\>\"", " ", "->", " ", 
+    RowBox[{"toyUse", "[", "\"\<Quotients\>\"", "]"}]}], ",", "\n", "  ", 
+   RowBox[{"\"\<PolynomialReduceRemainder\>\"", " ", "->", " ", 
+    RowBox[{"toyUse", "[", "\"\<Remainder\>\"", "]"}]}], ",", "\n", "  ", 
+   RowBox[{"\"\<UsedGenerators\>\"", " ", "->", " ", 
+    RowBox[{"toyUse", "[", "\"\<UsedGenerators\>\"", "]"}]}]}], "\n", 
+  "|>"}]}], "Input",ExpressionUUID->"e53666cf-f226-4185-9b1b-17e4fbf151a0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "Full", " ", "diagnostic", " ", "scan", " ", "over", " ", "generator"}], "-", 
+    RowBox[{"set", " ", 
+     RowBox[{"candidates", "."}]}]}], " ", "*)"}], "\n", 
+  RowBox[{"obstructionGeneratorDiagnostic", "[", 
+   RowBox[{
+   "toyF0", ",", " ", "toyVars", ",", " ", "toyKinAssumptions", ",", " ", 
+    "toyKinVars", ",", " ", "8", ",", " ", "2"}], "]"}]}]], "Input",Expression\
+UUID->"755008a2-b63f-4faf-9ef8-4e0323d3964e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Project command pattern for the five-point collinear example", "Section",ExpressionUUID->"03980781-e7eb-44d7-a413-1b9d1a3fcca6"],
+
+Cell["\<\
+After running 03_FivePoint_Spacelike_Collinear.wl, the same objects are \
+available for actual graph topologies. The following cells are written \
+defensively: they only run if the example data already exist in the kernel.\
+\>", "Text",ExpressionUUID->"81fa8b7d-0afd-43a9-b7ab-634b9f430d5e"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"ValueQ", "[", "UFCollinear2Loop7Prop", "]"}], ",", "\n", "  ", 
+   RowBox[{
+    RowBox[{"case7", " ", "=", " ", 
+     RowBox[{"First", "@", 
+      RowBox[{"Select", "[", 
+       RowBox[{"UFCollinear2Loop7Prop", ",", " ", 
+        RowBox[{
+         RowBox[{"AssociationQ", "[", 
+          RowBox[{"Lookup", "[", 
+           RowBox[{
+            RowBox[{"#", " ", "[", "\"\<InteriorObstructionScan\>\"", "]"}], ",",
+             " ", "\"\<ObstructionData\>\"", ",", " ", 
+            RowBox[{"Missing", "[", "]"}]}], "]"}], "]"}], " ", "&"}]}], 
+       "]"}]}]}], ";", "\n", "  ", 
+    RowBox[{"obs7", " ", "=", " ", 
+     RowBox[{"case7", "[", 
+      RowBox[{"\"\<InteriorObstructionScan\>\"", ",", 
+       " ", "\"\<ObstructionData\>\""}], "]"}]}], ";", "\n", "  ", 
+    RowBox[{"<|", "\n", "    ", 
+     RowBox[{
+      RowBox[{"\"\<Topology\>\"", " ", "->", " ", 
+       RowBox[{"case7", "[", "\"\<TopologyTeX\>\"", "]"}]}], ",", "\n", 
+      "    ", 
+      RowBox[{"\"\<CancellationFactors\>\"", " ", "->", " ", 
+       RowBox[{"case7", "[", 
+        RowBox[{"\"\<InteriorObstructionScan\>\"", ",", 
+         " ", "\"\<CancellationFactors\>\""}], "]"}]}], ",", "\n", "    ", 
+      RowBox[{"\"\<Generators\>\"", " ", "->", " ", 
+       RowBox[{"case7", "[", 
+        RowBox[{"\"\<InteriorObstructionScan\>\"", ",", 
+         " ", "\"\<Generators\>\""}], "]"}]}], ",", "\n", "    ", 
+      RowBox[{"\"\<F_Obs\>\"", " ", "->", " ", 
+       RowBox[{"obs7", "[", "\"\<Obstruction\>\"", "]"}]}], ",", "\n", "    ", 
+      RowBox[{"\"\<F_SL\>\"", " ", "->", " ", 
+       RowBox[{"obs7", "[", "\"\<Superleading\>\"", "]"}]}], ",", "\n", 
+      "    ", 
+      RowBox[{"\"\<GeneratorUseData\>\"", " ", "->", " ", 
+       RowBox[{"case7", "[", 
+        RowBox[{"\"\<InteriorObstructionScan\>\"", ",", 
+         " ", "\"\<GeneratorUseData\>\""}], "]"}]}]}], "\n", "  ", "|>"}]}], ",",
+    "\n", "  ", "\"\<Run \
+Get[NotebookDirectory[]<>\\\"03_FivePoint_Spacelike_Collinear.wl\\\"] first \
+to use this cell.\>\""}], "\n", "]"}]], "Input",ExpressionUUID->"55730551-\
+4966-4a96-b046-e9bb2c17ea16"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Layer V: Scaling geometry and uniqueness diagnostics", "Section",ExpressionUUID->"33c79965-4c10-48c2-acc5-06d97df96067"],
+
+Cell["\<\
+The scaling routine enforces three conditions: (1) all F_SL monomials have \
+one common pre-cancellation weight W_SL; (2) W_SL is strictly more singular \
+than the first surviving Lee--Pomeransky weight W_HR from U+F_Obs; (3) every \
+active variable is covered either by an F_SL monomial at W_SL or by a \
+surviving U/F_Obs monomial at W_HR. The unit gap is reported but not imposed.\
+\
+\>", "Text",ExpressionUUID->"f3556327-3eaa-4c55-b0ed-9c7d45b70298"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "hrfFSLLinearConstraintData", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"hrfFSLLinearConstraintData", "[", 
+    RowBox[{"fSL_", ",", " ", "vars_"}], "]"}], " ", ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"fSLList", ",", " ", "rows", ",", " ", "A"}], "}"}], ",", "\n", 
+     "  ", 
+     RowBox[{
+      RowBox[{"fSLList", " ", "=", " ", 
+       RowBox[{"DeleteCases", "[", 
+        RowBox[{
+         RowBox[{"Flatten", "[", 
+          RowBox[{"{", "fSL", "}"}], "]"}], ",", " ", "0"}], "]"}]}], ";", 
+      "\n", "  ", 
+      RowBox[{"rows", " ", "=", " ", 
+       RowBox[{"Join", " ", "@@", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"polynomialExponentRows", "[", 
+            RowBox[{"#", ",", " ", "vars"}], "]"}], " ", "&"}], " ", "/@", 
+          " ", "fSLList"}], ")"}]}]}], ";", "\n", "  ", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Length", "[", "rows", "]"}], " ", "<", " ", "2"}], ",", " ", 
+        RowBox[{"Return", "[", 
+         RowBox[{"<|", 
+          RowBox[{
+           RowBox[{"\"\<ExponentRows\>\"", " ", "->", " ", "rows"}], ",", " ", 
+           RowBox[{"\"\<ConstraintMatrix\>\"", " ", "->", " ", 
+            RowBox[{"{", "}"}]}], ",", " ", 
+           RowBox[{"\"\<Rank\>\"", " ", "->", " ", "0"}], ",", " ", 
+           RowBox[{"\"\<NullSpace\>\"", " ", "->", " ", 
+            RowBox[{"IdentityMatrix", "[", 
+             RowBox[{"Length", "[", "vars", "]"}], "]"}]}], ",", " ", 
+           
+           RowBox[{"\"\<AffineDimensionIgnoringDeltaPowers\>\"", " ", "->", 
+            " ", 
+            RowBox[{"Length", "[", "vars", "]"}]}]}], "|>"}], "]"}]}], "]"}], 
+      ";", "\n", "  ", 
+      RowBox[{"A", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"Rest", "[", "rows", "]"}], " ", "-", " ", 
+        RowBox[{"ConstantArray", "[", 
+         RowBox[{
+          RowBox[{"First", "[", "rows", "]"}], ",", " ", 
+          RowBox[{
+           RowBox[{"Length", "[", "rows", "]"}], " ", "-", " ", "1"}]}], 
+         "]"}]}]}], ";", "\n", "  ", 
+      RowBox[{"<|", "\n", "    ", 
+       RowBox[{
+        RowBox[{"\"\<ExponentRows\>\"", " ", "->", " ", "rows"}], ",", "\n", 
+        "    ", 
+        RowBox[{"\"\<ConstraintMatrix\>\"", " ", "->", " ", "A"}], ",", "\n", 
+        "    ", 
+        RowBox[{"\"\<Rank\>\"", " ", "->", " ", 
+         RowBox[{"MatrixRank", "[", "A", "]"}]}], ",", "\n", "    ", 
+        RowBox[{"\"\<NullSpace\>\"", " ", "->", " ", 
+         RowBox[{"NullSpace", "[", "A", "]"}]}], ",", "\n", "    ", 
+        RowBox[{"\"\<AffineDimensionIgnoringDeltaPowers\>\"", " ", "->", " ", 
+         
+         RowBox[{
+          RowBox[{"Length", "[", "vars", "]"}], " ", "-", " ", 
+          RowBox[{"MatrixRank", "[", "A", "]"}]}]}]}], "\n", "  ", "|>"}]}]}],
+     "\n", "]"}]}], ";"}]}], "Input",ExpressionUUID->"a13ce3cb-acb2-48ac-8c49-\
+8ae14afa9afc"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "hrfScalingGeometryAudit", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"hrfScalingGeometryAudit", "[", 
+    RowBox[{"fSL_", ",", " ", "U_", ",", " ", "vars_", ",", " ", 
+     RowBox[{"maxAbs_", ":", "5"}], ",", " ", 
+     RowBox[{"fObs_", ":", "None"}]}], "]"}], " ", ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"lin", ",", " ", "scan", ",", " ", "accepted"}], "}"}], ",", 
+     "\n", "  ", 
+     RowBox[{
+      RowBox[{"lin", " ", "=", " ", 
+       RowBox[{"hrfFSLLinearConstraintData", "[", 
+        RowBox[{"fSL", ",", " ", "vars"}], "]"}]}], ";", "\n", "  ", 
+      RowBox[{"scan", " ", "=", " ", 
+       RowBox[{"findCoverageLPScaling", "[", 
+        RowBox[{
+        "fSL", ",", " ", "U", ",", " ", "vars", ",", " ", "maxAbs", ",", " ", 
+         "fObs"}], "]"}]}], ";", "\n", "  ", 
+      RowBox[{"accepted", " ", "=", " ", 
+       RowBox[{"Lookup", "[", 
+        RowBox[{
+        "scan", ",", " ", "\"\<AcceptedCandidateDiagnostics\>\"", ",", " ", 
+         RowBox[{"{", "}"}]}], "]"}]}], ";", "\n", "  ", 
+      RowBox[{"<|", "\n", "    ", 
+       RowBox[{
+        RowBox[{"\"\<LinearEqualityData\>\"", " ", "->", " ", "lin"}], ",", 
+        "\n", "    ", 
+        RowBox[{"\"\<SelectedScaling\>\"", " ", "->", " ", 
+         RowBox[{"Lookup", "[", 
+          RowBox[{"scan", ",", " ", "\"\<Scaling\>\"", ",", " ", 
+           RowBox[{"Missing", "[", "\"\<NoScaling\>\"", "]"}]}], "]"}]}], ",",
+         "\n", "    ", 
+        RowBox[{"\"\<AcceptedCount\>\"", " ", "->", " ", 
+         RowBox[{"Lookup", "[", 
+          RowBox[{"scan", ",", " ", "\"\<AcceptedCount\>\"", ",", " ", 
+           RowBox[{"Missing", "[", "\"\<NoCount\>\"", "]"}]}], "]"}]}], ",", 
+        "\n", "    ", 
+        RowBox[{"\"\<CandidateCount\>\"", " ", "->", " ", 
+         RowBox[{"Lookup", "[", 
+          RowBox[{"scan", ",", " ", "\"\<CandidateCount\>\"", ",", " ", 
+           RowBox[{"Missing", "[", "\"\<NoCount\>\"", "]"}]}], "]"}]}], ",", 
+        "\n", "    ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"\"\<AcceptedScalings\>\"", " ", "->", " ", 
+           RowBox[{"Lookup", "[", 
+            RowBox[{"#", ",", " ", "\"\<ScalingVector\>\""}], "]"}]}], " ", 
+          "&"}], " ", "/@", " ", "accepted"}], ",", "\n", "    ", 
+        RowBox[{"\"\<SelectedDiagnostics\>\"", " ", "->", " ", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"accepted", " ", "===", " ", 
+            RowBox[{"{", "}"}]}], ",", " ", 
+           RowBox[{"Missing", "[", "\"\<NoAcceptedCandidate\>\"", "]"}], ",", 
+           " ", 
+           RowBox[{"First", "[", "accepted", "]"}]}], "]"}]}], ",", "\n", 
+        "    ", 
+        RowBox[{"\"\<NearMissDiagnostics\>\"", " ", "->", " ", 
+         RowBox[{"Lookup", "[", 
+          RowBox[{"scan", ",", " ", "\"\<NearMissDiagnostics\>\"", ",", " ", 
+           RowBox[{"{", "}"}]}], "]"}]}]}], "\n", "  ", "|>"}]}]}], "\n", 
+    "]"}]}], ";"}]}], "Input",ExpressionUUID->"566389b1-9763-4a64-9ee1-\
+130925b61d82"],
+
+Cell["\<\
+Apply the scaling audit to the toy obstruction. For the toy example we choose \
+a simple toy U only to demonstrate the diagnostic structure; physical \
+conclusions should be drawn from the graph examples below.\
+\>", "Text",ExpressionUUID->"0cb72970-bbbb-47dd-8fb9-00deab4150aa"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"toyU", " ", "=", " ", 
+   RowBox[{
+   "x0", " ", "+", " ", "x1", " ", "+", " ", "x2", " ", "+", " ", "x3", " ", "+",
+     " ", "x4"}]}], ";"}], "\n", 
+ RowBox[{"hrfScalingGeometryAudit", "[", 
+  RowBox[{
+   RowBox[{"toyObs", "[", "\"\<Superleading\>\"", "]"}], ",", " ", "toyU", ",",
+    " ", "toyVars", ",", " ", "3", ",", " ", 
+   RowBox[{"toyObs", "[", "\"\<Obstruction\>\"", "]"}]}], "]"}]}], "Input",Exp\
+ressionUUID->"3cda1334-23ef-40ea-8540-66075ac7653d"],
+
+Cell["\<\
+Apply the scaling audit to a real five-point collinear topology, if 03 has \
+been loaded.\
+\>", "Text",ExpressionUUID->"d2698bf6-e007-4d18-9c8f-ad3dd96956a4"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ValueQ", "[", "case7", "]"}], " ", "&&", " ", 
+    RowBox[{"AssociationQ", "[", "case7", "]"}]}], ",", "\n", "  ", 
+   RowBox[{"hrfScalingGeometryAudit", "[", 
+    RowBox[{
+     RowBox[{"obs7", "[", "\"\<Superleading\>\"", "]"}], ",", " ", 
+     RowBox[{"case7", "[", "\"\<U\>\"", "]"}], ",", " ", 
+     RowBox[{"case7", "[", "\"\<Variables\>\"", "]"}], ",", " ", "5", ",", 
+     " ", 
+     RowBox[{"obs7", "[", "\"\<Obstruction\>\"", "]"}]}], "]"}], ",", "\n", 
+   "  ", "\"\<Load 03_FivePoint_Spacelike_Collinear.wl and run the previous \
+project-data cell first.\>\""}], "\n", "]"}]], "Input",ExpressionUUID->\
+"19a71e93-b885-43f5-b60a-d2dc136bde3d"],
+
+Cell[CellGroupData[{
+
+Cell["Compact accepted-candidate table", "Subsection",ExpressionUUID->"c94d5368-ad6e-4bb2-ab2b-18e752fcf609"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "hrfAcceptedCandidateTable", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"hrfAcceptedCandidateTable", "[", "scan_Association", "]"}], " ", 
+    ":=", " ", 
+    RowBox[{"Dataset", "[", "\n", "  ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"KeyTake", "[", 
+        RowBox[{"#", ",", " ", 
+         RowBox[{"{", "\n", "    ", 
+          
+          RowBox[{"\"\<ScalingVector\>\"", ",", " ", "\"\<FSLWeight\>\"", ",",
+            " ", "\"\<PostCancellationLeadingWeight\>\"", ",", "\n", 
+           "    ", "\"\<HierarchyGapPostLPminusFSL\>\"", ",", 
+           " ", "\"\<UnitGapQ\>\"", ",", "\n", 
+           "    ", "\"\<VariablesCoveredByFSLAtWSL\>\"", ",", 
+           " ", "\"\<VariablesInPostCancellationLeadingSupport\>\"", ",", 
+           "\n", "    ", \
+"\"\<VariablesMissingFromLeadingRegionCoverage\>\""}], "\n", "  ", "}"}]}], 
+        "]"}], " ", "&"}], " ", "/@", " ", 
+      RowBox[{"Lookup", "[", 
+       RowBox[{
+       "scan", ",", " ", "\"\<AcceptedCandidateDiagnostics\>\"", ",", " ", 
+        RowBox[{"{", "}"}]}], "]"}]}], "\n", "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ValueQ", "[", "case7", "]"}], " ", "&&", " ", 
+    RowBox[{"AssociationQ", "[", "case7", "]"}]}], ",", "\n", "  ", 
+   RowBox[{"hrfAcceptedCandidateTable", "[", 
+    RowBox[{"findCoverageLPScaling", "[", 
+     RowBox[{
+      RowBox[{"obs7", "[", "\"\<Superleading\>\"", "]"}], ",", " ", 
+      RowBox[{"case7", "[", "\"\<U\>\"", "]"}], ",", " ", 
+      RowBox[{"case7", "[", "\"\<Variables\>\"", "]"}], ",", " ", "5", ",", 
+      " ", 
+      RowBox[{"obs7", "[", "\"\<Obstruction\>\"", "]"}]}], "]"}], "]"}], ",", 
+   "\n", "  ", "\"\<Load 03 and select case7 first.\>\""}], "\n", 
+  "]"}]}], "Input",ExpressionUUID->"07a67ed6-65eb-4bfd-b58c-73528fa96c9b"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Counting independent conditions across 7- and 8-propagator topologies\
+\>", "Section",ExpressionUUID->"8d9ebd75-64a4-4ce4-86ff-a56322a877ba"],
+
+Cell["\<\
+This table is meant to prepare a possible uniqueness proof. It records the \
+rank of the F_SL equal-weight system, the dimension left by those equalities \
+alone, the selected scaling vector, the hierarchy gap, and whether coverage \
+is complete.\
+\>", "Text",ExpressionUUID->"a6001ad7-0e13-49f6-b6d5-e95fd86f2e7e"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "hrfScalingRow", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"hrfScalingRow", "[", "row_Association", "]"}], " ", ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "data", ",", " ", "cand", ",", " ", "fsl", ",", " ", "vars", ",", " ", 
+       "lin"}], "}"}], ",", "\n", "  ", 
+     RowBox[{
+      RowBox[{"data", " ", "=", " ", 
+       RowBox[{"Lookup", "[", 
+        RowBox[{"row", ",", " ", "\"\<CoverageLPScalingData\>\"", ",", " ", 
+         RowBox[{"Missing", "[", "]"}]}], "]"}]}], ";", "\n", "  ", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"!", 
+          RowBox[{"AssociationQ", "[", "data", "]"}]}], " ", "||", " ", 
+         RowBox[{
+          RowBox[{"Lookup", "[", 
+           RowBox[{
+           "data", ",", " ", "\"\<AcceptedCandidateDiagnostics\>\"", ",", " ", 
+            RowBox[{"{", "}"}]}], "]"}], " ", "===", " ", 
+          RowBox[{"{", "}"}]}]}], ",", "\n", "    ", 
+        RowBox[{"Return", "[", 
+         RowBox[{"<|", 
+          RowBox[{
+           RowBox[{"\"\<GraphIndex\>\"", " ", "->", " ", 
+            RowBox[{"Lookup", "[", 
+             RowBox[{"row", ",", " ", "\"\<GraphIndex\>\"", ",", " ", 
+              RowBox[{"Missing", "[", "]"}]}], "]"}]}], ",", " ", 
+           RowBox[{"\"\<Topology\>\"", " ", "->", " ", 
+            RowBox[{"Lookup", "[", 
+             RowBox[{"row", ",", " ", "\"\<TopologyTeX\>\"", ",", " ", 
+              RowBox[{"Missing", "[", "]"}]}], "]"}]}], ",", " ", 
+           RowBox[{"\"\<Scaling\>\"", " ", "->", " ", 
+            RowBox[{"Missing", "[", "\"\<NoAcceptedScaling\>\"", "]"}]}]}], 
+          "|>"}], "]"}]}], "\n", "  ", "]"}], ";", "\n", "  ", 
+      RowBox[{"cand", " ", "=", " ", 
+       RowBox[{"First", "[", 
+        RowBox[{"data", "[", "\"\<AcceptedCandidateDiagnostics\>\"", "]"}], 
+        "]"}]}], ";", "\n", "  ", 
+      RowBox[{"fsl", " ", "=", " ", 
+       RowBox[{"Lookup", "[", 
+        RowBox[{"row", ",", " ", "\"\<FSL\>\"", ",", " ", 
+         RowBox[{"Missing", "[", "]"}]}], "]"}]}], ";", "\n", "  ", 
+      RowBox[{"vars", " ", "=", " ", 
+       RowBox[{"Lookup", "[", 
+        RowBox[{"row", ",", " ", "\"\<RemainingVars\>\"", ",", " ", 
+         RowBox[{"Lookup", "[", 
+          RowBox[{"row", ",", " ", "\"\<Variables\>\"", ",", " ", 
+           RowBox[{"{", "}"}]}], "]"}]}], "]"}]}], ";", "\n", "  ", 
+      RowBox[{"lin", " ", "=", " ", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"fsl", " ", "===", " ", 
+           RowBox[{"Missing", "[", "]"}]}], " ", "||", " ", 
+          RowBox[{"vars", " ", "===", " ", 
+           RowBox[{"{", "}"}]}]}], ",", " ", 
+         RowBox[{"Missing", "[", "]"}], ",", " ", 
+         RowBox[{"hrfFSLLinearConstraintData", "[", 
+          RowBox[{"fsl", ",", " ", "vars"}], "]"}]}], "]"}]}], ";", "\n", 
+      "  ", 
+      RowBox[{"<|", "\n", "    ", 
+       RowBox[{
+        RowBox[{"\"\<GraphIndex\>\"", " ", "->", " ", 
+         RowBox[{"row", "[", "\"\<GraphIndex\>\"", "]"}]}], ",", "\n", "    ", 
+        RowBox[{"\"\<Topology\>\"", " ", "->", " ", 
+         RowBox[{"Lookup", "[", 
+          RowBox[{"row", ",", " ", "\"\<TopologyTeX\>\"", ",", " ", 
+           RowBox[{"Lookup", "[", 
+            RowBox[{
+            "row", ",", " ", "\"\<TopologyName\>\"", ",", " ", "\"\<\>\""}], 
+            "]"}]}], "]"}]}], ",", "\n", "    ", 
+        RowBox[{"\"\<ZeroVars\>\"", " ", "->", " ", 
+         RowBox[{"Lookup", "[", 
+          RowBox[{"row", ",", " ", "\"\<ZeroVars\>\"", ",", " ", 
+           RowBox[{"{", "}"}]}], "]"}]}], ",", "\n", "    ", 
+        RowBox[{"\"\<ActiveVars\>\"", " ", "->", " ", "vars"}], ",", "\n", 
+        "    ", 
+        RowBox[{"\"\<Scaling\>\"", " ", "->", " ", 
+         RowBox[{"cand", "[", "\"\<ScalingVector\>\"", "]"}]}], ",", "\n", 
+        "    ", 
+        RowBox[{"\"\<RankEqualities\>\"", " ", "->", " ", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"AssociationQ", "[", "lin", "]"}], ",", " ", 
+           RowBox[{"lin", "[", "\"\<Rank\>\"", "]"}], ",", " ", 
+           RowBox[{"Missing", "[", "]"}]}], "]"}]}], ",", "\n", "    ", 
+        RowBox[{"\"\<DimAfterEqualities\>\"", " ", "->", " ", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"AssociationQ", "[", "lin", "]"}], ",", " ", 
+           RowBox[{
+           "lin", "[", "\"\<AffineDimensionIgnoringDeltaPowers\>\"", "]"}], ",",
+            " ", 
+           RowBox[{"Missing", "[", "]"}]}], "]"}]}], ",", "\n", "    ", 
+        RowBox[{"\"\<Gap\>\"", " ", "->", " ", 
+         RowBox[{"cand", "[", "\"\<HierarchyGapPostLPminusFSL\>\"", "]"}]}], ",",
+         "\n", "    ", 
+        RowBox[{"\"\<UnitGapQ\>\"", " ", "->", " ", 
+         RowBox[{"cand", "[", "\"\<UnitGapQ\>\"", "]"}]}], ",", "\n", "    ", 
+        
+        RowBox[{"\"\<CoveredByFSLAtWSL\>\"", " ", "->", " ", 
+         RowBox[{"cand", "[", "\"\<VariablesCoveredByFSLAtWSL\>\"", "]"}]}], ",",
+         "\n", "    ", 
+        RowBox[{"\"\<CoveredAtWHR\>\"", " ", "->", " ", 
+         RowBox[{
+         "cand", "[", "\"\<VariablesInPostCancellationLeadingSupport\>\"", 
+          "]"}]}], ",", "\n", "    ", 
+        RowBox[{"\"\<Missing\>\"", " ", "->", " ", 
+         RowBox[{
+         "cand", "[", "\"\<VariablesMissingFromLeadingRegionCoverage\>\"", 
+          "]"}]}]}], "\n", "  ", "|>"}]}]}], "\n", "]"}]}], ";"}]}], "Input",E\
+xpressionUUID->"f4c95a6d-481c-41f7-9a6f-444d0c3b5b5c"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"ValueQ", "[", "InteriorScalingData2Loop7Prop", "]"}], ",", "\n", 
+   "  ", 
+   RowBox[{"Dataset", "[", 
+    RowBox[{
+    "hrfScalingRow", " ", "/@", " ", "InteriorScalingData2Loop7Prop"}], "]"}],
+    ",", "\n", 
+   "  ", "\"\<Load/run 03 first to create \
+InteriorScalingData2Loop7Prop.\>\""}], "\n", "]"}]], "Input",ExpressionUUID->\
+"42062266-a769-44d6-9093-31b8e894668c"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"ValueQ", "[", "BoundaryScalingData2Loop7Prop", "]"}], ",", "\n", 
+   "  ", 
+   RowBox[{"Dataset", "[", 
+    RowBox[{
+    "hrfScalingRow", " ", "/@", " ", "BoundaryScalingData2Loop7Prop"}], "]"}],
+    ",", "\n", 
+   "  ", "\"\<Load/run 03 first to create \
+BoundaryScalingData2Loop7Prop.\>\""}], "\n", "]"}]], "Input",ExpressionUUID->\
+"37a19c66-88a9-42d2-9c2d-c1ba75931e78"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"ValueQ", "[", "InteriorScalingData2Loop8Prop", "]"}], ",", "\n", 
+   "  ", 
+   RowBox[{"Dataset", "[", 
+    RowBox[{
+    "hrfScalingRow", " ", "/@", " ", "InteriorScalingData2Loop8Prop"}], "]"}],
+    ",", "\n", 
+   "  ", "\"\<Load/run 03 first to create \
+InteriorScalingData2Loop8Prop.\>\""}], "\n", "]"}]], "Input",ExpressionUUID->\
+"d165df3f-fbe7-443b-ac07-4707c7c2a010"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"ValueQ", "[", "BoundaryScalingData2Loop8Prop", "]"}], ",", "\n", 
+   "  ", 
+   RowBox[{"Dataset", "[", 
+    RowBox[{
+    "hrfScalingRow", " ", "/@", " ", "BoundaryScalingData2Loop8Prop"}], "]"}],
+    ",", "\n", 
+   "  ", "\"\<Load/run 03 first to create \
+BoundaryScalingData2Loop8Prop.\>\""}], "\n", "]"}]], "Input",ExpressionUUID->\
+"a2dfb17a-d65a-4ed9-b12a-8a495864f26c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Where the current code differs from the idealized paper algorithm\
+\>", "Section",ExpressionUUID->"1d0de43f-93b0-4afc-9ed1-6e023260d6dc"],
+
+Cell["\<\
+1. Factor discovery keeps binomial factors that are individually \
+positive-compatible. The notebook helper hrfAdmissibleSubsetQ checks \
+simultaneous positivity of a subset, which is part of the mathematical \
+description, but the current findObstructions implementation does not yet use \
+it as a hard filter before generator scanning.
+
+2. Generator products are correctly used: the cancellation ideal is generated \
+by products g_k of factors f_i, not by the individual factors themselves.
+
+3. Obstruction extraction is implemented as polynomial division plus binary \
+monomial selection: the selected obstruction monomials are removed so that \
+the complement has zero remainder modulo the generator products.
+
+4. The scaling routine reports a unit hierarchy gap when it emerges, but does \
+not impose it. The equality constraints, hierarchy inequality, and coverage \
+condition determine the accepted candidate list.\
+\>", "Text",ExpressionUUID->"07bd6ea4-a8a8-4537-afc4-973237ce93fe"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Useful package commands referenced in this notebook", "Section",ExpressionUUID->"9be8c38a-fbe3-4e57-b163-e90a865b9c21"],
+
+Cell[BoxData[
+ RowBox[{"{", "\n", "  ", 
+  RowBox[{
+  "derivativeFactors", ",", " ", "derivativeFactorsExtended", ",", "\n", "  ",
+    "safeCancellationFactors", ",", " ", "safeCancellationFactorsExtended", ",",
+    " ", "positiveCompatibleQ", ",", "\n", "  ", "pairSectorGenerators", ",", 
+   " ", "candidateGeneratorSets", ",", " ", 
+   "candidateGeneratorSetsDiagnostic", ",", "\n", "  ", 
+   "obstructionByOriginalTermsGeneral", ",", " ", 
+   "obstructionGeneratorDiagnostic", ",", " ", "generatorUseData", ",", " ", 
+   "findObstructions", ",", "\n", "  ", "polynomialExponentRows", ",", " ", 
+   "findCoverageLPScaling", ",", " ", 
+   "coverageConstraintDiagnosticFromRows"}], "\n", "}"}]], "Input",ExpressionU\
+UID->"807ad08f-09c6-4759-baf1-fd6a3d68eb1c"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1342, 960},
+WindowMargins->{{34, Automatic}, {Automatic, 0}},
+WindowTitle->"Pedagogical HiddenRegionFinder Algorithm",
+Magnification:>1.5 Inherited,
+FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"36a63d69-4183-45d0-8c60-00f9fc2e0bcf"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[630, 23, 132, 0, 235, "Title",ExpressionUUID->"22423fa9-5c0f-4b73-9db2-306d56033a51"],
+Cell[765, 25, 152, 3, 44, "Input",ExpressionUUID->"15c5ebc4-cd4b-4d10-895e-c85655ede6aa"],
+Cell[920, 30, 390, 12, 247, "Text",ExpressionUUID->"599ac353-d8bd-4ec1-b539-0d99a1ae6c74"],
+Cell[CellGroupData[{
+Cell[1335, 46, 79, 0, 99, "Section",ExpressionUUID->"576c5f60-7af5-47ae-ad35-697d2cb4d3d5"],
+Cell[1417, 48, 391, 10, 105, "Input",ExpressionUUID->"60e324d3-c5ba-42ac-9640-e5c0c2decd49"],
+Cell[1811, 60, 142, 3, 50, "Text",ExpressionUUID->"65231a95-630e-4d7f-8f13-00fc90958a19"],
+Cell[CellGroupData[{
+Cell[1978, 67, 370, 9, 74, "Input",ExpressionUUID->"93703ad1-0d44-47f7-8ba4-b32f5bbda43d"],
+Cell[CellGroupData[{
+Cell[2373, 80, 415, 9, 34, "Print",ExpressionUUID->"24ba418c-f1b1-4609-a93e-53e938f2ac85"],
+Cell[2791, 91, 415, 9, 34, "Print",ExpressionUUID->"16815cb5-acd0-4a83-b41f-31a2618abbcb"],
+Cell[3209, 102, 1175, 26, 34, "Print",ExpressionUUID->"cdb87918-e4b7-4071-adc5-973a8b61b975"],
+Cell[4387, 130, 415, 9, 34, "Print",ExpressionUUID->"cbd4373b-03e8-4231-b945-25213a5be4ab"],
+Cell[4805, 141, 415, 9, 34, "Print",ExpressionUUID->"da37e5b0-230a-42a8-86b2-a3672011e0b3"],
+Cell[5223, 152, 415, 9, 34, "Print",ExpressionUUID->"54d57497-9ec8-48e4-a105-c91460ce5033"],
+Cell[5641, 163, 1157, 26, 34, "Print",ExpressionUUID->"03e70b13-7c61-443e-b42d-502aaf5d2b9e"],
+Cell[6801, 191, 415, 9, 34, "Print",ExpressionUUID->"8bc372dc-f96a-4e04-a9d6-a90f1f95d7df"],
+Cell[7219, 202, 415, 9, 34, "Print",ExpressionUUID->"12e503a1-e1d0-407d-a792-d8ddcd813a84"],
+Cell[7637, 213, 415, 9, 34, "Print",ExpressionUUID->"a8683daf-fb3e-4d78-8c89-8950b607ce47"],
+Cell[8055, 224, 415, 9, 34, "Print",ExpressionUUID->"352a4dcf-460c-419f-8066-135fb90bbfff"],
+Cell[8473, 235, 415, 9, 34, "Print",ExpressionUUID->"a34f1782-a034-475b-a67c-c52e9b55742a"],
+Cell[8891, 246, 415, 9, 34, "Print",ExpressionUUID->"d7fa96c6-e01f-4ebd-a8b4-29d3cd3a2452"],
+Cell[9309, 257, 415, 9, 34, "Print",ExpressionUUID->"36223931-a409-48a6-ac74-234a4536c5ff"],
+Cell[9727, 268, 415, 9, 34, "Print",ExpressionUUID->"2891190c-9a17-4f91-95f3-19e5a59d31c0"],
+Cell[10145, 279, 415, 9, 34, "Print",ExpressionUUID->"e553bab1-ef29-49c4-9463-e1882fa74ce3"],
+Cell[10563, 290, 415, 9, 34, "Print",ExpressionUUID->"4a969741-4bd4-4042-982b-5e2f1235bbf2"],
+Cell[10981, 301, 413, 9, 34, "Print",ExpressionUUID->"600c5567-babf-45e9-b4f3-676cbb1a4054"],
+Cell[11397, 312, 1140, 25, 34, "Print",ExpressionUUID->"8b60fe5c-a50f-4e85-bdf5-c816875bf9ca"],
+Cell[12540, 339, 413, 9, 34, "Print",ExpressionUUID->"ff09bd8d-830b-4524-a658-579845a8ad76"],
+Cell[12956, 350, 1140, 25, 34, "Print",ExpressionUUID->"aca52ba7-b60f-40e1-a648-19f81b713fec"],
+Cell[14099, 377, 412, 9, 34, "Print",ExpressionUUID->"bf7b1478-7f81-4ee7-9bed-4ac7cab7fa9b"],
+Cell[14514, 388, 1140, 25, 34, "Print",ExpressionUUID->"98003df4-a2c0-495a-bc4e-dc4d296c5edc"],
+Cell[15657, 415, 413, 9, 34, "Print",ExpressionUUID->"ad0ec0cf-678d-40c5-b3bb-7c5834e7e0e7"],
+Cell[16073, 426, 1138, 25, 34, "Print",ExpressionUUID->"6cff81d6-ad93-4479-8838-03c3fc9388f0"],
+Cell[17214, 453, 413, 9, 34, "Print",ExpressionUUID->"418369b7-f156-445a-bff2-c747b4931f82"],
+Cell[17630, 464, 1140, 25, 34, "Print",ExpressionUUID->"35d08757-4600-4b77-8e2d-75561f821f63"],
+Cell[18773, 491, 415, 9, 34, "Print",ExpressionUUID->"81f8c20d-f116-4e74-9a12-cd25f613e496"],
+Cell[19191, 502, 1138, 25, 34, "Print",ExpressionUUID->"cb38512d-7da0-44db-8617-5f9f5fc6941b"],
+Cell[20332, 529, 417, 9, 34, "Print",ExpressionUUID->"a4261e0b-2352-4df5-83e5-39029264296f"],
+Cell[20752, 540, 1140, 25, 34, "Print",ExpressionUUID->"050cfec3-1ce0-4726-a72a-5aa4ce31332b"],
+Cell[21895, 567, 417, 9, 34, "Print",ExpressionUUID->"8661ada2-bae1-4b4d-b469-fda5c09b7665"],
+Cell[22315, 578, 1138, 25, 34, "Print",ExpressionUUID->"50185bd9-f7bc-4ef3-91fd-599669438da1"],
+Cell[23456, 605, 414, 9, 34, "Print",ExpressionUUID->"8552b9e9-729f-4668-9791-b31c14dd47ba"],
+Cell[23873, 616, 1175, 26, 34, "Print",ExpressionUUID->"fbee518e-231d-477c-84ce-8681ac206c65"],
+Cell[25051, 644, 415, 9, 34, "Print",ExpressionUUID->"34db9764-fc87-4f8f-92d6-b8188373fe13"],
+Cell[25469, 655, 1138, 25, 34, "Print",ExpressionUUID->"c3dfe778-6cb2-4adf-ba02-86d68ba46a05"],
+Cell[26610, 682, 417, 9, 34, "Print",ExpressionUUID->"d0e920d3-c1b0-4a64-8b3e-b913eeacaea7"],
+Cell[27030, 693, 1140, 25, 34, "Print",ExpressionUUID->"58312241-9ba2-40df-a43e-244cd889762c"],
+Cell[28173, 720, 415, 9, 34, "Print",ExpressionUUID->"9df8cc0d-354e-43cc-8eb0-5f31b2428cdd"],
+Cell[28591, 731, 1138, 25, 34, "Print",ExpressionUUID->"34866279-3907-4847-860d-83e049a11392"],
+Cell[29732, 758, 415, 9, 34, "Print",ExpressionUUID->"91933d26-1ef6-4df3-ac5e-0e25b7a66a7e"],
+Cell[30150, 769, 1175, 26, 34, "Print",ExpressionUUID->"13a3e85c-54e0-480a-9bb7-954ae606f676"],
+Cell[31328, 797, 417, 9, 34, "Print",ExpressionUUID->"d3f1c5b6-7ec2-4c5d-a22b-b4baac5ba7ca"],
+Cell[31748, 808, 1137, 25, 34, "Print",ExpressionUUID->"fdb84492-381a-45e1-8bab-621afccb7338"],
+Cell[32888, 835, 417, 9, 34, "Print",ExpressionUUID->"09107454-8410-4716-995e-83199c7ac49f"],
+Cell[33308, 846, 1140, 25, 34, "Print",ExpressionUUID->"1335da55-552e-4ca5-aa08-f6b92b5ebabe"],
+Cell[34451, 873, 417, 9, 34, "Print",ExpressionUUID->"6f541020-af50-43e3-b466-4c92a2d6a613"],
+Cell[34871, 884, 1138, 25, 34, "Print",ExpressionUUID->"90c40caf-e552-4f12-aeb8-b8d9366473d8"],
+Cell[36012, 911, 417, 9, 34, "Print",ExpressionUUID->"3cbc5da4-328f-42b5-bf2f-d92611b2966b"],
+Cell[36432, 922, 1175, 26, 34, "Print",ExpressionUUID->"e6e1a69e-0537-4cf9-b5af-c134f2f0fca2"],
+Cell[37610, 950, 419, 9, 34, "Print",ExpressionUUID->"3fff9005-dc30-464a-88da-84fd059721ae"],
+Cell[38032, 961, 1138, 25, 34, "Print",ExpressionUUID->"d8efad6b-7e4b-4b39-8c34-18c12185bae9"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39231, 993, 110, 0, 99, "Section",ExpressionUUID->"eb3452ed-6fd5-4d02-9c69-57bc97aa9be2"],
+Cell[39344, 995, 296, 4, 83, "Text",ExpressionUUID->"d43eb0f6-a9c4-4a74-bdb6-7ad8a66065f5"],
+Cell[CellGroupData[{
+Cell[39665, 1003, 1735, 47, 227, "Input",ExpressionUUID->"71ace6e9-291c-4e4a-80fd-498e7a3f0f50"],
+Cell[41403, 1052, 991, 29, 50, "Output",ExpressionUUID->"5bca58d6-bb4e-448a-99d6-7a91c2cfc5f4"],
+Cell[42397, 1083, 7439, 136, 727, "Output",ExpressionUUID->"dc22dfec-a78a-4d8a-ae4c-f7735c31b4b0"]
+}, Open  ]],
+Cell[49851, 1222, 300, 6, 74, "Input",ExpressionUUID->"d44ed293-5b88-4f20-9456-47e78562911d"],
+Cell[CellGroupData[{
+Cell[50176, 1232, 1012, 25, 105, "Input",ExpressionUUID->"8f2b2dba-1bf5-4bd1-85da-f31d6800b676"],
+Cell[51191, 1259, 2727, 59, 216, "Output",ExpressionUUID->"ceb6fb90-9a41-40b4-87f5-ab68eb1c7f2a"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53967, 1324, 108, 0, 99, "Section",ExpressionUUID->"9237de5b-5a79-4576-a091-bec741733ef3"],
+Cell[54078, 1326, 415, 6, 116, "Text",ExpressionUUID->"3c64710c-82ae-4b26-9078-78d9db3dda61"],
+Cell[54496, 1334, 303, 4, 83, "Text",ExpressionUUID->"daab650d-84c6-4a06-9d2c-ac6b2c0bb98c"],
+Cell[54802, 1340, 1376, 36, 350, "Input",ExpressionUUID->"d57d6e75-a1fe-4fc9-816e-7b4cdd53f849"],
+Cell[56181, 1378, 228, 3, 83, "Text",ExpressionUUID->"2bc99fc8-9f61-43ef-a2fe-17b3bf8da7b9"],
+Cell[56412, 1383, 769, 20, 135, "Input",ExpressionUUID->"fae4ff32-f2af-4f40-a6e6-e8ed7a3531e3"],
+Cell[57184, 1405, 355, 5, 116, "Text",ExpressionUUID->"fc454970-0eb1-4390-9aa7-c75e74860d8f"],
+Cell[57542, 1412, 1555, 39, 289, "Input",ExpressionUUID->"2ba41796-014f-40d1-8cb5-bb9070bc3e97"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[59134, 1456, 134, 0, 99, "Section",ExpressionUUID->"fa9c23b3-a13f-4923-8cd1-534e166cba6c"],
+Cell[59271, 1458, 324, 5, 83, "Text",ExpressionUUID->"53475ef9-19d3-4de4-be81-32fc69614a75"],
+Cell[59598, 1465, 730, 14, 197, "Input",ExpressionUUID->"5bb25052-5390-4d39-956c-da764d3a4b73"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[60365, 1484, 155, 2, 105, "Section",ExpressionUUID->"af7dea1a-b14f-4a2a-bba3-4a31b2615397"],
+Cell[60523, 1488, 491, 7, 105, "Text",ExpressionUUID->"671498c1-e7ab-4f9b-a01e-ee41af6c3e51"],
+Cell[61017, 1497, 1665, 35, 105, "Input",ExpressionUUID->"e53666cf-f226-4185-9b1b-17e4fbf151a0"],
+Cell[62685, 1534, 499, 12, 105, "Input",ExpressionUUID->"755008a2-b63f-4faf-9ef8-4e0323d3964e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[63221, 1551, 134, 0, 105, "Section",ExpressionUUID->"03980781-e7eb-44d7-a413-1b9d1a3fcca6"],
+Cell[63358, 1553, 301, 4, 105, "Text",ExpressionUUID->"81fa8b7d-0afd-43a9-b7ab-634b9f430d5e"],
+Cell[63662, 1559, 2144, 46, 105, "Input",ExpressionUUID->"55730551-4966-4a96-b046-e9bb2c17ea16"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[65843, 1610, 126, 0, 105, "Section",ExpressionUUID->"33c79965-4c10-48c2-acc5-06d97df96067"],
+Cell[65972, 1612, 464, 7, 105, "Text",ExpressionUUID->"f3556327-3eaa-4c55-b0ed-9c7d45b70298"],
+Cell[66439, 1621, 2983, 71, 105, "Input",ExpressionUUID->"a13ce3cb-acb2-48ac-8c49-8ae14afa9afc"],
+Cell[69425, 1694, 3068, 67, 105, "Input",ExpressionUUID->"566389b1-9763-4a64-9ee1-130925b61d82"],
+Cell[72496, 1763, 289, 4, 105, "Text",ExpressionUUID->"0cb72970-bbbb-47dd-8fb9-00deab4150aa"],
+Cell[72788, 1769, 498, 11, 105, "Input",ExpressionUUID->"3cda1334-23ef-40ea-8540-66075ac7653d"],
+Cell[73289, 1782, 168, 3, 105, "Text",ExpressionUUID->"d2698bf6-e007-4d18-9c8f-ad3dd96956a4"],
+Cell[73460, 1787, 724, 15, 105, "Input",ExpressionUUID->"19a71e93-b885-43f5-b60a-d2dc136bde3d"],
+Cell[CellGroupData[{
+Cell[74209, 1806, 109, 0, 105, "Subsection",ExpressionUUID->"c94d5368-ad6e-4bb2-ab2b-18e752fcf609"],
+Cell[74321, 1808, 1869, 42, 105, "Input",ExpressionUUID->"07a67ed6-65eb-4bfd-b58c-73528fa96c9b"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[76239, 1856, 151, 2, 105, "Section",ExpressionUUID->"8d9ebd75-64a4-4ce4-86ff-a56322a877ba"],
+Cell[76393, 1860, 325, 5, 105, "Text",ExpressionUUID->"a6001ad7-0e13-49f6-b6d5-e95fd86f2e7e"],
+Cell[76721, 1867, 5519, 119, 105, "Input",ExpressionUUID->"f4c95a6d-481c-41f7-9a6f-444d0c3b5b5c"],
+Cell[82243, 1988, 432, 11, 105, "Input",ExpressionUUID->"42062266-a769-44d6-9093-31b8e894668c"],
+Cell[82678, 2001, 432, 11, 105, "Input",ExpressionUUID->"37a19c66-88a9-42d2-9c2d-c1ba75931e78"],
+Cell[83113, 2014, 432, 11, 105, "Input",ExpressionUUID->"d165df3f-fbe7-443b-ac07-4707c7c2a010"],
+Cell[83548, 2027, 432, 11, 105, "Input",ExpressionUUID->"a2dfb17a-d65a-4ed9-b12a-8a495864f26c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[84017, 2043, 147, 2, 105, "Section",ExpressionUUID->"1d0de43f-93b0-4afc-9ed1-6e023260d6dc"],
+Cell[84167, 2047, 1000, 17, 105, "Text",ExpressionUUID->"07bd6ea4-a8a8-4537-afc4-973237ce93fe"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[85204, 2069, 125, 0, 105, "Section",ExpressionUUID->"9be8c38a-fbe3-4e57-b163-e90a865b9c21"],
+Cell[85332, 2071, 762, 13, 105, "Input",ExpressionUUID->"807ad08f-09c6-4759-baf1-fd6a3d68eb1c"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

@@ -1,0 +1,165 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6302,        156]
+NotebookOptionsPosition[      4753,        123]
+NotebookOutlinePosition[      5278,        144]
+CellTagsIndexPosition[      5235,        141]
+WindowTitle->02b_HyperCrown_Regge
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Example 02 \[AHat]\.80\.94 HyperCrown {x11}=0 only", "Title",ExpressionUUID->"b34813c3-df33-4757-bcc4-9eb60bfd8470"],
+
+Cell["Single-diagram Regge boundary study. Fresh kernel.", "Text",ExpressionUUID->"6e9c1340-e5b3-414e-9b45-5beced4201b4"],
+
+Cell["\<\
+Kernel \"Second\" (Evaluation > Notebook's Kernel). On open, init prints a \
+reminder only. Restart Kernel once manually, then run In[1] onward. Do not \
+put RestartKernel in auto-run init cells.\
+\>", "Text",ExpressionUUID->"44fb5fc0-bb6c-42e0-a5d2-a84f70cdd89b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "Print", "[", 
+   "\"\<HRF notebook loaded. Before In[1], use Evaluation > Restart Kernel \
+once (manual).\>\"", "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ ShowCellTags->False,
+ CellLabel->"init:=",ExpressionUUID->"d4a4b638-99bf-4417-90f3-068e8a3f8747"],
+
+Cell["Setup", "Section",ExpressionUUID->"d7e4f80f-d3b4-445a-8767-5f319a3eb5fa"],
+
+Cell["\<\
+Minimal memory session: core load + T23 Regge sanity + HyperCrown boundary \
+{x11}=0 (wide PairSectors matches Ex01 Ex04, plus three Regge channels).\
+\>", "Text",ExpressionUUID->"2451a54a-8178-40d8-90ae-97fd66122d90"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$HRFExample02Report", "=", "True"}], ";", 
+  RowBox[{"$HRFScalingReport", "=", "False"}], ";", 
+  RowBox[{"$HRFRunEx02BoundariesOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunEx02CrownSanityOnLoad", "=", "True"}], ";", 
+  RowBox[{"$HRFEx02TrimScanStorageQ", "=", "True"}], ";", 
+  RowBox[{"$HRFEx02CrownSanityChannels", "=", 
+   RowBox[{"{", "\"\<T23\>\"", "}"}]}], ";", 
+  RowBox[{"$HRFFindObstructionsStopOnFirstAdmissibleQ", "=", "False"}], ";", 
+  RowBox[{"$HRFCandidateGeneratorSetLimit", "=", "64"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HiddenRegionFinder.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_PolynomialCancellationFactors.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";", 
+  RowBox[{"$HRFPolynomialMaxMonomials", "=", "12"}], ";", 
+  RowBox[{"$HRFPolynomialRequireKinematicDomainQ", "=", "False"}], ";", 
+  RowBox[{"hrfInstallPolynomialCancellationPatch", "[", "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<02_Forward_Regge_2to2_Massless.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"hrfEx02PostLoadCheck", "[", "]"}]}]], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"24a05d23-a3e5-458f-ac4c-7e2c761ea1b5"],
+
+Cell["HyperCrown boundary {x11}=0", "Section",ExpressionUUID->"39712bdd-f1f1-4d33-adcf-65c9bb66880c"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx02RunHyperCrownBoundary", "[", "]"}]], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"698ee30b-59f0-40f8-bfc8-e10e16ecd01a"],
+
+Cell[BoxData[
+ RowBox[{"InterpretationBox", "[", 
+  RowBox[{
+   RowBox[{"StyleBox", "[", 
+    RowBox[{"\"\<Ex02HyperCrownBoundaryDetailTable\>\"", ",", 
+     RowBox[{"ShowStringCharacters", "\[Rule]", "True"}]}], "]"}], ",", 
+   "Ex02HyperCrownBoundaryDetailTable", ",", 
+   RowBox[{"Editable", "\[Rule]", "False"}]}], "]"}]], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"715a27c6-fcd2-4163-8deb-c121415e2310"],
+
+Cell[BoxData[
+ RowBox[{"InterpretationBox", "[", 
+  RowBox[{
+   RowBox[{"StyleBox", "[", 
+    RowBox[{"\"\<Ex02HyperCrownBoundaryHRTable\>\"", ",", 
+     RowBox[{"ShowStringCharacters", "\[Rule]", "True"}]}], "]"}], ",", 
+   "Ex02HyperCrownBoundaryHRTable", ",", 
+   RowBox[{"Editable", "\[Rule]", "False"}]}], "]"}]], "Input",
+ CellLabel->"In[4]:=",ExpressionUUID->"cc86ab4f-b53c-4ea4-a748-13fb926bb619"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hrfHCWideReport", "=", 
+   RowBox[{"hrfEx02HyperCrownBoundaryDisplay", "[", "\"\<Wide\>\"", "]"}]}], 
+  ";", 
+  RowBox[{
+   RowBox[{"hrfHCWideReport", "[", "\"\<Ingredients\>\"", "]"}], "[", 
+   "\"\<ScalingVector\>\"", "]"}]}]], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"91009b40-e8b5-4605-bd75-28e8f8db8e36"]
+}, Open  ]]
+},
+Evaluator->"Second",
+InitializationCellEvaluation->False,
+InitializationCellWarning->False,
+WindowSize->{1200, 900},
+WindowTitle->"02b_HyperCrown_Regge",
+CellLabelAutoDelete->False,
+ShowCellTags->False,
+FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9cb83572-9c9e-4708-bac1-a1cbbf58bfcf"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[614, 23, 122, 0, 70, "Title",ExpressionUUID->"b34813c3-df33-4757-bcc4-9eb60bfd8470"],
+Cell[739, 25, 121, 0, 70, "Text",ExpressionUUID->"6e9c1340-e5b3-414e-9b45-5beced4201b4"],
+Cell[863, 27, 274, 4, 70, "Text",ExpressionUUID->"44fb5fc0-bb6c-42e0-a5d2-a84f70cdd89b"],
+Cell[1140, 33, 299, 8, 70, "Input",ExpressionUUID->"d4a4b638-99bf-4417-90f3-068e8a3f8747",
+ InitializationCell->True],
+Cell[1442, 43, 79, 0, 70, "Section",ExpressionUUID->"d7e4f80f-d3b4-445a-8767-5f319a3eb5fa"],
+Cell[1524, 45, 228, 3, 70, "Text",ExpressionUUID->"2451a54a-8178-40d8-90ae-97fd66122d90"],
+Cell[1755, 50, 1543, 34, 70, "Input",ExpressionUUID->"24a05d23-a3e5-458f-ac4c-7e2c761ea1b5"],
+Cell[3301, 86, 101, 0, 70, "Section",ExpressionUUID->"39712bdd-f1f1-4d33-adcf-65c9bb66880c"],
+Cell[3405, 88, 154, 2, 70, "Input",ExpressionUUID->"698ee30b-59f0-40f8-bfc8-e10e16ecd01a"],
+Cell[3562, 92, 413, 8, 70, "Input",ExpressionUUID->"715a27c6-fcd2-4163-8deb-c121415e2310"],
+Cell[3978, 102, 405, 8, 70, "Input",ExpressionUUID->"cc86ab4f-b53c-4ea4-a748-13fb926bb619"],
+Cell[4386, 112, 351, 8, 70, "Input",ExpressionUUID->"91009b40-e8b5-4605-bd75-28e8f8db8e36"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,272 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11207,        263]
+NotebookOptionsPosition[      8624,        219]
+NotebookOutlinePosition[      9154,        240]
+CellTagsIndexPosition[      9111,        237]
+WindowTitle->01a_DivingBeetle_WideAngle
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Example 01a \[AHat]\.80\.94 Diving Beetle wide-angle diagnostic", \
+"Title",ExpressionUUID->"06ccacf8-3a92-4c5c-9a6d-4657a6f291d5"],
+
+Cell["\<\
+Diving Beetle: interior + {x8,x9} boundary only. Fresh Local kernel.\
+\>", "Text",ExpressionUUID->"fc77b31d-724b-4476-a247-8dd5c3c30f35"],
+
+Cell["\<\
+Kernel \"Local\" (Evaluation > Notebook's Kernel). On open, init prints a \
+reminder only. Restart Kernel once manually, then run In[1] onward. Do not \
+put RestartKernel in auto-run init cells.\
+\>", "Text",ExpressionUUID->"6c88222a-d3f4-4340-9dec-d3ecdb0d3e4e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "Print", "[", 
+   "\"\<HRF notebook loaded. Before In[1], use Evaluation > Restart Kernel \
+once (manual).\>\"", "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ ShowCellTags->False,
+ CellLabel->"init:=",ExpressionUUID->"1012ccc5-bea9-449f-896a-f74fbb494e0b"],
+
+Cell["Setup", "Section",ExpressionUUID->"5a285a37-5616-4e61-837b-6bc0d5e3b182"],
+
+Cell["\<\
+Minimal session: load Diving Beetle diagram + polynomial patch only (no Crown \
+regression, no legacy boundary scan). Interior uses WideAngle4ptExhaustive; \
+boundary {x8,x9}=0 uses WideAngle4ptBoundary. Full 794-stratum scan is \
+deferred to a later notebook update.\
+\>", "Text",ExpressionUUID->"04d87831-29b5-4df1-bf1d-946a42412335"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$HRFExample01Report", "=", "False"}], ";", 
+  RowBox[{"$HRFExample04Report", "=", "True"}], ";", 
+  RowBox[{"$HRFScalingReport", "=", "False"}], ";", 
+  RowBox[{"$HRFRunCrownInteriorScanOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunHyperCrownBoundaryScansOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunSuperCrownBoundaryScanOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDivingBeetleDiagnosticsOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDivingBeetleInteriorScanOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDBFullBoundaryScan", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDeepBoundaryScan", "=", "False"}], ";", 
+  RowBox[{"$HRFEx04CompareBinomialQ", "=", "False"}], ";", 
+  RowBox[{"$HRFEx04TrimScanStorageQ", "=", "True"}], ";", 
+  RowBox[{"$HRFFindObstructionsStopOnFirstAdmissibleQ", "=", "False"}], ";", 
+  RowBox[{"$HRFCandidateGeneratorSetLimit", "=", "64"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HiddenRegionFinder.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<01_WideAngle_2to2_OffShell.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_PolynomialCancellationFactors.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";", 
+  RowBox[{"$HRFPolynomialMaxMonomials", "=", "12"}], ";", 
+  RowBox[{"$HRFPolynomialRequireKinematicDomainQ", "=", "False"}], ";", 
+  RowBox[{"hrfInstallPolynomialCancellationPatch", "[", "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<04_PolynomialFactor_Regression.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Print", "[", "\"\<=== Diving Beetle setup complete ===\>\"", "]"}],
+   ";", 
+  RowBox[{"Print", "[", 
+   RowBox[{"\"\<Diagram vars: \>\"", ",", "VarsDB"}], "]"}], ";"}]], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"639db50b-0527-4379-89aa-021888ad515a"],
+
+Cell["Diagram", "Section",ExpressionUUID->"6d9f50b4-c21b-4fd7-92f9-19d4bb39d203"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"DBInternalEdges", ",", "CrownExternalEdges"}], "]"}]], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"ba260d60-5d4a-45a1-a2d4-eea70954c7ce"],
+
+Cell["Interior (polynomial obstruction)", "Section",ExpressionUUID->"1ddf2d22-3695-4902-945d-d4f8f869d6c7"],
+
+Cell["\<\
+PairSectors exhaustive interior search + coverage scaling on DB U. May take \
+several minutes.\
+\>", "Text",ExpressionUUID->"c776f1bd-acac-4fee-862a-e56af61944ef"],
+
+Cell[BoxData[
+ RowBox[{"Ex04DivingBeetleInterior", "=", 
+  RowBox[{"hrfEx04DivingBeetleInterior", "[", "]"}]}]], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"08105278-e141-436c-8d8e-29a223bd5070"],
+
+Cell[BoxData[
+ RowBox[{"hrfDBInteriorReport", "=", 
+  RowBox[{"hrfEx04DivingBeetleInteriorDisplay", "[", "]"}]}]], "Input",
+ CellLabel->"In[4]:=",ExpressionUUID->"94e6f551-e601-4421-915e-ac8965313f68"],
+
+Cell[BoxData[
+ RowBox[{"KeyTake", "[", 
+  RowBox[{
+   RowBox[{"hrfDBInteriorReport", "[", "\"\<Ingredients\>\"", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<Generators\>\"", ",", "\"\<ScalingVector\>\"", ",", 
+     "\"\<VariableScaling\>\"", ",", "\"\<HiddenRegionQ\>\""}], "}"}]}], 
+  "]"}]], "Input",
+ CellLabel->"In[4a]:=",ExpressionUUID->"3ed7fe49-563a-4d84-84b7-bbd0f34e8879"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx04InspectPolynomialScan", "[", 
+  RowBox[{
+  "Ex04DivingBeetleInterior", ",", "Automatic", ",", "Automatic", ",", 
+   "KinAssump4ptOnShell", ",", "KinVars4pt", ",", 
+   RowBox[{
+    RowBox[{"DBData", "[", "\"\<UF\>\"", "]"}], "[", "\"\<U\>\"", "]"}]}], 
+  "]"}]], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"b1b4b010-cec6-4861-b727-ef92bef3d687"],
+
+Cell["Boundary {x8,x9}=0 (SuperCrown stratum on DB)", "Section",ExpressionUUID->"1200349a-024c-4f6c-b563-c99885eecba5"],
+
+Cell["\<\
+Same boundary as SuperCrown inheritance stratum. Lightweight case (no factor \
+audit). Per-trial diagnostic optional at In[8].\
+\>", "Text",ExpressionUUID->"d1fdfbd7-54a6-4b9c-abb9-1a0d9b46acb4"],
+
+Cell[BoxData[
+ RowBox[{"Ex04DivingBeetleX89Target", "=", 
+  RowBox[{"hrfEx04DivingBeetleX89Boundary", "[", "]"}]}]], "Input",
+ CellLabel->"In[6]:=",ExpressionUUID->"2ad8b079-8ae3-4bc2-a447-5e4abe90866a"],
+
+Cell[BoxData[
+ RowBox[{"hrfDBX89Report", "=", 
+  RowBox[{"hrfEx04DivingBeetleX89Display", "[", "]"}]}]], "Input",
+ CellLabel->"In[7]:=",ExpressionUUID->"4b2647d2-e9f2-4613-b802-030189f6a627"],
+
+Cell[BoxData[
+ RowBox[{"KeyTake", "[", 
+  RowBox[{
+   RowBox[{"hrfDBX89Report", "[", "\"\<Ingredients\>\"", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<Generators\>\"", ",", "\"\<ScalingVector\>\"", ",", 
+     "\"\<VariableScaling\>\"", ",", "\"\<HiddenRegionQ\>\""}], "}"}]}], 
+  "]"}]], "Input",
+ CellLabel->"In[7a]:=",ExpressionUUID->"fef7216e-9339-4b81-bb24-8e7d9122d262"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_WideAngleBoundaryDiagnostic.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";", 
+  RowBox[{
+   RowBox[{"hrfWideAngleBoundaryDiagnosticFromScan", "[", 
+    RowBox[{
+     RowBox[{
+     "Ex04DivingBeetleX89Target", "[", "\"\<PolynomialScan\>\"", "]"}], ",", 
+     RowBox[{"Ex04DivingBeetleX89Target", "[", "\"\<FRestricted\>\"", "]"}], 
+     ",", 
+     RowBox[{"Ex04DivingBeetleX89Target", "[", "\"\<RemainingVars\>\"", "]"}],
+      ",", "KinVars4pt", ",", 
+     RowBox[{"Expand", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"DBData", "[", "\"\<UF\>\"", "]"}], "[", "\"\<U\>\"", "]"}], "/.",
+        "\[VeryThinSpace]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"x8", "\[Rule]", "0"}], ",", 
+         RowBox[{"x9", "\[Rule]", "0"}]}], "}"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x8", ",", "x9"}], "}"}]}], "]"}], "\[LeftDoubleBracket]", "1", 
+   "\[RightDoubleBracket]"}]}]], "Input",
+ CellLabel->"In[8]:=",ExpressionUUID->"ae176621-9570-4c14-8e41-0a5d57bfcc0c"],
+
+Cell["Future work", "Section",ExpressionUUID->"eadc24bb-b243-45f0-a40e-3c9ebd6b59db"],
+
+Cell["\<\
+Full Diving Beetle boundary scan (794 strata) is not in this notebook yet. \
+When added, it will mirror HyperCrown In[10] in 01_WideAngle_4pt.nb with Ex04 \
+polynomial cases per stratum or a filtered deep scan.\
+\>", "Text",ExpressionUUID->"8a0531af-91ce-4b2e-ae4e-50bce57315e6"]
+}, Open  ]]
+},
+Evaluator->"Local",
+InitializationCellEvaluation->False,
+InitializationCellWarning->False,
+WindowSize->{1200, 900},
+WindowTitle->"01a_DivingBeetle_WideAngle",
+CellLabelAutoDelete->False,
+ShowCellTags->False,
+FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9cb83572-9c9e-4708-bac1-a1cbbf58bfcf"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[620, 23, 137, 1, 70, "Title",ExpressionUUID->"06ccacf8-3a92-4c5c-9a6d-4657a6f291d5"],
+Cell[760, 26, 147, 2, 70, "Text",ExpressionUUID->"fc77b31d-724b-4476-a247-8dd5c3c30f35"],
+Cell[910, 30, 273, 4, 70, "Text",ExpressionUUID->"6c88222a-d3f4-4340-9dec-d3ecdb0d3e4e"],
+Cell[1186, 36, 299, 8, 70, "Input",ExpressionUUID->"1012ccc5-bea9-449f-896a-f74fbb494e0b",
+ InitializationCell->True],
+Cell[1488, 46, 79, 0, 70, "Section",ExpressionUUID->"5a285a37-5616-4e61-837b-6bc0d5e3b182"],
+Cell[1570, 48, 346, 5, 70, "Text",ExpressionUUID->"04d87831-29b5-4df1-bf1d-946a42412335"],
+Cell[1919, 55, 2263, 48, 70, "Input",ExpressionUUID->"639db50b-0527-4379-89aa-021888ad515a"],
+Cell[4185, 105, 81, 0, 70, "Section",ExpressionUUID->"6d9f50b4-c21b-4fd7-92f9-19d4bb39d203"],
+Cell[4269, 107, 211, 3, 70, "Input",ExpressionUUID->"ba260d60-5d4a-45a1-a2d4-eea70954c7ce"],
+Cell[4483, 112, 107, 0, 70, "Section",ExpressionUUID->"1ddf2d22-3695-4902-945d-d4f8f869d6c7"],
+Cell[4593, 114, 173, 3, 70, "Text",ExpressionUUID->"c776f1bd-acac-4fee-862a-e56af61944ef"],
+Cell[4769, 119, 199, 3, 70, "Input",ExpressionUUID->"08105278-e141-436c-8d8e-29a223bd5070"],
+Cell[4971, 124, 201, 3, 70, "Input",ExpressionUUID->"94e6f551-e601-4421-915e-ac8965313f68"],
+Cell[5175, 129, 389, 9, 70, "Input",ExpressionUUID->"3ed7fe49-563a-4d84-84b7-bbd0f34e8879"],
+Cell[5567, 140, 379, 8, 70, "Input",ExpressionUUID->"b1b4b010-cec6-4861-b727-ef92bef3d687"],
+Cell[5949, 150, 119, 0, 70, "Section",ExpressionUUID->"1200349a-024c-4f6c-b563-c99885eecba5"],
+Cell[6071, 152, 205, 3, 70, "Text",ExpressionUUID->"d1fdfbd7-54a6-4b9c-abb9-1a0d9b46acb4"],
+Cell[6279, 157, 203, 3, 70, "Input",ExpressionUUID->"2ad8b079-8ae3-4bc2-a447-5e4abe90866a"],
+Cell[6485, 162, 191, 3, 70, "Input",ExpressionUUID->"4b2647d2-e9f2-4613-b802-030189f6a627"],
+Cell[6679, 167, 384, 9, 70, "Input",ExpressionUUID->"fef7216e-9339-4b81-bb24-8e7d9122d262"],
+Cell[7066, 178, 1162, 30, 70, "Input",ExpressionUUID->"ae176621-9570-4c14-8e41-0a5d57bfcc0c"],
+Cell[8231, 210, 85, 0, 70, "Section",ExpressionUUID->"eadc24bb-b243-45f0-a40e-3c9ebd6b59db"],
+Cell[8319, 212, 289, 4, 70, "Text",ExpressionUUID->"8a0531af-91ce-4b2e-ae4e-50bce57315e6"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

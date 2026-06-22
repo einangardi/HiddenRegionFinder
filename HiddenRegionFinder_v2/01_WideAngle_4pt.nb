@@ -1,0 +1,495 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     21864,        486]
+NotebookOptionsPosition[     16577,        413]
+NotebookOutlinePosition[     17097,        434]
+CellTagsIndexPosition[     17054,        431]
+WindowTitle->01_WideAngle_4pt
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Wide-angle 4-point examples", "Title",ExpressionUUID->"f2ba8cf5-0d37-4c1b-a3a6-589d81750ead"],
+
+Cell["\<\
+Example 01: In[1] Crown only (~1\[AHat]\.80\.932 min). Optional HyperCrown at \
+In[17]/In[19]. One kernel (Local).\
+\>", "Text",ExpressionUUID->"0f7150b6-f178-491b-a6bd-c72bbfb42668"],
+
+Cell["\<\
+Kernel \"Local\" (Evaluation > Notebook's Kernel). On open, init prints a \
+reminder only. Restart Kernel once manually, then run In[1] onward. Do not \
+put RestartKernel in auto-run init cells.\
+\>", "Text",ExpressionUUID->"071bbf1b-7cd4-4241-a8b7-83b42e2dab6f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "Print", "[", 
+   "\"\<HRF notebook loaded. Before In[1], use Evaluation > Restart Kernel \
+once (manual).\>\"", "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ ShowCellTags->False,
+ CellLabel->"init:=",ExpressionUUID->"b7fedb10-4476-413c-ab51-3aa955e501a5"],
+
+Cell["Setup", "Section",ExpressionUUID->"44f6d252-9d45-4ee3-8850-f10e85c01833"],
+
+Cell["\<\
+Example 01 (light load). In[1] loads diagrams + polynomial patch + Crown \
+interior only (~1\[AHat]\.80\.932 min, WideAngle4pt preset). HyperCrown \
+{x11}=0 is optional at In[17]. HyperCrown full interior is optional at \
+In[19]. Run one notebook at a time on Local kernel.\
+\>", "Text",ExpressionUUID->"b67925e3-4582-44c9-b8aa-d67ba6555716"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$HRFQuietReports", "=", "True"}], ";", 
+  RowBox[{"$HRFExample01Report", "=", "True"}], ";", 
+  RowBox[{"$HRFExample04Report", "=", "True"}], ";", 
+  RowBox[{"$HRFScalingReport", "=", "False"}], ";", 
+  RowBox[{"$HRFRunCrownInteriorScanOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunHyperCrownBoundaryScansOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunSuperCrownBoundaryScanOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDivingBeetleDiagnosticsOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunHyperCrownInteriorScan", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDivingBeetleInteriorScanOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFEx04CompareBinomialQ", "=", "False"}], ";", 
+  RowBox[{"$HRFEx04TrimScanStorageQ", "=", "True"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HiddenRegionFinder.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<01_WideAngle_2to2_OffShell.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_PolynomialCancellationFactors.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";", 
+  RowBox[{"$HRFPolynomialMaxMonomials", "=", "12"}], ";", 
+  RowBox[{"$HRFPolynomialRequireKinematicDomainQ", "=", "False"}], ";", 
+  RowBox[{"hrfInstallPolynomialCancellationPatch", "[", "]"}], ";", 
+  RowBox[{"$HRFEx04RunObstructionSearchQ", "=", "True"}], ";", 
+  RowBox[{"$HRFFindObstructionsStopOnFirstAdmissibleQ", "=", "False"}], ";", 
+  RowBox[{"$HRFCandidateGeneratorSetLimit", "=", "64"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<04_PolynomialFactor_Regression.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Ex04CrownRegression", "=", 
+   RowBox[{"hrfEx04CrownRegression", "[", "]"}]}], ";", 
+  RowBox[{
+  "Print", "[", "\"\<=== Example 01 CORE LOAD COMPLETE ===\>\"", "]"}], ";", 
+  RowBox[{
+  "Print", "[", 
+   "\"\<Polynomial-only (no binomial). Next: In[2] Crown table; optional \
+HyperCrown cells below.\>\"", "]"}], ";"}]], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"c405b256-f6e8-46f5-89b2-f3c5bb15a768"],
+
+Cell["Crown sanity check", "Section",ExpressionUUID->"6d096907-cb8f-4cd6-95c1-57539dd3c079"],
+
+Cell["\<\
+Wide-angle Crown interior (polynomial). Requires setup In[1] complete. Shows \
+generators and scaling vector.\
+\>", "Text",ExpressionUUID->"72888e7c-6646-457b-99ae-4456cd1faf05"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx04CrownSanityDisplay", "[", "]"}]], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"2fec5978-52e4-4290-a768-62fadb811641"],
+
+Cell["Diagrams", "Section",ExpressionUUID->"4d1ac213-e701-4bdd-8397-4af7854ce47c"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"CrownInternalEdges", ",", "CrownExternalEdges"}], "]"}]], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"9e4dc094-a931-4540-860d-39362dfbaf6c"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"SuperCrownInternalEdges", ",", "CrownExternalEdges"}], 
+  "]"}]], "Input",
+ CellLabel->"In[4]:=",ExpressionUUID->"e040979d-ca76-4340-b1af-0a0b80e889bd"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"HyperCrownInternalEdges", ",", "CrownExternalEdges"}], 
+  "]"}]], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"c577bcf3-4d05-454b-bc6f-5b5f74e3e1d7"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"DBInternalEdges", ",", "CrownExternalEdges"}], "]"}]], "Input",
+ CellLabel->"In[6]:=",ExpressionUUID->"2dfe701b-828e-47bd-87f6-00f6dafebd1a"],
+
+Cell["Crown interior (reference hidden region)", "Section",ExpressionUUID->"51c505b6-936d-408d-806c-2aeb1c2d9d36"],
+
+Cell["\<\
+Optional binomial Crown reference (slow if polynomial patch already active). \
+Set $HRFRunCrownInteriorScanOnLoad=True and reload 01 before the patch, or \
+evaluate manually.\
+\>", "Text",ExpressionUUID->"ae2a08b0-1400-4ac1-a4d6-521c3ba0c5ff"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"AssociationQ", "[", "CrownScan", "]"}], ",", 
+   RowBox[{"Dataset", "[", 
+    RowBox[{"{", 
+     RowBox[{"KeyTake", "[", 
+      RowBox[{
+       RowBox[{"hrfHiddenSummaryRow", "[", 
+        RowBox[{"\"\<Crown\>\"", ",", "\"\<Interior\>\"", ",", 
+         RowBox[{"{", "}"}], ",", "VarsCrown", ",", "CrownScan", ",", 
+         RowBox[{"hrfCoverageData", "[", 
+          RowBox[{"CrownScan", ",", 
+           RowBox[{
+            RowBox[{"CrownData", "[", "\"\<UF\>\"", "]"}], "[", "\"\<U\>\"", 
+            "]"}], ",", "VarsCrown", ",", "5"}], "]"}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<Region vector\>\"", ",", "\"\<Hidden region identified?\>\"", 
+         ",", "\"\<Scaling vector\>\"", ",", 
+         "\"\<Variable scaling by region variable\>\"", ",", 
+         "\"\<Comment\>\""}], "}"}]}], "]"}], "}"}], "]"}], ",", 
+   "\"\<CrownScan not run (binomial interior disabled)\>\""}], "]"}]], "Input",\
+
+ CellLabel->"In[7]:=",ExpressionUUID->"e0672d92-7d64-4474-af41-52144532c97e"],
+
+Cell["Interior region-study tables", "Section",ExpressionUUID->"db676dac-25bc-4178-8567-03a0266775f4"],
+
+Cell["\<\
+After In[1] these tables are empty for HyperCrown until optional Ex04 runs: \
+In[17] ({x11}=0 boundary) and/or In[19] (full interior), then re-evaluate \
+In[8] and In[13]. Diving Beetle polynomial runs live in \
+01a_DivingBeetle_WideAngle.nb (interior + {x8,x9} boundary); In[9] here is \
+legacy PairSectors only if you set load flags before In[1].\
+\>", "Text",ExpressionUUID->"4c37dbe6-24d6-4f98-a94d-349c26ab9f96"],
+
+Cell[BoxData[
+ RowBox[{"hrfHyperCrownRegionStudyTable", "[", "]"}]], "Input",
+ CellLabel->"In[8]:=",ExpressionUUID->"b0200d6b-be59-4d36-abed-ccc13337c58a"],
+
+Cell[BoxData[
+ RowBox[{"hrfDivingBeetleRegionStudyTable", "[", "]"}]], "Input",
+ CellLabel->"In[9]:=",ExpressionUUID->"e198741d-63a4-4fe4-a637-186f0b0f838d"],
+
+Cell["Boundary outcome tables", "Section",ExpressionUUID->"841bb0ad-2a94-4c25-8dd0-ff69b440ca5f"],
+
+Cell["\<\
+HyperCrown boundary table requires $HRFRunHyperCrownBoundaryScansOnLoad=True \
+before setup (15 strata, slow).\
+\>", "Text",ExpressionUUID->"d3b46032-ecb9-44a1-9d79-270a72838d51"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx01BoundaryOutcomeTable", "[", 
+  "HyperCrownBoundaryCandidateScans", "]"}]], "Input",
+ CellLabel->"In[10]:=",ExpressionUUID->"3de0967b-add5-4226-bcbe-8f93b03cfb06"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"ValueQ", "[", "DBBoundaryOutcomeTable", "]"}], ",", 
+   "DBBoundaryOutcomeTable", ",", 
+   "\"\<Diving Beetle boundary scan not run\>\""}], "]"}]], "Input",
+ CellLabel->"In[11]:=",ExpressionUUID->"b7c0af1d-644e-4a0d-84d8-1fc606b987db"],
+
+Cell[BoxData[
+ RowBox[{"hrfDivingBeetleFailureNarrative", "[", "]"}]], "Input",
+ CellLabel->"In[12]:=",ExpressionUUID->"81fb9501-2932-409f-a9e5-fd1f52d0785b"],
+
+Cell["Channel obstruction attempts (HyperCrown)", "Section",ExpressionUUID->"4fd16fe9-7d1d-47eb-8e17-1f4939e49a46"],
+
+Cell["\<\
+Populates after In[17]/In[19] (same Ex04 bridge as In[8]); re-run this cell \
+after those optional runs.\
+\>", "Text",ExpressionUUID->"97a4a0ba-c8ea-4db9-bcee-f6348088e6c4"],
+
+Cell[BoxData[
+ RowBox[{"hrfHyperCrownChannelAttemptTable", "[", "]"}]], "Input",
+ CellLabel->"In[13]:=",ExpressionUUID->"ba663537-3b9c-4959-980e-8f3776439c9f"],
+
+Cell["Polynomial hidden regions (Crown + HyperCrown)", "Section",ExpressionUUID->"3ff7b58b-7bc2-4af3-a072-beb2dffcd7a5"],
+
+Cell["\<\
+In[1] computed Ex04CrownRegression only. Optional HyperCrown {x11}=0 (~30 s) \
+at In[17]. Full HyperCrown interior (~10\[AHat]\.80\.9320 min, \
+polynomial-only) at In[19] only if needed.\
+\>", "Text",ExpressionUUID->"e2bcd860-82fd-4e04-b58a-7e417bf7681b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$HRFEx04RunObstructionSearchQ", "=", "True"}], ";", 
+  RowBox[{"$HRFFindObstructionsStopOnFirstAdmissibleQ", "=", "False"}], ";", 
+  RowBox[{"$HRFCandidateGeneratorSetLimit", "=", "64"}], ";", 
+  RowBox[{"$HRFObstructionFindInstanceTimeLimit", "=", "20"}], ";", 
+  RowBox[{"$HRFPolynomialRequireKinematicDomainQ", "=", "False"}], ";", 
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"!", 
+     RowBox[{"ValueQ", "[", "Ex04CrownRegression", "]"}]}], ",", 
+    RowBox[{"Get", "[", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+        "\"\<04_PolynomialFactor_Regression.wl\>\""}], "}"}], "]"}], "]"}]}], 
+   "]"}], ";"}]], "Input",
+ CellLabel->"In[14]:=",ExpressionUUID->"e88819a2-4890-4c27-87b3-5e06cdb50fd8"],
+
+Cell["\<\
+Crown interior (polynomial, PairSectors) \[AHat]\.80\.94 from In[1] unless \
+missing.\
+\>", "Text",ExpressionUUID->"4fdab901-2d52-4fba-9081-dbf5c7e18266"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"!", 
+     RowBox[{"ValueQ", "[", "Ex04CrownRegression", "]"}]}], ",", 
+    RowBox[{"Ex04CrownRegression", "=", 
+     RowBox[{"hrfEx04CrownRegression", "[", "]"}]}]}], "]"}], ";", 
+  "Ex04CrownRegression"}]], "Input",
+ CellLabel->"In[15]:=",ExpressionUUID->"08589035-cc43-4269-bdcb-31ef479c8a43"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx04InspectPolynomialScan", "[", 
+  RowBox[{
+  "Ex04CrownRegression", ",", "Automatic", ",", "Automatic", ",", 
+   "KinAssump4ptOnShell", ",", "KinVars4pt", ",", 
+   RowBox[{
+    RowBox[{"CrownData", "[", "\"\<UF\>\"", "]"}], "[", "\"\<U\>\"", "]"}]}], 
+  "]"}]], "Input",
+ CellLabel->"In[16]:=",ExpressionUUID->"79856b04-3835-4d49-8321-d493ca150bca"],
+
+Cell["\<\
+HyperCrown boundary {x11}=0 (WideAngle4ptBoundary: PairSectors, kin-free \
+sector check). Obstruction ~1\[AHat]\.80\.933 min; coverage LP on 11 vars \
+adds ~1\[AHat]\.80\.932 min. Assign the report, then pull copy-paste-friendly \
+ingredients from the Association (not from Dataset cells).\
+\>", "Text",ExpressionUUID->"156e69ab-c144-4f57-9a3a-a1504f8c59a1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hrfX11Report", "=", 
+   RowBox[{"hrfEx04HyperCrownX11Display", "[", "]"}]}], ";"}]], "Input",
+ CellLabel->"In[17]:=",ExpressionUUID->"e537a175-153e-4255-b67b-dfe126015ff2"],
+
+Cell["\<\
+Summary Dataset (display only). For generators, scaling vector, variable \
+scaling use Ingredients below.\
+\>", "Text",ExpressionUUID->"e0d7b368-7774-491e-a2f9-45e425afc070"],
+
+Cell[BoxData[
+ RowBox[{"hrfX11Report", "[", "\"\<Summary\>\"", "]"}]], "Input",
+ CellLabel->
+  "In[17a]:=",ExpressionUUID->"f989b8da-c09d-4b73-9cad-e56a5a25f31c"],
+
+Cell["\<\
+Copy-paste friendly primary ingredients (same fields as summary row, as plain \
+lists/associations):\
+\>", "Text",ExpressionUUID->"ef5f5635-c46c-4db4-8463-00a5ab12ac3f"],
+
+Cell[BoxData[
+ RowBox[{"KeyTake", "[", 
+  RowBox[{
+   RowBox[{"hrfX11Report", "[", "\"\<Ingredients\>\"", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<Generators\>\"", ",", "\"\<ScalingVector\>\"", ",", 
+     "\"\<VariableScaling\>\""}], "}"}]}], "]"}]], "Input",
+ CellLabel->
+  "In[17b]:=",ExpressionUUID->"418958de-fd49-4aa7-aed4-1dc4c11b1bdd"],
+
+Cell["\<\
+Per-trial tables include Scaling vector and Variable scaling columns. Full \
+structured log: hrfX11Report[\"Extract\"].\
+\>", "Text",ExpressionUUID->"3f3e413f-f478-48ac-8f13-b275adcddad4"],
+
+Cell[BoxData[
+ RowBox[{"hrfX11Report", "[", "\"\<AllValidTrialsScaling\>\"", "]"}]], "Input",\
+
+ CellLabel->
+  "In[17c]:=",ExpressionUUID->"73e5c28e-ec90-48b2-a847-776f133b899a"],
+
+Cell["\<\
+Per-trial audit (generators, sector form, decomposition, scaling). Re-scan \
+without LP: Get[\"HRF_WideAngleBoundaryDiagnostic.wl\"]; \
+hrfWideAngleBoundaryDiagnostic[\"HyperCrownX11\"]. With LP on valid trials \
+only: add \"RunScalingQ\" -> True. Analyze existing scan: \
+hrfWideAngleBoundaryDiagnosticFromScan[Ex04HyperCrownX11Target[\"\
+PolynomialScan\"], ...].\
+\>", "Text",ExpressionUUID->"6dc7df6c-c368-4bb0-9f5a-e2a01bd8d808"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_WideAngleBoundaryDiagnostic.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";", 
+  RowBox[{
+   RowBox[{"hrfWideAngleBoundaryDiagnostic", "[", 
+    RowBox[{"\"\<HyperCrownX11\>\"", ",", 
+     RowBox[{"\"\<RunScalingQ\>\"", "\[Rule]", "False"}]}], "]"}], 
+   "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}]], "Input",
+ CellLabel->"In[18]:=",ExpressionUUID->"aeb51a96-3036-454f-8751-14c40f0232ba"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx04InspectPolynomialScan", "[", 
+  RowBox[{
+  "Ex04HyperCrownX11Target", ",", "Automatic", ",", "Automatic", ",", 
+   "KinAssump4ptOnShell", ",", "KinVars4pt", ",", 
+   RowBox[{"Expand", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"HyperCrownData", "[", "\"\<UF\>\"", "]"}], "[", "\"\<U\>\"", 
+      "]"}], "/.", "\[VeryThinSpace]", 
+     RowBox[{"x11", "\[Rule]", "0"}]}], "]"}]}], "]"}]], "Input",
+ CellLabel->"In[18]:=",ExpressionUUID->"c4fce8ab-34d6-4c06-aac6-333221cf3b0e"],
+
+Cell["\<\
+OPTIONAL \[AHat]\.80\.94 HyperCrown interior (polynomial; ~5-15 min with \
+trim). After In[19], check hrfHyperCrownInteriorNarrative[] for an exhaustive \
+no-HR certificate. Full trial log: $HRFEx04TrimScanStorageQ=False and \
+$HRFFindObstructionsStoreAllTrialsQ=True.\
+\>", "Text",ExpressionUUID->"c76e2aa3-286c-43ab-ac28-a2bfa8ec640b"],
+
+Cell[BoxData[
+ RowBox[{"Ex04HyperCrownInterior", "=", 
+  RowBox[{"hrfEx04HyperCrownInterior", "[", "]"}]}]], "Input",
+ CellLabel->"In[19]:=",ExpressionUUID->"9eac81ef-4343-4be7-9f9a-f2eeff1fb217"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx04InspectPolynomialScan", "[", 
+  RowBox[{
+  "Ex04HyperCrownInterior", ",", "Automatic", ",", "Automatic", ",", 
+   "KinAssump4ptOnShell", ",", "KinVars4pt", ",", 
+   RowBox[{
+    RowBox[{"HyperCrownData", "[", "\"\<UF\>\"", "]"}], "[", "\"\<U\>\"", 
+    "]"}]}], "]"}]], "Input",
+ CellLabel->"In[20]:=",ExpressionUUID->"a86f581b-a7e9-42e6-b11a-190c75ce0e95"],
+
+Cell[BoxData[
+ RowBox[{"hrfHyperCrownInteriorNarrative", "[", "]"}]], "Input",
+ CellLabel->"In[21]:=",ExpressionUUID->"ab518280-3ca8-4202-bb31-605600d04e25"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"hrfEx04CasePopulatedQ", "[", "Ex04HyperCrownX11Target", "]"}], 
+   ",", 
+   RowBox[{
+    RowBox[{
+    "Ex04HyperCrownX11Target", "[", "\"\<GeneratorTrialTable\>\"", "]"}], 
+    "[", "\"\<Polynomial\>\"", "]"}], ",", 
+   "\"\<Run hrfEx04HyperCrownX11Display[] first.\>\""}], "]"}]], "Input",
+ CellLabel->"In[22]:=",ExpressionUUID->"2bb411f3-c2ee-4fc4-9095-a636b3efa1f0"]
+}, Open  ]]
+},
+Evaluator->"Local",
+InitializationCellEvaluation->False,
+InitializationCellWarning->False,
+WindowSize->{1200, 900},
+WindowTitle->"01_WideAngle_4pt",
+CellLabelAutoDelete->False,
+ShowCellTags->False,
+FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9cb83572-9c9e-4708-bac1-a1cbbf58bfcf"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[610, 23, 99, 0, 70, "Title",ExpressionUUID->"f2ba8cf5-0d37-4c1b-a3a6-589d81750ead"],
+Cell[712, 25, 193, 3, 70, "Text",ExpressionUUID->"0f7150b6-f178-491b-a6bd-c72bbfb42668"],
+Cell[908, 30, 273, 4, 70, "Text",ExpressionUUID->"071bbf1b-7cd4-4241-a8b7-83b42e2dab6f"],
+Cell[1184, 36, 299, 8, 70, "Input",ExpressionUUID->"b7fedb10-4476-413c-ab51-3aa955e501a5",
+ InitializationCell->True],
+Cell[1486, 46, 79, 0, 70, "Section",ExpressionUUID->"44f6d252-9d45-4ee3-8850-f10e85c01833"],
+Cell[1568, 48, 352, 5, 70, "Text",ExpressionUUID->"b67925e3-4582-44c9-b8aa-d67ba6555716"],
+Cell[1923, 55, 2473, 53, 70, "Input",ExpressionUUID->"c405b256-f6e8-46f5-89b2-f3c5bb15a768"],
+Cell[4399, 110, 92, 0, 70, "Section",ExpressionUUID->"6d096907-cb8f-4cd6-95c1-57539dd3c079"],
+Cell[4494, 112, 188, 3, 70, "Text",ExpressionUUID->"72888e7c-6646-457b-99ae-4456cd1faf05"],
+Cell[4685, 117, 151, 2, 70, "Input",ExpressionUUID->"2fec5978-52e4-4290-a768-62fadb811641"],
+Cell[4839, 121, 82, 0, 70, "Section",ExpressionUUID->"4d1ac213-e701-4bdd-8397-4af7854ce47c"],
+Cell[4924, 123, 214, 3, 70, "Input",ExpressionUUID->"9e4dc094-a931-4540-860d-39362dfbaf6c"],
+Cell[5141, 128, 222, 4, 70, "Input",ExpressionUUID->"e040979d-ca76-4340-b1af-0a0b80e889bd"],
+Cell[5366, 134, 222, 4, 70, "Input",ExpressionUUID->"c577bcf3-4d05-454b-bc6f-5b5f74e3e1d7"],
+Cell[5591, 140, 211, 3, 70, "Input",ExpressionUUID->"2dfe701b-828e-47bd-87f6-00f6dafebd1a"],
+Cell[5805, 145, 114, 0, 70, "Section",ExpressionUUID->"51c505b6-936d-408d-806c-2aeb1c2d9d36"],
+Cell[5922, 147, 253, 4, 70, "Text",ExpressionUUID->"ae2a08b0-1400-4ac1-a4d6-521c3ba0c5ff"],
+Cell[6178, 153, 1069, 24, 70, "Input",ExpressionUUID->"e0672d92-7d64-4474-af41-52144532c97e"],
+Cell[7250, 179, 102, 0, 70, "Section",ExpressionUUID->"db676dac-25bc-4178-8567-03a0266775f4"],
+Cell[7355, 181, 427, 6, 70, "Text",ExpressionUUID->"4c37dbe6-24d6-4f98-a94d-349c26ab9f96"],
+Cell[7785, 189, 155, 2, 70, "Input",ExpressionUUID->"b0200d6b-be59-4d36-abed-ccc13337c58a"],
+Cell[7943, 193, 157, 2, 70, "Input",ExpressionUUID->"e198741d-63a4-4fe4-a637-186f0b0f838d"],
+Cell[8103, 197, 97, 0, 70, "Section",ExpressionUUID->"841bb0ad-2a94-4c25-8dd0-ff69b440ca5f"],
+Cell[8203, 199, 189, 3, 70, "Text",ExpressionUUID->"d3b46032-ecb9-44a1-9d79-270a72838d51"],
+Cell[8395, 204, 193, 3, 70, "Input",ExpressionUUID->"3de0967b-add5-4226-bcbe-8f93b03cfb06"],
+Cell[8591, 209, 293, 6, 70, "Input",ExpressionUUID->"b7c0af1d-644e-4a0d-84d8-1fc606b987db"],
+Cell[8887, 217, 158, 2, 70, "Input",ExpressionUUID->"81fb9501-2932-409f-a9e5-fd1f52d0785b"],
+Cell[9048, 221, 115, 0, 70, "Section",ExpressionUUID->"4fd16fe9-7d1d-47eb-8e17-1f4939e49a46"],
+Cell[9166, 223, 183, 3, 70, "Text",ExpressionUUID->"97a4a0ba-c8ea-4db9-bcee-f6348088e6c4"],
+Cell[9352, 228, 159, 2, 70, "Input",ExpressionUUID->"ba663537-3b9c-4959-980e-8f3776439c9f"],
+Cell[9514, 232, 120, 0, 70, "Section",ExpressionUUID->"3ff7b58b-7bc2-4af3-a072-beb2dffcd7a5"],
+Cell[9637, 234, 265, 4, 70, "Text",ExpressionUUID->"e2bcd860-82fd-4e04-b58a-7e417bf7681b"],
+Cell[9905, 240, 824, 18, 70, "Input",ExpressionUUID->"e88819a2-4890-4c27-87b3-5e06cdb50fd8"],
+Cell[10732, 260, 164, 3, 70, "Text",ExpressionUUID->"4fdab901-2d52-4fba-9081-dbf5c7e18266"],
+Cell[10899, 265, 366, 9, 70, "Input",ExpressionUUID->"08589035-cc43-4269-bdcb-31ef479c8a43"],
+Cell[11268, 276, 378, 8, 70, "Input",ExpressionUUID->"79856b04-3835-4d49-8321-d493ca150bca"],
+Cell[11649, 286, 368, 5, 70, "Text",ExpressionUUID->"156e69ab-c144-4f57-9a3a-a1504f8c59a1"],
+Cell[12020, 293, 207, 4, 70, "Input",ExpressionUUID->"e537a175-153e-4255-b67b-dfe126015ff2"],
+Cell[12230, 299, 184, 3, 70, "Text",ExpressionUUID->"e0d7b368-7774-491e-a2f9-45e425afc070"],
+Cell[12417, 304, 162, 3, 70, "Input",ExpressionUUID->"f989b8da-c09d-4b73-9cad-e56a5a25f31c"],
+Cell[12582, 309, 179, 3, 70, "Text",ExpressionUUID->"ef5f5635-c46c-4db4-8463-00a5ab12ac3f"],
+Cell[12764, 314, 353, 9, 70, "Input",ExpressionUUID->"418958de-fd49-4aa7-aed4-1dc4c11b1bdd"],
+Cell[13120, 325, 198, 3, 70, "Text",ExpressionUUID->"3f3e413f-f478-48ac-8f13-b275adcddad4"],
+Cell[13321, 330, 178, 4, 70, "Input",ExpressionUUID->"73e5c28e-ec90-48b2-a847-776f133b899a"],
+Cell[13502, 336, 443, 7, 70, "Text",ExpressionUUID->"6dc7df6c-c368-4bb0-9f5a-e2a01bd8d808"],
+Cell[13948, 345, 571, 14, 70, "Input",ExpressionUUID->"aeb51a96-3036-454f-8751-14c40f0232ba"],
+Cell[14522, 361, 509, 11, 70, "Input",ExpressionUUID->"c4fce8ab-34d6-4c06-aac6-333221cf3b0e"],
+Cell[15034, 374, 347, 5, 70, "Text",ExpressionUUID->"c76e2aa3-286c-43ab-ac28-a2bfa8ec640b"],
+Cell[15384, 381, 196, 3, 70, "Input",ExpressionUUID->"9eac81ef-4343-4be7-9f9a-f2eeff1fb217"],
+Cell[15583, 386, 388, 8, 70, "Input",ExpressionUUID->"a86f581b-a7e9-42e6-b11a-190c75ce0e95"],
+Cell[15974, 396, 157, 2, 70, "Input",ExpressionUUID->"ab518280-3ca8-4202-bb31-605600d04e25"],
+Cell[16134, 400, 427, 10, 70, "Input",ExpressionUUID->"2bb411f3-c2ee-4fc4-9095-a636b3efa1f0"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
