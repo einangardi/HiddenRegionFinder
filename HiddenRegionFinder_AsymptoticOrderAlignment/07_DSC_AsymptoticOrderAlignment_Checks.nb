@@ -1,0 +1,165 @@
+Notebook[
+ {
+  Cell[
+   "Double-spacelike-collinear asymptotic-order alignment and HRF checks", 
+   "Title"], Cell["This notebook contains only the double-spacelike-collinear \
+(DSC) expansion in the physical 2->4 sheet with p1 and p2 incoming.  It \
+contains no NMRK substitutions or NMRK result files.  The relation to NMRK is \
+documented separately in NMRK_DSC_Kinematic_and_HRF_Comparison.tex.", 
+   "Text"], Cell["Graph and momentum conventions", "Section"], 
+  Cell["All momenta are algebraically outgoing.  The physical process is 2->4 \
+with p1 and p2 incoming.  Every graph uses the external attachments p1->1, \
+p2->4, p3->5, p4->3, p5->2 and p6->6.  The Feynman parameters x0,x1,... \
+follow the internal-edge order displayed below.", "Text"], 
+  Cell[BoxData[TagBox[GridBox[{{"\"Graph\"", 
+        "\"Internal edges (vertex pairs, in x0,x1,... order)\""}, 
+       {"\"one-loop hexagon\"", "\"(5,6),(1,6),(1,2),(2,3),(3,4),(4,5)\""}, 
+       {"\"planar hexbox\"", 
+        "\"(5,6),(1,8),(8,6),(1,2),(2,3),(3,4),(4,7),(7,5),(7,8)\""}, 
+       {"\"nonplanar hexbox\"", 
+        "\"(5,8),(1,8),(1,2),(2,3),(7,3),(7,5),(4,7),(6,8),(4,6)\""}, 
+       {"\"hexagon-pentagon\"", 
+        "\"(5,6),(1,8),(8,6),(1,3),(3,4),(4,7),(7,5),(7,2),(8,2)\""}}, 
+      GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+      GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}], "Grid"]], "Output"], 
+  Cell["Definition of the DSC variables", "Section"], 
+  Cell["The exact momentum-twistor chart is parametrized by the small \
+deformation eps and five finite dimensionless variables a, tau1, tau2, zD and \
+zbD (called zc and zbc in DSC_TwistorInvariantData_20260719.wl).  \
+Operationally these variables are defined by the exact invariant formulae in \
+that file.  Their leading adjacent invariants in the present physical labels \
+are displayed below.  The formula column retains the common raw twistor sign; \
+the final column gives the physical invariant sign after applying the common \
+minus.  This identifies the limit and physical sheet without assuming prior \
+knowledge of the chart.", "Text"], 
+  Cell[BoxData[TagBox[GridBox[{{"\"Invariant\"", 
+        "\"raw-twistor leading coefficient/form\"", "\"power\"", 
+        "\"physical sign after common minus\""}, 
+       {"\"s12\"", "\"tau2/[a (1+tau1) (1+tau2)]\"", "\"O(1)\"", 
+        "\"positive\""}, {"\"s23\"", "\"-eps^2 tau1/(a zbD)\"", 
+        "\"O(eps^2)\"", "\"negative\""}, {"\"s34\"", 
+        "\"-1/[(a-1) (1+tau2)]\"", "\"O(1)\"", "\"positive\""}, 
+       {"\"s45\"", "\"1/a\"", "\"O(1)\"", "\"positive\""}, 
+       {"\"s56\"", "\"-tau1/[(a-1) (1+tau1)]\"", "\"O(1)\"", "\"positive\""}, 
+       {"\"s16\"", "\"-eps^2 tau2 zD/a\"", "\"O(eps^2)\"", "\"negative\""}}, 
+      GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+      GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}], "Grid"]], "Output"], 
+  Cell["The two spacelike-collinear pairs are (p1,p6) and (p2,p3): s16 and \
+s23 vanish as eps^2 while the remaining adjacent invariants stay hard.  The \
+parameter called epsilon in the invariant form of Duhr--Venkata--Zhang may \
+therefore differ by a square from the raw twistor deformation eps used by \
+this runner.", "Text"], Cell["Native-to-physical label map", "Subsection"], 
+  Cell["Duhr--Venkata--Zhang write the small native invariants as stilde14 \
+and stilde23.  The graph convention is obtained by exchanging native labels 4 \
+and 6: s12=stilde12, s13=stilde13, s26=stilde24, s36=stilde34, s23=stilde23 \
+and s16=stilde14.  This relabelling must be applied before comparing signs or \
+collinear pairs.", "Text"], Cell["Physical domain", "Subsection"], 
+  Cell["The physical chart used by the runner is a<0, -1<tau1<0, tau2<-1, \
+zD<0 and zbD<0.  On the 2->4 sheet, s16<0 and s23<0; s12>0 and the adjacent \
+outgoing invariants s34, s45 and s56 are positive.  Raw momentum-twistor \
+brackets carry a common projective sign, so they must not be identified \
+directly with physical pair invariants.", "Text"], 
+  Cell["dscTwistorData=Import[FileNameJoin[{NotebookDirectory[],\"DSC_Twistor\
+InvariantData_20260719.wl\"}],\"WL\"];", "Input"], 
+  Cell["Load and reproduce", "Section"], Cell["SetDirectory[NotebookDirectory\
+[]];\n$HRFQuietReports=True;\nGet[\"HiddenRegionFinder.wl\"];\nGet[\"HRF_Asym\
+ptoticOrderAlignment.wl\"];", "Input"], Cell["RunProcess[{\"wolframscript\",\
+\"-file\",FileNameJoin[{NotebookDirectory[],\"HRF_RunGenericDSCAsymptoticOrde\
+rAlignment.wl\"}],\"hexagon\"}]", "Input"], 
+  Cell["One-loop hexagon: certified DSC region", "Section"], 
+  Cell["The face-only sum is not the final vector.  The occupied-layer \
+ideal-jet certificate fixes both the depth and the uniform alignment \
+representative in the original Feynman coordinates.", "Text"], 
+  Cell[BoxData[TagBox[GridBox[{{"\"Quantity\"", "\"Vector (x0,...,x5)\"", 
+        "\"Meaning\""}, {"\"Chosen alignment representative f\"", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "2"}], ",", RowBox[{"-", "2"}], 
+            ",", RowBox[{"-", "2"}], ",", RowBox[{"-", "1"}], ",", 
+            RowBox[{"-", "2"}], ",", RowBox[{"-", "2"}]}], "}"}], 
+        "\"face selection only\""}, {"\"Face-only HRF vector h\"", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}], 
+            ",", RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}], ",", 
+            RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}]}], "}"}], 
+        "\"discovery-stage vector\""}, {"\"Naive f+h\"", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "3"}], ",", RowBox[{"-", "3"}], 
+            ",", RowBox[{"-", "3"}], ",", RowBox[{"-", "2"}], ",", 
+            RowBox[{"-", "3"}], ",", RowBox[{"-", "3"}]}], "}"}], 
+        "\"not the final region vector\""}, {"\"Certified total vector v\"", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "2"}], ",", RowBox[{"-", "2"}], 
+            ",", RowBox[{"-", "2"}], ",", "0", ",", RowBox[{"-", "2"}], ",", 
+            RowBox[{"-", "2"}]}], "}"}], 
+        "\"final original-coordinate vector\""}, 
+       {"\"Relative certified vector\"", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "2"}], ",", RowBox[{"-", "2"}], 
+            ",", RowBox[{"-", "2"}], ",", "0", ",", RowBox[{"-", "2"}], ",", 
+            RowBox[{"-", "2"}]}], "}"}], "\"display diagnostic\""}}, 
+      GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+      GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}], "Grid"]], "Output"], 
+  Cell[BoxData[TagBox[GridBox[{{"\"Certified total vector\"", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "2"}], ",", RowBox[{"-", "2"}], 
+            ",", RowBox[{"-", "2"}], ",", "0", ",", RowBox[{"-", "2"}], ",", 
+            RowBox[{"-", "2"}]}], "}"}]}, {"\"(W_SL,W_HR)\"", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "4"}], ",", RowBox[{"-", "2"}]}], 
+          "}"}]}, {"\"Hierarchy gap\"", "2"}, {"\"Transverse weights\"", 
+        RowBox[{"{", RowBox[{"1", ",", "1"}], "}"}]}, 
+       {"\"Certificate\"", "\"OriginalCoordinateIdealJet\""}}, 
+      GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+      GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}], "Grid"]], "Output"], 
+  Cell["Occupied-layer audit", "Subsection"], Cell["The lowest three occupied \
+F layers have ideal orders 2, 1 and 0.  In particular, the nonzero weight -3 \
+layer cancels to first order; it is not an absent eta layer.", "Text"], 
+  Cell[BoxData[TagBox[GridBox[{{"\"Weight\"", "\"F terms\"", 
+        "\"I-adic order\"", "\"jet support\""}, {RowBox[{"-", "4"}], "18", 
+        "2", RowBox[{"{", RowBox[{"{", RowBox[{"1", ",", "1"}], "}"}], 
+          "}"}]}, {RowBox[{"-", "3"}], "52", "1", 
+        RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"1", ",", "0"}], "}"}], 
+            ",", RowBox[{"{", RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}, 
+       {RowBox[{"-", "2"}], "154", "0", 
+        RowBox[{"{", RowBox[{"{", RowBox[{"0", ",", "0"}], "}"}], "}"}]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+      GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}], "Grid"]], "Output"], 
+  Cell["Cancellation hypersurface", "Subsection"], 
+  Cell[BoxData[TagBox[GridBox[
+      {{TagBox[FormBox[RowBox[{RowBox[{"tau2", " ", "x4"}], "+", "x4", "+", 
+            "x5"}], TraditionalForm], TraditionalForm, Editable -> True]}, 
+       {TagBox[FormBox[RowBox[{RowBox[{"tau1", " ", "x1"}], "+", 
+            RowBox[{"tau1", " ", "x2"}], "+", "x2"}], TraditionalForm], 
+         TraditionalForm, Editable -> True]}}, GridBoxAlignment -> 
+       {"Columns" -> {{Left}}}, DefaultBaseStyle -> "Column", 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}], "Column"]], "Output"], 
+  Cell["Two-loop structural audit", "Section"], 
+  Cell[BoxData[TagBox[GridBox[{{"\"Graph\"", "\"staged\"", 
+        "\"structural audits\"", "\"certified\"", "\"certified vector\"", 
+        "\"gap\""}, {"\"hexbox\"", "156", "27", "1", 
+        RowBox[{"{", RowBox[{"0", ",", RowBox[{"-", "2"}], ",", "0", ",", 
+            RowBox[{"-", "2"}], ",", "0", ",", RowBox[{"-", "2"}], ",", 
+            RowBox[{"-", "2"}], ",", "0", ",", "0"}], "}"}], "2"}, 
+       {"\"nonplanar hexbox\"", "61", "6", "0", "\"--\"", "\"--\""}, 
+       {"\"hexagon-pentagon\"", "0", "0", "0", "\"--\"", "\"--\""}}, 
+      GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+      GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}], "Grid"]], "Output"], 
+  Cell["Reproduction and regression", "Section"], 
+  Cell["RunProcess[{\"wolframscript\",\"-file\",FileNameJoin[{NotebookDirecto\
+ry[],\"HRF_RunGenericDSCAsymptoticOrderAlignment.wl\"}],\"hexbox\"}]", 
+   "Input"], Cell["Get[\"HRF_LayeredDissectionRegressionTests.wl\"];\nhrfRunL\
+ayeredDissectionRegressionTests[]", "Input"], 
+  Cell["References and notation sources", "Section"], 
+  Cell["DSC momentum-twistor and invariant parametrization: C. Duhr, A. \
+Venkata and C. Zhang, arXiv:2507.05355.  Local dissection and pullback of \
+hidden-region vectors: E. Gardi et al., arXiv:2407.13738.  The complete \
+translation to NMRK variables is given in \
+NMRK_DSC_Kinematic_and_HRF_Comparison.pdf in this directory.", "Text"]}, 
+ WindowTitle -> "DSC_AsymptoticOrderAlignment_Checks", 
+ StyleDefinitions -> "Default.nb", CellLabelAutoDelete -> False]

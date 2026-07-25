@@ -1,0 +1,336 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14257,        327]
+NotebookOptionsPosition[     10845,        276]
+NotebookOutlinePosition[     11298,        295]
+CellTagsIndexPosition[     11255,        292]
+WindowTitle->02_Current_Regge_4pt
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Current Regge-limit 4-point examples", "Title",ExpressionUUID->"959d10d0-4b10-4904-976f-c4630ca1249e"],
+
+Cell["\<\
+Current Regge path only: explicit boundary/interior runners and Regge delta \
+layers in scaling acceptance.\
+\>", "Text",ExpressionUUID->"e2c2a9fa-f692-4878-bff5-b13db3597c8d"],
+
+Cell["Setup", "Section",ExpressionUUID->"4c2ae060-debf-42dd-99b3-aa72617522e0"],
+
+Cell["\<\
+This notebook runs the current Regge path. Boundaries are explicit calls so \
+each block can be run in a fresh kernel if memory is tight.\
+\>", "Text",ExpressionUUID->"5d21528b-e9c7-49e8-81d5-04c20572fb8c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$HRFExample02Report", "=", "True"}], ";", 
+  RowBox[{"$HRFScalingReport", "=", "False"}], ";", 
+  RowBox[{"$HRFRunEx02InteriorStudiesOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunEx02LegacyCrownForwardOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunEx02BoundariesOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunEx02SuperCrownBoundary", "=", "False"}], ";", 
+  RowBox[{"$HRFRunEx02HyperCrownBoundaries", "=", "False"}], ";", 
+  RowBox[{"$HRFRunEx02DBBoundary", "=", "False"}], ";", 
+  RowBox[{"$HRFRunEx02CrownSanityOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFEx02TrimScanStorageQ", "=", "True"}], ";", 
+  RowBox[{"$HRFEx02DeepTrimScanStorageQ", "=", "True"}], ";", 
+  RowBox[{"$HRFFindObstructionsStopOnFirstAdmissibleQ", "=", "False"}], ";", 
+  RowBox[{"$HRFCandidateGeneratorSetLimit", "=", "64"}], ";", 
+  RowBox[{"$HRFPolynomialMaxMonomials", "=", "12"}], ";", 
+  RowBox[{"$HRFPolynomialRequireKinematicDomainQ", "=", "False"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HiddenRegionFinder.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_PolynomialCancellationFactors.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";", 
+  RowBox[{"hrfInstallPolynomialCancellationPatch", "[", "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<02_Forward_Regge_2to2_Massless.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"hrfEx02PostLoadCheck", "[", "]"}]}]], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"f8d29443-225e-4e35-bcc8-d55b9cc41828"],
+
+Cell["Channel convention and graphs", "Section",ExpressionUUID->"c69d2860-142a-4db6-8a0e-4c308dd71384"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx02ChannelLegend", "[", "]"}]], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"01beae35-bc71-4f55-8150-a593658bc26c"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx02ShowDiagram", "[", 
+  RowBox[{"CrownInternalEdges", ",", "CrownExternalEdges"}], "]"}]], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"51f2ec80-1cc6-4358-8572-ec7a6313f724"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx02ShowDiagram", "[", 
+  RowBox[{"SuperCrownInternalEdges", ",", "CrownExternalEdges"}], 
+  "]"}]], "Input",
+ CellLabel->"In[4]:=",ExpressionUUID->"4b8f2320-7d1d-4788-8d49-1eb9cd6b1574"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx02ShowDiagram", "[", 
+  RowBox[{"HyperCrownInternalEdges", ",", "CrownExternalEdges"}], 
+  "]"}]], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"de0d53c6-7ce4-4cf6-8001-8b6fd2cd6bec"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx02ShowDiagram", "[", 
+  RowBox[{"DBInternalEdges", ",", "DBExternalEdges"}], "]"}]], "Input",
+ CellLabel->"In[6]:=",ExpressionUUID->"cef55424-1a58-4ec2-bc92-a6eb2c6d0830"],
+
+Cell["Crown interior positive control", "Section",ExpressionUUID->"502b60da-c895-4827-b59f-021a0daa69d9"],
+
+Cell["\<\
+Runs wide angle plus the three Regge channels for the Crown interior. This is \
+the positive control for the Regge path.\
+\>", "Text",ExpressionUUID->"54394233-6a1d-40f6-9bfa-ee62c9996853"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Ex02CrownInterior", "=", 
+   RowBox[{"hrfEx02InteriorStudy", "[", 
+    RowBox[{"\"\<Crown\>\"", ",", 
+     RowBox[{"Ex02Diagrams", "[", "\"\<Crown\>\"", "]"}], ",", "20"}], 
+    "]"}]}], ";", 
+  RowBox[{"Dataset", "[", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"KeyTake", "[", 
+       RowBox[{
+        RowBox[{"Ex02CrownInterior", "[", "#1", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Kinematic regime\>\"", ",", "\"\<Hidden region identified?\>\"",
+           ",", "\"\<Scaling status\>\"", ",", "\"\<Scaling vector\>\""}], 
+         "}"}]}], "]"}], "&"}], ")"}], "/@", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<Wide\>\"", ",", "\"\<T23\>\"", ",", "\"\<T12\>\"", ",", 
+      "\"\<T13\>\""}], "}"}]}], "]"}]}]], "Input",
+ CellLabel->"In[7]:=",ExpressionUUID->"4659b86d-0a7d-4143-9442-ee86b3272972"],
+
+Cell["SuperCrown boundary x8 = x9 = 0", "Section",ExpressionUUID->"e2fb526d-67eb-4452-9593-d377c5acbb5c"],
+
+Cell["\<\
+Expected current result: accepted hidden region in wide angle and in all \
+three Regge channels.\
+\>", "Text",ExpressionUUID->"3aaec196-aa40-4c00-878d-ef8058e15e23"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx02RunSuperCrownBoundary", "[", "]"}]], "Input",
+ CellLabel->"In[8]:=",ExpressionUUID->"efce64db-a24a-4c15-9c18-1bc4af00406b"],
+
+Cell[BoxData[
+ RowBox[{"InterpretationBox", "[", 
+  RowBox[{
+   RowBox[{"StyleBox", "[", 
+    RowBox[{"\"\<Ex02SuperCrownReggeChannelSummary\>\"", ",", 
+     RowBox[{"ShowStringCharacters", "\[Rule]", "True"}]}], "]"}], ",", 
+   "Ex02SuperCrownReggeChannelSummary", ",", 
+   RowBox[{"Editable", "\[Rule]", "False"}]}], "]"}]], "Input",
+ CellLabel->"In[9]:=",ExpressionUUID->"ee70ba1f-138c-49ea-8123-824b30d9ca2e"],
+
+Cell[BoxData[
+ RowBox[{"InterpretationBox", "[", 
+  RowBox[{
+   RowBox[{"StyleBox", "[", 
+    RowBox[{"\"\<Ex02SuperCrownBoundaryDetailTable\>\"", ",", 
+     RowBox[{"ShowStringCharacters", "\[Rule]", "True"}]}], "]"}], ",", 
+   "Ex02SuperCrownBoundaryDetailTable", ",", 
+   RowBox[{"Editable", "\[Rule]", "False"}]}], "]"}]], "Input",
+ CellLabel->"In[10]:=",ExpressionUUID->"57151a12-3df8-488d-8aed-5492154255dc"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hrfSCWideReport", "=", 
+   RowBox[{"hrfEx02ReggeChannelDisplay", "[", 
+    RowBox[{
+    "\"\<SuperCrown\>\"", ",", "\"\<Boundary {x8,x9}\>\"", ",", 
+     "\"\<Wide\>\""}], "]"}]}], ";", 
+  RowBox[{"KeyTake", "[", 
+   RowBox[{
+    RowBox[{"hrfSCWideReport", "[", "\"\<Ingredients\>\"", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<Generators\>\"", ",", "\"\<ScalingVector\>\"", ",", 
+      "\"\<VariableScaling\>\"", ",", "\"\<HiddenRegionQ\>\""}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellLabel->"In[11]:=",ExpressionUUID->"15546b42-a253-400e-a81e-3e5f21d751a8"],
+
+Cell["HyperCrown boundary x11 = 0", "Section",ExpressionUUID->"bbf54851-3468-4fde-882e-e65cb0e97658"],
+
+Cell["\<\
+This is slower than SuperCrown. In the monitored split run, the accepted \
+Regge boundary HR appeared in channel T12; wide angle is handled in notebook \
+01.\
+\>", "Text",ExpressionUUID->"70db3ef8-dee5-46ba-bc53-18689d4f343c"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx02RunHyperCrownBoundary", "[", "]"}]], "Input",
+ CellLabel->"In[12]:=",ExpressionUUID->"b6fd3124-66a7-4f0f-859a-d2ef282a5cdc"],
+
+Cell[BoxData[
+ RowBox[{"InterpretationBox", "[", 
+  RowBox[{
+   RowBox[{"StyleBox", "[", 
+    RowBox[{"\"\<Ex02HyperCrownBoundaryDetailTable\>\"", ",", 
+     RowBox[{"ShowStringCharacters", "\[Rule]", "True"}]}], "]"}], ",", 
+   "Ex02HyperCrownBoundaryDetailTable", ",", 
+   RowBox[{"Editable", "\[Rule]", "False"}]}], "]"}]], "Input",
+ CellLabel->"In[13]:=",ExpressionUUID->"7d23b765-a398-40f8-9714-78b972c4339c"],
+
+Cell[BoxData[
+ RowBox[{"InterpretationBox", "[", 
+  RowBox[{
+   RowBox[{"StyleBox", "[", 
+    RowBox[{"\"\<Ex02HyperCrownBoundaryHRTable\>\"", ",", 
+     RowBox[{"ShowStringCharacters", "\[Rule]", "True"}]}], "]"}], ",", 
+   "Ex02HyperCrownBoundaryHRTable", ",", 
+   RowBox[{"Editable", "\[Rule]", "False"}]}], "]"}]], "Input",
+ CellLabel->"In[14]:=",ExpressionUUID->"5158df89-07a2-4ea5-82e9-242945dcc7dc"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hrfHCT12Report", "=", 
+   RowBox[{"hrfEx02ReggeChannelDisplay", "[", 
+    RowBox[{
+    "\"\<HyperCrown\>\"", ",", "\"\<Boundary {x11}\>\"", ",", "\"\<T12\>\""}],
+     "]"}]}], ";", 
+  RowBox[{"KeyTake", "[", 
+   RowBox[{
+    RowBox[{"hrfHCT12Report", "[", "\"\<Ingredients\>\"", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<Generators\>\"", ",", "\"\<ScalingVector\>\"", ",", 
+      "\"\<VariableScaling\>\"", ",", "\"\<HiddenRegionQ\>\""}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellLabel->"In[15]:=",ExpressionUUID->"37bbc7bc-ab77-44df-a306-951342300233"],
+
+Cell["Diving Beetle boundary x8 = x9 = 0", "Section",ExpressionUUID->"69f5db26-4858-479f-9512-f0e098065151"],
+
+Cell["\<\
+This is the current negative control in the tested Regge boundary stratum.\
+\>", "Text",ExpressionUUID->"42cfc8fa-5da9-44db-b8aa-7a8d57196f3f"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx02RunDBBoundary", "[", "]"}]], "Input",
+ CellLabel->"In[16]:=",ExpressionUUID->"a3a7fce9-55d5-47c4-a015-ef434dd716eb"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx02BoundaryComparisonDisplay", "[", "\"\<Diving Beetle\>\"", 
+  "]"}]], "Input",
+ CellLabel->"In[17]:=",ExpressionUUID->"57d13c42-067f-4beb-b47a-dbe41ae9c0e9"],
+
+Cell["Optional interiors", "Section",ExpressionUUID->"8cf3e38e-df92-4ede-9304-ae622a8dc12b"],
+
+Cell["\<\
+Run only when needed; HyperCrown interior is slow. These calls use the same \
+current Regge path one diagram at a time.\
+\>", "Text",ExpressionUUID->"66494ecb-226d-4f26-8567-c1f5e118575f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Ex02SuperCrownInterior", "=", 
+   RowBox[{"hrfEx02InteriorStudy", "[", 
+    RowBox[{"\"\<SuperCrown\>\"", ",", 
+     RowBox[{"Ex02Diagrams", "[", "\"\<SuperCrown\>\"", "]"}], ",", "20"}], 
+    "]"}]}], ";", 
+  RowBox[{"Ex02HyperCrownInterior", "=", 
+   RowBox[{"hrfEx02InteriorStudy", "[", 
+    RowBox[{"\"\<HyperCrown\>\"", ",", 
+     RowBox[{"Ex02Diagrams", "[", "\"\<HyperCrown\>\"", "]"}], ",", "30"}], 
+    "]"}]}], ";", 
+  RowBox[{"Ex02DBInterior", "=", 
+   RowBox[{"hrfEx02InteriorStudy", "[", 
+    RowBox[{"\"\<Diving Beetle\>\"", ",", 
+     RowBox[{"Ex02Diagrams", "[", "\"\<Diving Beetle\>\"", "]"}], ",", "20"}],
+     "]"}]}], ";"}]], "Input",
+ CellLabel->"In[18]:=",ExpressionUUID->"1679737c-f0e2-41cc-96c0-670c95994db1"]
+}, Open  ]]
+},
+Evaluator->"Local",
+WindowSize->{1250, 900},
+WindowTitle->"02_Current_Regge_4pt",
+CellLabelAutoDelete->False,
+ShowCellTags->False,
+FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"be8d4635-6127-4ecb-86f9-3a1e8d200383"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[614, 23, 108, 0, 70, "Title",ExpressionUUID->"959d10d0-4b10-4904-976f-c4630ca1249e"],
+Cell[725, 25, 186, 3, 70, "Text",ExpressionUUID->"e2c2a9fa-f692-4878-bff5-b13db3597c8d"],
+Cell[914, 30, 79, 0, 70, "Section",ExpressionUUID->"4c2ae060-debf-42dd-99b3-aa72617522e0"],
+Cell[996, 32, 216, 3, 70, "Text",ExpressionUUID->"5d21528b-e9c7-49e8-81d5-04c20572fb8c"],
+Cell[1215, 37, 1842, 38, 70, "Input",ExpressionUUID->"f8d29443-225e-4e35-bcc8-d55b9cc41828"],
+Cell[3060, 77, 103, 0, 70, "Section",ExpressionUUID->"c69d2860-142a-4db6-8a0e-4c308dd71384"],
+Cell[3166, 79, 146, 2, 70, "Input",ExpressionUUID->"01beae35-bc71-4f55-8150-a593658bc26c"],
+Cell[3315, 83, 206, 3, 70, "Input",ExpressionUUID->"51f2ec80-1cc6-4358-8572-ec7a6313f724"],
+Cell[3524, 88, 214, 4, 70, "Input",ExpressionUUID->"4b8f2320-7d1d-4788-8d49-1eb9cd6b1574"],
+Cell[3741, 94, 214, 4, 70, "Input",ExpressionUUID->"de0d53c6-7ce4-4cf6-8001-8b6fd2cd6bec"],
+Cell[3958, 100, 200, 3, 70, "Input",ExpressionUUID->"cef55424-1a58-4ec2-bc92-a6eb2c6d0830"],
+Cell[4161, 105, 105, 0, 70, "Section",ExpressionUUID->"502b60da-c895-4827-b59f-021a0daa69d9"],
+Cell[4269, 107, 199, 3, 70, "Text",ExpressionUUID->"54394233-6a1d-40f6-9bfa-ee62c9996853"],
+Cell[4471, 112, 875, 23, 70, "Input",ExpressionUUID->"4659b86d-0a7d-4143-9442-ee86b3272972"],
+Cell[5349, 137, 105, 0, 70, "Section",ExpressionUUID->"e2fb526d-67eb-4452-9593-d377c5acbb5c"],
+Cell[5457, 139, 175, 3, 70, "Text",ExpressionUUID->"3aaec196-aa40-4c00-878d-ef8058e15e23"],
+Cell[5635, 144, 154, 2, 70, "Input",ExpressionUUID->"efce64db-a24a-4c15-9c18-1bc4af00406b"],
+Cell[5792, 148, 413, 8, 70, "Input",ExpressionUUID->"ee70ba1f-138c-49ea-8123-824b30d9ca2e"],
+Cell[6208, 158, 414, 8, 70, "Input",ExpressionUUID->"57151a12-3df8-488d-8aed-5492154255dc"],
+Cell[6625, 168, 603, 15, 70, "Input",ExpressionUUID->"15546b42-a253-400e-a81e-3e5f21d751a8"],
+Cell[7231, 185, 101, 0, 70, "Section",ExpressionUUID->"bbf54851-3468-4fde-882e-e65cb0e97658"],
+Cell[7335, 187, 236, 4, 70, "Text",ExpressionUUID->"70db3ef8-dee5-46ba-bc53-18689d4f343c"],
+Cell[7574, 193, 155, 2, 70, "Input",ExpressionUUID->"b6fd3124-66a7-4f0f-859a-d2ef282a5cdc"],
+Cell[7732, 197, 414, 8, 70, "Input",ExpressionUUID->"7d23b765-a398-40f8-9714-78b972c4339c"],
+Cell[8149, 207, 406, 8, 70, "Input",ExpressionUUID->"5158df89-07a2-4ea5-82e9-242945dcc7dc"],
+Cell[8558, 217, 597, 15, 70, "Input",ExpressionUUID->"37bbc7bc-ab77-44df-a306-951342300233"],
+Cell[9158, 234, 108, 0, 70, "Section",ExpressionUUID->"69f5db26-4858-479f-9512-f0e098065151"],
+Cell[9269, 236, 153, 2, 70, "Text",ExpressionUUID->"42cfc8fa-5da9-44db-b8aa-7a8d57196f3f"],
+Cell[9425, 240, 147, 2, 70, "Input",ExpressionUUID->"a3a7fce9-55d5-47c4-a015-ef434dd716eb"],
+Cell[9575, 244, 187, 3, 70, "Input",ExpressionUUID->"57d13c42-067f-4beb-b47a-dbe41ae9c0e9"],
+Cell[9765, 249, 92, 0, 70, "Section",ExpressionUUID->"8cf3e38e-df92-4ede-9304-ae622a8dc12b"],
+Cell[9860, 251, 198, 3, 70, "Text",ExpressionUUID->"66494ecb-226d-4f26-8567-c1f5e118575f"],
+Cell[10061, 256, 768, 17, 70, "Input",ExpressionUUID->"1679737c-f0e2-41cc-96c0-670c95994db1"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

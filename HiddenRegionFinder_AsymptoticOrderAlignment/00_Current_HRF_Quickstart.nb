@@ -1,0 +1,213 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8051,        204]
+NotebookOptionsPosition[      6684,        175]
+NotebookOutlinePosition[      7142,        194]
+CellTagsIndexPosition[      7099,        191]
+WindowTitle->00_Current_HRF_Quickstart
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["HRF current workflow quickstart", "Title",ExpressionUUID->"9ec6a499-7b7d-4fe9-81e4-9ae2ee7af7b7"],
+
+Cell["\<\
+Evaluate from a fresh kernel in this source directory. The notebook is a \
+compact health check and index for the curated current notebooks.\
+\>", "Text",ExpressionUUID->"024a81fb-ba41-4453-8702-6464f2cb22c0"],
+
+Cell["Fresh-kernel load gate", "Section",ExpressionUUID->"67f62b02-2946-4026-b13b-40d57a013b17"],
+
+Cell["\<\
+This cell checks that the current source files load from a clean kernel and \
+that the polynomial-factor and exact-coverage-scaling entry points are \
+present.\
+\>", "Text",ExpressionUUID->"2544f02e-cc15-4261-bdfb-630812da9b38"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ClearAll", "[", "downValueQ", "]"}], ";", 
+  RowBox[{
+   RowBox[{"downValueQ", "[", "name_String", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Length", "[", 
+     RowBox[{"ToExpression", "[", 
+      RowBox[{"name", ",", "InputForm", ",", "DownValues"}], "]"}], "]"}], 
+    ">", "0"}]}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HiddenRegionFinder.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_PolynomialCancellationFactors.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_FinalLogicPatch.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_Example01Common.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_ExactCoverageScaling.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"hrfInstallPolynomialCancellationPatch", "[", "]"}], ";", 
+  RowBox[{"Association", "[", 
+   RowBox[{
+    RowBox[{"\"\<CoreLoaded\>\"", "\[Rule]", 
+     RowBox[{"TrueQ", "[", "$HRFFinderCoreLoadedQ", "]"}]}], ",", 
+    RowBox[{"\"\<findObstructions\>\"", "\[Rule]", 
+     RowBox[{"downValueQ", "[", "\"\<findObstructions\>\"", "]"}]}], ",", 
+    RowBox[{"\"\<findExactCoverageLPScaling\>\"", "\[Rule]", 
+     RowBox[{"downValueQ", "[", "\"\<findExactCoverageLPScaling\>\"", "]"}]}],
+     ",", 
+    RowBox[{"\"\<hrfCoverageFoundQ\>\"", "\[Rule]", 
+     RowBox[{"downValueQ", "[", "\"\<hrfCoverageFoundQ\>\"", "]"}]}]}], 
+   "]"}]}]], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"df9caecb-1c4c-4620-aa02-a6d1f578a950"],
+
+Cell["Compact tests", "Section",ExpressionUUID->"c00906ae-c33b-489d-9019-034ad2b45d49"],
+
+Cell["\<\
+These are the compact checks used before preparing the Git source candidate. \
+They are the preferred quick regression path; the exhaustive Example 02 \
+interior scan is intentionally not run here.\
+\>", "Text",ExpressionUUID->"51805f46-71dd-46b4-b9a5-e634b34bfd71"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$HRFQuietReports", "=", "True"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_PolynomialFactorRegressionTests.wl\>\""}], "}"}], "]"}], "]"}],
+   ";", 
+  RowBox[{"reg", "=", 
+   RowBox[{"hrfRunPolynomialFactorRegressionTests", "[", "]"}]}], ";", 
+  RowBox[{"reg", "[", "\"\<Summary\>\"", "]"}]}]], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"bbc3ea72-bab7-435a-a506-aa06f12d604f"],
+
+Cell[BoxData[
+ RowBox[{"Block", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"$HRFQuietReports", "=", "True"}], ",", 
+     RowBox[{"$HRFExample02Report", "=", "False"}], ",", 
+     RowBox[{"$HRFRunEx02InteriorStudiesOnLoad", "=", "False"}], ",", 
+     RowBox[{"$HRFRunEx02BoundariesOnLoad", "=", "False"}], ",", 
+     RowBox[{"$HRFRunEx02CrownSanityOnLoad", "=", "False"}], ",", 
+     RowBox[{"$HRFRunEx02SuperCrownBoundary", "=", "False"}], ",", 
+     RowBox[{"$HRFRunEx02HyperCrownBoundaries", "=", "False"}], ",", 
+     RowBox[{"$HRFFindObstructionsStopOnFirstAdmissibleQ", "=", "False"}], 
+     ",", 
+     RowBox[{"$HRFCandidateGeneratorSetLimit", "=", "64"}]}], "}"}], ",", 
+   RowBox[{
+    RowBox[{"Get", "[", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+        "\"\<02_Forward_Regge_2to2_Massless.wl\>\""}], "}"}], "]"}], "]"}], 
+    ";", 
+    RowBox[{"crownStudy", "=", 
+     RowBox[{"hrfEx02InteriorStudy", "[", 
+      RowBox[{"\"\<Crown\>\"", ",", 
+       RowBox[{"Ex02Diagrams", "[", "\"\<Crown\>\"", "]"}], ",", "20"}], 
+      "]"}]}], ";", 
+    RowBox[{"Dataset", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"KeyTake", "[", 
+        RowBox[{
+         RowBox[{"crownStudy", "[", "\"\<Wide\>\"", "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Hidden region identified?\>\"", ",", "\"\<Scaling status\>\"", 
+           ",", "\"\<Scaling vector\>\""}], "}"}]}], "]"}], ",", 
+       RowBox[{"KeyTake", "[", 
+        RowBox[{
+         RowBox[{"crownStudy", "[", "\"\<T23\>\"", "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\<Hidden region identified?\>\"", ",", "\"\<Scaling status\>\"", 
+           ",", "\"\<Scaling vector\>\""}], "}"}]}], "]"}]}], "}"}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"0fee44b8-c312-401e-a486-782b2a1264ec"],
+
+Cell["Where to go next", "Section",ExpressionUUID->"fc924fc6-7e81-4df3-a951-b5252b1dc6a0"],
+
+Cell["\<\
+Use notebook 01 for wide-angle four-point examples, notebook 02 for Regge \
+four-point examples, notebook 03 for spacelike collinear five-point examples, \
+notebook 04 for topology preselection, and notebook 05 for regression/audit \
+details.\
+\>", "Text",ExpressionUUID->"e0fa1aa0-0d57-4a45-9a27-df4d2f7f6abb"]
+}, Open  ]]
+},
+Evaluator->"Local",
+WindowSize->{1250, 900},
+WindowTitle->"00_Current_HRF_Quickstart",
+CellLabelAutoDelete->False,
+ShowCellTags->False,
+FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"be8d4635-6127-4ecb-86f9-3a1e8d200383"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[619, 23, 103, 0, 70, "Title",ExpressionUUID->"9ec6a499-7b7d-4fe9-81e4-9ae2ee7af7b7"],
+Cell[725, 25, 219, 3, 70, "Text",ExpressionUUID->"024a81fb-ba41-4453-8702-6464f2cb22c0"],
+Cell[947, 30, 96, 0, 70, "Section",ExpressionUUID->"67f62b02-2946-4026-b13b-40d57a013b17"],
+Cell[1046, 32, 238, 4, 70, "Text",ExpressionUUID->"2544f02e-cc15-4261-bdfb-630812da9b38"],
+Cell[1287, 38, 2123, 54, 70, "Input",ExpressionUUID->"df9caecb-1c4c-4620-aa02-a6d1f578a950"],
+Cell[3413, 94, 87, 0, 70, "Section",ExpressionUUID->"c00906ae-c33b-489d-9019-034ad2b45d49"],
+Cell[3503, 96, 276, 4, 70, "Text",ExpressionUUID->"51805f46-71dd-46b4-b9a5-e634b34bfd71"],
+Cell[3782, 102, 536, 13, 70, "Input",ExpressionUUID->"bbc3ea72-bab7-435a-a506-aa06f12d604f"],
+Cell[4321, 117, 1930, 46, 70, "Input",ExpressionUUID->"0fee44b8-c312-401e-a486-782b2a1264ec"],
+Cell[6254, 165, 90, 0, 70, "Section",ExpressionUUID->"fc924fc6-7e81-4df3-a951-b5252b1dc6a0"],
+Cell[6347, 167, 321, 5, 70, "Text",ExpressionUUID->"e0fa1aa0-0d57-4a45-9a27-df4d2f7f6abb"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

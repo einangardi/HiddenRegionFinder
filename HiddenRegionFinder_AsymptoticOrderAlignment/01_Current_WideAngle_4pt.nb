@@ -1,0 +1,260 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     10895,        251]
+NotebookOptionsPosition[      8320,        209]
+NotebookOutlinePosition[      8777,        228]
+CellTagsIndexPosition[      8734,        225]
+WindowTitle->01_Current_WideAngle_4pt
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Current wide-angle 4-point examples", "Title",ExpressionUUID->"b5dc92e9-100e-451d-b6ce-e54e0f6755ed"],
+
+Cell["\<\
+Current wide-angle path only: polynomial factors, generator physics filter, \
+and exact coverage scaling.\
+\>", "Text",ExpressionUUID->"c4677640-c8de-4b70-8623-a25b51b1104a"],
+
+Cell["Setup", "Section",ExpressionUUID->"e0abf32b-75ff-460d-80f6-8676dc3674e1"],
+
+Cell["\<\
+This notebook uses the current polynomial-factor path and exact coverage \
+scaling. No comparison route is run on load.\
+\>", "Text",ExpressionUUID->"f26e1471-642d-44f8-84b3-e0c1f79f823b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$HRFQuietReports", "=", "True"}], ";", 
+  RowBox[{"$HRFExample01Report", "=", "False"}], ";", 
+  RowBox[{"$HRFExample04Report", "=", "True"}], ";", 
+  RowBox[{"$HRFScalingReport", "=", "False"}], ";", 
+  RowBox[{"$HRFRunCrownInteriorScanOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunSuperCrownInteriorScan", "=", "False"}], ";", 
+  RowBox[{"$HRFRunSuperCrownBoundaryScanOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunHyperCrownInteriorScan", "=", "False"}], ";", 
+  RowBox[{"$HRFRunHyperCrownBoundaryScansOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDivingBeetleDiagnosticsOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDivingBeetleInteriorScanOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDBFullBoundaryScan", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDeepBoundaryScan", "=", "False"}], ";", 
+  RowBox[{"$HRFEx04CompareBinomialQ", "=", "False"}], ";", 
+  RowBox[{"$HRFEx04TrimScanStorageQ", "=", "True"}], ";", 
+  RowBox[{"$HRFEx04RunObstructionSearchQ", "=", "True"}], ";", 
+  RowBox[{"$HRFFindObstructionsStopOnFirstAdmissibleQ", "=", "False"}], ";", 
+  RowBox[{"$HRFCandidateGeneratorSetLimit", "=", "64"}], ";", 
+  RowBox[{"$HRFPolynomialMaxMonomials", "=", "12"}], ";", 
+  RowBox[{"$HRFPolynomialRequireKinematicDomainQ", "=", "False"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HiddenRegionFinder.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<01_WideAngle_2to2_OffShell.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_PolynomialCancellationFactors.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";", 
+  RowBox[{"hrfInstallPolynomialCancellationPatch", "[", "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<04_PolynomialFactor_Regression.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";"}]], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"951489f3-d6c8-4cb5-8da5-880f894011ad"],
+
+Cell["Graphs", "Section",ExpressionUUID->"51ed2193-5352-4a07-ba6c-6a4b9f0525b0"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"CrownInternalEdges", ",", "CrownExternalEdges"}], "]"}]], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"eef8a635-5803-475e-8ccd-487cdc0b6431"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"SuperCrownInternalEdges", ",", "SuperCrownExternalEdges"}], 
+  "]"}]], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"ddef1685-576a-4a51-b6b4-fefb20703167"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"HyperCrownInternalEdges", ",", "HyperCrownExternalEdges"}], 
+  "]"}]], "Input",
+ CellLabel->"In[4]:=",ExpressionUUID->"9ab0abe7-62a7-44d8-821e-7e582fe83b1d"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"DBInternalEdges", ",", "DBExternalEdges"}], "]"}]], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"7f9aefc4-ec9e-40ff-a5ec-27ac7b3ad7ed"],
+
+Cell["Crown interior", "Section",ExpressionUUID->"ffa3b8b7-4541-41a4-9d34-1e3493431914"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Ex04CrownRegression", "=", 
+   RowBox[{"hrfEx04CrownRegression", "[", "]"}]}], ";", 
+  RowBox[{"hrfCrownReport", "=", 
+   RowBox[{"hrfEx04CrownSanityDisplay", "[", "]"}]}], ";", 
+  "hrfCrownReport"}]], "Input",
+ CellLabel->"In[6]:=",ExpressionUUID->"2dd908c1-953e-4a34-89ab-fc3a3393d1bf"],
+
+Cell[BoxData[
+ RowBox[{"KeyTake", "[", 
+  RowBox[{
+   RowBox[{"hrfEx04CaseIngredients", "[", "Ex04CrownRegression", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<Generators\>\"", ",", "\"\<ScalingVector\>\"", ",", 
+     "\"\<VariableScaling\>\"", ",", "\"\<HiddenRegionQ\>\""}], "}"}]}], 
+  "]"}]], "Input",
+ CellLabel->"In[7]:=",ExpressionUUID->"21ea25c3-d91e-440e-ad89-d9f5ddf0850b"],
+
+Cell["HyperCrown boundary x11 = 0", "Section",ExpressionUUID->"e328dfd0-7c53-4716-82bb-8b64e01e2d04"],
+
+Cell["\<\
+This is the current positive HyperCrown boundary example. It uses the \
+WideAngle4ptBoundary preset and exact coverage scaling.\
+\>", "Text",ExpressionUUID->"9b2049c3-a9e1-4849-991e-ad96bfd4bc80"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hrfX11Report", "=", 
+   RowBox[{"hrfEx04HyperCrownX11Display", "[", "]"}]}], ";", 
+  RowBox[{"hrfX11Report", "[", "\"\<Summary\>\"", "]"}]}]], "Input",
+ CellLabel->"In[8]:=",ExpressionUUID->"8a648378-9253-4a7c-98e1-2ad0e865363d"],
+
+Cell[BoxData[
+ RowBox[{"KeyTake", "[", 
+  RowBox[{
+   RowBox[{"hrfX11Report", "[", "\"\<Ingredients\>\"", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<Generators\>\"", ",", "\"\<ScalingVector\>\"", ",", 
+     "\"\<VariableScaling\>\"", ",", "\"\<HiddenRegionQ\>\"", ",", 
+     "\"\<Obstruction\>\"", ",", "\"\<FSL\>\""}], "}"}]}], "]"}]], "Input",
+ CellLabel->"In[9]:=",ExpressionUUID->"e559dc2a-2d72-4014-82d2-b441f9bb3db6"],
+
+Cell[BoxData[
+ RowBox[{"hrfX11Report", "[", "\"\<AllValidTrialsScaling\>\"", "]"}]], "Input",\
+
+ CellLabel->"In[10]:=",ExpressionUUID->"1688a6e5-8eed-4e92-bbea-d2c9adba56b2"],
+
+Cell["Diving Beetle checks", "Section",ExpressionUUID->"69116bfe-bd39-40e2-8bb5-03f654243fb7"],
+
+Cell["\<\
+These cells are the current direct HRF checks for Diving Beetle. They are \
+expected to produce no accepted hidden region in the tested interior and \
+x8,x9 boundary cases.\
+\>", "Text",ExpressionUUID->"b18adb0f-92d6-48fc-ad17-a3df403e0d45"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Ex04DivingBeetleInterior", "=", 
+   RowBox[{"hrfEx04DivingBeetleInterior", "[", "]"}]}], ";", 
+  RowBox[{"hrfDBInteriorReport", "=", 
+   RowBox[{"hrfEx04DivingBeetleInteriorDisplay", "[", "]"}]}], ";", 
+  RowBox[{"hrfDBInteriorReport", "[", "\"\<Summary\>\"", "]"}]}]], "Input",
+ CellLabel->"In[11]:=",ExpressionUUID->"132c54c8-5487-4e3e-a283-2936efeca212"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Ex04DivingBeetleX89Target", "=", 
+   RowBox[{"hrfEx04DivingBeetleX89Boundary", "[", "]"}]}], ";", 
+  RowBox[{"hrfDBX89Report", "=", 
+   RowBox[{"hrfEx04DivingBeetleX89Display", "[", "]"}]}], ";", 
+  RowBox[{"hrfDBX89Report", "[", "\"\<Summary\>\"", "]"}]}]], "Input",
+ CellLabel->"In[12]:=",ExpressionUUID->"e8cf8ebe-54e0-4952-835c-467d90e33260"],
+
+Cell["Optional diagnostics", "Section",ExpressionUUID->"560e3266-0041-4876-bf32-a12b5d0e9a34"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_WideAngleBoundaryDiagnostic.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";", 
+  RowBox[{
+   RowBox[{"hrfWideAngleBoundaryDiagnostic", "[", 
+    RowBox[{"\"\<HyperCrownX11\>\"", ",", 
+     RowBox[{"\"\<RunScalingQ\>\"", "\[Rule]", "False"}]}], "]"}], 
+   "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}]], "Input",
+ CellLabel->"In[13]:=",ExpressionUUID->"70535a0d-5b6a-4942-bc79-60e209de160b"]
+}, Open  ]]
+},
+Evaluator->"Local",
+WindowSize->{1250, 900},
+WindowTitle->"01_Current_WideAngle_4pt",
+CellLabelAutoDelete->False,
+ShowCellTags->False,
+FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"be8d4635-6127-4ecb-86f9-3a1e8d200383"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[618, 23, 107, 0, 70, "Title",ExpressionUUID->"b5dc92e9-100e-451d-b6ce-e54e0f6755ed"],
+Cell[728, 25, 184, 3, 70, "Text",ExpressionUUID->"c4677640-c8de-4b70-8623-a25b51b1104a"],
+Cell[915, 30, 79, 0, 70, "Section",ExpressionUUID->"e0abf32b-75ff-460d-80f6-8676dc3674e1"],
+Cell[997, 32, 198, 3, 70, "Text",ExpressionUUID->"f26e1471-642d-44f8-84b3-e0c1f79f823b"],
+Cell[1198, 37, 2331, 49, 70, "Input",ExpressionUUID->"951489f3-d6c8-4cb5-8da5-880f894011ad"],
+Cell[3532, 88, 80, 0, 70, "Section",ExpressionUUID->"51ed2193-5352-4a07-ba6c-6a4b9f0525b0"],
+Cell[3615, 90, 214, 3, 70, "Input",ExpressionUUID->"eef8a635-5803-475e-8ccd-487cdc0b6431"],
+Cell[3832, 95, 227, 4, 70, "Input",ExpressionUUID->"ddef1685-576a-4a51-b6b4-fefb20703167"],
+Cell[4062, 101, 227, 4, 70, "Input",ExpressionUUID->"9ab0abe7-62a7-44d8-821e-7e582fe83b1d"],
+Cell[4292, 107, 208, 3, 70, "Input",ExpressionUUID->"7f9aefc4-ec9e-40ff-a5ec-27ac7b3ad7ed"],
+Cell[4503, 112, 88, 0, 70, "Section",ExpressionUUID->"ffa3b8b7-4541-41a4-9d34-1e3493431914"],
+Cell[4594, 114, 323, 7, 70, "Input",ExpressionUUID->"2dd908c1-953e-4a34-89ab-fc3a3393d1bf"],
+Cell[4920, 123, 391, 9, 70, "Input",ExpressionUUID->"21ea25c3-d91e-440e-ad89-d9f5ddf0850b"],
+Cell[5314, 134, 101, 0, 70, "Section",ExpressionUUID->"e328dfd0-7c53-4716-82bb-8b64e01e2d04"],
+Cell[5418, 136, 206, 3, 70, "Text",ExpressionUUID->"9b2049c3-a9e1-4849-991e-ad96bfd4bc80"],
+Cell[5627, 141, 264, 5, 70, "Input",ExpressionUUID->"8a648378-9253-4a7c-98e1-2ad0e865363d"],
+Cell[5894, 148, 432, 9, 70, "Input",ExpressionUUID->"e559dc2a-2d72-4014-82d2-b441f9bb3db6"],
+Cell[6329, 159, 174, 3, 70, "Input",ExpressionUUID->"1688a6e5-8eed-4e92-bbea-d2c9adba56b2"],
+Cell[6506, 164, 94, 0, 70, "Section",ExpressionUUID->"69116bfe-bd39-40e2-8bb5-03f654243fb7"],
+Cell[6603, 166, 251, 4, 70, "Text",ExpressionUUID->"b18adb0f-92d6-48fc-ad17-a3df403e0d45"],
+Cell[6857, 172, 392, 7, 70, "Input",ExpressionUUID->"132c54c8-5487-4e3e-a283-2936efeca212"],
+Cell[7252, 181, 381, 7, 70, "Input",ExpressionUUID->"e8cf8ebe-54e0-4952-835c-467d90e33260"],
+Cell[7636, 190, 94, 0, 70, "Section",ExpressionUUID->"560e3266-0041-4876-bf32-a12b5d0e9a34"],
+Cell[7733, 192, 571, 14, 70, "Input",ExpressionUUID->"70535a0d-5b6a-4942-bc79-60e209de160b"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

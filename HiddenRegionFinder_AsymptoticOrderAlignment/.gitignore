@@ -1,0 +1,32 @@
+# Generated full scans retain every face and can be hundreds of megabytes.
+results/generated/*
+!results/generated/.gitkeep
+results/nmrk_wz/full_*.wl
+
+# Historical pre-release output names, accepted only as local compatibility
+# inputs and never produced by the canonical runners.
+results/generic_DSC_facelift_*.wl
+results/wz_NMRK_facelift_hexagon.wl
+results/one_loop_hexagon_facelift_search_*.wl
+
+.DS_Store
+*.swp
+*.bbl
+*.blg
+/*.aux
+/*.log
+/*.out
+/*.pdf
+/*.synctex.gz
+output/pdf/*.aux
+output/pdf/*.log
+output/pdf/*.out
+
+# Wide-angle completeness runners checkpoint every contraction stratum.
+# Keep compact aggregate summaries in Git, not per-ID rows/checkpoints.
+results/wa16_*_partial_rows.wl
+results/wa16_*_rows.wl
+results/wa16_complete_harvest_v*_id*.wl
+results/wa16_face_pinch_v*_id*.wl
+results/wa16_prefilter_id*.wl
+results/wa16_regge_boundary_v*_class*_codim*_summary.wl

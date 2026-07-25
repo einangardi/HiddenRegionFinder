@@ -1,0 +1,283 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11903,        274]
+NotebookOptionsPosition[      9129,        230]
+NotebookOutlinePosition[      9595,        249]
+CellTagsIndexPosition[      9552,        246]
+WindowTitle->03_Current_SpacelikeCollinear_5pt
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Current spacelike-collinear 5-point examples", "Title",ExpressionUUID->"ad19945c-d4fc-450b-98f7-b435f987884a"],
+
+Cell["\<\
+Current five-point path: seed, three-loop vertex, 7/8 descendants, and \
+optional 70-topology preselected scan.\
+\>", "Text",ExpressionUUID->"824bbcdf-65cb-49e6-8f7b-89104f1725ce"],
+
+Cell["Setup for seed and vertex", "Section",ExpressionUUID->"ff37588b-7afc-47bc-b8b0-3a059e5f8763"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$HRFQuietReports", "=", "True"}], ";", 
+  RowBox[{"$HRFExample04Report", "=", "True"}], ";", 
+  RowBox[{"$HRFEx04RunObstructionSearchQ", "=", "True"}], ";", 
+  RowBox[{"$HRFRunEx04RegressionOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunEx04SlowCasesOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunEx04FivePointOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFFindObstructionsStopOnFirstAdmissibleQ", "=", "False"}], ";", 
+  RowBox[{"$HRFCandidateGeneratorSetLimit", "=", "128"}], ";", 
+  RowBox[{"$HRFMaxProductSubsetSize", "=", "2"}], ";", 
+  RowBox[{"$HRFEx04TrimScanStorageQ", "=", "True"}], ";", 
+  RowBox[{"$HRFPolynomialRequireKinematicDomainQ", "=", "False"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HiddenRegionFinder.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_Example03CollinearCore.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_PolynomialCancellationFactors.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";", 
+  RowBox[{"hrfInstallPolynomialCancellationPatch", "[", "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<04_PolynomialFactor_Regression.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";"}]], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"a6999a88-a1c3-4e7a-a9c5-45679fd25e9d"],
+
+Cell["Seed graph", "Section",ExpressionUUID->"2071c4db-21fa-4df5-9b8b-408cc4a42443"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"seedInternalLines", ",", "seedExternalLines"}], "]"}]], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"87b4529c-bc0e-4057-9f15-154701bc6a37"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Ex04Seed5ptInterior", "=", 
+   RowBox[{"hrfEx04Seed5ptInterior", "[", "]"}]}], ";", 
+  RowBox[{"hrfSeedReport", "=", 
+   RowBox[{"hrfEx04FivePointCaseDisplay", "[", 
+    RowBox[{"Ex04Seed5ptInterior", ",", "\"\<Seed5pt\>\""}], "]"}]}], ";", 
+  RowBox[{"hrfSeedReport", "[", "\"\<Summary\>\"", "]"}]}]], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"16ea7cf7-8def-4ce1-9e4c-846ca1cac050"],
+
+Cell[BoxData[
+ RowBox[{"KeyTake", "[", 
+  RowBox[{
+   RowBox[{"hrfSeedReport", "[", "\"\<Ingredients\>\"", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<Generators\>\"", ",", "\"\<ScalingVector\>\"", ",", 
+     "\"\<VariableScaling\>\"", ",", "\"\<HiddenRegionQ\>\"", ",", 
+     "\"\<Obstruction\>\"", ",", "\"\<FSL\>\""}], "}"}]}], "]"}]], "Input",
+ CellLabel->"In[4]:=",ExpressionUUID->"dc9db8c9-34fb-47db-8706-2affb89aef57"],
+
+Cell["Three-loop vertex graph", "Section",ExpressionUUID->"748aae4c-4e77-4c83-919b-04d43c303338"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"ThreeLoopVertexInternalLines", ",", "seedExternalLines"}], 
+  "]"}]], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"47a335c1-39f7-4666-a850-a1f9a8e26be2"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Ex04ThreeLoopVertexInterior", "=", 
+   RowBox[{"hrfEx04ThreeLoopVertexInterior", "[", "]"}]}], ";", 
+  RowBox[{"hrfVertexReport", "=", 
+   RowBox[{"hrfEx04FivePointCaseDisplay", "[", 
+    RowBox[{"Ex04ThreeLoopVertexInterior", ",", "\"\<ThreeLoopVertex\>\""}], 
+    "]"}]}], ";", 
+  RowBox[{"hrfVertexReport", "[", "\"\<Summary\>\"", "]"}]}]], "Input",
+ CellLabel->"In[6]:=",ExpressionUUID->"ea15b916-89a5-481d-bd01-031be0061e7a"],
+
+Cell[BoxData[
+ RowBox[{"KeyTake", "[", 
+  RowBox[{
+   RowBox[{"hrfVertexReport", "[", "\"\<Ingredients\>\"", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<Generators\>\"", ",", "\"\<ScalingVector\>\"", ",", 
+     "\"\<VariableScaling\>\"", ",", "\"\<HiddenRegionQ\>\"", ",", 
+     "\"\<Obstruction\>\"", ",", "\"\<FSL\>\""}], "}"}]}], "]"}]], "Input",
+ CellLabel->"In[7]:=",ExpressionUUID->"4ebcfd79-bb68-43ab-9575-006ec68cce2a"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx04FivePointComparisonDisplay", "[", 
+  RowBox[{"{", 
+   RowBox[{"Ex04Seed5ptInterior", ",", "Ex04ThreeLoopVertexInterior"}], "}"}],
+   "]"}]], "Input",
+ CellLabel->"In[8]:=",ExpressionUUID->"6d0d6561-06e1-4d09-a2aa-08ce65b4aa37"],
+
+Cell["Seven/eight-propagator descendant scan", "Section",ExpressionUUID->"9dc1b59e-c33e-4f73-ae8a-ebcc1a37e662"],
+
+Cell["\<\
+This is the current compact descendant scan. It regenerates \
+Example03PolynomialDescendantScanSummary.wl/csv files in the notebook \
+directory.\
+\>", "Text",ExpressionUUID->"f2955626-ccbc-486a-849c-7c65ff4c9da8"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";", 
+  RowBox[{"$HRFRunExample03EightPropBoundaryScanQ", "=", "True"}], ";", 
+  RowBox[{"<<", "\"\<HRF_RunExample03PolynomialDescendantScan.wl\>\""}], 
+  ";"}]], "Input",
+ CellLabel->"In[9]:=",ExpressionUUID->"1271f192-a52b-47d2-8352-277ed12e0e20"],
+
+Cell[BoxData[
+ RowBox[{"InterpretationBox", "[", 
+  RowBox[{
+   RowBox[{"StyleBox", "[", 
+    RowBox[{"\"\<Example03PolynomialDescendantSummary\>\"", ",", 
+     RowBox[{"ShowStringCharacters", "\[Rule]", "True"}]}], "]"}], ",", 
+   "Example03PolynomialDescendantSummary", ",", 
+   RowBox[{"Editable", "\[Rule]", "False"}]}], "]"}]], "Input",
+ CellLabel->"In[10]:=",ExpressionUUID->"510c4262-8a16-4f9f-a81e-dc648403e423"],
+
+Cell[BoxData[
+ RowBox[{"Dataset", "[", "Example03PolynomialDescendantHRRows", 
+  "]"}]], "Input",
+ CellLabel->"In[11]:=",ExpressionUUID->"cb3bd610-075a-42b2-82dc-7d34530cf792"],
+
+Cell["Full 70-topology preselected scan", "Section",ExpressionUUID->"336e31d4-e883-466b-8e5b-15d437960173"],
+
+Cell["\<\
+Optional and slower. Run interior and boundary scans, then load the result \
+browser. These are the current commands for regenerating the five-point \
+preselected outputs.\
+\>", "Text",ExpressionUUID->"45fb10a2-041e-4888-899f-b12c5495516f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";", 
+  RowBox[{"$HRFPreselectedRunInteriorQ", "=", "True"}], ";", 
+  RowBox[{"$HRFPreselectedRunBoundaryQ", "=", "False"}], ";", 
+  RowBox[{
+  "$HRFPreselectedOutputPrefix", "=", 
+   "\"\<Preselected5ptHRFScan_interior\>\""}], ";", 
+  RowBox[{"<<", "\"\<HRF_RunPreselected5ptScan.wl\>\""}], ";"}]], "Input",
+ CellLabel->"In[12]:=",ExpressionUUID->"93fcee77-e025-4c44-af2b-30301bf9c707"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";", 
+  RowBox[{"$HRFPreselectedRunInteriorQ", "=", "False"}], ";", 
+  RowBox[{"$HRFPreselectedRunBoundaryQ", "=", "True"}], ";", 
+  RowBox[{"$HRFPreselectedBoundaryMaxCodim", "=", "2"}], ";", 
+  RowBox[{
+  "$HRFPreselectedOutputPrefix", "=", 
+   "\"\<Preselected5ptHRFScan_boundary_codim2\>\""}], ";", 
+  RowBox[{"<<", "\"\<HRF_RunPreselected5ptScan.wl\>\""}], ";"}]], "Input",
+ CellLabel->"In[13]:=",ExpressionUUID->"9b192a8c-f86d-46da-8b8b-870f76198862"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$HRFQuietReports", "=", "True"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<HRF_Example03PreselectedResults.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";", 
+  RowBox[{"hrfEx03PreselectedScanSummary", "[", "]"}]}]], "Input",
+ CellLabel->"In[14]:=",ExpressionUUID->"839d4393-5100-4313-81cb-7a1cc26f5965"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx03PreselectedInteriorHRTable", "[", "]"}]], "Input",
+ CellLabel->"In[15]:=",ExpressionUUID->"a3733ef9-28c5-4763-959a-7cfdb239bfe5"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx03PreselectedBoundaryHRTable", "[", "]"}]], "Input",
+ CellLabel->"In[16]:=",ExpressionUUID->"6558e8c7-b2dd-476b-b632-f10c197952c8"],
+
+Cell[BoxData[
+ RowBox[{"hrfEx03PreselectedHRTopologyPanels", "[", "]"}]], "Input",
+ CellLabel->"In[17]:=",ExpressionUUID->"131f54d2-44b5-4f5e-98fc-0d777d055012"]
+}, Open  ]]
+},
+Evaluator->"Local",
+WindowSize->{1250, 900},
+WindowTitle->"03_Current_SpacelikeCollinear_5pt",
+CellLabelAutoDelete->False,
+ShowCellTags->False,
+FrontEndVersion->"14.0 for Mac OS X ARM (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"be8d4635-6127-4ecb-86f9-3a1e8d200383"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[627, 23, 116, 0, 70, "Title",ExpressionUUID->"ad19945c-d4fc-450b-98f7-b435f987884a"],
+Cell[746, 25, 190, 3, 70, "Text",ExpressionUUID->"824bbcdf-65cb-49e6-8f7b-89104f1725ce"],
+Cell[939, 30, 99, 0, 70, "Section",ExpressionUUID->"ff37588b-7afc-47bc-b8b0-3a059e5f8763"],
+Cell[1041, 32, 1744, 40, 70, "Input",ExpressionUUID->"a6999a88-a1c3-4e7a-a9c5-45679fd25e9d"],
+Cell[2788, 74, 84, 0, 70, "Section",ExpressionUUID->"2071c4db-21fa-4df5-9b8b-408cc4a42443"],
+Cell[2875, 76, 212, 3, 70, "Input",ExpressionUUID->"87b4529c-bc0e-4057-9f15-154701bc6a37"],
+Cell[3090, 81, 424, 8, 70, "Input",ExpressionUUID->"16ea7cf7-8def-4ce1-9e4c-846ca1cac050"],
+Cell[3517, 91, 433, 9, 70, "Input",ExpressionUUID->"dc9db8c9-34fb-47db-8706-2affb89aef57"],
+Cell[3953, 102, 97, 0, 70, "Section",ExpressionUUID->"748aae4c-4e77-4c83-919b-04d43c303338"],
+Cell[4053, 104, 226, 4, 70, "Input",ExpressionUUID->"47a335c1-39f7-4666-a850-a1f9a8e26be2"],
+Cell[4282, 110, 465, 9, 70, "Input",ExpressionUUID->"ea15b916-89a5-481d-bd01-031be0061e7a"],
+Cell[4750, 121, 435, 9, 70, "Input",ExpressionUUID->"4ebcfd79-bb68-43ab-9575-006ec68cce2a"],
+Cell[5188, 132, 258, 5, 70, "Input",ExpressionUUID->"6d0d6561-06e1-4d09-a2aa-08ce65b4aa37"],
+Cell[5449, 139, 112, 0, 70, "Section",ExpressionUUID->"9dc1b59e-c33e-4f73-ae8a-ebcc1a37e662"],
+Cell[5564, 141, 223, 4, 70, "Text",ExpressionUUID->"f2955626-ccbc-486a-849c-7c65ff4c9da8"],
+Cell[5790, 147, 356, 7, 70, "Input",ExpressionUUID->"1271f192-a52b-47d2-8352-277ed12e0e20"],
+Cell[6149, 156, 420, 8, 70, "Input",ExpressionUUID->"510c4262-8a16-4f9f-a81e-dc648403e423"],
+Cell[6572, 166, 176, 3, 70, "Input",ExpressionUUID->"cb3bd610-075a-42b2-82dc-7d34530cf792"],
+Cell[6751, 171, 107, 0, 70, "Section",ExpressionUUID->"336e31d4-e883-466b-8e5b-15d437960173"],
+Cell[6861, 173, 250, 4, 70, "Text",ExpressionUUID->"45fb10a2-041e-4888-899f-b12c5495516f"],
+Cell[7114, 179, 494, 10, 70, "Input",ExpressionUUID->"93fcee77-e025-4c44-af2b-30301bf9c707"],
+Cell[7611, 191, 564, 11, 70, "Input",ExpressionUUID->"9b192a8c-f86d-46da-8b8b-870f76198862"],
+Cell[8178, 204, 445, 11, 70, "Input",ExpressionUUID->"839d4393-5100-4313-81cb-7a1cc26f5965"],
+Cell[8626, 217, 160, 2, 70, "Input",ExpressionUUID->"a3733ef9-28c5-4763-959a-7cfdb239bfe5"],
+Cell[8789, 221, 160, 2, 70, "Input",ExpressionUUID->"6558e8c7-b2dd-476b-b632-f10c197952c8"],
+Cell[8952, 225, 161, 2, 70, "Input",ExpressionUUID->"131f54d2-44b5-4f5e-98fc-0d777d055012"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
