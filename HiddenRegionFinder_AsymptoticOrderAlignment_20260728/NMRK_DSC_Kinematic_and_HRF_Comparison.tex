@@ -1,0 +1,776 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\allowdisplaybreaks
+
+\newcommand{\F}{\mathcal F}
+\newcommand{\U}{\mathcal U}
+\newcommand{\Pcal}{\mathcal P}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\HR}{\mathrm{HR}}
+\newcommand{\zb}{\bar z}
+\newcommand{\wb}{\bar w}
+\newcommand{\hX}{\widehat X}
+\newcommand{\eps}{\epsilon}
+
+\title{NMRK and double-spacelike-collinear limits:\\
+kinematics and hidden regions on equal footing}
+\author{Draft note for internal discussion}
+\date{21 July 2026}
+
+\begin{document}
+\maketitle
+
+\section{Purpose and conventions}
+
+This note compares two six-point asymptotic expansions using the same graphs,
+the same external labels and the same final HRF certification criterion:
+central next-to-multi-Regge kinematics (NMRK), with particular attention to
+the surface \(w_M=z_M\), and the generic double-spacelike-collinear (DSC) limit of
+Ref.~\cite{Duhr:2025lyg}.  Neither limit is defined by dual conformal
+invariance.  Dual conformal invariance only reduces the variables on which a
+particular observable can depend.
+
+The presentation is deliberately not chronological.  We first define the two
+limits symmetrically, then work through the common one-loop hexagon, and only
+afterwards report and compare the other graphs.  Discovery-stage vectors are
+kept distinct from certified region vectors.
+
+All momenta are outgoing in algebraic formulae.  The physical sheet is a
+\(2\to4\) process with particles 1 and 2 incoming.  Hence
+\begin{equation}
+ s_{12}>0,\qquad s_{34},s_{45},s_{56}>0,\qquad
+ s_{16},s_{23}<0,
+ \label{eq:physical-signs}
+\end{equation}
+where \(s_{16}\) and \(s_{23}\) become small in the DSC limit.  A region vector
+always means
+\begin{equation}
+ x_i\longrightarrow\eta^{v_i}x_i,\qquad (v_0,\ldots,v_{N-1};1).
+ \label{eq:vector-convention}
+\end{equation}
+Here \(\eta\) denotes the small parameter of the expansion under discussion:
+the NMRK parameter in Sec.~2.2 or \(\varepsilon_D\) in Sec.~2.3.
+The final component is displayed explicitly whenever there is a possible
+normalization ambiguity.
+
+\section{Kinematics: coordinates first, limits second}
+
+Two notationally different objects were conflated in an earlier version of
+this note: a coordinate system for generic six-point kinematics and a limit
+taken inside that coordinate system.  They are separated here.  Subscripts
+\(M\) and \(D\) distinguish the minimal-light-cone and Duhr--Venkata--Zhang
+transverse variables.
+
+\subsection{General minimal light-cone variables}
+
+The minimal light-cone variables (MSLCV) follow
+Refs.~\cite{Byrne:2022wdr,Byrne:2025phh}.  Set \(P=p_4^+\) and
+\(Q=q_1^\perp\bar q_1^\perp\).  The longitudinal coordinates are defined by
+\begin{equation}
+p_3^+=PX_{34},\qquad p_4^+=P,\qquad
+p_5^+=\frac{P}{X_{45}},\qquad
+p_6^+=\frac{P}{X_{45}X_{56}},
+\label{eq:nmrk-plus-definitions}
+\end{equation}
+and the transverse coordinates by
+\begin{align}
+p_4^\perp&=-\frac{q_1^\perp}{z_M-1},&
+p_5^\perp&=\frac{z_Mq_1^\perp}{w_M(z_M-1)},\nonumber\\
+p_6^\perp&=\frac{z_M(w_M-1)q_1^\perp}{w_M(z_M-1)},&
+p_3^\perp&=-p_4^\perp-p_5^\perp-p_6^\perp,
+\label{eq:nmrk-transverse-definitions}
+\end{align}
+with barred equations defining \(\bar z_M,\bar w_M\).  In complexified
+kinematics the barred and unbarred coordinates may be manipulated as
+independent algebraic variables.  On the real Lorentzian \(2\to4\) sheet
+specified in Eq.~\eqref{eq:physical-signs}, however, the barred transverse
+components are the complex conjugates of the unbarred ones.  Consequently,
+\begin{equation}
+ \bar z_M=z_M^*,\qquad \bar w_M=w_M^*.
+ \label{eq:mslcv-reality}
+\end{equation}
+Thus the bars on the MSLCV variables used in the NMRK analysis below are
+literal complex conjugation; algebraic independence is only a device for
+complexification and analytic continuation.  Equations
+\eqref{eq:nmrk-plus-definitions}--\eqref{eq:nmrk-transverse-definitions} are
+a parametrization of generic kinematics; no Regge or collinear limit has yet
+been taken.
+
+The same coordinates can be reconstructed from invariants.  In the present
+ordering,
+\begin{equation}
+ X_{34}=\frac{s_{13}}{s_{14}},\qquad
+ X_{45}=\frac{s_{14}}{s_{15}},\qquad
+ X_{56}=\frac{s_{15}}{s_{16}},\qquad
+ Q=-\frac{s_{23}X_{34}X_{45}X_{56}}
+ {1+X_{56}+X_{45}X_{56}+X_{34}X_{45}X_{56}}.
+ \label{eq:mslcv-invariant-inversion}
+\end{equation}
+For completeness, put
+\(u=z_M-1\), \(\bar u=\bar z_M-1\),
+\(v=w_M-1\), and \(\bar v=\bar w_M-1\).  The transverse coordinates are
+fixed, up to exchanging the two roots, by
+\begin{align}
+u\bar u&=\frac{s_{23}X_{34}}{s_{24}},&
+u+\bar u&=\frac{X_{34}^2+u\bar u-s_{34}X_{34}u\bar u/Q}{X_{34}},
+\nonumber\\
+w_M\bar w_M&=\frac{X_{45}(1+u+\bar u+u\bar u)s_{24}}{s_{25}},&
+v\bar v&=\frac{s_{26}}{X_{56}s_{25}},\qquad
+v+\bar v=w_M\bar w_M-1-v\bar v.
+\label{eq:mslcv-transverse-inversion}
+\end{align}
+Equations \eqref{eq:mslcv-invariant-inversion} and
+\eqref{eq:mslcv-transverse-inversion} will provide the exact bridge from the
+twistor parametrization below; they are valid before either limit is taken.
+
+\subsection{Central NMRK and the additional \texorpdfstring{\(w_M=z_M\)}{wM=zM} surface}
+
+Central NMRK is the scaling
+\begin{equation}
+ X_{34}=\frac{\hX_{34}}{\eta},\qquad
+ X_{56}=\frac{\hX_{56}}{\eta},\qquad
+ X_{45},Q,z_M,\bar z_M,w_M,\bar w_M=O(1),\qquad \eta\to0.
+ \label{eq:nmrk-scaling}
+\end{equation}
+The positive HRF chart used below is
+\begin{equation}
+ Q,\hX_{34},X_{45},\hX_{56},K_z>0,\qquad
+ K_z=(1-z_M)(1-\bar z_M)>0.
+ \label{eq:nmrk-domain}
+\end{equation}
+The condition \(w_M=z_M\), \(\bar w_M=\bar z_M\), is a further restriction,
+not part of the definition of NMRK.  For the planar ordering relevant to the
+central-emission variables,
+\begin{equation}
+ 1-u_A=\frac{X_{45}(w_M-z_M)(\bar w_M-\bar z_M)}
+ {(1+X_{45})(w_M\bar w_M+X_{45}z_M\bar z_M)}.
+ \label{eq:uA}
+\end{equation}
+Thus the extra surface is the distinguished cross-ratio boundary \(u_A=1\).
+
+\subsection{DSC momentum twistors, labels and physical sheet}
+
+We now define the variables actually used by the DSC runner.  Hats denote
+the native cyclic labels of Ref.~\cite{Duhr:2025lyg}.  A convenient
+projective gauge for the four undeformed twistors is
+\begin{equation}
+ Z_1=(1,0,0,0),\quad Z_4=(0,1,0,0),\quad
+ Z_5=(1,1,1,0),\quad Z_6=(1,a,0,1),
+ \label{eq:dsc-seed-twistors}
+\end{equation}
+where \(a\) is the remaining hard seed modulus.  With
+\(\varepsilon_D\to0\), the double-collinear deformation is
+\begin{align}
+Z_2={}&Z_1+\varepsilon_D Z_4
+-\varepsilon_D\tau_1\frac{\langle14\rangle}{\langle61\rangle}Z_6
+-\varepsilon_D^2(1-z_D)\tau_2
+ \frac{\langle14\rangle}{\langle45\rangle}Z_5,
+\nonumber\\
+Z_3={}&Z_4+\varepsilon_D Z_1
+-\varepsilon_D\tau_2\frac{\langle14\rangle}{\langle45\rangle}Z_5
++\varepsilon_D^2\frac{(1-\bar z_D)\tau_1}{\bar z_D}
+ \frac{\langle14\rangle}{\langle61\rangle}Z_6.
+\label{eq:dsc-twistor-deformation}
+\end{align}
+The paper's momentum fractions obey
+\(\tau_i=(1-\xi_i)/\xi_i\).  The variables \(z_D,\bar z_D\) in
+Eq.~\eqref{eq:dsc-twistor-deformation} are not the MSLCV variables
+\(z_M,\bar z_M\), despite the deliberately similar notation.
+
+It is important to state the reality condition before continuing to the
+DSC sheet.  In the standard real transverse-momentum realization of the
+six-point \(2\to4\) multi-Regge region, the variables denoted by \(z_D\) and
+\(\bar z_D\) form a complex-conjugate pair,
+\begin{equation}
+ \bar z_D=z_D^*.
+ \label{eq:dsc-conjugate-branch}
+\end{equation}
+This is the branch on which the familiar MRK formulae are written in terms
+of \(|z_D|\) and \(z_D/\bar z_D\).  Duhr--Venkata--Zhang reach the
+double-spacelike-collinear region by analytic continuation from the timelike
+Euclidean region into a specified Mandelstam region.  During this
+continuation \(z_D\) and \(\bar z_D\) must be regarded as the two algebraic
+roots, not as a conjugate pair at every intermediate point.
+
+The change of reality is transparent from their cross-ratio variables.  If
+\begin{equation}
+ r_1=\frac{u_1}{1-u_2},\qquad r_3=\frac{u_3}{1-u_2},
+\end{equation}
+then their defining relations imply
+\begin{equation}
+ z_D\bar z_D=\frac{r_1}{r_3},\qquad
+ z_D+\bar z_D=1+\frac{r_1-1}{r_3}.
+ \label{eq:dsc-root-sum-product}
+\end{equation}
+Thus \(z_D\) and \(\bar z_D\) are the roots of a quadratic with real
+coefficients whenever the continued ratios are real.  A negative quadratic
+discriminant gives Eq.~\eqref{eq:dsc-conjugate-branch}; after the
+discriminant changes sign the two roots are both real.  The latter is the
+branch used by the DSC HRF chart below.
+
+For clarity, the twistor-to-invariant operation used below is also fixed
+here.  Write \(Z_i=(\lambda_i,\mu_i)\), take all labels cyclically, and set
+\begin{equation}
+ \widetilde\lambda_i=
+ \frac{\langle i\,i{+}1\rangle\mu_{i-1}
+ +\langle i{+}1\,i{-}1\rangle\mu_i
+ +\langle i{-}1\,i\rangle\mu_{i+1}}
+ {\langle i{-}1\,i\rangle\langle i\,i{+}1\rangle},
+ \qquad
+ s_{ij}^{(T)}=\langle ij\rangle[ji].
+ \label{eq:twistor-to-invariants}
+\end{equation}
+Angle and square brackets are the two-by-two determinants of the
+corresponding spinors.  Equations
+\eqref{eq:dsc-seed-twistors}--\eqref{eq:twistor-to-invariants} therefore
+determine every pair invariant rationally at finite \(\varepsilon_D\).
+
+The native twistor labels are not the graph labels.  The order-aware map used
+in the runner is
+\begin{equation}
+ p_1=\hat p_1,\quad p_2=\hat p_3,\quad p_3=\hat p_4,\quad
+ p_4=\hat p_5,\quad p_5=\hat p_6,\quad p_6=\hat p_2.
+ \label{eq:dsc-label-map}
+\end{equation}
+It maps the two small twistor pairs to the desired graph invariants
+\(s_{23}\) and \(s_{16}\).  To keep the sign convention transparent, let
+\(s_{ij}^{(T)}=\langle ij\rangle[ji]\) denote the invariants reconstructed
+from the twistors in the seed convention above.  Their leading adjacent
+values are
+\begin{equation}
+\begin{aligned}
+s_{12}^{(T)}&=\frac{\tau_2}{a(1+\tau_1)(1+\tau_2)}+O(\varepsilon_D),&
+s_{23}^{(T)}&=-\frac{\varepsilon_D^2\tau_1}{a\bar z_D}+O(\varepsilon_D^3),\\
+s_{34}^{(T)}&=-\frac{1}{(a-1)(1+\tau_2)}+O(\varepsilon_D),&
+s_{45}^{(T)}&=\frac1a,\\
+s_{56}^{(T)}&=-\frac{\tau_1}{(a-1)(1+\tau_1)}+O(\varepsilon_D),&
+s_{16}^{(T)}&=-\frac{\varepsilon_D^2\tau_2z_D}{a}+O(\varepsilon_D^3).
+\end{aligned}
+\label{eq:dsc-runner-leading-adjacent}
+\end{equation}
+Our graph-polynomial convention is
+\begin{equation}
+ s_{ij}=-s_{ij}^{(T)}.
+ \label{eq:dsc-sign-convention}
+\end{equation}
+This is a single spinor-bracket/metric convention, not a separate sign choice
+for each invariant.
+
+A convenient \emph{real slice} of the physical \(2\to4\) sheet is
+\begin{equation}
+ a<0,\qquad -1<\tau_1<0,\qquad \tau_2<-1,\qquad
+ z_D<0,\qquad \bar z_D<0.
+ \label{eq:dsc-domain}
+\end{equation}
+On this slice \((s_{12}^{(T)},s_{23}^{(T)},s_{34}^{(T)},s_{45}^{(T)},
+s_{56}^{(T)},s_{16}^{(T)})\) has signs
+\((- ,+,-,-,-,+)\).  Equation \eqref{eq:dsc-sign-convention} therefore gives
+exactly Eq.~\eqref{eq:physical-signs}.  The bar on \(\bar z_D\) is inherited
+notation from the conjugate branch in Eq.~\eqref{eq:dsc-conjugate-branch}.
+On the continued branch \eqref{eq:dsc-domain}, however, \(z_D\) and
+\(\bar z_D\) are two real roots and need not be equal.  Requiring both roots
+to be negative selects the sign-definite component used by HRF; it does not
+reduce the kinematics to the diagonal \(z_D=\bar z_D\).  This is different
+from Eq.~\eqref{eq:mslcv-reality}: the MSLCV variables remain complex
+conjugates on the physical NMRK sheet considered in this note.
+
+\subsection{Exact coordinate map and comparison of the two limiting paths}
+
+There is no additional informal ``dictionary.''  At finite
+\(\varepsilon_D\), reconstruct the fifteen \(s_{ij}\) using
+Eqs.~\eqref{eq:dsc-seed-twistors}--\eqref{eq:dsc-sign-convention}, and insert
+them in the invariant relations \eqref{eq:mslcv-invariant-inversion} and
+\eqref{eq:mslcv-transverse-inversion}.  This is an exact, invariantly defined
+map from \((a,\tau_1,\tau_2,z_D,\bar z_D,\varepsilon_D)\) to the MSLCV.
+
+Expanding that exact map makes the limiting path explicit:
+\begin{align}
+X_{34}&=\frac{a-1}{1+\tau_2}+O(\varepsilon_D),&
+X_{45}&=-\frac1a+O(\varepsilon_D),\nonumber\\
+X_{56}&=\frac{a}{(a-1)(1+\tau_1)\tau_2z_D}\,
+ \varepsilon_D^{-2}+O(\varepsilon_D^{-1}),&
+Q&=\frac{\tau_1}{a\tau_2\bar z_D}\,
+ \varepsilon_D^2+O(\varepsilon_D^3).
+\label{eq:dsc-to-mslcv-longitudinal}
+\end{align}
+The approach of the transverse variables to the boundary is fixed by
+\begin{align}
+u\bar u&=\frac{(a-1)^2\tau_1}{a\tau_2\bar z_D}\,
+ \varepsilon_D^2+O(\varepsilon_D^3),&
+u+\bar u&=-\frac{(a-1)(\tau_1+a\tau_2\bar z_D)}
+ {a\tau_2\bar z_D}\,\varepsilon_D+O(\varepsilon_D^2),\nonumber\\
+v\bar v&=\frac{(a-1)^2\tau_1\tau_2z_D}{a}\,
+ \varepsilon_D^2+O(\varepsilon_D^3),&
+v+\bar v&=\frac{(a-1)(\tau_1+a\tau_2z_D)}{a}\,
+ \varepsilon_D+O(\varepsilon_D^2).
+\label{eq:dsc-to-mslcv-transverse}
+\end{align}
+Thus DSC has \(X_{34},X_{45}=O(1)\),
+\(X_{56}=O(\varepsilon_D^{-2})\), \(Q=O(\varepsilon_D^2)\), and
+\(z_M,\bar z_M,w_M,\bar w_M\to1\).  Central NMRK instead has both
+\(X_{34}\) and \(X_{56}\) large while \(Q\) remains hard.  Generic DSC and
+central NMRK with \(w_M=z_M\) are therefore distinct paths in the same
+six-point kinematic space.  Their one-loop cancellation hypersurfaces are
+nevertheless related, as shown explicitly in Sec.~\ref{sec:one-loop-common}.
+
+\section{Common one-loop hexagon}
+\label{sec:one-loop-common}
+
+The graph and all label conventions are displayed in
+Fig.~\ref{fig:one-loop-hexagon}.  The loop edges
+\begin{equation}
+ (5,6),(6,1),(1,2),(2,3),(3,4),(4,5)
+ \quad\longleftrightarrow\quad
+ x_0,x_1,x_2,x_3,x_4,x_5,
+ \label{eq:hexagon-edge-map}
+\end{equation}
+respectively.  The external attachments are
+\(p_1\to1\), \(p_2\to4\), \(p_3\to5\), \(p_4\to3\), \(p_5\to2\), and
+\(p_6\to6\).
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.15, every node/.style={font=\small}]
+  \foreach \n/\ang in {1/150,2/90,3/30,4/-30,5/-90,6/-150}
+    \coordinate (v\n) at (\ang:1.55);
+  \draw (v1)--node[above left]{$x_2$}(v2)
+        --node[above right]{$x_3$}(v3)
+        --node[right]{$x_4$}(v4)
+        --node[below right]{$x_5$}(v5)
+        --node[below left]{$x_0$}(v6)
+        --node[left]{$x_1$}(v1);
+  \foreach \n in {1,...,6} \fill (v\n) circle (1.5pt);
+  \node[above left=1pt of v1] {$1$};
+  \node[above=2pt of v2] {$2$};
+  \node[above right=1pt of v3] {$3$};
+  \node[below right=1pt of v4] {$4$};
+  \node[below=2pt of v5] {$5$};
+  \node[below left=1pt of v6] {$6$};
+  \draw (v1)--++(150:0.75) node[above left]{$p_1$};
+  \draw (v2)--++(90:0.75) node[above]{$p_5$};
+  \draw (v3)--++(30:0.75) node[above right]{$p_4$};
+  \draw (v4)--++(-30:0.75) node[below right]{$p_2$};
+  \draw (v5)--++(-90:0.75) node[below]{$p_3$};
+  \draw (v6)--++(-150:0.75) node[below left]{$p_6$};
+\end{tikzpicture}
+\caption{The one-loop hexagon, with the graph vertices, external momenta and
+Schwinger parameters used by HRF.}
+\label{fig:one-loop-hexagon}
+\end{figure}
+
+Before either kinematic expansion, the Symanzik polynomials are
+\begin{equation}
+ \U=x_0+x_1+x_2+x_3+x_4+x_5.
+\end{equation}
+and
+\begin{align}
+\F={}&s_{16}x_0x_2
++(-s_{14}+s_{23}-s_{45}-s_{46})x_0x_3+s_{23}x_0x_4
+\nonumber\\
+&+(-s_{14}-s_{16}+s_{23}-s_{45}-s_{46}-s_{56})x_1x_3
+\nonumber\\
+&+(-s_{16}+s_{23}-s_{46}-s_{56})x_1x_4
+\nonumber\\
+&+(s_{12}-s_{34}-s_{35}-s_{45}-s_{46}-s_{56})x_1x_5
+\nonumber\\
+&+s_{45}x_2x_4+(s_{16}-s_{23}-s_{34}-s_{35})x_2x_5
+\nonumber\\
+&+(-s_{14}-s_{34}-s_{45}-s_{46})x_3x_5.
+\label{eq:hexagon-F}
+\end{align}
+The same \(\U\), \(\F\), graph labels and HRF implementation are used for
+both expansions.  Only the substitution for the invariants \(s_{ij}\)
+changes.
+
+\subsection{Certification rule after asymptotic-order alignment}
+
+This subsection fixes the notation used in the two examples.  Write the full
+kinematically expanded polynomial as
+\begin{equation}
+ \F(\eta,\mathbf x)=\sum_m \eta^{a_m}c_m\mathbf x^{\mathbf r_m}.
+ \label{eq:full-laurent-F}
+\end{equation}
+The algorithm has three logically separate stages.
+
+\paragraph{1. Asymptotic-order alignment (face discovery).}
+A trial face vector \(f\) assigns the total weight
+\(a_m+\mathbf r_m\mathbin{\cdot}f\) to each monomial.  The monomials of
+minimum weight define an order-aligned face \(\F^{(f)}\).  This operation
+exposes monomials that occur at different fixed-\(\mathbf x\) orders in
+\(\eta\), but acquire a common effective order after the parameter scaling
+\(x_e\mapsto\eta^{f_e}x_e\), so that they can participate in the same
+cancellation sector.  Because \(\F\) is
+homogeneous in the Schwinger parameters, replacing
+\(f\to f+c(1,\ldots,1)\) does not change which monomials lie on the face.
+Thus \(f\) is only a discovery-stage representative, not yet a physical
+region vector.
+
+\paragraph{2. Ordinary HRF on the selected face.}
+Once \(\F^{(f)}\) has been selected, the usual HRF analysis is performed just
+as it would be without asymptotic-order alignment.  HRF finds non-monomial cancellation
+factors \(L_i(\mathbf x)\), forms their ideal
+\(I=\langle L_1,\ldots,L_r\rangle\), and decomposes
+\begin{equation}
+ \F^{(f)}=\F_{\SL}+\F_{\rm obs},\qquad \F_{\SL}\in I.
+ \label{eq:hrf-decomposition}
+\end{equation}
+It then finds a cancellation scaling \(h\) for which all monomials of
+\(\F_{\SL}\) have the common weight \(W_{\SL}\), while the first surviving
+terms of \(\U+\F_{\rm obs}\) have weight \(W_{\HR}>W_{\SL}\).  We call \(h\)
+the \emph{HRF face scaling}.  The displayed sum \(f+h\) is useful during
+discovery, but it inherits the uniform ambiguity of \(f\) and is not
+automatically the final vector.
+
+\paragraph{3. Certification in the original coordinates.}
+The algorithm returns to the full \(\Pcal(\eta,\mathbf x)=\U+\F\) and retains
+every occupied weight layer.  Each \(\F\)-layer is resolved in the filtration
+\(I^q/I^{q+1}\).  A layer in \(I^q\) cancels to order \(q\) at the common
+pinch; an absent power of \(\eta\) is not counted as a cancellation layer.
+The first resolved nonvanishing layer fixes \(W_{\HR}\).  The simultaneous
+balance with \(\U\) fixes the previously ambiguous uniform component and,
+with the convention in Eq.~\eqref{eq:vector-convention}, produces the final
+original-coordinate vector \(v\).
+
+If the resolved \(W_{\HR}\) monomials already define a unique lower facet of
+the full Lee--Pomeransky polynomial, this gives a direct certificate.  If the
+ideal-layer system is nonlinear, singular or non-unique, a local dissection
+provides the necessary and sufficient facet test and its pullback fixes
+\(v\).  No space-time dimensional information enters any of these decisions.
+
+\subsection{NMRK with \texorpdfstring{\(w_M=z_M\)}{wM=zM}}
+
+The cancellation surface factorizes as
+\begin{align}
+ L_1^{\rm NMRK}&=(1+X_{45})x_4-\hX_{34}X_{45}x_5,\nonumber\\
+ L_2^{\rm NMRK}&=(1+X_{45})x_2-K_zX_{45}\hX_{56}x_1.
+ \label{eq:nmrk-factors}
+\end{align}
+Up to a nonzero kinematic factor,
+\begin{equation}
+ \F_{\SL}^{\rm NMRK}=Q\hX_{34}\hX_{56}
+ L_1^{\rm NMRK}L_2^{\rm NMRK}.
+ \label{eq:nmrk-fsl}
+\end{equation}
+For generic NMRK the corresponding bilinear coefficient determinant is
+proportional to
+\((w_M-z_M)(\bar w_M-\bar z_M)\); it is a near miss.  The surface
+\(w_M=z_M\) makes the
+factorization exact.
+
+For this case the discovery and certification data are
+\begin{align}
+ f&=(-1,-1,-2,-1,-2,-1),\nonumber\\
+ h&=(-1,-1,-1,-1,-1,-1),\nonumber\\
+ v_{\rm NMRK}&=f+h=(-2,-2,-3,-2,-3,-2),
+ \qquad (v_{\rm NMRK};1),
+ \label{eq:nmrk-vector}
+\end{align}
+with
+\begin{equation}
+ W_{\SL}=-4,\qquad W_{\HR}=-3,\qquad
+ W_{\HR}-W_{\SL}=1.
+ \label{eq:nmrk-gap}
+\end{equation}
+Here the direct composition is already the unique lower-facet normal.  At
+\(W_{\HR}\), the active \(\U\) contribution is \(x_2+x_4\), and the active
+\(\F\) contribution is
+\begin{equation}
+ -Q\hX_{34}X_{45}\hX_{56}
+ (K_zx_0x_2+K_zx_0x_4+\hX_{34}x_3x_5
+ +K_z\hX_{56}x_1x_3).
+ \label{eq:nmrk-whr}
+\end{equation}
+These monomials, together with the resolved promoted face, certify a scaleful
+region.
+
+\subsection{Generic DSC}
+
+The DSC cancellation factors are
+\begin{equation}
+ L_1^{\rm DSC}=(1+\tau_2)x_4+x_5,\qquad
+ L_2^{\rm DSC}=\tau_1x_1+(1+\tau_1)x_2,
+ \label{eq:dsc-factors}
+\end{equation}
+and
+\begin{equation}
+ \F_{\SL}^{\rm DSC}=
+ -(a-1)a^2\bar z_D^{,2}L_1^{\rm DSC}L_2^{\rm DSC}.
+ \label{eq:dsc-fsl}
+\end{equation}
+These factors make the contrast with the crossed double-timelike-collinear
+(DTC) domain immediate.  In the DSC domain
+\(-1<\tau_1<0\) and \(\tau_2<-1\), each factor has terms of opposite sign
+and admits a zero with positive Feynman parameters:
+\begin{equation}
+ L_1^{\rm DSC}=0:\quad
+ x_5=-(1+\tau_2)x_4>0,
+ \qquad
+ L_2^{\rm DSC}=0:\quad
+ x_2=-\frac{\tau_1}{1+\tau_1}x_1>0.
+ \label{eq:dsc-positive-pinch}
+\end{equation}
+The two equations can therefore hold simultaneously in the interior of the
+integration domain.  For two final-state timelike splittings, by contrast,
+the momentum fractions satisfy \(0<\xi_i<1\), and hence
+\begin{equation}
+ \tau_i=\frac{1-\xi_i}{\xi_i}>0.
+ \label{eq:dtc-tau-domain}
+\end{equation}
+It follows that both \(L_1^{\rm DSC}\) and \(L_2^{\rm DSC}\) are strictly
+positive for positive \(x_i\).  Crossing thus preserves the algebraic form
+of this candidate generator but removes its common positive Landau pinch.
+This excludes the timelike continuation of the DSC hidden region; by itself
+it does not exclude a different cancellation generator in the DTC limit.
+
+The discovery-stage vectors are
+\begin{align}
+ f&=(-2,-2,-2,-1,-2,-2),\nonumber\\
+ h&=(-1,-1,-1,-1,-1,-1),\nonumber\\
+ f+h&=(-3,-3,-3,-2,-3,-3).
+ \label{eq:dsc-naive}
+\end{align}
+The last line is not the final region vector.  The full nonzero coefficient
+layers satisfy
+\begin{equation}
+ \operatorname{ord}_I\F_{-4}=2,\qquad
+ \operatorname{ord}_I\F_{-3}=1,\qquad
+ \operatorname{ord}_I\F_{-2}=0,\qquad
+ I=\langle L_1^{\rm DSC},L_2^{\rm DSC}\rangle.
+\label{eq:dsc-ideal-orders}
+\end{equation}
+Here \(\F_k\) is the sum of monomials of total weight \(k\), and
+\(\operatorname{ord}_I\F_k=q\) means
+\(\F_k\in I^q\) but \(\F_k\notin I^{q+1}\).
+Thus the \(-3\) layer is present but cancels to first order on the common
+pinch.  Solving the ideal-jet balance gives transverse weights
+\(q_1=q_2=1\), and \(\U\) fixes the uniform component.  The certified answer is
+\begin{equation}
+ v_{\rm DSC}=(-2,-2,-2,0,-2,-2),\qquad (v_{\rm DSC};1),
+ \label{eq:dsc-vector}
+\end{equation}
+with
+\begin{equation}
+ W_{\SL}=-4,\qquad W_{\HR}=-2,\qquad
+ W_{\HR}-W_{\SL}=2.
+ \label{eq:dsc-gap}
+\end{equation}
+This is an original-coordinate ideal-jet certificate.  Dissection pulls back
+to the same vector and explains the previously observed factor of two.
+
+\subsection{What is common and what is different}
+
+After the separate kinematic rescalings have been made, the coefficients in
+the two factorized \(\F_{\SL}\) polynomials are identified by
+\begin{equation}
+ \frac{K_zX_{45}\hX_{56}}{1+X_{45}}=-\frac{\tau_1}{1+\tau_1},
+ \qquad
+ \frac{\hX_{34}X_{45}}{1+X_{45}}=-\frac{1}{1+\tau_2}.
+ \label{eq:factor-map}
+\end{equation}
+This is a map of the cancellation factors on the two selected faces, not a
+claim that the full kinematic limits coincide.  Consequently the factorized
+\(W_{\SL}\) support is the same.  The expansions are nevertheless distinct because the
+next occupied layers differ.  NMRK with \(w_M=z_M\) has a depth-one hierarchy;
+generic DSC has an additional first-order cancellation layer and hence a
+depth-two hierarchy.  This is why the two final vectors are related but not
+equal.
+
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Expansion & certified \(v\) & \((W_{\SL},W_{\HR})\) & gap\\
+\midrule
+NMRK with \(w_M=z_M\) & \((-2,-2,-3,-2,-3,-2)\) & \((-4,-3)\) & 1\\
+generic DSC & \((-2,-2,-2,0,-2,-2)\) & \((-4,-2)\) & 2\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Results within each limit}
+
+\subsection{NMRK results}
+
+The one-loop result above and all three two-loop controls have now been
+passed through the current final audit.  ``Full'' means that no Feynman
+parameter is fixed to zero; ``boundary'' denotes a certified scaling vector
+on a one-edge boundary stratum.  At two loops, a certified vector is not yet
+identified with a distinct physical hidden region: vectors must also be
+compared at the level of their polynomial generator and local facet.
+Every vector in the tables below has last component \(1\).  When a vector is
+called ``relative,'' its uniform representative is chosen so that
+\(\max_i v_i=0\); this does not suppress or alter the final component.
+
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Graph & generic NMRK & certified vectors at \(w_M=z_M\) & support split\\
+\midrule
+one-loop hexagon & no HR & 1 certified & 1 full\\
+planar hexbox & no staged candidate & 11 certified & 7 full + 4 boundary\\
+non-planar hexbox & no staged candidate & 3 certified & 1 full + 2 boundary\\
+hexagon-pentagon & no staged candidate & no staged candidate & --\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection*{Planar-hexbox generator multiplicity}
+
+A cancellation hypersurface is defined by non-monomial polynomial factors.
+No individual Feynman parameter \(x_i\) is a cancellation hypersurface, and
+no monomial factor is counted as an HR generator.  For the seven
+full-support planar-hexbox vectors, introduce the non-monomial linear
+polynomials
+\begin{align}
+A&=(1+X_{45})x_3-K_zX_{45}\hX_{56}x_1,&
+B&=(1+X_{45})x_3-K_zX_{45}\hX_{56}x_2,\nonumber\\
+C&=(1+X_{45})x_3-K_zX_{45}\hX_{56}(x_1+x_2),&
+D&=(1+X_{45})x_5-\hX_{34}X_{45}x_6,\nonumber\\
+E&=(1+X_{45})x_5-\hX_{34}X_{45}x_7,&
+F&=(1+X_{45})x_5-\hX_{34}X_{45}(x_6+x_7).
+\label{eq:planar-generator-factors}
+\end{align}
+Every factor in Eq.~\eqref{eq:planar-generator-factors} contains at least two
+Schwinger monomials.  Up to factor ordering and overall signs, the seven
+vectors form five generator classes,
+\begin{equation}
+G_1=AD,\qquad G_2=CD,\qquad G_3=AF,\qquad
+G_4=AE,\qquad G_5=BD.
+\label{eq:planar-generator-classes}
+\end{equation}
+The detailed assignment is
+\begin{center}
+\small
+\begin{tabular}{@{}ccl@{}}
+\toprule
+row & generator & relative certified vector\\
+\midrule
+1 & \(G_1\) & \((-2,-1,-1,-2,-1,-2,-1,0,-1)\)\\
+2 & \(G_2\) & \((-1,-1,-1,-2,-1,-2,-1,0,-2)\)\\
+3 & \(G_3\) & \((-1,-1,0,-2,-1,-2,-1,-1,-2)\)\\
+4 & \(G_1\) & \((-1,-1,0,-2,-1,-2,-1,0,-2)\)\\
+5 & \(G_1\) & \((-1,-1,0,-2,-1,-2,-1,0,-1)\)\\
+6 & \(G_4\) & \((-1,-1,0,-2,-1,-2,0,-1,-2)\)\\
+7 & \(G_5\) & \((-1,0,-1,-2,-1,-2,-1,0,-2)\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+Rows 1, 4 and 5 therefore have exactly the same polynomial generator
+\(G_1=AD\), but different certified vectors.  The present lower-facet audit
+proves that each vector is scaleful; it does not prove that these three
+vectors define three physically distinct hidden regions.  That distinction
+requires a common local-coordinate analysis around \(A=D=0\), followed by a
+single dissection/facet enumeration and a comparison of the active monomial
+sets and normal cones.  The count ``seven'' must consequently be read as
+seven certified full-support vectors, not seven established physical HRs.
+
+\subsection{DSC results}
+
+The saved DSC scans have all been passed through the current structural
+audit.  ``Staged'' counts face presentations before the final
+scalefulness/layer test; ``certified'' counts accepted structural vectors.
+
+\begin{center}
+\begin{tabular}{@{}lrrl@{}}
+\toprule
+Graph & staged presentations & certified & certified vector(s)\\
+\midrule
+one-loop hexagon & 1 structural class & 1 & \((-2,-2,-2,0,-2,-2)\)\\
+planar hexbox & 156 & 1 & \((0,-2,0,-2,0,-2,-2,0,0)\)\\
+non-planar hexbox & 61 & 0 & --\\
+hexagon-pentagon & 0 & 0 & --\\
+\bottomrule
+\end{tabular}
+\end{center}
+For the planar hexbox, 27 structural representatives were audited: 26 fail
+the resolved \(W_{\HR}\)-facet test and one has an accepted layered common
+pinch facet.  The non-planar hexbox has six structural representatives, all
+rejected by the resolved facet test.
+
+\section{Graph-by-graph comparison}
+
+The one-loop hexagon shows the closest relationship.  Both limits reach the
+same factorized singular hypersurface, but DSC contains one extra occupied
+cancellation layer.  This changes the hierarchy gap from 1 to 2 and changes
+the final original-coordinate vector.
+
+For the planar hexbox, NMRK with \(w_M=z_M\) has seven full-support certified
+vectors and four certified vectors on one-edge boundary strata.  All have
+hierarchy gap 1 and direct resolved-facet certificates.  The seven interior
+vectors represent only five polynomial-generator classes, and three of them
+share \(G_1=AD\), as detailed above.  Generic DSC instead has one
+full-support certified vector,
+\begin{equation}
+v_{\rm DSC}^{\rm P}=(0,-2,0,-2,0,-2,-2,0,0),\qquad
+(W_{\SL},W_{\HR})=(-4,-2),
+\end{equation}
+with gap 2 and a layered common-pinch dissection certificate.  None of the
+seven full-support NMRK relative vectors equals this DSC vector.  This proves
+that the displayed scaling vectors differ, but it does not by itself count
+distinct physical regions.  A generator-level translation and common local
+dissection are required before deciding how many planar-hexbox HRs the two
+limits share.
+
+For the non-planar hexbox, NMRK with \(w_M=z_M\) has one full-support certified
+vector and two certified vectors on one-edge boundary strata, again with gap
+1.  The full-support relative vector is
+\begin{equation}
+(-1,-1,-2,-1,-2,-1,-1,0,-2),
+\end{equation}
+whereas generic DSC has no certified region.  The hexagon-pentagon is a
+common negative control: neither expansion has even a staged candidate.
+
+\section{Reproducibility}
+
+The calculations are separated by expansion:
+\begin{itemize}
+ \item \path{06_NMRK_wz_AsymptoticOrderAlignment_Checks.nb} contains only NMRK inputs and
+ certificates;
+ \item \path{07_DSC_AsymptoticOrderAlignment_Checks.nb} contains only DSC inputs and
+ certificates;
+ \item \path{HRF_RunNMRKMultiGraphAsymptoticOrderAlignment.wl} reruns the NMRK two-loop
+ graphs with the current final audit;
+ \item \path{HRF_RunGenericDSCAsymptoticOrderAlignment.wl} reruns the DSC graphs.
+\end{itemize}
+This document is the only layer that translates and compares the two
+expansions.
+
+\begingroup
+\small
+\begin{thebibliography}{9}
+\bibitem{Byrne:2022wdr}
+E.~P.~Byrne, V.~Del Duca, L.~J.~Dixon, E.~Gardi and J.~M.~Smillie,
+``One-loop central-emission vertex for two gluons in
+\(\mathcal N=4\) super Yang--Mills theory,'' JHEP \textbf{08} (2022) 271,
+\href{https://arxiv.org/abs/2204.12459}{arXiv:2204.12459}.
+
+\bibitem{Byrne:2025phh}
+E.~P.~Byrne, V.~Del Duca, E.~Gardi, Y.~Mo and J.~M.~Smillie,
+``Regge factorization of tree-level QCD amplitudes using a minimal set of
+lightcone variables,'' JHEP \textbf{03} (2026) 170,
+\href{https://arxiv.org/abs/2506.10644}{arXiv:2506.10644}.
+
+\bibitem{Gardi:2024axt}
+E.~Gardi, F.~Herzog, S.~Jones and Y.~Ma,
+``Dissecting polytopes: Landau singularities and asymptotic expansions in
+\(2\to2\) scattering,'' JHEP \textbf{08} (2024) 127,
+\href{https://arxiv.org/abs/2407.13738}{arXiv:2407.13738}.
+
+\bibitem{Duhr:2025lyg}
+C.~Duhr, A.~Venkata and C.~Zhang,
+``Double Spacelike Collinear Limits from Multi-Regge Kinematics,''
+Phys. Rev. Lett. \textbf{135} (2025) 241601,
+\href{https://arxiv.org/abs/2507.05355}{arXiv:2507.05355}.
+\end{thebibliography}
+\endgroup
+
+\end{document}

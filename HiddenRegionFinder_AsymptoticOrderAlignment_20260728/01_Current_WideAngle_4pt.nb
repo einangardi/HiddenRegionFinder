@@ -1,0 +1,718 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     33224,        709]
+NotebookOptionsPosition[     26886,        628]
+NotebookOutlinePosition[     27338,        647]
+CellTagsIndexPosition[     27295,        644]
+WindowTitle->01_Current_WideAngle_4pt
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Current wide-angle 4-point examples", "Title",ExpressionUUID->"89e3745d-0db3-4702-8ed9-a3586b2e7eba"],
+
+Cell["\<\
+Current wide-angle path only: polynomial factors, generator physics filter, \
+and exact coverage scaling.\
+\>", "Text",ExpressionUUID->"d14d4aa0-7f75-4a50-b0d4-588d34cd7ba9"],
+
+Cell["Setup", "Section",ExpressionUUID->"75c68fbd-1f74-46f9-9141-a4cd3fd0bda2"],
+
+Cell["\<\
+This notebook uses the current polynomial-factor path and exact coverage \
+scaling. No comparison route is run on load.\
+\>", "Text",ExpressionUUID->"1deda363-488f-47d4-b38b-8a9cc0ab827e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$HRFQuietReports", "=", "True"}], ";", 
+  RowBox[{"$HRFExample01Report", "=", "False"}], ";", 
+  RowBox[{"$HRFExample04Report", "=", "True"}], ";", 
+  RowBox[{"$HRFScalingReport", "=", "False"}], ";", 
+  RowBox[{"$HRFRunCrownInteriorScanOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunSuperCrownInteriorScan", "=", "False"}], ";", 
+  RowBox[{"$HRFRunSuperCrownBoundaryScanOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunHyperCrownInteriorScan", "=", "False"}], ";", 
+  RowBox[{"$HRFRunHyperCrownBoundaryScansOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDivingBeetleDiagnosticsOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDivingBeetleInteriorScanOnLoad", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDBFullBoundaryScan", "=", "False"}], ";", 
+  RowBox[{"$HRFRunDeepBoundaryScan", "=", "False"}], ";", 
+  RowBox[{"$HRFEx04CompareBinomialQ", "=", "False"}], ";", 
+  RowBox[{"$HRFEx04TrimScanStorageQ", "=", "True"}], ";", 
+  RowBox[{"$HRFEx04RunObstructionSearchQ", "=", "True"}], ";", 
+  RowBox[{"$HRFFindObstructionsStopOnFirstAdmissibleQ", "=", "False"}], ";", 
+  RowBox[{"HRFNotebookDefaultSearchProfile", "=", 
+   RowBox[{"Association", "[", 
+    RowBox[{
+     RowBox[{"\"\<CandidateGeneratorSetLimit\>\"", "\[Rule]", "64"}], ",", 
+     RowBox[{"\"\<MaxTwoGeneratorUnionTrials\>\"", "\[Rule]", "48"}], ",", 
+     RowBox[{"\"\<PolynomialMaxMonomials\>\"", "\[Rule]", "Automatic"}], ",", 
+     
+     RowBox[{"\"\<LegacySignedMonomialPairsQ\>\"", "\[Rule]", "False"}], ",", 
+     
+     RowBox[{"\"\<KinDomainFindInstanceTimeLimit\>\"", "\[Rule]", "5"}], ",", 
+     
+     RowBox[{"\"\<ObstructionFindInstanceTimeLimit\>\"", "\[Rule]", "20"}]}], 
+    "]"}]}], ";", 
+  RowBox[{"$HRFCandidateGeneratorSetLimit", "=", 
+   RowBox[{
+   "HRFNotebookDefaultSearchProfile", 
+    "[", "\"\<CandidateGeneratorSetLimit\>\"", "]"}]}], ";", 
+  RowBox[{"$HRFMaxTwoGeneratorUnionTrials", "=", 
+   RowBox[{
+   "HRFNotebookDefaultSearchProfile", 
+    "[", "\"\<MaxTwoGeneratorUnionTrials\>\"", "]"}]}], ";", 
+  RowBox[{"$HRFPolynomialMaxMonomials", "=", 
+   RowBox[{
+   "HRFNotebookDefaultSearchProfile", "[", "\"\<PolynomialMaxMonomials\>\"", 
+    "]"}]}], ";", 
+  RowBox[{"$HRFPolynomialEnableSignedMonomialPairs", "=", 
+   RowBox[{
+   "HRFNotebookDefaultSearchProfile", 
+    "[", "\"\<LegacySignedMonomialPairsQ\>\"", "]"}]}], ";", 
+  RowBox[{"$HRFKinDomainFindInstanceTimeLimit", "=", 
+   RowBox[{
+   "HRFNotebookDefaultSearchProfile", 
+    "[", "\"\<KinDomainFindInstanceTimeLimit\>\"", "]"}]}], ";", 
+  RowBox[{"$HRFObstructionFindInstanceTimeLimit", "=", 
+   RowBox[{
+   "HRFNotebookDefaultSearchProfile", 
+    "[", "\"\<ObstructionFindInstanceTimeLimit\>\"", "]"}]}], ";", 
+  RowBox[{"$HRFPolynomialRequireKinematicDomainQ", "=", "False"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], 
+      ",", "\"\<HiddenRegionFinder.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], 
+      ",", "\"\<01_WideAngle_2to2_OffShell.wl\>\""}], "}"}], "]"}], "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], 
+      ",", "\"\<HRF_PolynomialCancellationFactors.wl\>\""}], "}"}], "]"}], 
+   "]"}], ";", 
+  RowBox[{"hrfInstallPolynomialCancellationPatch", "[", "]"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], 
+      ",", "\"\<04_PolynomialFactor_Regression.wl\>\""}], "}"}], "]"}], "]"}],
+   ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], 
+      ",", "\"\<HRF_WideAngleMomentumReconstruction.wl\>\""}], "}"}], "]"}], 
+   "]"}], ";"}]], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"c141eb17-a083-40cc-845a-7b225c0569d8"],
+
+Cell["Graphs", "Section",ExpressionUUID->"1db11a27-1df1-49fa-a775-251ec2758565"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"CrownInternalEdges", ",", "CrownExternalEdges"}], "]"}]], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"c2dbc902-43a5-446d-ad2f-af69b5cfd122"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"SuperCrownInternalEdges", ",", "SuperCrownExternalEdges"}], 
+  "]"}]], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"0c65a12e-4041-44b4-925e-be189ba6c0a7"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"HyperCrownInternalEdges", ",", "HyperCrownExternalEdges"}], 
+  "]"}]], "Input",
+ CellLabel->"In[4]:=",ExpressionUUID->"f54a2f7f-7e59-43c5-b80f-d2740c3883f4"],
+
+Cell[BoxData[
+ RowBox[{"drawGraphFromPySecDecInput", "[", 
+  RowBox[{"DBInternalEdges", ",", "DBExternalEdges"}], "]"}]], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"786db6a9-fb8d-48e9-99c8-9c56e664fc72"],
+
+Cell["Crown interior", "Section",ExpressionUUID->"9dc9cfca-29d3-4f6c-ad2b-b53f747e8cd7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Ex04CrownRegression", "=", 
+   RowBox[{"hrfEx04CrownRegression", "[", "]"}]}], ";", 
+  RowBox[{"hrfCrownReport", "=", 
+   RowBox[{"hrfEx04CrownSanityDisplay", "[", "]"}]}], ";", 
+  "hrfCrownReport"}]], "Input",
+ CellLabel->"In[6]:=",ExpressionUUID->"2b7eee4d-88da-4497-b2d1-c99c36eddbbb"],
+
+Cell[BoxData[
+ RowBox[{"KeyTake", "[", 
+  RowBox[{
+   RowBox[{"hrfEx04CaseIngredients", "[", "Ex04CrownRegression", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\"\<Generators\>\"", ",", "\"\<ScalingVector\>\"", 
+     ",", "\"\<HiddenRegionQ\>\""}], "}"}]}], "]"}]], "Input",
+ CellLabel->"In[7]:=",ExpressionUUID->"edc44ed3-e2a9-4a76-83e4-18a15f2b12fc"],
+
+Cell["SuperCrown codimension-two boundary HR", "Section",ExpressionUUID->"92e5d3a4-90ca-4a1f-bf9e-ad4d23230a6a"],
+
+Cell["\<\
+This focused constructive check restores the SuperCrown example without \
+attempting a full boundary survey. On B={x8=0,x9=0}, the restricted \
+polynomial contains the Crown superleading polynomial multiplied by x10 x11. \
+The present polynomial-factor path finds the two Crown generators, zero \
+obstruction and one exact region vector. Boundary equations x_e=0 and scaling \
+components v_e are reported separately.\
+\>", "Text",ExpressionUUID->"2c76b981-1296-4464-8c01-9cb4ff1e4fc6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Ex04SuperCrownX89Target", "=", 
+   RowBox[{"hrfEx04SuperCrownX89Boundary", "[", "]"}]}], ";", 
+  RowBox[{"hrfSCIngredients", "=", 
+   RowBox[{"hrfEx04CaseIngredients", "[", "Ex04SuperCrownX89Target", "]"}]}], 
+  ";", 
+  RowBox[{"Association", "[", 
+   RowBox[{
+    RowBox[{"\"\<Boundary B\>\"", "\[Rule]", 
+     RowBox[{
+     "hrfSCIngredients", "[", "\"\<BoundaryZeroVariables\>\"", "]"}]}], ",", 
+    RowBox[{"\"\<Active edge order\>\"", "\[Rule]", 
+     RowBox[{"hrfSCIngredients", "[", "\"\<RegionVariables\>\"", "]"}]}], ",", 
+    RowBox[{"\"\<v_B=(v_e;1)\>\"", "\[Rule]", 
+     RowBox[{"Append", "[", 
+      RowBox[{
+       RowBox[{"hrfSCIngredients", "[", "\"\<ScalingVector\>\"", "]"}], ",", 
+       "1"}], "]"}]}], ",", 
+    RowBox[{"\"\<Named components\>\"", "\[Rule]", 
+     RowBox[{"Normal", "[", 
+      RowBox[{"hrfSCIngredients", "[", "\"\<VariableScaling\>\"", "]"}], 
+      "]"}]}], ",", 
+    RowBox[{"\"\<Hidden region\>\"", "\[Rule]", 
+     RowBox[{"hrfSCIngredients", "[", "\"\<HiddenRegionQ\>\"", "]"}]}]}], 
+   "]"}]}]], "Input",
+ CellLabel->"In[7a]:=",ExpressionUUID->"60386692-1652-4b8a-9439-d57d97b7e70d"],
+
+Cell[BoxData[
+ RowBox[{"KeyTake", "[", 
+  RowBox[{"hrfSCIngredients", ",", 
+   RowBox[{"{", 
+    RowBox[{"\"\<Generators\>\"", ",", "\"\<FSL\>\"", 
+     ",", "\"\<Obstruction\>\"", ",", "\"\<ScalingStatus\>\""}], "}"}]}], 
+  "]"}]], "Input",
+ CellLabel->"In[7b]:=",ExpressionUUID->"bca6ddc0-f92a-4870-8a19-32d1de00bb88"],
+
+Cell[BoxData[
+ RowBox[{"KeyTake", "[", 
+  RowBox[{
+   RowBox[{"Ex04SuperCrownX89Target", "[", "\"\<PolynomialScan\>\"", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\"\<EffectiveSearchConfiguration\>\"", 
+     ",", "\"\<SearchTruncatedQ\>\"", 
+     ",", "\"\<HiddenRegionSearchCompleteQ\>\"", 
+     ",", "\"\<HiddenRegionCount\>\""}], "}"}]}], "]"}]], "Input",
+ CellLabel->"In[7c]:=",ExpressionUUID->"a802ca5d-874a-424a-a6e6-79903f482997"],
+
+Cell["HyperCrown boundary x11 = 0", "Section",ExpressionUUID->"1e74c528-c580-45ff-91f4-b10e85b47fc2"],
+
+Cell["\<\
+This is the current positive HyperCrown boundary example. It uses the \
+WideAngle4ptBoundary preset and exact coverage scaling.\
+\>", "Text",ExpressionUUID->"7076460d-a739-4827-875d-e54c5ccb5fb4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hrfX11Report", "=", 
+   RowBox[{"hrfEx04HyperCrownX11Display", "[", "]"}]}], ";", 
+  RowBox[{"hrfX11Report", "[", "\"\<Summary\>\"", "]"}]}]], "Input",
+ CellLabel->"In[8]:=",ExpressionUUID->"60c0c758-cf33-4a44-bff5-9ee5da3ae182"],
+
+Cell[BoxData[
+ RowBox[{"KeyTake", "[", 
+  RowBox[{
+   RowBox[{"hrfX11Report", "[", "\"\<Ingredients\>\"", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\"\<Generators\>\"", ",", "\"\<ScalingVector\>\"", 
+     ",", "\"\<HiddenRegionQ\>\"", ",", "\"\<Obstruction\>\"", 
+     ",", "\"\<FSL\>\""}], "}"}]}], "]"}]], "Input",
+ CellLabel->"In[9]:=",ExpressionUUID->"470ab6ae-c569-43ee-8c10-b4f3a0510f49"],
+
+Cell[BoxData[
+ RowBox[{"hrfX11Report", "[", "\"\<AllValidTrialsScaling\>\"", "]"}]], "Input",\
+
+ CellLabel->"In[10]:=",ExpressionUUID->"40dd993a-aeaa-4c7f-ab8a-438846f46f67"],
+
+Cell["HyperCrown survey: interior and codimensions one and two", "Section",ExpressionUUID->"a5b4b282-1cef-4bfe-a60f-3cfe7045679a"],
+
+Cell["\<\
+This survey separates constructive existence witnesses from certified \
+exclusions. A direct positive witness establishes one representative; exact \
+graph permutations and crossings establish every member of its D4 orbit. A \
+negative statement is made only when the complete \
+derivative/channel-polynomial factor construction, obstruction trials and \
+exact scaling tests all finish without truncation.\
+\>", "Text",ExpressionUUID->"9530a01b-d223-4ae3-897e-d3bbe1bf8f9b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], 
+      ",", "\"\<HRF_HyperCrownCodimensionSurvey.wl\>\""}], "}"}], "]"}], 
+   "]"}], ";", 
+  RowBox[{"hrfHyperCrownCodimensionSurveyTable", "[", "]"}]}]], "Input",
+ CellLabel->
+  "In[10a]:=",ExpressionUUID->"1d66b9c6-0b9e-4075-a3c6-d822e2af12f3"],
+
+Cell["Exact graph symmetry and orbit completion", "Subsection",ExpressionUUID->"228ca0f6-181e-4b36-b6c7-9e4f8498bbfc"],
+
+Cell["\<\
+The HyperCrown graph has the D4 automorphism group of its four-edge square. \
+Some elements leave s12 and s23 fixed; others exchange them. In this topology \
+survey an external permutation, its induced edge permutation and the \
+corresponding relabelling of the two invariants are performed together. A \
+crossing-related image is therefore the same physical case with a different \
+choice of which symmetric external pair is called incoming. The positive \
+Schwinger orthant, cancellation locus and region vector are carried \
+bijectively to the image, so one HRF representative certifies its full D4 \
+orbit.\
+\>", "Text",ExpressionUUID->"c6ad60b3-b2f2-4a6c-ac05-9bbd578bac85"],
+
+Cell[BoxData[
+ RowBox[{"hrfHyperCrownSymmetryAudit", "[", "]"}]], "Input",
+ CellLabel->
+  "In[10b]:=",ExpressionUUID->"483922c6-3b14-45b1-9184-c0a2b7638e96"],
+
+Cell[BoxData[
+ RowBox[{"hrfHyperCrownSymmetryOrbitTable", "[", "]"}]], "Input",
+ CellLabel->
+  "In[10c]:=",ExpressionUUID->"60c8ab3d-1d32-4b87-b4ce-3b62a247c53f"],
+
+Cell["Enumeration and level of certainty", "Subsection",ExpressionUUID->"cc46a69e-ac7e-4e44-b0b3-83d2f0a1cecf"],
+
+Cell["\<\
+There are two inequivalent HyperCrown boundary-HR types through codimension \
+two. Type I has one square edge contracted and four labelled representatives. \
+Type II has two adjacent square edges contracted and four labelled \
+representatives. The opposite-edge orbit has no HR: on x8=x9=0 the complete \
+uncapped polynomial-factor construction produces only the s12-supported \
+Crown-like generator, while the s23 coefficient supplies no companion \
+generator; exact coverage proves that the remaining one-generator \
+presentation has no scaling vector. The x10=x11 result follows by D4 \
+symmetry. The interior remains a separate unresolved search.\
+\>", "Text",ExpressionUUID->"80ca4a5b-a86e-4a23-9efc-93d176f142d1"],
+
+Cell[BoxData[
+ RowBox[{"hrfHyperCrownEstablishedTypeTable", "[", "]"}]], "Input",
+ CellLabel->
+  "In[10d]:=",ExpressionUUID->"efbaca35-4c7b-4f15-8237-6913c8d6baef"],
+
+Cell["\<\
+Notation is kept separate: B denotes equations x_e=0, whereas v_e is a \
+component of the scaling vector defined by x_e~delta^(v_e). The master edge \
+order is X=(x0,x1,...,x11); delete the variables in B while retaining that \
+order. Every augmented normal is displayed horizontally as v_B=(v_e;1), \
+followed by named component rules {v_i->...}. The two accepted generator \
+presentations on each directly positive codimension-two stratum give the same \
+vector, so they constitute one region rather than two distinct HRs.\
+\>", "Text",ExpressionUUID->"b56f384f-0318-4aa1-92b3-0e75aa48388e"],
+
+Cell[BoxData[
+ RowBox[{"hrfHyperCrownPositiveRegionVectorTable", "[", "]"}]], "Input",
+ CellLabel->
+  "In[10e]:=",ExpressionUUID->"a38da29f-1d7f-45d8-a2c1-397e0bc37b52"],
+
+Cell["\<\
+Search budgets are explicit. The exploratory profile is useful for finding \
+positive witnesses; it cannot certify absence. The certified profile removes \
+the candidate, two-generator-union and polynomial-size caps. \
+FullHarvestQ->True means complete factorisation of the relevant derivatives \
+and primitive channel polynomials. The former signed-monomial-pair \
+enlargement is retained only as a legacy diagnostic because arbitrary \
+two-term sub-sums are not polynomial cancellation factors.\
+\>", "Text",ExpressionUUID->"4bea0c7b-b4f0-4249-8da7-6f05092cbcf2"],
+
+Cell[BoxData[
+ RowBox[{"Dataset", "[", 
+  RowBox[{"KeyValueMap", "[", 
+   RowBox[{
+    RowBox[{"Function", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"name", ",", "cfg"}], "}"}], ",", 
+      RowBox[{"Join", "[", 
+       RowBox[{
+        RowBox[{"Association", "[", 
+         RowBox[{"\"\<Profile\>\"", "\[Rule]", "name"}], "]"}], ",", "cfg"}], 
+       "]"}]}], "]"}], ",", "HRFSearchProfiles20260728"}], "]"}], 
+  "]"}]], "Input",
+ CellLabel->
+  "In[10f]:=",ExpressionUUID->"8b28e9f4-defd-48fc-aecc-5980174adcfb"],
+
+Cell["\<\
+The opposite-edge audit displays both channel coefficients. The s12 \
+coefficient factorises into the familiar Crown-like product. The complete \
+derivative/channel-polynomial factor construction finds no admissible \
+generator supported in s23; the long s23 coefficient is therefore an \
+obstruction, not a second cancellation generator.\
+\>", "Text",ExpressionUUID->"fe4542a7-7a1a-4278-96ce-aec6ac753755"],
+
+Cell[BoxData[
+ RowBox[{"hrfHyperCrownOppositePairChannelAudit", "[", "]"}]], "Input",
+ CellLabel->
+  "In[10g]:=",ExpressionUUID->"2697d74f-8650-4b49-82ea-2e2c4677ed75"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"hcCase", "=", 
+   RowBox[{"hrfHyperCrownRunCurrentStratum", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x8", ",", "x9"}], "}"}], ",", 
+     RowBox[{"\"\<FullHarvestQ\>\"", "\[Rule]", "True"}], ",", 
+     RowBox[{"\"\<CandidateGeneratorSetLimit\>\"", "\[Rule]", "\[Infinity]"}],
+      ",", 
+     RowBox[{"\"\<MaxTwoGeneratorUnionTrials\>\"", "\[Rule]", "\[Infinity]"}],
+      ",", 
+     RowBox[{"\"\<PolynomialMaxMonomials\>\"", "\[Rule]", "Automatic"}], ",", 
+     
+     RowBox[{"\"\<LegacySignedMonomialPairsQ\>\"", "\[Rule]", "False"}], ",", 
+     
+     RowBox[{"\"\<KinDomainFindInstanceTimeLimit\>\"", "\[Rule]", 
+      "\[Infinity]"}], ",", 
+     RowBox[{"\"\<ObstructionFindInstanceTimeLimit\>\"", "\[Rule]", 
+      "\[Infinity]"}], ",", 
+     RowBox[{"\"\<StopOnFirstAdmissible\>\"", "\[Rule]", "False"}]}], "]"}]}],
+   ";", 
+  RowBox[{"hrfHyperCrownStratumAudit", "[", "hcCase", "]"}]}]], "Input",
+ CellLabel->
+  "In[10f]:=",ExpressionUUID->"53999ed4-0bfb-4c3b-b41e-4d5621a076df"],
+
+Cell[BoxData["Null"], "Input",
+ CellLabel->
+  "In[10g]:=",ExpressionUUID->"17cc3913-d371-493e-907a-2b95277a5eaf"],
+
+Cell["Momentum-space reconstruction of the positive regions", "Section",ExpressionUUID->"d75612a9-82c4-478e-8d1c-ab53643b7241"],
+
+Cell["\<\
+These are constructive momentum-flow certificates for the Crown and for every \
+HyperCrown stratum in the two established symmetry orbits. The LP rule \
+x_e~delta^(v_e) implies q_e^2~delta^(-v_e). Component powers are displayed as \
+(q+,q-,qPerp), with p1 chosen as the large-minus direction and p2 as the \
+large-plus direction. A p3- or p4-collinear momentum has all three \
+fixed-frame components of order one; its virtuality is nevertheless O(delta) \
+because the leading longitudinal and transverse pieces obey the on-shell \
+relation. The Jet direction column records this coefficient-level \
+information, which cannot be inferred from component valuations alone.\
+\>", "Text",ExpressionUUID->"39634cf9-e4fd-43e5-b383-5e1b0deaa7d0"],
+
+Cell["Crown interior: Landshoff momentum flow", "Subsection",ExpressionUUID->"04af1ddf-ad60-4c4c-8ae9-fce17ed07889"],
+
+Cell["\<\
+All eight propagators have virtuality O(delta). The lines occur in four jet \
+pairs parallel to p1,p2,p3,p4 and join two disconnected hard vertices. Three \
+jet momenta may be chosen as loop variables; the fourth is fixed by \
+k1+k2=k3+k4. This is the wide-angle Landshoff region, not a Glauber region at \
+generic scattering angle.\
+\>", "Text",ExpressionUUID->"55c7238b-5e5c-4260-be32-74d386586a7b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CrownMomentumCertificate", "=", 
+   RowBox[{"hrfWideAngleCrownMomentumCertificate", "[", "]"}]}], ";", 
+  RowBox[{
+  "hrfWideAngleMomentumCertificateSummary", "[", "CrownMomentumCertificate", 
+   "]"}]}]], "Input",
+ CellLabel->"In[11]:=",ExpressionUUID->"98918f14-e4dd-4737-9b21-9a1f529d1b17"],
+
+Cell[BoxData[
+ RowBox[{"CrownMomentumCertificate", "[", "\"\<MomentumTable\>\"", 
+  "]"}]], "Input",
+ CellLabel->"In[12]:=",ExpressionUUID->"5a005790-d3a7-4b04-92f0-0aaa45f58023"],
+
+Cell[BoxData[
+ RowBox[{"Association", "[", 
+  RowBox[{
+   RowBox[{"\"\<MomentumRelations\>\"", "\[Rule]", 
+    RowBox[{
+    "CrownMomentumCertificate", "[", "\"\<MomentumRelations\>\"", "]"}]}], ",", 
+   RowBox[{"\"\<VertexConservationCompatibleQ\>\"", "\[Rule]", 
+    RowBox[{"CrownMomentumCertificate", "[", 
+     RowBox[{"\"\<VertexAudit\>\"", 
+      ",", "\"\<AllVertexComponentsCompatibleQ\>\""}], "]"}]}], ",", 
+   RowBox[{"\"\<IndependentLoopBasisValidQ\>\"", "\[Rule]", 
+    RowBox[{
+    "CrownMomentumCertificate", "[", "\"\<IndependentLoopBasisValidQ\>\"", 
+     "]"}]}]}], "]"}]], "Input",
+ CellLabel->"In[13]:=",ExpressionUUID->"dad64cea-b658-4520-994e-c71f6e678c97"],
+
+Cell["HyperCrown boundary x11=0: Landshoff plus a soft loop", "Subsection",ExpressionUUID->"073abfd4-12e8-4db0-8ba8-69aadc90f199"],
+
+Cell["\<\
+The parametric boundary x11=0 contracts the x11 edge and merges its endpoints \
+before momentum conservation is imposed. The ten jet propagators have \
+q_e^2~delta, whereas x10 has q10~(delta,delta,delta) and q10^2~delta^2. A \
+valid four-loop basis is {x0,x4,x6,x10}: three external-direction jet momenta \
+plus the soft exchange. Thus the boundary region is a Landshoff descendant \
+with an extra soft loop, not a new generic-angle Glauber mode.\
+\>", "Text",ExpressionUUID->"aa5677a7-94ca-483e-9d18-ce1a9a3d98c1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"HyperCrownX11MomentumCertificate", "=", 
+   RowBox[{"hrfWideAngleHyperCrownX11MomentumCertificate", "[", "]"}]}], ";", 
+  
+  RowBox[{
+  "hrfWideAngleMomentumCertificateSummary", "[", 
+   "HyperCrownX11MomentumCertificate", "]"}]}]], "Input",
+ CellLabel->"In[14]:=",ExpressionUUID->"15c09625-1f8b-48a0-99f0-e1cfdc5e50e6"],
+
+Cell[BoxData[
+ RowBox[{"HyperCrownX11MomentumCertificate", "[", "\"\<MomentumTable\>\"", 
+  "]"}]], "Input",
+ CellLabel->"In[15]:=",ExpressionUUID->"8afecd21-4f5f-4b3a-abbb-389e1e6ab010"],
+
+Cell[BoxData[
+ RowBox[{"Association", "[", 
+  RowBox[{
+   RowBox[{"\"\<BoundaryContraction\>\"", "\[Rule]", 
+    RowBox[{
+    "HyperCrownX11MomentumCertificate", "[", "\"\<BoundaryContraction\>\"", 
+     "]"}]}], ",", 
+   RowBox[{"\"\<MomentumRelations\>\"", "\[Rule]", 
+    RowBox[{
+    "HyperCrownX11MomentumCertificate", "[", "\"\<MomentumRelations\>\"", 
+     "]"}]}], ",", 
+   RowBox[{"\"\<VertexConservationCompatibleQ\>\"", "\[Rule]", 
+    RowBox[{"HyperCrownX11MomentumCertificate", "[", 
+     RowBox[{"\"\<VertexAudit\>\"", 
+      ",", "\"\<AllVertexComponentsCompatibleQ\>\""}], "]"}]}], ",", 
+   RowBox[{"\"\<IndependentLoopBasisValidQ\>\"", "\[Rule]", 
+    RowBox[{
+    "HyperCrownX11MomentumCertificate", 
+     "[", "\"\<IndependentLoopBasisValidQ\>\"", "]"}]}]}], "]"}]], "Input",
+ CellLabel->"In[16]:=",ExpressionUUID->"889762a4-295c-4d4c-a9f8-a80f96149ffe"],
+
+Cell["All positive HyperCrown strata", "Subsection",ExpressionUUID->"2c6ab7cd-8592-457c-89a9-686f73f63229"],
+
+Cell["\<\
+The four codimension-one regions are symmetry-related Landshoff descendants \
+with one soft loop: contracting x8, x9, x10 or x11 makes the opposite square \
+edge x9, x8, x11 or x10 soft, respectively. The four positive adjacent-pair \
+codimension-two regions have uniform v_e=-1 on every active parameter. Their \
+extra parallel pair is collinear to p1, p2, p3 or p4 according to the \
+stratum; no propagator or loop requires Glauber scaling.\
+\>", "Text",ExpressionUUID->"2eecb2ad-f704-4f91-90fd-8daef9425bf1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"HyperCrownPositiveMomentumCertificates", "=", 
+   RowBox[{"hrfWideAngleHyperCrownPositiveMomentumCertificates", "[", "]"}]}],
+   ";", 
+  RowBox[{"Dataset", "[", 
+   RowBox[{"KeyValueMap", "[", 
+    RowBox[{
+     RowBox[{"Function", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"stratum", ",", "cert"}], "}"}], ",", 
+       RowBox[{"Association", "[", 
+        RowBox[{
+         RowBox[{"\"\<Boundary B\>\"", "\[Rule]", "stratum"}], ",", 
+         RowBox[{"\"\<v_B (active order;1)\>\"", "\[Rule]", 
+          RowBox[{"ToString", "[", 
+           InterpretationBox[
+            StyleBox[
+             RowBox[{"cert", "[", "\"\<ScalingVectorWithDelta\>\"", "]"}],
+             ShowStringCharacters->True,
+             NumberMarks->True],
+            InputForm[
+             $CellContext`cert["ScalingVectorWithDelta"]],
+            AutoDelete->True,
+            Editable->True], "]"}]}], ",", 
+         RowBox[{"\"\<Virtualities\>\"", "\[Rule]", 
+          RowBox[{"ToString", "[", 
+           InterpretationBox[
+            StyleBox[
+             RowBox[{"Normal", "[", 
+              RowBox[{"cert", "[", "\"\<VirtualityPowers\>\"", "]"}], "]"}],
+             ShowStringCharacters->True,
+             NumberMarks->True],
+            InputForm[
+             Normal[
+              $CellContext`cert["VirtualityPowers"]]],
+            AutoDelete->True,
+            Editable->True], "]"}]}], ",", 
+         RowBox[{"\"\<Vertex conservation\>\"", "\[Rule]", 
+          RowBox[{"cert", "[", 
+           
+           RowBox[{"\"\<VertexAudit\>\"", 
+            ",", "\"\<AllVertexComponentsCompatibleQ\>\""}], "]"}]}], ",", 
+         RowBox[{"\"\<Loop basis valid\>\"", "\[Rule]", 
+          RowBox[{"cert", "[", "\"\<IndependentLoopBasisValidQ\>\"", "]"}]}], 
+         ",", 
+         RowBox[{"\"\<Interpretation\>\"", "\[Rule]", 
+          RowBox[{"cert", "[", "\"\<Interpretation\>\"", "]"}]}]}], "]"}]}], 
+      "]"}], ",", "HyperCrownPositiveMomentumCertificates"}], "]"}], 
+   "]"}]}]], "Input",
+ CellLabel->
+  "In[16a]:=",ExpressionUUID->"115d01a0-0555-4ce5-a8ae-87680d3812d5"],
+
+Cell["\<\
+Select any established stratum to inspect the complete edge-by-edge \
+(+,-,perp) table. The example below is the uniform x8=x10=0 region; available \
+keys are {x8}, {x9}, {x10}, {x11}, {x8,x10}, {x8,x11}, {x9,x10} and {x9,x11}.\
+\
+\>", "Text",ExpressionUUID->"d6373868-4be4-46f2-bb0e-f2fabaf7d89d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "HyperCrownPositiveMomentumCertificates", "[", "\"\<{x8, x10}\>\"", "]"}], 
+  "[", "\"\<MomentumTable\>\"", "]"}]], "Input",
+ CellLabel->
+  "In[16b]:=",ExpressionUUID->"327a30ce-af9d-44fe-bc09-7f1944c15a65"],
+
+Cell["Diving Beetle checks", "Section",ExpressionUUID->"a8325639-8dc2-48ff-97d3-7433e5b11b96"],
+
+Cell["\<\
+These cells are the current direct HRF checks for Diving Beetle. They are \
+expected to produce no accepted hidden region in the tested interior and \
+x8,x9 boundary cases.\
+\>", "Text",ExpressionUUID->"0e09b5ef-4fc0-45dc-ba39-71c2832ce927"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Ex04DivingBeetleInterior", "=", 
+   RowBox[{"hrfEx04DivingBeetleInterior", "[", "]"}]}], ";", 
+  RowBox[{"hrfDBInteriorReport", "=", 
+   RowBox[{"hrfEx04DivingBeetleInteriorDisplay", "[", "]"}]}], ";", 
+  RowBox[{"hrfDBInteriorReport", "[", "\"\<Summary\>\"", "]"}]}]], "Input",
+ CellLabel->"In[17]:=",ExpressionUUID->"8743ee34-1a77-4a97-b5c8-0eac367b5f4c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Ex04DivingBeetleX89Target", "=", 
+   RowBox[{"hrfEx04DivingBeetleX89Boundary", "[", "]"}]}], ";", 
+  RowBox[{"hrfDBX89Report", "=", 
+   RowBox[{"hrfEx04DivingBeetleX89Display", "[", "]"}]}], ";", 
+  RowBox[{"hrfDBX89Report", "[", "\"\<Summary\>\"", "]"}]}]], "Input",
+ CellLabel->"In[18]:=",ExpressionUUID->"1e46a0cc-a12c-416c-b3bf-d5bcd51afa63"],
+
+Cell["\<\
+The more extensive Diving Beetle exclusion and the per-trial development \
+diagnostics are maintained in the dedicated audit notebooks; they are not \
+repeated here.\
+\>", "Text",ExpressionUUID->"d7317fe8-f435-480c-ad8f-13197d1c3f84"]
+}, Open  ]]
+},
+Evaluator->"Local",
+WindowSize->{1250, 900},
+WindowTitle->"01_Current_WideAngle_4pt",
+CellLabelAutoDelete->False,
+ShowCellTags->False,
+FrontEndVersion->"15.0 for Mac OS X ARM (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"0dba1762-c527-4a52-b56d-6d2ad4c1e984"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[614, 23, 107, 0, 105, "Title",ExpressionUUID->"89e3745d-0db3-4702-8ed9-a3586b2e7eba"],
+Cell[724, 25, 184, 3, 105, "Text",ExpressionUUID->"d14d4aa0-7f75-4a50-b0d4-588d34cd7ba9"],
+Cell[911, 30, 79, 0, 105, "Section",ExpressionUUID->"75c68fbd-1f74-46f9-9141-a4cd3fd0bda2"],
+Cell[993, 32, 198, 3, 105, "Text",ExpressionUUID->"1deda363-488f-47d4-b38b-8a9cc0ab827e"],
+Cell[1194, 37, 4040, 91, 105, "Input",ExpressionUUID->"c141eb17-a083-40cc-845a-7b225c0569d8"],
+Cell[5237, 130, 80, 0, 105, "Section",ExpressionUUID->"1db11a27-1df1-49fa-a775-251ec2758565"],
+Cell[5320, 132, 214, 3, 105, "Input",ExpressionUUID->"c2dbc902-43a5-446d-ad2f-af69b5cfd122"],
+Cell[5537, 137, 227, 4, 105, "Input",ExpressionUUID->"0c65a12e-4041-44b4-925e-be189ba6c0a7"],
+Cell[5767, 143, 227, 4, 105, "Input",ExpressionUUID->"f54a2f7f-7e59-43c5-b80f-d2740c3883f4"],
+Cell[5997, 149, 208, 3, 105, "Input",ExpressionUUID->"786db6a9-fb8d-48e9-99c8-9c56e664fc72"],
+Cell[6208, 154, 88, 0, 105, "Section",ExpressionUUID->"9dc9cfca-29d3-4f6c-ad2b-b53f747e8cd7"],
+Cell[6299, 156, 323, 7, 105, "Input",ExpressionUUID->"2b7eee4d-88da-4497-b2d1-c99c36eddbbb"],
+Cell[6625, 165, 351, 7, 105, "Input",ExpressionUUID->"edc44ed3-e2a9-4a76-83e4-18a15f2b12fc"],
+Cell[6979, 174, 112, 0, 105, "Section",ExpressionUUID->"92e5d3a4-90ca-4a1f-bf9e-ad4d23230a6a"],
+Cell[7094, 176, 495, 7, 105, "Text",ExpressionUUID->"2c76b981-1296-4464-8c01-9cb4ff1e4fc6"],
+Cell[7592, 185, 1165, 26, 105, "Input",ExpressionUUID->"60386692-1652-4b8a-9439-d57d97b7e70d"],
+Cell[8760, 213, 320, 7, 105, "Input",ExpressionUUID->"bca6ddc0-f92a-4870-8a19-32d1de00bb88"],
+Cell[9083, 222, 437, 9, 105, "Input",ExpressionUUID->"a802ca5d-874a-424a-a6e6-79903f482997"],
+Cell[9523, 233, 101, 0, 105, "Section",ExpressionUUID->"1e74c528-c580-45ff-91f4-b10e85b47fc2"],
+Cell[9627, 235, 206, 3, 105, "Text",ExpressionUUID->"7076460d-a739-4827-875d-e54c5ccb5fb4"],
+Cell[9836, 240, 264, 5, 105, "Input",ExpressionUUID->"60c0c758-cf33-4a44-bff5-9ee5da3ae182"],
+Cell[10103, 247, 395, 8, 105, "Input",ExpressionUUID->"470ab6ae-c569-43ee-8c10-b4f3a0510f49"],
+Cell[10501, 257, 174, 3, 105, "Input",ExpressionUUID->"40dd993a-aeaa-4c7f-ab8a-438846f46f67"],
+Cell[10678, 262, 130, 0, 105, "Section",ExpressionUUID->"a5b4b282-1cef-4bfe-a60f-3cfe7045679a"],
+Cell[10811, 264, 484, 7, 105, "Text",ExpressionUUID->"9530a01b-d223-4ae3-897e-d3bbe1bf8f9b"],
+Cell[11298, 273, 405, 11, 105, "Input",ExpressionUUID->"1d66b9c6-0b9e-4075-a3c6-d822e2af12f3"],
+Cell[11706, 286, 118, 0, 105, "Subsection",ExpressionUUID->"228ca0f6-181e-4b36-b6c7-9e4f8498bbfc"],
+Cell[11827, 288, 689, 10, 105, "Text",ExpressionUUID->"c6ad60b3-b2f2-4a6c-ac05-9bbd578bac85"],
+Cell[12519, 300, 157, 3, 105, "Input",ExpressionUUID->"483922c6-3b14-45b1-9184-c0a2b7638e96"],
+Cell[12679, 305, 162, 3, 105, "Input",ExpressionUUID->"60c8ab3d-1d32-4b87-b4ce-3b62a247c53f"],
+Cell[12844, 310, 111, 0, 105, "Subsection",ExpressionUUID->"cc46a69e-ac7e-4e44-b0b3-83d2f0a1cecf"],
+Cell[12958, 312, 729, 10, 105, "Text",ExpressionUUID->"80ca4a5b-a86e-4a23-9efc-93d176f142d1"],
+Cell[13690, 324, 164, 3, 105, "Input",ExpressionUUID->"efbaca35-4c7b-4f15-8237-6913c8d6baef"],
+Cell[13857, 329, 603, 8, 105, "Text",ExpressionUUID->"b56f384f-0318-4aa1-92b3-0e75aa48388e"],
+Cell[14463, 339, 169, 3, 105, "Input",ExpressionUUID->"a38da29f-1d7f-45d8-a2c1-397e0bc37b52"],
+Cell[14635, 344, 575, 8, 105, "Text",ExpressionUUID->"4bea0c7b-b4f0-4249-8da7-6f05092cbcf2"],
+Cell[15213, 354, 525, 15, 105, "Input",ExpressionUUID->"8b28e9f4-defd-48fc-aecc-5980174adcfb"],
+Cell[15741, 371, 417, 6, 105, "Text",ExpressionUUID->"fe4542a7-7a1a-4278-96ce-aec6ac753755"],
+Cell[16161, 379, 168, 3, 105, "Input",ExpressionUUID->"2697d74f-8650-4b49-82ea-2e2c4677ed75"],
+Cell[16332, 384, 1032, 24, 105, "Input",ExpressionUUID->"53999ed4-0bfb-4c3b-b41e-4d5621a076df"],
+Cell[17367, 410, 113, 2, 105, "Input",ExpressionUUID->"17cc3913-d371-493e-907a-2b95277a5eaf"],
+Cell[17483, 414, 127, 0, 105, "Section",ExpressionUUID->"d75612a9-82c4-478e-8d1c-ab53643b7241"],
+Cell[17613, 416, 748, 10, 105, "Text",ExpressionUUID->"39634cf9-e4fd-43e5-b383-5e1b0deaa7d0"],
+Cell[18364, 428, 116, 0, 105, "Subsection",ExpressionUUID->"04af1ddf-ad60-4c4c-8ae9-fce17ed07889"],
+Cell[18483, 430, 411, 6, 105, "Text",ExpressionUUID->"55c7238b-5e5c-4260-be32-74d386586a7b"],
+Cell[18897, 438, 328, 7, 105, "Input",ExpressionUUID->"98918f14-e4dd-4737-9b21-9a1f529d1b17"],
+Cell[19228, 447, 179, 3, 105, "Input",ExpressionUUID->"5a005790-d3a7-4b04-92f0-0aaa45f58023"],
+Cell[19410, 452, 679, 14, 105, "Input",ExpressionUUID->"dad64cea-b658-4520-994e-c71f6e678c97"],
+Cell[20092, 468, 130, 0, 105, "Subsection",ExpressionUUID->"073abfd4-12e8-4db0-8ba8-69aadc90f199"],
+Cell[20225, 470, 526, 7, 105, "Text",ExpressionUUID->"aa5677a7-94ca-483e-9d18-ce1a9a3d98c1"],
+Cell[20754, 479, 355, 8, 105, "Input",ExpressionUUID->"15c09625-1f8b-48a0-99f0-e1cfdc5e50e6"],
+Cell[21112, 489, 187, 3, 105, "Input",ExpressionUUID->"8afecd21-4f5f-4b3a-abbb-389e1e6ab010"],
+Cell[21302, 494, 873, 19, 105, "Input",ExpressionUUID->"889762a4-295c-4d4c-a9f8-a80f96149ffe"],
+Cell[22178, 515, 107, 0, 105, "Subsection",ExpressionUUID->"2c6ab7cd-8592-457c-89a9-686f73f63229"],
+Cell[22288, 517, 521, 7, 105, "Text",ExpressionUUID->"2eecb2ad-f704-4f91-90fd-8daef9425bf1"],
+Cell[22812, 526, 2123, 52, 105, "Input",ExpressionUUID->"115d01a0-0555-4ce5-a8ae-87680d3812d5"],
+Cell[24938, 580, 308, 5, 105, "Text",ExpressionUUID->"d6373868-4be4-46f2-bb0e-f2fabaf7d89d"],
+Cell[25249, 587, 244, 6, 105, "Input",ExpressionUUID->"327a30ce-af9d-44fe-bc09-7f1944c15a65"],
+Cell[25496, 595, 94, 0, 105, "Section",ExpressionUUID->"a8325639-8dc2-48ff-97d3-7433e5b11b96"],
+Cell[25593, 597, 251, 4, 105, "Text",ExpressionUUID->"0e09b5ef-4fc0-45dc-ba39-71c2832ce927"],
+Cell[25847, 603, 392, 7, 105, "Input",ExpressionUUID->"8743ee34-1a77-4a97-b5c8-0eac367b5f4c"],
+Cell[26242, 612, 381, 7, 105, "Input",ExpressionUUID->"1e46a0cc-a12c-416c-b3bf-d5bcd51afa63"],
+Cell[26626, 621, 244, 4, 105, "Text",ExpressionUUID->"d7317fe8-f435-480c-ad8f-13197d1c3f84"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
