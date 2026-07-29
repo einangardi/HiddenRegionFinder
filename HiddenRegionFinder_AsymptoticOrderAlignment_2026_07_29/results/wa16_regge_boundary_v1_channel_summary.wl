@@ -1,0 +1,16 @@
+(* Created with the Wolfram Language : www.wolfram.com *)
+{<|"Channel" -> "T23", "GraphCount" -> 16, "BoundaryCount" -> 114452,
+  "CertificateCounts" -> <|"InheritedParentInteriorFaceClosure" -> 46520,
+    "GlobalSubtractionFreeFirstNonzeroReggeLayer" -> 12640,
+    "TrivialRestrictedReggePolynomial" -> 55292|>,
+  "HiddenRegionStratumCount" -> 0, "UnresolvedFaceCount" -> 0|>,
+ <|"Channel" -> "T12", "GraphCount" -> 16, "BoundaryCount" -> 114452,
+  "CertificateCounts" -> <|"InheritedParentInteriorFaceClosure" -> 46520,
+    "GlobalSubtractionFreeFirstNonzeroReggeLayer" -> 12640,
+    "TrivialRestrictedReggePolynomial" -> 55292|>,
+  "HiddenRegionStratumCount" -> 0, "UnresolvedFaceCount" -> 0|>,
+ <|"Channel" -> "T13", "GraphCount" -> 16, "BoundaryCount" -> 114452,
+  "CertificateCounts" -> <|"InheritedParentInteriorFaceClosure" -> 46520,
+    "GlobalSubtractionFreeFirstNonzeroReggeLayer" -> 12640,
+    "TrivialRestrictedReggePolynomial" -> 55292|>,
+  "HiddenRegionStratumCount" -> 0, "UnresolvedFaceCount" -> 0|>}
