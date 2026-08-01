@@ -1,0 +1,641 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     26848,        632]
+NotebookOptionsPosition[     22486,        577]
+NotebookOutlinePosition[     22871,        592]
+CellTagsIndexPosition[     22828,        589]
+WindowTitle->Five-point wide-angle and central-soft F comparison
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+Five-point seed: wide-angle Landshoff versus central-soft MRK\
+\>", "Title",ExpressionUUID->"ab905d78-edc3-4d6d-8a9c-16f5b6187df1"],
+
+Cell["\<\
+This notebook compares the F polynomial for the same two-loop six-propagator \
+graph and the same external attachment order {1,2,3,5,4}. It separates the \
+exact coplanar wide-angle on-shell expansion from the central-soft MRK \
+composite expansion. Every region vector is displayed in the convention \
+(v_x0,...,v_x5;1).\
+\>", "Text",ExpressionUUID->"16c386b8-513b-4a8b-aebf-b88ac810340a"],
+
+Cell["1. Reproducible setup", "Section",ExpressionUUID->"fc1db057-b864-4692-bc4e-2968c3186411"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$HRF5ComparisonLibraryOnly", "=", "True"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], 
+      ",", "\"\<HRF_FivePointWideAngleCentralSoftComparison.wl\>\""}], "}"}], 
+    "]"}], "]"}], ";", 
+  RowBox[{"comparison", "=", 
+   RowBox[{"hrf5WideAngleCentralSoftComparison", "[", "]"}]}], ";"}]], "Input",\
+ExpressionUUID->"e61958ab-d2e2-4d70-8bf8-043d8304e615"],
+
+Cell["\<\
+The graph has internal edges x0:(1,3), x1:(1,5), x2:(2,3), x3:(2,5), \
+x4:(3,4), x5:(4,5). External momenta are attached to vertices in the order \
+{1,2,3,5,4}; this is the representative attachment that has the central-soft \
+MRK hidden region.\
+\>", "Text",ExpressionUUID->"8109946d-84f3-474b-9054-ed1c2bce5374"],
+
+Cell["2. Common exact transverse chart", "Section",ExpressionUUID->"9d5e20d2-0bf7-44f0-8866-079dce934c83"],
+
+Cell["\<\
+Use p3_perp=q, p4_perp=k and p5_perp=-q-k, with w=-p3_perp/p4_perp and \
+wbar=-conjugate(p3_perp)/conjugate(p4_perp). The exact wide-angle coplanar \
+branch has finite nonzero q and k with w=wbar=-q/k. The central-soft MRK \
+limit instead sends k to zero, so w and wbar become large.\
+\>", "Text",ExpressionUUID->"9aa303fe-6ca4-493e-aecd-aa37eb5a4f69"],
+
+Cell["2.1 Exact light-cone coefficients used below", "Subsection",ExpressionUUID->"547e717f-c660-4cc3-a74a-d4198b363050"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     StyleBox["\<\"symbol\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"definition\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"meaning\"\>",
+      StripOnInput->False,
+      FontWeight->Bold]},
+    {"\<\"P\"\>", "\<\"p3+ = P delta^(-b)\"\>", "\<\"upper-jet longitudinal \
+normalization\"\>"},
+    {"\<\"K\"\>", "\<\"p4+ = K delta^a\"\>", "\<\"central-emission \
+longitudinal normalization\"\>"},
+    {"\<\"M\"\>", "\<\"p5- = M delta^(-b)\"\>", "\<\"lower-jet longitudinal \
+normalization\"\>"},
+    {"\<\"T\"\>", "\<\"|p3_perp|^2 = T\"\>", "\<\"fixed upper transverse \
+scale\"\>"},
+    {"\<\"R\"\>", "\<\"|p4_perp|^2 = R delta^(2a)\"\>", "\<\"rescaled central \
+transverse scale\"\>"},
+    {"\<\"C\"\>", "\<\"2 Re(p3_perp conjugate(k_perp)) = C\"\>", \
+"\<\"transverse interference; C^2 <= 4 T R\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       RGBColor[0.94, 0.96, 0.99], None}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.65}}}],
+  "Grid"]], "Output",ExpressionUUID->"83e38dd1-3daa-4b8e-8b5e-2fb87d1ca73d"],
+
+Cell["\<\
+All P,K,M,R,T are positive. The sign of C records the relative transverse \
+orientation; in a general physical configuration it obeys the transverse \
+Cauchy-Schwarz bound.\
+\>", "Text",ExpressionUUID->"0a98f503-8e26-43dc-b4a7-0ef662aedfee"],
+
+Cell["2.2 Relation to the variables of the NNLL 2-to-3 MRK paper", \
+"Subsection",ExpressionUUID->"76111bba-50ff-488b-95eb-72abc7633d61"],
+
+Cell["\<\
+The paper fixes {s,s1,s2,t1,t2}, or equivalently {s,s1,s2,z,zbar}, and varies \
+the auxiliary parameter x. The central-soft limit is a composite path rather \
+than ordinary MRK at fixed s1,s2,z,zbar:\
+\>", "Text",ExpressionUUID->"8b7bd9af-5dc5-4a1d-8cde-09026fdb9bf7"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     StyleBox["\<\"paper variable\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"invariants\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"central-soft scaling\"\>",
+      StripOnInput->False,
+      FontWeight->Bold]},
+    {"\<\"x\"\>", "\<\"s12=s/x^2\"\>", "\<\"x=delta^b\"\>"},
+    {"\<\"s\"\>", "\<\"hard energy coefficient\"\>", "\<\"s=P M\"\>"},
+    {"\<\"s1\"\>", "\<\"s45=s1/x\"\>", "\<\"s1=K M delta^a\"\>"},
+    {"\<\"s2\"\>", "\<\"s34=s2/x\"\>", "\<\"s2=(P R/K) delta^a\"\>"},
+    {"\<\"t1\"\>", "\<\"t1=s15\"\>", "\<\"t1=-T-C delta^a-R \
+delta^(2a)+...\"\>"},
+    {"\<\"t2\"\>", "\<\"t2=s23\"\>", "\<\"t2=-T+...\"\>"},
+    {"\<\"z,zbar\"\>", "\<\"t1=-(1-z)(1-zbar)s1 s2/s; t2=-z zbar s1 \
+s2/s\"\>", "\<\"z=Z delta^(-a), zbar=Zbar delta^(-a)\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       RGBColor[0.94, 0.96, 0.99], None}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.65}}}],
+  "Grid"]], "Output",ExpressionUUID->"b0d8727c-ed8f-4fef-a097-f04b68497130"],
+
+Cell["\<\
+The finite rescaled variables satisfy Z Zbar=T/R and Z+Zbar=-C/R. The exact \
+transverse variables used later in that paper are w=-p3_perp/p4_perp, \
+wbar=-conjugate(p3_perp)/conjugate(p4_perp), X34=p3+/p4+, and X45=p4+/p5+, \
+together with one dimensionful transverse scale. Along the central-soft path, \
+w~delta^(-a), X34~delta^(-(a+b)), and X45~delta^(a-b).\
+\>", "Text",ExpressionUUID->"d2698b0b-aa7e-45d4-b452-6530d7f56435"],
+
+Cell["3. Coplanar wide-angle on-shell expansion", "Section",ExpressionUUID->"b4fb7860-0024-44b7-9677-0ec524406043"],
+
+Cell["\<\
+Here p_i^2=lambda tends to zero while all adjacent invariants remain \
+wide-angle and the massless endpoint satisfies Gram=0. The polynomial is \
+F=F0+lambda F1. With all x_e scaling as lambda^(-1), F0 has raw weight -3, \
+whereas U and lambda F1 have weight -2.\
+\>", "Text",ExpressionUUID->"ae0a2d9b-f684-4101-b5a8-8392e0792b28"],
+
+Cell["3.1 Positive Landau locus and local coordinates", "Subsection",ExpressionUUID->"dc03ab81-178d-4f2a-a2fe-3d38439b9076"],
+
+Cell["\<\
+The following replacement rules define three normal coordinates y0,y2,y4 \
+around the positive Landau locus. The remaining x1,x3,x5 are internal \
+coordinates along it.\
+\>", "Text",ExpressionUUID->"2277c9c3-b57b-422f-93d1-801dd01627ad"],
+
+Cell[BoxData[
+ TagBox[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"x0", "\[Rule]", 
+      RowBox[{
+       FractionBox[
+        RowBox[{"aPlus", " ", "kTrans", " ", "x1", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"bPlus", " ", "mMinus"}], "+", 
+           SuperscriptBox["kTrans", "2"], "+", 
+           RowBox[{"kTrans", " ", "qTrans"}]}], ")"}]}], 
+        RowBox[{"bPlus", " ", "qTrans", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"aPlus", " ", "mMinus"}], "+", 
+           RowBox[{"kTrans", " ", "qTrans"}], "+", 
+           SuperscriptBox["qTrans", "2"]}], ")"}]}]], "+", "y0"}]}], ",", 
+     RowBox[{"x2", "\[Rule]", 
+      RowBox[{
+       FractionBox[
+        RowBox[{"x3", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"bPlus", " ", "mMinus"}], "+", 
+           SuperscriptBox["kTrans", "2"], "+", 
+           RowBox[{"kTrans", " ", "qTrans"}]}], ")"}]}], 
+        RowBox[{
+         RowBox[{"aPlus", " ", "mMinus"}], "+", 
+         RowBox[{"kTrans", " ", "qTrans"}], "+", 
+         SuperscriptBox["qTrans", "2"]}]], "+", "y2"}]}], ",", 
+     RowBox[{"x4", "\[Rule]", 
+      RowBox[{
+       FractionBox[
+        RowBox[{"kTrans", " ", "x5"}], "qTrans"], "+", "y4"}]}]}], "}"}],
+   TraditionalForm],
+  TraditionalForm,
+  Editable->True]], "Output",ExpressionUUID->"0ae5989d-023e-4d03-ba10-\
+5f29401381f2"],
+
+Cell["3.2 Exact factorised superleading sector", "Subsection",ExpressionUUID->"fde74a1c-a334-408b-a5f4-3f70b83a9124"],
+
+Cell["\<\
+In these coordinates the constant and linear terms vanish identically. There \
+is also no cubic normal-coordinate term. The complete F_SL=F0 is the \
+quadratic form\
+\>", "Text",ExpressionUUID->"5466371a-ac34-49ca-b053-84c4294c0310"],
+
+Cell[BoxData[
+ TagBox[
+  FormBox[
+   RowBox[{
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{"x1", " ", "y2", " ", "y4", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"aPlus", " ", "bPlus", " ", "mMinus"}], "+", 
+         RowBox[{"aPlus", " ", 
+          SuperscriptBox["kTrans", "2"]}], "+", 
+         RowBox[{"bPlus", " ", 
+          SuperscriptBox["qTrans", "2"]}]}], ")"}]}], "bPlus"]}], "-", 
+    RowBox[{
+     FractionBox["1", 
+      RowBox[{"aPlus", " ", "mMinus"}]], 
+     RowBox[{
+      SuperscriptBox["qTrans", "2"], " ", "x3", " ", "y0", " ", "y4", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"aPlus", " ", "mMinus"}], "+", 
+        RowBox[{"bPlus", " ", "mMinus"}], "+", 
+        SuperscriptBox["kTrans", "2"], "+", 
+        RowBox[{"2", " ", "kTrans", " ", "qTrans"}], "+", 
+        SuperscriptBox["qTrans", "2"]}], ")"}]}]}], "+", 
+    FractionBox[
+     RowBox[{"x5", " ", "y0", " ", "y2", " ", 
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"aPlus", " ", "mMinus"}], "+", 
+         RowBox[{"kTrans", " ", "qTrans"}], "+", 
+         SuperscriptBox["qTrans", "2"]}], ")"}], "2"]}], 
+     RowBox[{"aPlus", " ", "mMinus"}]]}],
+   TraditionalForm],
+  TraditionalForm,
+  Editable->True]], "Output",ExpressionUUID->"8aabe617-1d78-40c6-8e69-\
+8d36a415a113"],
+
+Cell["\<\
+where all three coefficient functions below are positive for positive \
+light-cone data:\
+\>", "Text",ExpressionUUID->"1807c6fe-0fea-4373-822e-1878cf3e4651"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     StyleBox["\<\"coefficient\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"value\"\>",
+      StripOnInput->False,
+      FontWeight->Bold]},
+    {"AWA", 
+     FractionBox[
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"aPlus", " ", "mMinus"}], "+", 
+         RowBox[{"kTrans", " ", "qTrans"}], "+", 
+         SuperscriptBox["qTrans", "2"]}], ")"}], "2"], 
+      RowBox[{"aPlus", " ", "mMinus"}]]},
+    {"BWA", 
+     FractionBox[
+      RowBox[{
+       SuperscriptBox["qTrans", "2"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         SuperscriptBox["kTrans", "2"], "+", 
+         RowBox[{"aPlus", " ", "mMinus"}], "+", 
+         RowBox[{"bPlus", " ", "mMinus"}], "+", 
+         RowBox[{"2", " ", "kTrans", " ", "qTrans"}], "+", 
+         SuperscriptBox["qTrans", "2"]}], ")"}]}], 
+      RowBox[{"aPlus", " ", "mMinus"}]]},
+    {"CWA", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"aPlus", " ", 
+        SuperscriptBox["kTrans", "2"]}], "+", 
+       RowBox[{"aPlus", " ", "bPlus", " ", "mMinus"}], "+", 
+       RowBox[{"bPlus", " ", 
+        SuperscriptBox["qTrans", "2"]}]}], "bPlus"]}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       RGBColor[0.94, 0.96, 0.99], None}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.65}}}],
+  "Grid"]], "Output",ExpressionUUID->"0092ce23-1d62-46a6-84c9-8e935c657b87"],
+
+Cell["3.3 Scaling", "Subsection",ExpressionUUID->"73bdf32c-f961-4528-89df-0bd74de6ba82"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     StyleBox["\<\"object\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"weight\"\>",
+      StripOnInput->False,
+      FontWeight->Bold]},
+    {"\<\"original LP parameters (x0,...,x5)\"\>", "\<\"(-1,-1,-1,-1,-1,-1;1)\
+\"\>"},
+    {"\<\"internal coordinates (x1,x3,x5)\"\>", "\<\"(-1,-1,-1)\"\>"},
+    {"\<\"symmetric normal coordinates (y0,y2,y4)\"\>", "\<\"(-1/2,-1/2,-1/2)\
+\"\>"},
+    {"\<\"raw F_SL\"\>", "\<\"W_SL=-3\"\>"},
+    {"\<\"F_SL after cancellation; U; lambda F1\"\>", "\<\"W_HR=-2\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       RGBColor[0.94, 0.96, 0.99], None}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.65}}}],
+  "Grid"]], "Output",ExpressionUUID->"ae9d52cd-b6ba-48df-8dd7-d773bcc3cae1"],
+
+Cell["\<\
+The symmetric local presentation has y0,y2,y4 proportional to lambda^(-1/2). \
+Each term x_i y_j y_k in F_SL therefore has weight -2, exactly matching U and \
+lambda F1. The original-variable HR vector remains the uniform vector; the \
+half-integer weights refer only to the dissected local normal coordinates.\
+\>", "Text",ExpressionUUID->"cb7964cf-105f-4e0b-a365-d39316c7c327"],
+
+Cell["4. Central-soft MRK expansion", "Section",ExpressionUUID->"10b588ac-f14f-4f54-b23d-05b89bde55bc"],
+
+Cell["\<\
+For the representative path p4_perp~delta and x_MRK~delta^2, asymptotic-order \
+alignment produces the first vector below. The later vectors were previously \
+reported as an HRF composition, but the next-layer audit below shows that \
+they must be rejected.\
+\>", "Text",ExpressionUUID->"e8e80724-9ae9-4842-abf3-ac496001a69c"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     StyleBox["\<\"stage\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"vector (x0,...,x5;1)\"\>",
+      StripOnInput->False,
+      FontWeight->Bold]},
+    {"\<\"asymptotic-order alignment\"\>", "\<\"(-3,-3,0,-3,-3,-3;1)\"\>"},
+    {"\<\"would-be HRF scaling in the aligned variables\"\>", \
+"\<\"(-1,-1,-1,-1,-1,-1;1)\"\>"},
+    {"\<\"rejected composed scaling in the original variables\"\>", \
+"\<\"(-4,-4,-1,-4,-4,-4;1)\"\>"},
+    {"\<\"raw superleading F layer\"\>", "\<\"W=-13\"\>"},
+    {"\<\"first obstruction\"\>", "\<\"W=-12\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       RGBColor[0.94, 0.96, 0.99], None}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.65}}}],
+  "Grid"]], "Output",ExpressionUUID->"12b8f904-8144-403c-859b-559082a0fee8"],
+
+Cell["4.1 The aligned leading factorisation", "Subsection",ExpressionUUID->"b591130f-2c89-4689-9610-74612c19c160"],
+
+Cell[BoxData[
+ TagBox[
+  FormBox[
+   RowBox[{
+    RowBox[{"-", "M"}], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"P", " ", "x2"}], "-", 
+      RowBox[{"K", " ", "x3"}]}], ")"}], " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"x1", " ", "x4"}], "-", 
+      RowBox[{"x0", " ", "x5"}]}], ")"}]}],
+   TraditionalForm],
+  TraditionalForm,
+  Editable->True]], "Output",ExpressionUUID->"86964f28-a654-4a7c-a878-\
+a473ff52e662"],
+
+Cell["\<\
+At the leading aligned level the candidate locus is simultaneous: P x2-K x3=0 \
+and x1 x4-x0 x5=0. It is not a union of coordinate boundaries. This leading \
+statement alone is insufficient because the next aligned layer must also be \
+examined.\
+\>", "Text",ExpressionUUID->"c76243fe-afaf-4bda-8e94-327392ea79b2"],
+
+Cell["4.2 The full sequence of F layers", "Subsection",ExpressionUUID->"f5b83546-d062-4e76-9b4b-0a60c93c0525"],
+
+Cell["\<\
+After applying the would-be composed vector, the layers beginning at the raw \
+superleading weight -13 are:\
+\>", "Text",ExpressionUUID->"68c1fb00-5674-423f-88b4-feaec5f23c43"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     StyleBox["\<\"delta weight\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"coefficient polynomial\"\>",
+      StripOnInput->False,
+      FontWeight->Bold]},
+    {
+     RowBox[{"-", "13"}], 
+     RowBox[{
+      RowBox[{"-", "M"}], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"P", " ", "x2"}], "-", 
+        RowBox[{"K", " ", "x3"}]}], ")"}], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"x1", " ", "x4"}], "-", 
+        RowBox[{"x0", " ", "x5"}]}], ")"}]}]},
+    {
+     RowBox[{"-", "12"}], 
+     RowBox[{
+      RowBox[{"-", "T"}], " ", "x0", " ", "x3", " ", "x4"}]},
+    {
+     RowBox[{"-", "11"}], 
+     RowBox[{"C", " ", "x1", " ", "x3", " ", "x4"}]},
+    {
+     RowBox[{"-", "10"}], 
+     FractionBox[
+      RowBox[{"R", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "P"}], " ", "x1", " ", "x2", " ", "x4"}], "+", 
+         RowBox[{"2", " ", "K", " ", "x1", " ", "x3", " ", "x4"}], "-", 
+         RowBox[{"P", " ", "x1", " ", "x2", " ", "x5"}], "-", 
+         RowBox[{"K", " ", "x0", " ", "x3", " ", "x5"}]}], ")"}]}], "K"]},
+    {
+     RowBox[{"-", "9"}], 
+     RowBox[{"-", 
+      FractionBox[
+       RowBox[{"T", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"K", " ", "M", " ", "P", " ", "x1", " ", "x2", " ", "x4"}], 
+          "+", 
+          RowBox[{
+           SuperscriptBox["K", "2"], " ", "M", " ", "x0", " ", "x3", " ", 
+           "x4"}], "-", 
+          RowBox[{"P", " ", "R", " ", "x1", " ", "x3", " ", "x4"}], "-", 
+          RowBox[{
+          "2", " ", "K", " ", "M", " ", "P", " ", "x0", " ", "x2", " ", 
+           "x5"}], "+", 
+          RowBox[{
+           SuperscriptBox["K", "2"], " ", "M", " ", "x0", " ", "x3", " ", 
+           "x5"}]}], ")"}]}], 
+       RowBox[{"K", " ", "M", " ", "P"}]]}]},
+    {
+     RowBox[{"-", "8"}], 
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "K"}], " ", 
+        SuperscriptBox["T", "2"], " ", "x0", " ", "x3", " ", "x4"}], "+", 
+       RowBox[{"C", " ", "P", " ", "R", " ", "x1", " ", "x3", " ", "x4"}], "+", 
+       RowBox[{
+       "C", " ", "K", " ", "M", " ", "P", " ", "x0", " ", "x2", " ", "x5"}]}], 
+      RowBox[{"K", " ", "M", " ", "P"}]]}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       RGBColor[0.94, 0.96, 0.99], None}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.65}}}],
+  "Grid"]], "Output",ExpressionUUID->"b923b9d1-048d-4a9a-838f-dbde09452dfc"],
+
+Cell["\<\
+The delta^(-12) coefficient is -T x0 x3 x4. It does not vanish on the \
+two-factor locus and is strictly nonzero for T,x0,x3,x4>0. It is therefore a \
+genuine obstruction, not a harmless deformation that may be skipped.\
+\>", "Text",ExpressionUUID->"1f417c87-7f20-4517-b376-f7610e7d7279"],
+
+Cell["4.3 Positive-stationarity test after alignment", "Subsection",ExpressionUUID->"adbb9a5a-0036-4521-9bb0-d0d7e93455ca"],
+
+Cell[BoxData[
+ TagBox[
+  FormBox[
+   RowBox[{
+    RowBox[{"-", 
+     RowBox[{"M", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"P", " ", "x2"}], "-", 
+        RowBox[{"K", " ", "x3"}]}], ")"}], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"x1", " ", "x4"}], "-", 
+        RowBox[{"x0", " ", "x5"}]}], ")"}]}]}], "-", 
+    RowBox[{"T", " ", "x0", " ", "x3", " ", "x4"}]}],
+   TraditionalForm],
+  TraditionalForm,
+  Editable->True]], "Output",ExpressionUUID->"0ff3cf48-2647-468b-b41d-\
+d57f42644b7b"],
+
+Cell["\<\
+The derivatives with respect to x1 and x2 force P x2-K x3=0 and x1 x4-x0 \
+x5=0. After imposing these, the x0 derivative reduces to -T x3 x4, which \
+cannot vanish in the positive interior. Hence the combined first two aligned \
+layers have no positive stationary pinch. The previously reported vector \
+(-4,-4,-1,-4,-4,-4;1) is rejected.\
+\>", "Text",ExpressionUUID->"a4b84aaa-3846-4a6f-963b-9bea39aea3d9"],
+
+Cell["5. Structural comparison", "Section",ExpressionUUID->"fb0cb380-fecf-4bf5-9165-f5c70eccd9c1"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     StyleBox["\<\"feature\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"wide-angle on-shell\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"central-soft MRK\"\>",
+      StripOnInput->False,
+      FontWeight->Bold]},
+    {"\<\"kinematic route to Gram zero\"\>", "\<\"finite transverse momenta, \
+w=wbar\"\>", "\<\"p4_perp -> 0; w,wbar -> infinity\"\>"},
+    {"\<\"leading cancellation structure\"\>", "\<\"quadratic form in three \
+linear normal coordinates\"\>", "\<\"leading product, immediately obstructed \
+at the next layer\"\>"},
+    {"\<\"LP-parameter vector\"\>", "\<\"uniform (-1,-1,-1,-1,-1,-1;1)\"\>", \
+"\<\"previous nonuniform candidate is rejected\"\>"},
+    {"\<\"cancellation hierarchy\"\>", "\<\"one gap: -3 -> -2\"\>", "\<\"-13 \
+leading product; nonzero obstruction at -12\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       RGBColor[0.94, 0.96, 0.99], None}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.65}}}],
+  "Grid"]], "Output",ExpressionUUID->"e8d95a79-bb1d-4e0c-8eef-1785aa61d58b"],
+
+Cell["\<\
+The coplanar wide-angle on-shell region remains an exact positive Landau \
+region. By contrast, the previously reported central-soft MRK candidate fails \
+at the first obstruction after asymptotic-order alignment. Before drawing a \
+wide-angle-to-MRK correspondence at five points, the remaining attachment \
+orders and possible alternative scalings must be re-audited with this \
+obstruction test enforced.\
+\>", "Text",ExpressionUUID->"751b354c-b069-44a6-8ccb-c6c5721afebc"]
+},
+WindowTitle->"Five-point wide-angle and central-soft F comparison",
+FrontEndVersion->"15.0 for Mac OS X ARM (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"4fa4d273-4bc6-416c-af3e-a4f66d6369e9"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[619, 21, 141, 2, 105, "Title",ExpressionUUID->"ab905d78-edc3-4d6d-8a9c-16f5b6187df1"],
+Cell[763, 25, 400, 6, 105, "Text",ExpressionUUID->"16c386b8-513b-4a8b-aebf-b88ac810340a"],
+Cell[1166, 33, 95, 0, 105, "Section",ExpressionUUID->"fc1db057-b864-4692-bc4e-2968c3186411"],
+Cell[1264, 35, 490, 12, 105, "Input",ExpressionUUID->"e61958ab-d2e2-4d70-8bf8-043d8304e615"],
+Cell[1757, 49, 324, 5, 105, "Text",ExpressionUUID->"8109946d-84f3-474b-9054-ed1c2bce5374"],
+Cell[2084, 56, 106, 0, 105, "Section",ExpressionUUID->"9d5e20d2-0bf7-44f0-8866-079dce934c83"],
+Cell[2193, 58, 362, 5, 105, "Text",ExpressionUUID->"9aa303fe-6ca4-493e-aecd-aa37eb5a4f69"],
+Cell[2558, 65, 121, 0, 105, "Subsection",ExpressionUUID->"547e717f-c660-4cc3-a74a-d4198b363050"],
+Cell[2682, 67, 1359, 32, 105, "Output",ExpressionUUID->"83e38dd1-3daa-4b8e-8b5e-2fb87d1ca73d"],
+Cell[4044, 101, 251, 4, 105, "Text",ExpressionUUID->"0a98f503-8e26-43dc-b4a7-0ef662aedfee"],
+Cell[4298, 107, 137, 1, 105, "Subsection",ExpressionUUID->"76111bba-50ff-488b-95eb-72abc7633d61"],
+Cell[4438, 110, 278, 4, 105, "Text",ExpressionUUID->"8b7bd9af-5dc5-4a1d-8cde-09026fdb9bf7"],
+Cell[4719, 116, 1311, 29, 105, "Output",ExpressionUUID->"b0d8727c-ed8f-4fef-a097-f04b68497130"],
+Cell[6033, 147, 440, 6, 105, "Text",ExpressionUUID->"d2698b0b-aa7e-45d4-b452-6530d7f56435"],
+Cell[6476, 155, 115, 0, 105, "Section",ExpressionUUID->"b4fb7860-0024-44b7-9677-0ec524406043"],
+Cell[6594, 157, 341, 5, 105, "Text",ExpressionUUID->"ae0a2d9b-f684-4101-b5a8-8392e0792b28"],
+Cell[6938, 164, 124, 0, 105, "Subsection",ExpressionUUID->"dc03ab81-178d-4f2a-a2fe-3d38439b9076"],
+Cell[7065, 166, 247, 4, 105, "Text",ExpressionUUID->"2277c9c3-b57b-422f-93d1-801dd01627ad"],
+Cell[7315, 172, 1391, 40, 105, "Output",ExpressionUUID->"0ae5989d-023e-4d03-ba10-5f29401381f2"],
+Cell[8709, 214, 117, 0, 105, "Subsection",ExpressionUUID->"fde74a1c-a334-408b-a5f4-3f70b83a9124"],
+Cell[8829, 216, 243, 4, 105, "Text",ExpressionUUID->"5466371a-ac34-49ca-b053-84c4294c0310"],
+Cell[9075, 222, 1327, 38, 105, "Output",ExpressionUUID->"8aabe617-1d78-40c6-8e69-8d36a415a113"],
+Cell[10405, 262, 167, 3, 105, "Text",ExpressionUUID->"1807c6fe-0fea-4373-822e-1878cf3e4651"],
+Cell[10575, 267, 1645, 46, 105, "Output",ExpressionUUID->"0092ce23-1d62-46a6-84c9-8e935c657b87"],
+Cell[12223, 315, 88, 0, 105, "Subsection",ExpressionUUID->"73bdf32c-f961-4528-89df-0bd74de6ba82"],
+Cell[12314, 317, 1023, 24, 105, "Output",ExpressionUUID->"ae9d52cd-b6ba-48df-8dd7-d773bcc3cae1"],
+Cell[13340, 343, 389, 5, 105, "Text",ExpressionUUID->"cb7964cf-105f-4e0b-a365-d39316c7c327"],
+Cell[13732, 350, 103, 0, 105, "Section",ExpressionUUID->"10b588ac-f14f-4f54-b23d-05b89bde55bc"],
+Cell[13838, 352, 336, 5, 105, "Text",ExpressionUUID->"e8e80724-9ae9-4842-abf3-ac496001a69c"],
+Cell[14177, 359, 1061, 24, 105, "Output",ExpressionUUID->"12b8f904-8144-403c-859b-559082a0fee8"],
+Cell[15241, 385, 114, 0, 105, "Subsection",ExpressionUUID->"b591130f-2c89-4689-9610-74612c19c160"],
+Cell[15358, 387, 434, 16, 105, "Output",ExpressionUUID->"86964f28-a654-4a7c-a878-a473ff52e662"],
+Cell[15795, 405, 324, 5, 105, "Text",ExpressionUUID->"c76243fe-afaf-4bda-8e94-327392ea79b2"],
+Cell[16122, 412, 110, 0, 105, "Subsection",ExpressionUUID->"f5b83546-d062-4e76-9b4b-0a60c93c0525"],
+Cell[16235, 414, 186, 3, 105, "Text",ExpressionUUID->"68c1fb00-5674-423f-88b4-feaec5f23c43"],
+Cell[16424, 419, 2741, 78, 105, "Output",ExpressionUUID->"b923b9d1-048d-4a9a-838f-dbde09452dfc"],
+Cell[19168, 499, 298, 4, 105, "Text",ExpressionUUID->"1f417c87-7f20-4517-b376-f7610e7d7279"],
+Cell[19469, 505, 123, 0, 105, "Subsection",ExpressionUUID->"adbb9a5a-0036-4521-9bb0-d0d7e93455ca"],
+Cell[19595, 507, 524, 18, 105, "Output",ExpressionUUID->"0ff3cf48-2647-468b-b41d-d57f42644b7b"],
+Cell[20122, 527, 417, 6, 105, "Text",ExpressionUUID->"a4b84aaa-3846-4a6f-963b-9bea39aea3d9"],
+Cell[20542, 535, 98, 0, 105, "Section",ExpressionUUID->"fb0cb380-fecf-4bf5-9165-f5c70eccd9c1"],
+Cell[20643, 537, 1350, 29, 105, "Output",ExpressionUUID->"e8d95a79-bb1d-4e0c-8eef-1785aa61d58b"],
+Cell[21996, 568, 486, 7, 105, "Text",ExpressionUUID->"751b354c-b069-44a6-8ccb-c6c5721afebc"]
+}
+]
+*)
+
+(* End of internal cache information *)

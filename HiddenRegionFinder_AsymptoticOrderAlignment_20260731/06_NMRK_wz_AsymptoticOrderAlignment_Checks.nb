@@ -1,0 +1,526 @@
+Notebook[{Cell["NMRK asymptotic-order alignment and HRF checks", "Title"], 
+  Cell["This notebook contains only the central NMRK expansion and its w=z, \
+wb=zb restriction.  It contains no DSC substitutions or DSC result files.  \
+The relation to DSC is documented separately in \
+NMRK_DSC_Kinematic_and_HRF_Comparison.tex.", "Text"], 
+  Cell["Graph and momentum conventions", "Section"], 
+  Cell["All momenta are algebraically outgoing.  The physical process is 2->4 \
+with p1 and p2 incoming.  Every graph uses the external attachments p1->1, \
+p2->4, p3->5, p4->3, p5->2 and p6->6.  For the one-loop hexagon this gives \
+the cyclic external ordering (1,5,4,2,3,6).  The Feynman parameters x0,x1,... \
+follow the internal-edge order displayed below.", "Text"], 
+  Cell[BoxData[TagBox[GridBox[{{"\"Graph\"", 
+        "\"Internal edges (vertex pairs, in x0,x1,... order)\""}, 
+       {"\"one-loop hexagon\"", "\"(5,6),(1,6),(1,2),(2,3),(3,4),(4,5)\""}, 
+       {"\"planar hexbox\"", 
+        "\"(5,6),(1,8),(8,6),(1,2),(2,3),(3,4),(4,7),(7,5),(7,8)\""}, 
+       {"\"nonplanar hexbox\"", 
+        "\"(5,8),(1,8),(1,2),(2,3),(7,3),(7,5),(4,7),(6,8),(4,6)\""}, 
+       {"\"hexagon-pentagon\"", 
+        "\"(5,6),(1,8),(8,6),(1,3),(3,4),(4,7),(7,5),(7,2),(8,2)\""}}, 
+      GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+      GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}], "Grid"]], "Output"], 
+  Cell["NMRK kinematic variables", "Section"], Cell["Let P=p4^+ and Q=q1 \
+q1bar=|q1_perp|^2.  The longitudinal variables are defined by p3^+=P X34, \
+p4^+=P, p5^+=P/X45 and p6^+=P/(X45 X56).  Thus X34, X45 and X56 are ordered \
+ratios of adjacent plus components; X34h and X56h below denote finite \
+rescaled variables, not new invariants.", "Text"], 
+  Cell["The transverse variables z,w and their barred partners are defined by \
+p4_perp=-q1_perp/(z-1), p5_perp=z q1_perp/[w(z-1)], \
+p6_perp=z(w-1)q1_perp/[w(z-1)], and p3_perp=-(p4_perp+p5_perp+p6_perp).  The \
+barred equations define zb and wb.  In a real physical slice barred variables \
+are complex conjugates; HRF uses the algebraic chart described next.", 
+   "Text"], Cell["Central NMRK limit and positive chart", "Subsection"], 
+  Cell["The expansion parameter is eta->0.  Central NMRK means X34=X34h/eta, \
+X56=X56h/eta and X45=O(1), with Q, z, zb, w and wb fixed.  The special \
+surface tested here is w=z and wb=zb.  We replace (1-z)(1-zb) by the chart \
+variable Kz and impose Q>0, X34h>0, X45>0, X56h>0 and Kz>0.", "Text"], 
+  Cell["For the planar ordering used here, 1-uA = X45 |w-z|^2 / \
+[(1+X45)(|w|^2+X45 |z|^2)].  Consequently w=z is the cross-ratio boundary \
+uA=1; it is an additional restriction, not part of generic central NMRK.", 
+   "Text"], Cell["Load and reproduce", "Section"], 
+  Cell["SetDirectory[NotebookDirectory[]];\n$HRFQuietReports=True;\nGet[\"Hid\
+denRegionFinder.wl\"];\nGet[\"HRF_AsymptoticOrderAlignment.wl\"];", "Input"], 
+  Cell["RunProcess[{\"wolframscript\",\"-file\",FileNameJoin[{NotebookDirecto\
+ry[],\"HRF_RunWZNMRKHexagonAsymptoticOrderAlignment.wl\"}]}]", "Input"], 
+  Cell["Current one-loop certificate", "Section"], 
+  Cell["Three accepted face presentations are equivalent descriptions of one \
+structurally unique NMRK hidden region.", "Text"], 
+  Cell[BoxData[TagBox[GridBox[{{"\"Accepted face presentations\"", "3"}, 
+       {"\"Structurally unique regions\"", "1"}, {"\"(W_SL,W_HR)\"", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "4"}], ",", RowBox[{"-", "3"}]}], 
+          "}"}]}, {"\"Hierarchy gap\"", "1"}, {"\"Certificate\"", 
+        "\"StagedAsymptoticOrderAlignmentPlusHRF\""}}, 
+      GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+      GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}], "Grid"]], "Output"], 
+  Cell["Scaling vectors", "Section"], Cell["Here the direct composition is \
+valid: the certified total vector is f+h.  The relative vector is shown only \
+as a pattern diagnostic; calculations use the certified total vector with \
+final eta component 1.", "Text"], 
+  Cell[BoxData[TagBox[GridBox[{{"\"Quantity\"", "\"Vector (x0,...,x5)\""}, 
+       {"\"Alignment representative f\"", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}], 
+            ",", RowBox[{"-", "2"}], ",", RowBox[{"-", "1"}], ",", 
+            RowBox[{"-", "2"}], ",", RowBox[{"-", "1"}]}], "}"}]}, 
+       {"\"Face-only HRF vector h\"", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}], 
+            ",", RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}], ",", 
+            RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}]}], "}"}]}, 
+       {"\"Certified total vector v\"", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "2"}], ",", RowBox[{"-", "2"}], 
+            ",", RowBox[{"-", "3"}], ",", RowBox[{"-", "2"}], ",", 
+            RowBox[{"-", "3"}], ",", RowBox[{"-", "2"}]}], "}"}]}, 
+       {"\"Relative total vector\"", RowBox[
+         {"{", RowBox[{"0", ",", "0", ",", RowBox[{"-", "1"}], ",", "0", ",", 
+            RowBox[{"-", "1"}], ",", "0"}], "}"}]}}, 
+      GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+      GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}], "Grid"]], "Output"], 
+  Cell["Cancellation hypersurface and LP layers", "Section"], 
+  Cell[BoxData[TagBox[GridBox[
+      {{TagBox[FormBox[RowBox[{RowBox[{"X34h", " ", "X45", " ", "x5"}], "+", 
+            RowBox[{"x4", " ", RowBox[{"(", RowBox[{"-", "X45"}], ")"}]}], 
+            "-", "x4"}], TraditionalForm], TraditionalForm, 
+         Editable -> True]}, 
+       {TagBox[FormBox[RowBox[{RowBox[{"Kz", " ", "x1", " ", "X45", " ", 
+              "X56h"}], "+", RowBox[{"x2", " ", RowBox[{"(", RowBox[
+                 {"-", "X45"}], ")"}]}], "-", "x2"}], TraditionalForm], 
+         TraditionalForm, Editable -> True]}}, GridBoxAlignment -> 
+       {"Columns" -> {{Left}}}, DefaultBaseStyle -> "Column", 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}], "Column"]], "Output"], 
+  Cell[BoxData[TagBox[DynamicModuleBox[{Typeset`var$$ = False}, 
+      InterpretationBox[StyleBox[PaneSelectorBox[
+         {False -> GridBox[{{OpenerBox[Dynamic[Typeset`var$$], Appearance -> 
+                Automatic, Enabled -> Automatic, AutoAction -> False, 
+               ContinuousAction -> False], "\"Certified NMRK LP layers\""}}, 
+            GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+            GridBoxBackground -> {"Columns" -> {{Automatic}}}, 
+            GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> {
+                {Automatic}}}, GridBoxSpacings -> {"Columns" -> {{0.2}}, 
+              "Rows" -> {{0.5}}}, BaselinePosition -> {1, 1}], 
+          True -> GridBox[{{OpenerBox[Dynamic[Typeset`var$$], Appearance -> 
+                Automatic, Enabled -> Automatic, AutoAction -> False, 
+               ContinuousAction -> False], "\"Certified NMRK LP layers\""}, 
+             {"", PaneBox[TagBox[GridBox[{{StyleBox["\"F_SL\"", Bold, 
+                    RGBColor[2/3, 0, 0], StripOnInput -> False]}, 
+                  {TagBox[FormBox[RowBox[{"Q", " ", "X34h", " ", "X56h", " ", 
+                       RowBox[{"(", RowBox[{RowBox[{"X34h", " ", "X45", " ", 
+                          "x5"}], "+", RowBox[{"x4", " ", RowBox[{"(", RowBox[
+                          {"-", "X45"}], ")"}]}], "-", "x4"}], ")"}], " ", 
+                       RowBox[{"(", RowBox[{RowBox[{"Kz", " ", "x1", " ", 
+                          "X45", " ", "X56h"}], "+", RowBox[{"x2", " ", 
+                          RowBox[{"(", RowBox[{"-", "X45"}], ")"}]}], "-", 
+                          "x2"}], ")"}]}], TraditionalForm], TraditionalForm, 
+                    Editable -> True]}, {StyleBox["\"F at W_HR\"", Bold, 
+                    RGBColor[0, 0, 2/3], StripOnInput -> False]}, 
+                  {TagBox[FormBox[RowBox[{RowBox[{"-", "Q"}], " ", "X34h", 
+                       " ", "X45", " ", "X56h", " ", RowBox[{"(", RowBox[
+                          {RowBox[{"Kz", " ", "x0", " ", "x2"}], "+", RowBox[
+                          {"Kz", " ", "x0", " ", "x4"}], "+", RowBox[{"Kz", 
+                          " ", "x1", " ", "x3", " ", "X56h"}], "+", RowBox[
+                          {"x3", " ", "X34h", " ", "x5"}]}], ")"}]}], 
+                     TraditionalForm], TraditionalForm, Editable -> True]}, 
+                  {StyleBox["\"U at W_HR\"", Bold, RGBColor[0, 0, 2/3], 
+                    StripOnInput -> False]}, {TagBox[FormBox[RowBox[
+                      {"x2", "+", "x4"}], TraditionalForm], TraditionalForm, 
+                    Editable -> True]}}, GridBoxAlignment -> {"Columns" -> 
+                    {{Left}}}, DefaultBaseStyle -> "Column", 
+                 GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> 
+                    {{Automatic}}}, GridBoxSpacings -> {"Columns" -> 
+                    {{Automatic}}, "Rows" -> {{1.1}}}], "Column"], 
+               ImageMargins -> 0]}}, GridBoxAlignment -> 
+             {"Columns" -> {{Left}}}, AutoDelete -> False, 
+            GridBoxBackground -> {"Columns" -> {{Automatic}}}, 
+            GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> {
+                {Automatic}}}, GridBoxSpacings -> {"Columns" -> {{0.2}}, 
+              "Rows" -> {{0.5}}}, BaselinePosition -> {1, 1}]}, 
+         Dynamic[TrueQ[Typeset`var$$]], Alignment -> Automatic, 
+         ImageSize -> Automatic, ImageMargins -> 0, BaseStyle -> {}, 
+         DefaultBaseStyle -> "OpenerView", BaselinePosition -> Baseline], 
+        Deployed -> False, StripOnInput -> False], 
+       OpenerView[{"Certified NMRK LP layers", 
+         Column[{Style["F_SL", Bold, RGBColor[2/3, 0, 0]], 
+           Q X34h X56h (X34h X45 x5 + x4 (-X45) - x4) 
+             (Kz x1 X45 X56h + x2 (-X45) - x2), Style["F at W_HR", Bold, 
+            RGBColor[0, 0, 2/3]], 
+           -Q X34h X45 X56h (Kz x0 x2 + Kz x0 x4 + Kz x1 x3 X56h + x3 X34h x5
+              ), Style["U at W_HR", Bold, RGBColor[0, 0, 2/3]], x2 + x4}, 
+          Spacings -> 1.1]}, False]], DynamicModuleValues -> Automatic], 
+     Setting[#1, {0}] & ]], "Output"], Cell["Two-loop NMRK results", 
+   "Section"], Cell["The exhaustive generic-NMRK scans have no staged \
+candidate.  The w=z candidates have now been rerun through the current \
+full-native-F audit: the aligned face proposes the cancellation and scaling, \
+but every occupied eta layer of the original polynomial is then restored and \
+tested under the composed vector.  Full-support and one-edge-boundary regions \
+are counted separately.  This final audit retains seven planar-hexbox regions \
+(four full support and three boundary); four additional staged candidates \
+fail after the omitted layers are restored and are not counted as hidden \
+regions.", "Text"], 
+  Cell[BoxData[TagBox[GridBox[{{"\"Graph\"", "\"generic staged\"", 
+        "\"w=z staged\"", "\"w=z certified\"", "\"full support\"", 
+        "\"boundary strata\""}, {"\"planar-hexbox\"", "0", "13", "7", "4", 
+        "3"}, {"\"nonplanar-hexbox\"", "0", "8", "3", "1", "2"}, 
+       {"\"hexagon-pentagon\"", "0", "0", "0", "0", "0"}}, 
+      GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+      GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}], "Grid"]], "Output"], 
+  Cell["Certified two-loop representatives", "Subsection"], 
+  Cell["The panels are initially collapsed.  Vectors are associations on the \
+active variables, so a boundary-stratum result cannot be mistaken for a \
+nine-component full-support vector.", "Text"], 
+  Cell[BoxData[TagBox[GridBox[
+      {{TagBox[DynamicModuleBox[{Typeset`var$$ = False}, InterpretationBox[
+           StyleBox[PaneSelectorBox[{False -> GridBox[
+                {{OpenerBox[Dynamic[Typeset`var$$], Appearance -> Automatic, 
+                   Enabled -> Automatic, AutoAction -> False, 
+                   ContinuousAction -> False], 
+                  "\"planar-hexbox certified representatives (7)\""}}, 
+                GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> 
+                 False, GridBoxBackground -> {"Columns" -> {{Automatic}}}, 
+                GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> 
+                   {{Automatic}}}, GridBoxSpacings -> {"Columns" -> {{0.2}}, 
+                  "Rows" -> {{0.5}}}, BaselinePosition -> {1, 1}], 
+              True -> GridBox[{{OpenerBox[Dynamic[Typeset`var$$], 
+                   Appearance -> Automatic, Enabled -> Automatic, 
+                   AutoAction -> False, ContinuousAction -> False], 
+                  "\"planar-hexbox certified representatives (7)\""}, 
+                 {"", PaneBox[TagBox[GridBox[{{"\"boundary x=0\"", 
+                       "\"certified scaling on active variables\"", 
+                       "\"(W_SL,W_HR)\"", "\"gap\"", "\"certificate\""}, 
+                      {RowBox[{"{", "x7", "}"}], RowBox[
+                        {"\[LeftAssociation]", RowBox[{RowBox[{"x0", 
+                          "\[Rule]", RowBox[{"-", "2"}]}], ",", RowBox[
+                          {"x1", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x2", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x3", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x4", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x5", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x6", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x8", "\[Rule]", RowBox[{"-", "2"}]}]}], 
+                         "\[RightAssociation]"}], RowBox[{"{", RowBox[
+                          {RowBox[{"-", "7"}], ",", RowBox[{"-", "6"}]}], 
+                         "}"}], "1", 
+                       "\"StagedAsymptoticOrderAlignmentPlusHRF\""}, 
+                      {RowBox[{"{", "x2", "}"}], RowBox[
+                        {"\[LeftAssociation]", RowBox[{RowBox[{"x0", 
+                          "\[Rule]", RowBox[{"-", "2"}]}], ",", RowBox[
+                          {"x1", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x3", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x4", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x5", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x6", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x7", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x8", "\[Rule]", RowBox[{"-", "2"}]}]}], 
+                         "\[RightAssociation]"}], RowBox[{"{", RowBox[
+                          {RowBox[{"-", "7"}], ",", RowBox[{"-", "6"}]}], 
+                         "}"}], "1", 
+                       "\"StagedAsymptoticOrderAlignmentPlusHRF\""}, 
+                      {RowBox[{"{", "}"}], RowBox[{"\[LeftAssociation]", 
+                         RowBox[{RowBox[{"x0", "\[Rule]", RowBox[{"-", 
+                          "2"}]}], ",", RowBox[{"x1", "\[Rule]", RowBox[
+                          {"-", "2"}]}], ",", RowBox[{"x2", "\[Rule]", 
+                          RowBox[{"-", "1"}]}], ",", RowBox[{"x3", "\[Rule]", 
+                          RowBox[{"-", "3"}]}], ",", RowBox[{"x4", "\[Rule]", 
+                          RowBox[{"-", "2"}]}], ",", RowBox[{"x5", "\[Rule]", 
+                          RowBox[{"-", "3"}]}], ",", RowBox[{"x6", "\[Rule]", 
+                          RowBox[{"-", "2"}]}], ",", RowBox[{"x7", "\[Rule]", 
+                          RowBox[{"-", "2"}]}], ",", RowBox[{"x8", "\[Rule]", 
+                          RowBox[{"-", "3"}]}]}], "\[RightAssociation]"}], 
+                       RowBox[{"{", RowBox[{RowBox[{"-", "7"}], ",", RowBox[
+                          {"-", "6"}]}], "}"}], "1", 
+                       "\"StagedAsymptoticOrderAlignmentPlusHRF\""}, 
+                      {RowBox[{"{", "}"}], RowBox[{"\[LeftAssociation]", 
+                         RowBox[{RowBox[{"x0", "\[Rule]", RowBox[{"-", 
+                          "2"}]}], ",", RowBox[{"x1", "\[Rule]", RowBox[
+                          {"-", "2"}]}], ",", RowBox[{"x2", "\[Rule]", 
+                          RowBox[{"-", "1"}]}], ",", RowBox[{"x3", "\[Rule]", 
+                          RowBox[{"-", "3"}]}], ",", RowBox[{"x4", "\[Rule]", 
+                          RowBox[{"-", "2"}]}], ",", RowBox[{"x5", "\[Rule]", 
+                          RowBox[{"-", "3"}]}], ",", RowBox[{"x6", "\[Rule]", 
+                          RowBox[{"-", "2"}]}], ",", RowBox[{"x7", "\[Rule]", 
+                          RowBox[{"-", "1"}]}], ",", RowBox[{"x8", "\[Rule]", 
+                          RowBox[{"-", "3"}]}]}], "\[RightAssociation]"}], 
+                       RowBox[{"{", RowBox[{RowBox[{"-", "7"}], ",", RowBox[
+                          {"-", "6"}]}], "}"}], "1", 
+                       "\"StagedAsymptoticOrderAlignmentPlusHRF\""}, 
+                      {RowBox[{"{", "}"}], RowBox[{"\[LeftAssociation]", 
+                         RowBox[{RowBox[{"x0", "\[Rule]", RowBox[{"-", 
+                          "2"}]}], ",", RowBox[{"x1", "\[Rule]", RowBox[
+                          {"-", "2"}]}], ",", RowBox[{"x2", "\[Rule]", 
+                          RowBox[{"-", "1"}]}], ",", RowBox[{"x3", "\[Rule]", 
+                          RowBox[{"-", "3"}]}], ",", RowBox[{"x4", "\[Rule]", 
+                          RowBox[{"-", "2"}]}], ",", RowBox[{"x5", "\[Rule]", 
+                          RowBox[{"-", "3"}]}], ",", RowBox[{"x6", "\[Rule]", 
+                          RowBox[{"-", "2"}]}], ",", RowBox[{"x7", "\[Rule]", 
+                          RowBox[{"-", "1"}]}], ",", RowBox[{"x8", "\[Rule]", 
+                          RowBox[{"-", "2"}]}]}], "\[RightAssociation]"}], 
+                       RowBox[{"{", RowBox[{RowBox[{"-", "6"}], ",", RowBox[
+                          {"-", "5"}]}], "}"}], "1", 
+                       "\"StagedAsymptoticOrderAlignmentPlusHRF\""}, 
+                      {RowBox[{"{", "x7", "}"}], RowBox[
+                        {"\[LeftAssociation]", RowBox[{RowBox[{"x0", 
+                          "\[Rule]", RowBox[{"-", "2"}]}], ",", RowBox[
+                          {"x1", "\[Rule]", RowBox[{"-", "1"}]}], ",", 
+                          RowBox[{"x2", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x3", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x4", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x5", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x6", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x8", "\[Rule]", RowBox[{"-", "2"}]}]}], 
+                         "\[RightAssociation]"}], RowBox[{"{", RowBox[
+                          {RowBox[{"-", "7"}], ",", RowBox[{"-", "6"}]}], 
+                         "}"}], "1", 
+                       "\"StagedAsymptoticOrderAlignmentPlusHRF\""}, 
+                      {RowBox[{"{", "}"}], RowBox[{"\[LeftAssociation]", 
+                         RowBox[{RowBox[{"x0", "\[Rule]", RowBox[{"-", 
+                          "2"}]}], ",", RowBox[{"x1", "\[Rule]", RowBox[
+                          {"-", "1"}]}], ",", RowBox[{"x2", "\[Rule]", 
+                          RowBox[{"-", "2"}]}], ",", RowBox[{"x3", "\[Rule]", 
+                          RowBox[{"-", "3"}]}], ",", RowBox[{"x4", "\[Rule]", 
+                          RowBox[{"-", "2"}]}], ",", RowBox[{"x5", "\[Rule]", 
+                          RowBox[{"-", "3"}]}], ",", RowBox[{"x6", "\[Rule]", 
+                          RowBox[{"-", "2"}]}], ",", RowBox[{"x7", "\[Rule]", 
+                          RowBox[{"-", "1"}]}], ",", RowBox[{"x8", "\[Rule]", 
+                          RowBox[{"-", "3"}]}]}], "\[RightAssociation]"}], 
+                       RowBox[{"{", RowBox[{RowBox[{"-", "7"}], ",", RowBox[
+                          {"-", "6"}]}], "}"}], "1", 
+                       "\"StagedAsymptoticOrderAlignmentPlusHRF\""}}, 
+                     GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                     AutoDelete -> False, GridBoxFrame -> {"Columns" -> 
+                        {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+                      {"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Grid"], ImageMargins -> 0]}}, GridBoxAlignment -> 
+                 {"Columns" -> {{Left}}}, AutoDelete -> False, 
+                GridBoxBackground -> {"Columns" -> {{Automatic}}}, 
+                GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> 
+                   {{Automatic}}}, GridBoxSpacings -> {"Columns" -> {{0.2}}, 
+                  "Rows" -> {{0.5}}}, BaselinePosition -> {1, 1}]}, 
+             Dynamic[TrueQ[Typeset`var$$]], Alignment -> Automatic, 
+             ImageSize -> Automatic, ImageMargins -> 0, BaseStyle -> {}, 
+             DefaultBaseStyle -> "OpenerView", BaselinePosition -> Baseline], 
+            Deployed -> False, StripOnInput -> False], 
+           OpenerView[{"planar-hexbox certified representatives (7)", 
+             Grid[{{"boundary x=0", "certified scaling on active variables", 
+                "(W_SL,W_HR)", "gap", "certificate"}, {{x7}, <|x0 -> -2, 
+                 x1 -> -2, x2 -> -3, x3 -> -3, x4 -> -2, x5 -> -3, x6 -> -2, 
+                 x8 -> -2|>, {-7, -6}, 1, 
+                "StagedAsymptoticOrderAlignmentPlusHRF"}, {{x2}, 
+                <|x0 -> -2, x1 -> -2, x3 -> -3, x4 -> -2, x5 -> -3, x6 -> -2, 
+                 x7 -> -3, x8 -> -2|>, {-7, -6}, 1, 
+                "StagedAsymptoticOrderAlignmentPlusHRF"}, {{}, <|x0 -> -2, 
+                 x1 -> -2, x2 -> -1, x3 -> -3, x4 -> -2, x5 -> -3, x6 -> -2, 
+                 x7 -> -2, x8 -> -3|>, {-7, -6}, 1, 
+                "StagedAsymptoticOrderAlignmentPlusHRF"}, {{}, <|x0 -> -2, 
+                 x1 -> -2, x2 -> -1, x3 -> -3, x4 -> -2, x5 -> -3, x6 -> -2, 
+                 x7 -> -1, x8 -> -3|>, {-7, -6}, 1, 
+                "StagedAsymptoticOrderAlignmentPlusHRF"}, {{}, <|x0 -> -2, 
+                 x1 -> -2, x2 -> -1, x3 -> -3, x4 -> -2, x5 -> -3, x6 -> -2, 
+                 x7 -> -1, x8 -> -2|>, {-6, -5}, 1, 
+                "StagedAsymptoticOrderAlignmentPlusHRF"}, {{x7}, 
+                <|x0 -> -2, x1 -> -1, x2 -> -3, x3 -> -3, x4 -> -2, x5 -> -3, 
+                 x6 -> -2, x8 -> -2|>, {-7, -6}, 1, 
+                "StagedAsymptoticOrderAlignmentPlusHRF"}, {{}, <|x0 -> -2, 
+                 x1 -> -1, x2 -> -2, x3 -> -3, x4 -> -2, x5 -> -3, x6 -> -2, 
+                 x7 -> -1, x8 -> -3|>, {-7, -6}, 1, 
+                "StagedAsymptoticOrderAlignmentPlusHRF"}}, Frame -> All, 
+              Alignment -> Left]}, False]], DynamicModuleValues -> 
+           Automatic], Setting[#1, {0}] & ]}, 
+       {TagBox[DynamicModuleBox[{Typeset`var$$ = False}, InterpretationBox[
+           StyleBox[PaneSelectorBox[{False -> GridBox[
+                {{OpenerBox[Dynamic[Typeset`var$$], Appearance -> Automatic, 
+                   Enabled -> Automatic, AutoAction -> False, 
+                   ContinuousAction -> False], 
+                  "\"nonplanar-hexbox certified representatives (3)\""}}, 
+                GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> 
+                 False, GridBoxBackground -> {"Columns" -> {{Automatic}}}, 
+                GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> 
+                   {{Automatic}}}, GridBoxSpacings -> {"Columns" -> {{0.2}}, 
+                  "Rows" -> {{0.5}}}, BaselinePosition -> {1, 1}], 
+              True -> GridBox[{{OpenerBox[Dynamic[Typeset`var$$], 
+                   Appearance -> Automatic, Enabled -> Automatic, 
+                   AutoAction -> False, ContinuousAction -> False], 
+                  "\"nonplanar-hexbox certified representatives (3)\""}, 
+                 {"", PaneBox[TagBox[GridBox[{{"\"boundary x=0\"", 
+                       "\"certified scaling on active variables\"", 
+                       "\"(W_SL,W_HR)\"", "\"gap\"", "\"certificate\""}, 
+                      {RowBox[{"{", "x7", "}"}], RowBox[
+                        {"\[LeftAssociation]", RowBox[{RowBox[{"x0", 
+                          "\[Rule]", RowBox[{"-", "2"}]}], ",", RowBox[
+                          {"x1", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x2", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x3", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x4", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x5", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x6", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x8", "\[Rule]", RowBox[{"-", "2"}]}]}], 
+                         "\[RightAssociation]"}], RowBox[{"{", RowBox[
+                          {RowBox[{"-", "7"}], ",", RowBox[{"-", "6"}]}], 
+                         "}"}], "1", 
+                       "\"StagedAsymptoticOrderAlignmentPlusHRF\""}, 
+                      {RowBox[{"{", "}"}], RowBox[{"\[LeftAssociation]", 
+                         RowBox[{RowBox[{"x0", "\[Rule]", RowBox[{"-", 
+                          "2"}]}], ",", RowBox[{"x1", "\[Rule]", RowBox[
+                          {"-", "2"}]}], ",", RowBox[{"x2", "\[Rule]", 
+                          RowBox[{"-", "3"}]}], ",", RowBox[{"x3", "\[Rule]", 
+                          RowBox[{"-", "2"}]}], ",", RowBox[{"x4", "\[Rule]", 
+                          RowBox[{"-", "3"}]}], ",", RowBox[{"x5", "\[Rule]", 
+                          RowBox[{"-", "2"}]}], ",", RowBox[{"x6", "\[Rule]", 
+                          RowBox[{"-", "2"}]}], ",", RowBox[{"x7", "\[Rule]", 
+                          RowBox[{"-", "1"}]}], ",", RowBox[{"x8", "\[Rule]", 
+                          RowBox[{"-", "3"}]}]}], "\[RightAssociation]"}], 
+                       RowBox[{"{", RowBox[{RowBox[{"-", "7"}], ",", RowBox[
+                          {"-", "6"}]}], "}"}], "1", 
+                       "\"StagedAsymptoticOrderAlignmentPlusHRF\""}, 
+                      {RowBox[{"{", "x7", "}"}], RowBox[
+                        {"\[LeftAssociation]", RowBox[{RowBox[{"x0", 
+                          "\[Rule]", RowBox[{"-", "1"}]}], ",", RowBox[
+                          {"x1", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x2", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x3", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x4", "\[Rule]", RowBox[{"-", "2"}]}], ",", 
+                          RowBox[{"x5", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x6", "\[Rule]", RowBox[{"-", "3"}]}], ",", 
+                          RowBox[{"x8", "\[Rule]", RowBox[{"-", "2"}]}]}], 
+                         "\[RightAssociation]"}], RowBox[{"{", RowBox[
+                          {RowBox[{"-", "7"}], ",", RowBox[{"-", "6"}]}], 
+                         "}"}], "1", 
+                       "\"StagedAsymptoticOrderAlignmentPlusHRF\""}}, 
+                     GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                     AutoDelete -> False, GridBoxFrame -> {"Columns" -> 
+                        {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+                      {"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+                    "Grid"], ImageMargins -> 0]}}, GridBoxAlignment -> 
+                 {"Columns" -> {{Left}}}, AutoDelete -> False, 
+                GridBoxBackground -> {"Columns" -> {{Automatic}}}, 
+                GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> 
+                   {{Automatic}}}, GridBoxSpacings -> {"Columns" -> {{0.2}}, 
+                  "Rows" -> {{0.5}}}, BaselinePosition -> {1, 1}]}, 
+             Dynamic[TrueQ[Typeset`var$$]], Alignment -> Automatic, 
+             ImageSize -> Automatic, ImageMargins -> 0, BaseStyle -> {}, 
+             DefaultBaseStyle -> "OpenerView", BaselinePosition -> Baseline], 
+            Deployed -> False, StripOnInput -> False], 
+           OpenerView[{"nonplanar-hexbox certified representatives (3)", 
+             Grid[{{"boundary x=0", "certified scaling on active variables", 
+                "(W_SL,W_HR)", "gap", "certificate"}, {{x7}, <|x0 -> -2, 
+                 x1 -> -2, x2 -> -3, x3 -> -2, x4 -> -3, x5 -> -3, x6 -> -2, 
+                 x8 -> -2|>, {-7, -6}, 1, 
+                "StagedAsymptoticOrderAlignmentPlusHRF"}, {{}, <|x0 -> -2, 
+                 x1 -> -2, x2 -> -3, x3 -> -2, x4 -> -3, x5 -> -2, x6 -> -2, 
+                 x7 -> -1, x8 -> -3|>, {-7, -6}, 1, 
+                "StagedAsymptoticOrderAlignmentPlusHRF"}, {{x7}, 
+                <|x0 -> -1, x1 -> -2, x2 -> -3, x3 -> -2, x4 -> -2, x5 -> -3, 
+                 x6 -> -3, x8 -> -2|>, {-7, -6}, 1, 
+                "StagedAsymptoticOrderAlignmentPlusHRF"}}, Frame -> All, 
+              Alignment -> Left]}, False]], DynamicModuleValues -> 
+           Automatic], Setting[#1, {0}] & ]}, 
+       {TagBox[DynamicModuleBox[{Typeset`var$$ = False}, InterpretationBox[
+           StyleBox[PaneSelectorBox[{False -> GridBox[
+                {{OpenerBox[Dynamic[Typeset`var$$], Appearance -> Automatic, 
+                   Enabled -> Automatic, AutoAction -> False, 
+                   ContinuousAction -> False], 
+                  "\"hexagon-pentagon certified representatives (0)\""}}, 
+                GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> 
+                 False, GridBoxBackground -> {"Columns" -> {{Automatic}}}, 
+                GridBoxItemSize -> {"Columns" -> {{Automatic}}, "Rows" -> 
+                   {{Automatic}}}, GridBoxSpacings -> {"Columns" -> {{0.2}}, 
+                  "Rows" -> {{0.5}}}, BaselinePosition -> {1, 1}], 
+              True -> GridBox[{{OpenerBox[Dynamic[Typeset`var$$], 
+                   Appearance -> Automatic, Enabled -> Automatic, 
+                   AutoAction -> False, ContinuousAction -> False], 
+                  "\"hexagon-pentagon certified representatives (0)\""}, 
+                 {"", PaneBox["\"No certified region.\"", ImageMargins -> 
+                    0]}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                AutoDelete -> False, GridBoxBackground -> {"Columns" -> 
+                   {{Automatic}}}, GridBoxItemSize -> {"Columns" -> 
+                   {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                GridBoxSpacings -> {"Columns" -> {{0.2}}, "Rows" -> {{0.5}}}, 
+                BaselinePosition -> {1, 1}]}, Dynamic[TrueQ[Typeset`var$$]], 
+             Alignment -> Automatic, ImageSize -> Automatic, 
+             ImageMargins -> 0, BaseStyle -> {}, DefaultBaseStyle -> 
+              "OpenerView", BaselinePosition -> Baseline], Deployed -> False, 
+            StripOnInput -> False], OpenerView[
+            {"hexagon-pentagon certified representatives (0)", 
+             "No certified region."}, False]], DynamicModuleValues -> 
+           Automatic], Setting[#1, {0}] & ]}}, GridBoxAlignment -> 
+       {"Columns" -> {{Left}}}, DefaultBaseStyle -> "Column", 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}, GridBoxSpacings -> 
+       {"Columns" -> {{Automatic}}, "Rows" -> {{1}}}], "Column"]], "Output"], 
+  Cell["Interior-generator multiplicity: open audit", "Subsection"], 
+  Cell["A cancellation hypersurface is defined by non-monomial polynomial \
+factors.  No x_i alone is treated as a cancellation factor.  The four \
+full-support planar-hexbox vectors fall into three generator classes.  Rows 2 \
+and 3 have the same product of the same two non-monomial linear factors (up \
+to factor order and overall signs), but have different certified vectors.  \
+Whether these are two genuinely distinct local facets of one singular \
+hypersurface or an overcount remains to be established by a common \
+local-coordinate/dissection analysis.", "Text"], 
+  Cell[BoxData[TagBox[GridBox[{{"\"row\"", "\"generator class\"", 
+        "\"relative vector\"", "\"polynomial factor 1\"", 
+        "\"polynomial factor 2\""}, {"1", "1", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}], 
+            ",", "0", ",", RowBox[{"-", "2"}], ",", RowBox[{"-", "1"}], ",", 
+            RowBox[{"-", "2"}], ",", RowBox[{"-", "1"}], ",", 
+            RowBox[{"-", "1"}], ",", RowBox[{"-", "2"}]}], "}"}], 
+        TagBox[FormBox[RowBox[{RowBox[{"X34h", " ", "X45", " ", "x6"}], "+", 
+            RowBox[{"X34h", " ", "X45", " ", "x7"}], "-", 
+            RowBox[{RowBox[{"X45"}], " ", "x5"}], "-", "x5"}], 
+          TraditionalForm], TraditionalForm, Editable -> True], 
+        TagBox[FormBox[RowBox[{RowBox[{"Kz", " ", "x1", " ", "X45", " ", 
+              "X56h"}], "+", RowBox[{"x3", " ", RowBox[{"(", RowBox[
+                 {"-", "X45"}], ")"}]}], "-", "x3"}], TraditionalForm], 
+         TraditionalForm, Editable -> True]}, {"2", "2", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}], 
+            ",", "0", ",", RowBox[{"-", "2"}], ",", RowBox[{"-", "1"}], ",", 
+            RowBox[{"-", "2"}], ",", RowBox[{"-", "1"}], ",", "0", ",", 
+            RowBox[{"-", "2"}]}], "}"}], 
+        TagBox[FormBox[RowBox[{RowBox[{"X34h", " ", "X45", " ", "x6"}], "-", 
+            RowBox[{RowBox[{"X45"}], " ", "x5"}], "-", "x5"}], 
+          TraditionalForm], TraditionalForm, Editable -> True], 
+        TagBox[FormBox[RowBox[{RowBox[{"Kz", " ", "x1", " ", "X45", " ", 
+              "X56h"}], "+", RowBox[{"x3", " ", RowBox[{"(", RowBox[
+                 {"-", "X45"}], ")"}]}], "-", "x3"}], TraditionalForm], 
+         TraditionalForm, Editable -> True]}, {"3", "2", 
+        RowBox[{"{", RowBox[{RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}], 
+            ",", "0", ",", RowBox[{"-", "2"}], ",", RowBox[{"-", "1"}], ",", 
+            RowBox[{"-", "2"}], ",", RowBox[{"-", "1"}], ",", "0", ",", 
+            RowBox[{"-", "1"}]}], "}"}], 
+        TagBox[FormBox[RowBox[{RowBox[{"Kz", " ", "x1", " ", "X45", " ", 
+              "X56h"}], "+", RowBox[{"x3", " ", RowBox[{"(", RowBox[
+                 {"-", "X45"}], ")"}]}], "-", "x3"}], TraditionalForm], 
+         TraditionalForm, Editable -> True], 
+        TagBox[FormBox[RowBox[{RowBox[{"X34h", " ", "X45", " ", "x6"}], "-", 
+            RowBox[{RowBox[{"X45"}], " ", "x5"}], "-", "x5"}], 
+          TraditionalForm], TraditionalForm, Editable -> True]}, 
+       {"4", "3", RowBox[{"{", RowBox[{RowBox[{"-", "1"}], ",", "0", ",", 
+            RowBox[{"-", "1"}], ",", RowBox[{"-", "2"}], ",", 
+            RowBox[{"-", "1"}], ",", RowBox[{"-", "2"}], ",", 
+            RowBox[{"-", "1"}], ",", "0", ",", RowBox[{"-", "2"}]}], "}"}], 
+        TagBox[FormBox[RowBox[{RowBox[{"X34h", " ", "X45", " ", "x6"}], "-", 
+            RowBox[{RowBox[{"X45"}], " ", "x5"}], "-", "x5"}], 
+          TraditionalForm], TraditionalForm, Editable -> True], 
+        TagBox[FormBox[RowBox[{RowBox[{"Kz", " ", "x2", " ", "X45", " ", 
+              "X56h"}], "+", RowBox[{"x3", " ", RowBox[{"(", RowBox[
+                 {"-", "X45"}], ")"}]}], "-", "x3"}], TraditionalForm], 
+         TraditionalForm, Editable -> True]}}, GridBoxAlignment -> 
+       {"Columns" -> {{Left}}}, AutoDelete -> False, 
+      GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+      GridBoxItemSize -> {"Columns" -> {{Automatic}}, 
+        "Rows" -> {{Automatic}}}], "Grid"]], "Output"], 
+  Cell["References and notation sources", "Section"], 
+  Cell["NMRK light-cone and central-emission variables: E. P. Byrne et al., \
+arXiv:2204.12459, and E. P. Byrne et al., arXiv:2506.10644.  Local dissection \
+and pullback of hidden-region vectors: E. Gardi et al., arXiv:2407.13738.  \
+The comparison with DSC is documented in \
+NMRK_DSC_Kinematic_and_HRF_Comparison.pdf in this directory.", "Text"], 
+  Cell["Regression", "Section"], Cell["Get[\"HRF_LayeredDissectionRegressionT\
+ests.wl\"];\nhrfRunLayeredDissectionRegressionTests[]", "Input"]}, 
+ WindowTitle -> "NMRK_wz_AsymptoticOrderAlignment_Checks", 
+ StyleDefinitions -> "Default.nb", CellLabelAutoDelete -> False]

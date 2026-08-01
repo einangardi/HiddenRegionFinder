@@ -1,0 +1,37 @@
+\providecommand{\href}[2]{#2}\begingroup\raggedright\begin{thebibliography}{1}
+
+\bibitem{Chen:2026dnj}
+W.~Chen, E.~Gardi, R.~Ma, Y.~Ma, Y.~Zhang and Z.~Zhu,
+  \emph{{Spacelike-Collinear Scattering by the Method of Regions}},
+  \href{https://arxiv.org/abs/2607.15126}{{\tt 2607.15126}}.
+
+\bibitem{Henn:2024qjq}
+J.~Henn, R.~Ma, Y.~Xu, K.~Yan, Y.~Zhang and H.~X. Zhu, \emph{{Two-Loop
+  Spacelike Splitting Amplitude for N=4 Super-Yang-Mills Theory}},
+  \href{https://arxiv.org/abs/2406.14604}{{\tt 2406.14604}}.
+
+\bibitem{Abreu:2024xoh}
+S.~Abreu, G.~De~Laurentis, G.~Falcioni, E.~Gardi, C.~Milloy and L.~Vernazza,
+  \emph{{The two-loop Lipatov vertex in QCD}},
+  \href{http://dx.doi.org/10.1007/JHEP04(2025)161}{\emph{JHEP} {\bf 04} (2025)
+  161}, [\href{https://arxiv.org/abs/2412.20578}{{\tt 2412.20578}}].
+
+\bibitem{Zhang:2005SchurComplement}
+F.~Zhang, ed., \emph{{The Schur Complement and Its Applications}}, vol.~4 of
+  \emph{Numerical Methods and Algorithms}.
+\newblock Springer, New York, 2005,
+  \href{http://dx.doi.org/10.1007/b105056}{10.1007/b105056}.
+
+\bibitem{Bartels:1980pe}
+J.~Bartels, \emph{{High-Energy Behavior in a Nonabelian Gauge Theory (II)}},
+  \href{http://dx.doi.org/10.1016/0550-3213(80)90019-X}{\emph{Nucl. Phys.} {\bf
+  B175} (1980) 365--401}.
+
+\bibitem{Bartels:2008ce}
+J.~Bartels, L.~N. Lipatov and A.~Sabio~Vera, \emph{{BFKL Pomeron, Reggeized
+  gluons and Bern-Dixon-Smirnov amplitudes}},
+  \href{http://dx.doi.org/10.1103/PhysRevD.80.045002}{\emph{Phys. Rev. D} {\bf
+  80} (2009) 045002}, [\href{https://arxiv.org/abs/0802.2065}{{\tt
+  0802.2065}}].
+
+\end{thebibliography}\endgroup
