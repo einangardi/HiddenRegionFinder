@@ -1,0 +1,43 @@
+(* Created with the Wolfram Language : www.wolfram.com *)
+<|"GeneratedOn" -> "2026-09-12T10:32:11", "EquivalenceKey" -> 
+  {"BoundaryStratum", "ExactCancellationIdeal", "NormalisedPullbackVector", 
+   "WHR"}, "PresentationOnlyData" -> {"WSL", "CancellationDepth"}, 
+ "TopologyComparison" -> {<|"Topology" -> "planar hexagon--box", 
+    "StagedCandidates" -> 13, "CertifiedCandidates" -> 13, 
+    "RawCertificates" -> 41, "PhysicalHRs" -> 25, "InteriorHRs" -> 13, 
+    "CodimensionOneHRs" -> 12, "StrictCertificatePresentations" -> 27, 
+    "StagedDistinctCancellationFactors" -> 8, 
+    "HRSupplyingCancellationFactors" -> 8, "StagedDistinctGenerators" -> 7, 
+    "HRSupplyingGenerators" -> 7, "BoundaryRestrictionsOfInterior" -> 6, 
+    "PreviousTableCount" -> 7, "AgreesWithPreviousTable" -> False|>, 
+   <|"Topology" -> 
+     "same-path hexagon--pentagon (legacy key nonplanar-hexbox)", 
+    "StagedCandidates" -> 8, "CertifiedCandidates" -> 4, 
+    "RawCertificates" -> 9, "PhysicalHRs" -> 9, "InteriorHRs" -> 3, 
+    "CodimensionOneHRs" -> 6, "StrictCertificatePresentations" -> 9, 
+    "StagedDistinctCancellationFactors" -> 18, 
+    "HRSupplyingCancellationFactors" -> 5, "StagedDistinctGenerators" -> 6, 
+    "HRSupplyingGenerators" -> 4, "BoundaryRestrictionsOfInterior" -> 0, 
+    "PreviousTableCount" -> 3, "AgreesWithPreviousTable" -> False|>, 
+   <|"Topology" -> 
+     "separate-path hexagon--pentagon (legacy key hexagon-pentagon)", 
+    "StagedCandidates" -> 0, "CertifiedCandidates" -> 0, 
+    "RawCertificates" -> 0, "PhysicalHRs" -> 0, "InteriorHRs" -> 0, 
+    "CodimensionOneHRs" -> 0, "StrictCertificatePresentations" -> 0, 
+    "StagedDistinctCancellationFactors" -> 0, 
+    "HRSupplyingCancellationFactors" -> 0, "StagedDistinctGenerators" -> 0, 
+    "HRSupplyingGenerators" -> 0, "BoundaryRestrictionsOfInterior" -> 0, 
+    "PreviousTableCount" -> 0, "AgreesWithPreviousTable" -> True|>}, 
+ "CandidateOutcomes" -> {<|"Topology" -> "planar hexagon--box", 
+    "ExactNoPositivePinchRejections" -> 0, 
+    "CompleteDissectionNoCertificate" -> 0, 
+    "CandidatesProducingCertificates" -> 13|>, 
+   <|"Topology" -> "same-path hexagon--pentagon (legacy key \
+nonplanar-hexbox)", "ExactNoPositivePinchRejections" -> 3, 
+    "CompleteDissectionNoCertificate" -> 1, 
+    "CandidatesProducingCertificates" -> 4|>, 
+   <|"Topology" -> 
+     "separate-path hexagon--pentagon (legacy key hexagon-pentagon)", 
+    "ExactNoPositivePinchRejections" -> 0, 
+    "CompleteDissectionNoCertificate" -> 0, 
+    "CandidatesProducingCertificates" -> 0|>}|>

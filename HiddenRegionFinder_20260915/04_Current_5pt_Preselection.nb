@@ -1,0 +1,140 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      4977,        131]
+NotebookOptionsPosition[      3602,        102]
+NotebookOutlinePosition[      4057,        121]
+CellTagsIndexPosition[      4014,        118]
+WindowTitle->04_Current_5pt_Preselection
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Current 5-point topology preselection", "Title",ExpressionUUID->"97c1d948-4ca8-408e-82e6-e0a240df9e6e"],
+
+Cell["\<\
+Current preselection notebook: recursive derivative preselection only, with \
+the handoff fixture used by the five-point HRF scan.\
+\>", "Text",ExpressionUUID->"2bae3e29-b342-4fa1-987f-7f0c666447bf"],
+
+Cell["Setup", "Section",ExpressionUUID->"a13bf73d-fe60-4ad7-b900-5548fd9f03ee"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$HRFQuietReports", "=", "True"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], 
+      ",", "\"\<HRF_RecursiveDerivativePreselection.wl\>\""}], "}"}], "]"}], 
+   "]"}], ";"}]], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"64bf58d5-1671-47f6-8c6f-d87e0a5918cc"],
+
+Cell["Run recursive derivative preselection", "Section",ExpressionUUID->"783534a0-0150-4baa-891e-0b1b5b4afdea"],
+
+Cell["\<\
+This produces the 70 representative topology handoff. PreselectionZeroVars \
+are diagnostic provenance for the recursive sign test; HRF still receives the \
+original listed graph.\
+\>", "Text",ExpressionUUID->"6c4d2ba2-864a-447e-8806-be7f9510125d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RDScan", "=", 
+   RowBox[{"hrfRunRecursiveDerivativePreselection", "[", "]"}]}], ";", 
+  RowBox[{"RDScan", "[", "\"\<Summary\>\"", "]"}]}]], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"0fc5f9e3-676d-498d-9010-4a63b524050a"],
+
+Cell[BoxData[
+ RowBox[{"RDScan", "[", "\"\<CandidateDataset\>\"", "]"}]], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"3912bff6-2823-4b39-8f59-508a5aee8fc7"],
+
+Cell[BoxData[
+ RowBox[{"hrfRecursiveCandidateDrawingGrid", "[", 
+  RowBox[{
+   RowBox[{"Take", "[", 
+    RowBox[{
+     RowBox[{"RDScan", "[", "\"\<CandidateRows\>\"", "]"}], ",", 
+     RowBox[{"UpTo", "[", "20", "]"}]}], "]"}], ",", "2"}], "]"}]], "Input",
+ CellLabel->"In[4]:=",ExpressionUUID->"44f177d8-7998-4c4f-b697-b2cc4d54a8a0"],
+
+Cell["Export handoff fixture", "Section",ExpressionUUID->"9f77cb8f-15ad-44d2-8c1a-89566cfdd9a8"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{
+    RowBox[{"FileNameJoin", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"NotebookDirectory", "[", "]"}], 
+       ",", "\"\<RecursiveDerivativePreselectionHandoff.csv\>\""}], "}"}], 
+     "]"}], ",", 
+    RowBox[{"hrfRecursiveCSVTable", "[", 
+     RowBox[{"RDScan", "[", "\"\<CandidateHandoffRows\>\"", "]"}], "]"}]}], 
+   "]"}], ";", 
+  RowBox[{
+   RowBox[{"RDScan", "[", "\"\<CandidateHandoffRows\>\"", "]"}], ">>", 
+   InterpretationBox[
+    RowBox[{"FileNameJoin", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"NotebookDirectory", "[", "]"}], 
+       ",", "\"\<RecursiveDerivativePreselectionHandoff.wl\>\""}], "}"}], 
+     "]"}],
+    FileNameJoin[{
+      NotebookDirectory[], "RecursiveDerivativePreselectionHandoff.wl"}],
+    Editable->False]}], ";"}]], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"204b253a-bb51-4623-866d-c45e4166a7aa"]
+}, Open  ]]
+},
+Evaluator->"Local",
+WindowSize->{1250, 900},
+WindowTitle->"04_Current_5pt_Preselection",
+CellLabelAutoDelete->False,
+ShowCellTags->False,
+FrontEndVersion->"15.0 for Mac OS X ARM (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"642fb724-5ed0-40c3-8813-a3c8a2974699"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[617, 23, 109, 0, 105, "Title",ExpressionUUID->"97c1d948-4ca8-408e-82e6-e0a240df9e6e"],
+Cell[729, 25, 209, 3, 105, "Text",ExpressionUUID->"2bae3e29-b342-4fa1-987f-7f0c666447bf"],
+Cell[941, 30, 79, 0, 105, "Section",ExpressionUUID->"a13bf73d-fe60-4ad7-b900-5548fd9f03ee"],
+Cell[1023, 32, 393, 10, 105, "Input",ExpressionUUID->"64bf58d5-1671-47f6-8c6f-d87e0a5918cc"],
+Cell[1419, 44, 111, 0, 105, "Section",ExpressionUUID->"783534a0-0150-4baa-891e-0b1b5b4afdea"],
+Cell[1533, 46, 258, 4, 105, "Text",ExpressionUUID->"6c4d2ba2-864a-447e-8806-be7f9510125d"],
+Cell[1794, 52, 262, 5, 105, "Input",ExpressionUUID->"0fc5f9e3-676d-498d-9010-4a63b524050a"],
+Cell[2059, 59, 160, 2, 105, "Input",ExpressionUUID->"3912bff6-2823-4b39-8f59-508a5aee8fc7"],
+Cell[2222, 63, 334, 7, 105, "Input",ExpressionUUID->"44f177d8-7998-4c4f-b697-b2cc4d54a8a0"],
+Cell[2559, 72, 96, 0, 105, "Section",ExpressionUUID->"9f77cb8f-15ad-44d2-8c1a-89566cfdd9a8"],
+Cell[2658, 74, 928, 25, 105, "Input",ExpressionUUID->"204b253a-bb51-4623-866d-c45e4166a7aa"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,555 @@
+\providecommand{\href}[2]{#2}\begingroup\raggedright\begin{thebibliography}{10}
+
+\bibitem{Pak:2009dg}
+A.~Pak, M.~Rogal and M.~Steinhauser, \emph{{Virtual three-loop corrections to
+  Higgs boson production in gluon fusion for finite top quark mass}},
+  \href{http://dx.doi.org/10.1016/j.physletb.2009.08.016}{\emph{Phys. Lett. B}
+  {\bf 679} (2009) 473--477}, [\href{https://arxiv.org/abs/0907.2998}{{\tt
+  0907.2998}}].
+
+\bibitem{Pak:2009bx}
+A.~Pak, M.~Rogal and M.~Steinhauser, \emph{{Finite top quark mass effects in
+  NNLO Higgs boson production at LHC}},
+  \href{http://dx.doi.org/10.1007/JHEP02(2010)025}{\emph{JHEP} {\bf 02} (2010)
+  025}, [\href{https://arxiv.org/abs/0911.4662}{{\tt 0911.4662}}].
+
+\bibitem{Anastasiou:2015ema}
+C.~Anastasiou, C.~Duhr, F.~Dulat, F.~Herzog and B.~Mistlberger, \emph{{Higgs
+  boson gluon-fusion production in QCD at three loops}},
+  \href{http://dx.doi.org/10.1103/PhysRevLett.114.212001}{\emph{Phys. Rev.
+  Lett.} {\bf 114} (2015) 212001},
+  [\href{https://arxiv.org/abs/1503.06056}{{\tt 1503.06056}}].
+
+\bibitem{Jaskiewicz:2025dihiggs}
+S.~Jaskiewicz, S.~Jones, R.~Szafron and Y.~Ulrich, \emph{{The structure of
+  quark mass corrections in the $gg \to HH$ amplitude at high-energy}},
+  \href{http://dx.doi.org/10.1007/JHEP09(2025)015}{\emph{JHEP} {\bf 09} (2025)
+  015}, [\href{https://arxiv.org/abs/2501.00587}{{\tt 2501.00587}}].
+
+\bibitem{Guan:2024hlf}
+X.~Guan, F.~Herzog, Y.~Ma, B.~Mistlberger and A.~Suresh, \emph{{Splitting
+  amplitudes at N$^{3}$LO in QCD}},
+  \href{http://dx.doi.org/10.1007/JHEP01(2025)090}{\emph{JHEP} {\bf 01} (2025)
+  090}, [\href{https://arxiv.org/abs/2408.03019}{{\tt 2408.03019}}].
+
+\bibitem{Gardi:2025ule}
+E.~Gardi and Z.~Zhu, \emph{{Computing the soft anomalous dimension with
+  massless particles using the method of regions}},
+  \href{http://dx.doi.org/10.1007/JHEP03(2026)173}{\emph{JHEP} {\bf 03} (2026)
+  173}, [\href{https://arxiv.org/abs/2509.18017}{{\tt 2509.18017}}].
+
+\bibitem{Gardi:2025massive}
+E.~Gardi and Z.~Zhu, \emph{{Infrared singularities of multileg amplitudes with
+  a massive particle at three loops}},
+  \href{https://arxiv.org/abs/2510.27567}{{\tt 2510.27567}}.
+
+\bibitem{Collins:1984kg}
+J.~C. Collins, D.~E. Soper and G.~F. Sterman, \emph{{Transverse Momentum
+  Distribution in Drell-Yan Pair and W and Z Boson Production}},
+  \href{http://dx.doi.org/10.1016/0550-3213(85)90479-1}{\emph{Nucl. Phys. B}
+  {\bf 250} (1985) 199--224}.
+
+\bibitem{Collins:1985ue}
+J.~C. Collins, D.~E. Soper and G.~F. Sterman, \emph{{Factorization for Short
+  Distance Hadron - Hadron Scattering}},
+  \href{http://dx.doi.org/10.1016/0550-3213(85)90565-6}{\emph{Nucl. Phys. B}
+  {\bf 261} (1985) 104--142}.
+
+\bibitem{Collins:1989gx}
+J.~C. Collins, D.~E. Soper and G.~F. Sterman, \emph{{Factorization of Hard
+  Processes in QCD}},
+  \href{http://dx.doi.org/10.1142/9789814503266_0001}{\emph{Adv. Ser. Direct.
+  High Energy Phys.} {\bf 5} (1989) 1--91},
+  [\href{https://arxiv.org/abs/hep-ph/0409313}{{\tt hep-ph/0409313}}].
+
+\bibitem{Becher:2024kmk}
+T.~Becher, P.~Hager, S.~Jaskiewicz, M.~Neubert and D.~Schwienbacher,
+  \emph{{Factorization Restoration through Glauber Gluons}},
+  \href{http://dx.doi.org/10.1103/PhysRevLett.134.061901}{\emph{Phys. Rev.
+  Lett.} {\bf 134} (2025) 061901},
+  [\href{https://arxiv.org/abs/2408.10308}{{\tt 2408.10308}}].
+
+\bibitem{Catani:1989ne}
+S.~Catani and L.~Trentadue, \emph{{Resummation of the QCD perturbative series
+  for hard processes}},
+  \href{http://dx.doi.org/10.1016/0550-3213(89)90273-3}{\emph{Nucl. Phys. B}
+  {\bf 327} (1989) 323--352}.
+
+\bibitem{Contopanagos:1996nh}
+H.~Contopanagos, E.~Laenen and G.~F. Sterman, \emph{{Sudakov factorization and
+  resummation}},
+  \href{http://dx.doi.org/10.1016/S0550-3213(96)00567-6}{\emph{Nucl. Phys. B}
+  {\bf 484} (1997) 303--330}, [\href{https://arxiv.org/abs/hep-ph/9604313}{{\tt
+  hep-ph/9604313}}].
+
+\bibitem{Catani:2000vq}
+S.~Catani, D.~de~Florian and M.~Grazzini, \emph{{Universality of non-leading
+  logarithmic contributions in transverse-momentum distributions}},
+  \href{http://dx.doi.org/10.1016/S0550-3213(00)00617-9}{\emph{Nucl. Phys. B}
+  {\bf 596} (2001) 299--312}, [\href{https://arxiv.org/abs/hep-ph/0008184}{{\tt
+  hep-ph/0008184}}].
+
+\bibitem{Grozin:2004yc}
+A.~G. Grozin, \emph{{Heavy quark effective theory}},
+  \href{http://dx.doi.org/10.1007/b79301}{\emph{Springer Tracts Mod. Phys.}
+  {\bf 201} (2004) 1--213}.
+
+\bibitem{Bauer:2000yr}
+C.~W. Bauer, S.~Fleming and M.~E. Luke, \emph{{Summing Sudakov logarithms in
+  $B\to X_s\gamma$ in effective field theory}},
+  \href{http://dx.doi.org/10.1103/PhysRevD.63.014006}{\emph{Phys. Rev. D} {\bf
+  63} (2000) 014006}, [\href{https://arxiv.org/abs/hep-ph/0005275}{{\tt
+  hep-ph/0005275}}].
+
+\bibitem{Bauer:2000ew}
+C.~W. Bauer, S.~Fleming, D.~Pirjol and I.~W. Stewart, \emph{{An effective field
+  theory for collinear and soft gluons: Heavy to light decays}},
+  \href{http://dx.doi.org/10.1103/PhysRevD.63.114020}{\emph{Phys. Rev. D} {\bf
+  63} (2001) 114020}, [\href{https://arxiv.org/abs/hep-ph/0011336}{{\tt
+  hep-ph/0011336}}].
+
+\bibitem{Jantzen:2011nz}
+B.~Jantzen, \emph{{Foundation and generalization of the expansion by regions}},
+  \href{http://dx.doi.org/10.1007/JHEP12(2011)076}{\emph{JHEP} {\bf 12} (2011)
+  076}, [\href{https://arxiv.org/abs/1111.2589}{{\tt 1111.2589}}].
+
+\bibitem{Smirnov:2002pj}
+V.~A. Smirnov, \emph{{Applied asymptotic expansions in momenta and masses}},
+  {\emph{Springer Tracts Mod. Phys.} {\bf 177} (2002) 1--262}.
+
+\bibitem{Semenova:2018cwy}
+T.~Y. Semenova, A.~V. Smirnov and V.~A. Smirnov, \emph{{On the status of
+  expansion by regions}},
+  \href{http://dx.doi.org/10.1140/epjc/s10052-019-6653-3}{\emph{Eur. Phys. J.
+  C} {\bf 79} (2019) 136}, [\href{https://arxiv.org/abs/1809.04325}{{\tt
+  1809.04325}}].
+
+\bibitem{Ma25}
+Y.~Ma, \emph{{Identifying regions for asymptotic expansions of amplitudes:
+  Fundamentals and recent advances}},
+  \href{http://dx.doi.org/10.1142/S0217751X25300133}{\emph{Int. J. Mod. Phys.
+  A} {\bf 40} (2025) 2530013}, [\href{https://arxiv.org/abs/2505.01368}{{\tt
+  2505.01368}}].
+
+\bibitem{CtkGrshnTch82}
+K.~G. Chetyrkin, S.~G. Gorishny and F.~V. Tkachov, \emph{{Operator product
+  expansion in the minimal subtraction scheme}},
+  \href{http://dx.doi.org/10.1016/0370-2693(82)90701-8}{\emph{Phys. Lett. B}
+  {\bf 119} (1982) 407--411}.
+
+\bibitem{Ctk83}
+K.~G. Chetyrkin, \emph{{Infrared R*-operation and operator product expansion in
+  the minimal subtraction scheme}}, {\emph{Phys. Lett. B} {\bf 126} (1983)
+  371--375}.
+
+\bibitem{GrshnLrnTch83}
+S.~G. Gorishny, S.~A. Larin and F.~V. Tkachov, \emph{{The algorithm for OPE
+  coefficient functions in the MS scheme}},
+  \href{http://dx.doi.org/10.1016/0370-2693(83)91439-9}{\emph{Phys. Lett. B}
+  {\bf 124} (1983) 217--220}.
+
+\bibitem{GrshnLrn87}
+S.~G. Gorishny and S.~A. Larin, \emph{{Coefficient functions of asymptotic
+  operator expansions in the minimal subtraction scheme}}, {\emph{Nucl. Phys.
+  B} {\bf 283} (1987) 452--476}.
+
+\bibitem{SmthDVr88}
+C.~H. Llewellyn~Smith and J.~P. de~Vries, \emph{{The operator product expansion
+  for minimally subtracted operators}}, {\emph{Nucl. Phys. B} {\bf 296} (1988)
+  991--1006}.
+
+\bibitem{Grshn89}
+S.~G. Gorishny, \emph{{Construction of operator expansions and effective
+  theories in the MS scheme}}, {\emph{Nucl. Phys. B} {\bf 319} (1989)
+  633--666}.
+
+\bibitem{Smirnov:1990rz}
+V.~A. Smirnov, \emph{{Asymptotic expansions in limits of large momenta and
+  masses}}, \href{http://dx.doi.org/10.1007/BF02102092}{\emph{Commun. Math.
+  Phys.} {\bf 134} (1990) 109--137}.
+
+\bibitem{Smirnov:1994tg}
+V.~A. Smirnov, \emph{{Asymptotic expansions in momenta and masses and
+  calculation of Feynman diagrams}},
+  \href{http://dx.doi.org/10.1142/S0217732395001617}{\emph{Mod. Phys. Lett. A}
+  {\bf 10} (1995) 1485--1500},
+  [\href{https://arxiv.org/abs/hep-th/9412063}{{\tt hep-th/9412063}}].
+
+\bibitem{Beneke:1997zp}
+M.~Beneke and V.~A. Smirnov, \emph{{Asymptotic expansion of Feynman integrals
+  near threshold}},
+  \href{http://dx.doi.org/10.1016/S0550-3213(98)00138-2}{\emph{Nucl. Phys. B}
+  {\bf 522} (1998) 321--344}, [\href{https://arxiv.org/abs/hep-ph/9711391}{{\tt
+  hep-ph/9711391}}].
+
+\bibitem{Smirnov:1998vk}
+V.~A. Smirnov and E.~R. Rakhmetov, \emph{{The Strategy of regions for
+  asymptotic expansion of two loop vertex Feynman diagrams}},
+  \href{http://dx.doi.org/10.1007/BF02557396}{\emph{Theor. Math. Phys.} {\bf
+  120} (1999) 870--875}, [\href{https://arxiv.org/abs/hep-ph/9812529}{{\tt
+  hep-ph/9812529}}].
+
+\bibitem{Smirnov:1999bza}
+V.~A. Smirnov, \emph{{Problems of the strategy of regions}},
+  \href{http://dx.doi.org/10.1016/S0370-2693(99)01061-8}{\emph{Phys. Lett. B}
+  {\bf 465} (1999) 226--234}, [\href{https://arxiv.org/abs/hep-ph/9907471}{{\tt
+  hep-ph/9907471}}].
+
+\bibitem{Pilipp:2008power}
+V.~Pilipp, \emph{{Semi-numerical power expansion of Feynman integrals}},
+  \href{http://dx.doi.org/10.1088/1126-6708/2008/09/135}{\emph{JHEP} {\bf 09}
+  (2008) 135}, [\href{https://arxiv.org/abs/0808.2555}{{\tt 0808.2555}}].
+
+\bibitem{Pak:2010pt}
+A.~Pak and A.~Smirnov, \emph{{Geometric approach to asymptotic expansion of
+  Feynman integrals}},
+  \href{http://dx.doi.org/10.1140/epjc/s10052-011-1626-1}{\emph{Eur. Phys. J.
+  C} {\bf 71} (2011) 1626}, [\href{https://arxiv.org/abs/1011.4863}{{\tt
+  1011.4863}}].
+
+\bibitem{Lee:2013hzt}
+R.~N. Lee and A.~A. Pomeransky, \emph{{Critical points and number of master
+  integrals}}, \href{http://dx.doi.org/10.1007/JHEP11(2013)165}{\emph{JHEP}
+  {\bf 11} (2013) 165}, [\href{https://arxiv.org/abs/1308.6676}{{\tt
+  1308.6676}}].
+
+\bibitem{Jantzen:2012mw}
+B.~Jantzen, A.~V. Smirnov and V.~A. Smirnov, \emph{{Expansion by regions:
+  revealing potential and Glauber regions automatically}},
+  \href{http://dx.doi.org/10.1140/epjc/s10052-012-2139-2}{\emph{Eur. Phys. J.
+  C} {\bf 72} (2012) 2139}, [\href{https://arxiv.org/abs/1206.0546}{{\tt
+  1206.0546}}].
+
+\bibitem{Ananthanarayan:2018tog}
+B.~Ananthanarayan, A.~Pal, S.~Ramanan and R.~Sarkar, \emph{{Unveiling Regions
+  in multi-scale Feynman Integrals using Singularities and Power Geometry}},
+  \href{http://dx.doi.org/10.1140/epjc/s10052-019-6533-x}{\emph{Eur. Phys. J.
+  C} {\bf 79} (2019) 57}, [\href{https://arxiv.org/abs/1810.06270}{{\tt
+  1810.06270}}].
+
+\bibitem{Heinrich:2021dbf}
+G.~Heinrich, S.~Jahn, S.~P. Jones, M.~Kerner, F.~Langer, V.~Magerya et~al.,
+  \emph{{Expansion by regions with pySecDec}},
+  \href{http://dx.doi.org/10.1016/j.cpc.2021.108267}{\emph{Comput. Phys.
+  Commun.} {\bf 273} (2022) 108267},
+  [\href{https://arxiv.org/abs/2108.10807}{{\tt 2108.10807}}].
+
+\bibitem{Lnd59}
+L.~Landau, \emph{On analytic properties of vertex parts in quantum field
+  theory}, {\emph{Nuclear Physics} {\bf 13} (1959) 181--192}.
+
+\bibitem{Bjorken:1959fd}
+J.~D. Bjorken, \emph{{Experimental tests of Quantum electrodynamics and
+  spectral representations of Green's functions in perturbation theory}}.
+\newblock PhD thesis, Stanford U., 1959.
+
+\bibitem{Nakanishi:1959jzx}
+N.~Nakanishi, \emph{{Ordinary and Anomalous Thresholds in Perturbation
+  Theory}}, \href{http://dx.doi.org/10.1143/ptp.22.128}{\emph{Prog. Theor.
+  Phys.} {\bf 22} (1959) 128--144}.
+
+\bibitem{Collins:2020euz}
+J.~Collins, \emph{{A new and complete proof of the Landau condition for pinch
+  singularities of Feynman graphs and other integrals}},
+  \href{https://arxiv.org/abs/2007.04085}{{\tt 2007.04085}}.
+
+\bibitem{Gardi:2022khw}
+E.~Gardi, F.~Herzog, S.~Jones, Y.~Ma and J.~Schlenk, \emph{{The on-shell
+  expansion: from Landau equations to the Newton polytope}},
+  \href{http://dx.doi.org/10.1007/JHEP07(2023)197}{\emph{JHEP} {\bf 07} (2023)
+  197}, [\href{https://arxiv.org/abs/2211.14845}{{\tt 2211.14845}}].
+
+\bibitem{Ma:2023hrt}
+Y.~Ma, \emph{{Identifying regions in wide-angle scattering via
+  graph-theoretical approaches}},
+  \href{http://dx.doi.org/10.1007/JHEP09(2024)197}{\emph{JHEP} {\bf 09} (2024)
+  197}, [\href{https://arxiv.org/abs/2312.14012}{{\tt 2312.14012}}].
+
+\bibitem{Gardi:2024axt}
+E.~Gardi, F.~Herzog, S.~Jones and Y.~Ma, \emph{{Dissecting polytopes: Landau
+  singularities and asymptotic expansions in 2 {\textrightarrow} 2
+  scattering}}, \href{http://dx.doi.org/10.1007/JHEP08(2024)127}{\emph{JHEP}
+  {\bf 08} (2024) 127}, [\href{https://arxiv.org/abs/2407.13738}{{\tt
+  2407.13738}}].
+
+\bibitem{Halliday:1964fixedangle}
+I.~G. Halliday, \emph{{High-energy behavior at fixed angle in perturbation
+  theory}}, {\emph{Annals Phys.} {\bf 28} (1964) 320--345}.
+
+\bibitem{Landshoff:1974wideangle}
+P.~V. Landshoff, \emph{{Model for elastic scattering at wide angle}},
+  \href{http://dx.doi.org/10.1103/PhysRevD.10.1024}{\emph{Phys. Rev. D} {\bf
+  10} (1974) 1024--1030}.
+
+\bibitem{Botts:1989kf}
+J.~Botts and G.~F. Sterman, \emph{{Hard Elastic Scattering in QCD: Leading
+  Behavior}}, \href{http://dx.doi.org/10.1016/0550-3213(89)90372-6}{\emph{Nucl.
+  Phys.} {\bf B325} (1989) 62--100}.
+
+\bibitem{Chen:2026dnj}
+W.~Chen, E.~Gardi, R.~Ma, Y.~Ma, Y.~Zhang and Z.~Zhu,
+  \emph{{Spacelike-Collinear Scattering by the Method of Regions}},
+  \href{https://arxiv.org/abs/2607.15126}{{\tt 2607.15126}}.
+
+\bibitem{Weinzierl:2022eaz}
+S.~Weinzierl, \emph{{Feynman Integrals. A Comprehensive Treatment for Students
+  and Researchers}}.
+\newblock UNITEXT for Physics. Springer, 2022,
+  \href{http://dx.doi.org/10.1007/978-3-030-99558-4}{10.1007/978-3-030-99558-4}.
+
+\bibitem{Kim:2023parametrizations}
+U.-R. Kim, S.~Cho and J.~Lee, \emph{{The art of Schwinger and Feynman
+  parametrizations}},
+  \href{http://dx.doi.org/10.1007/s40042-023-00764-3}{\emph{J. Korean Phys.
+  Soc.} {\bf 82} (2023) 1023--1039}.
+
+\bibitem{Schwinger:1951nm}
+J.~S. Schwinger, \emph{{On gauge invariance and vacuum polarization}},
+  \href{http://dx.doi.org/10.1103/PhysRev.82.664}{\emph{Phys. Rev.} {\bf 82}
+  (1951) 664--679}.
+
+\bibitem{Chen:2019mqc}
+W.~Chen, \emph{{Reduction of Feynman Integrals in the Parametric
+  Representation}},
+  \href{http://dx.doi.org/10.1007/JHEP02(2020)115}{\emph{JHEP} {\bf 02} (2020)
+  115}, [\href{https://arxiv.org/abs/1902.10387}{{\tt 1902.10387}}].
+
+\bibitem{Fevola:2023pld}
+C.~Fevola, S.~Mizera and S.~Telen, \emph{{Principal Landau Determinants}},
+  \href{http://dx.doi.org/10.1016/j.cpc.2024.109278}{\emph{Comput. Phys.
+  Commun.} {\bf 303} (2024) 109278},
+  [\href{https://arxiv.org/abs/2311.16219}{{\tt 2311.16219}}].
+
+\bibitem{Coleman:1965cn}
+S.~Coleman and R.~E. Norton, \emph{{Singularities in the physical region}},
+  \href{http://dx.doi.org/10.1007/BF02750472}{\emph{Nuovo Cim.} {\bf 38} (1965)
+  438--442}.
+
+\bibitem{Mandelstam:1963cuts2}
+S.~Mandelstam, \emph{{Cuts in the Angular Momentum Plane. 2}},
+  \href{http://dx.doi.org/10.1007/BF02828822}{\emph{Nuovo Cim.} {\bf 30} (1963)
+  1148--1162}.
+
+\bibitem{Henn:2024qjq}
+J.~Henn, R.~Ma, Y.~Xu, K.~Yan, Y.~Zhang and H.~X. Zhu, \emph{{Two-Loop
+  Spacelike Splitting Amplitude for N=4 Super-Yang-Mills Theory}},
+  \href{https://arxiv.org/abs/2406.14604}{{\tt 2406.14604}}.
+
+\bibitem{Abreu:2024xoh}
+S.~Abreu, G.~De~Laurentis, G.~Falcioni, E.~Gardi, C.~Milloy and L.~Vernazza,
+  \emph{{The two-loop Lipatov vertex in QCD}},
+  \href{http://dx.doi.org/10.1007/JHEP04(2025)161}{\emph{JHEP} {\bf 04} (2025)
+  161}, [\href{https://arxiv.org/abs/2412.20578}{{\tt 2412.20578}}].
+
+\bibitem{Caron-Huot:2020vlo}
+S.~Caron-Huot, D.~Chicherin, J.~Henn, Y.~Zhang and S.~Zoia, \emph{{Multi-Regge
+  Limit of the Two-Loop Five-Point Amplitudes in $\mathcal{N} = 4$ Super
+  Yang-Mills and $\mathcal{N} = 8$ Supergravity}},
+  \href{http://dx.doi.org/10.1007/JHEP10(2020)188}{\emph{JHEP} {\bf 10} (2020)
+  188}, [\href{https://arxiv.org/abs/2003.03120}{{\tt 2003.03120}}].
+
+\bibitem{Byrne:2025phh}
+E.~P. Byrne, V.~Del~Duca, E.~Gardi, Y.~Mo and J.~M. Smillie, \emph{{Regge
+  factorization of tree-level QCD amplitudes using a minimal set of lightcone
+  variables}}, \href{http://dx.doi.org/10.1007/JHEP03(2026)170}{\emph{JHEP}
+  {\bf 03} (2026) 170}, [\href{https://arxiv.org/abs/2506.10644}{{\tt
+  2506.10644}}].
+
+\bibitem{Zhang:2005SchurComplement}
+F.~Zhang, ed., \emph{{The Schur Complement and Its Applications}}, vol.~4 of
+  \emph{Numerical Methods and Algorithms}.
+\newblock Springer, New York, 2005,
+  \href{http://dx.doi.org/10.1007/b105056}{10.1007/b105056}.
+
+\bibitem{Cox:2015iva}
+D.~A. Cox, J.~Little and D.~O'Shea, \emph{{Ideals, Varieties, and Algorithms:
+  An Introduction to Computational Algebraic Geometry and Commutative
+  Algebra}}.
+\newblock Undergraduate Texts in Mathematics. Springer, 4~ed., 2015,
+  \href{http://dx.doi.org/10.1007/978-3-319-16721-3}{10.1007/978-3-319-16721-3}.
+
+\bibitem{Buccioni:2024gzo}
+F.~Buccioni, F.~Caola, F.~Devoto and G.~Gambuti, \emph{{Investigating the
+  universality of five-point QCD scattering amplitudes at high energy}},
+  \href{http://dx.doi.org/10.1007/JHEP03(2025)129}{\emph{JHEP} {\bf 03} (2025)
+  129}, [\href{https://arxiv.org/abs/2411.14050}{{\tt 2411.14050}}].
+
+\bibitem{Dixon:2016selfcross}
+L.~J. Dixon and I.~Esterlis, \emph{{All orders results for self-crossing Wilson
+  loops mimicking double parton scattering}},
+  \href{http://dx.doi.org/10.1007/JHEP07(2016)116}{\emph{JHEP} {\bf 07} (2016)
+  116}, [\href{https://arxiv.org/abs/1602.02107}{{\tt 1602.02107}}].
+
+\bibitem{Bourjaily:2018aeq}
+J.~L. Bourjaily, A.~J. McLeod, M.~von Hippel and M.~Wilhelm,
+  \emph{{Rationalizing Loop Integration}},
+  \href{http://dx.doi.org/10.1007/JHEP08(2018)184}{\emph{JHEP} {\bf 08} (2018)
+  184}, [\href{https://arxiv.org/abs/1805.10281}{{\tt 1805.10281}}].
+
+\bibitem{Byrne:2022cev}
+E.~P. Byrne, V.~Del~Duca, L.~J. Dixon, E.~Gardi and J.~M. Smillie,
+  \emph{{One-loop central-emission vertex for two gluons in $\mathcal{N}=4$
+  super Yang--Mills theory}},
+  \href{http://dx.doi.org/10.1007/JHEP08(2022)271}{\emph{JHEP} {\bf 08} (2022)
+  271}, [\href{https://arxiv.org/abs/2204.12459}{{\tt 2204.12459}}].
+
+\bibitem{Duhr:2025lyg}
+C.~Duhr, A.~Venkata and C.~Zhang, \emph{{Double Spacelike Collinear Limits from
+  Multi-Regge Kinematics}},
+  \href{http://dx.doi.org/10.1103/3bxb-zfwc}{\emph{Phys. Rev. Lett.} {\bf 135}
+  (2025) 241601}, [\href{https://arxiv.org/abs/2507.05355}{{\tt 2507.05355}}].
+
+\bibitem{GardiZhu:2026regions}
+E.~Gardi and Z.~Zhu, \emph{{The Method of Regions: from parametric space to
+  momentum space}}, {\emph{in preparation} (2026) }.
+
+\bibitem{GardiHerzogJonesMa:2026regge}
+E.~Gardi, F.~Herzog, S.~Jones and Y.~Ma, \emph{{Regions in the Regge-limit
+  expansion of two-to-two scattering}}, {\emph{in preparation} (2026) }.
+
+\bibitem{Lipatov1976}
+L.~N. Lipatov, \emph{Reggeization of the vector meson and the vacuum
+  singularity in nonabelian gauge theories}, {\emph{Soviet Journal of Nuclear
+  Physics} {\bf 23} (1976) 338--345}.
+
+\bibitem{Fadin:1975cb}
+V.~S. Fadin, E.~A. Kuraev and L.~N. Lipatov, \emph{{On the Pomeranchuk
+  Singularity in Asymptotically Free Theories}},
+  \href{http://dx.doi.org/10.1016/0370-2693(75)90524-9}{\emph{Phys. Lett. B}
+  {\bf 60} (1975) 50--52}.
+
+\bibitem{Kuraev:1976ge}
+E.~A. Kuraev, L.~N. Lipatov and V.~S. Fadin, \emph{{Multi-Reggeon Processes in
+  the Yang--Mills Theory}}, {\emph{Sov. Phys. JETP} {\bf 44} (1976) 443--450}.
+
+\bibitem{Kuraev:1977fs}
+E.~A. Kuraev, L.~N. Lipatov and V.~S. Fadin, \emph{{The Pomeranchuk Singularity
+  in Nonabelian Gauge Theories}}, {\emph{Sov. Phys. JETP} {\bf 45} (1977)
+  199--204}.
+
+\bibitem{Balitsky:1978ic}
+I.~I. Balitsky and L.~N. Lipatov, \emph{{The Pomeranchuk Singularity in Quantum
+  Chromodynamics}}, {\emph{Sov. J. Nucl. Phys.} {\bf 28} (1978) 822--829}.
+
+\bibitem{Rothstein:2016bsq}
+I.~Z. Rothstein and I.~W. Stewart, \emph{{An Effective Field Theory for Forward
+  Scattering and Factorization Violation}},
+  \href{http://dx.doi.org/10.1007/JHEP08(2016)025}{\emph{JHEP} {\bf 08} (2016)
+  025}, [\href{https://arxiv.org/abs/1601.04695}{{\tt 1601.04695}}].
+
+\bibitem{Moult:2022lfy}
+I.~Moult, S.~Raman, G.~Ridgway and I.~W. Stewart, \emph{{Anomalous dimensions
+  from soft Regge constants}},
+  \href{http://dx.doi.org/10.1007/JHEP05(2023)025}{\emph{JHEP} {\bf 05} (2023)
+  025}, [\href{https://arxiv.org/abs/2207.02859}{{\tt 2207.02859}}].
+
+\bibitem{Gao:2024qsg}
+A.~Gao, I.~Moult, S.~Raman, G.~Ridgway and I.~W. Stewart, \emph{{A collinear
+  perspective on the Regge limit}},
+  \href{http://dx.doi.org/10.1007/JHEP05(2024)328}{\emph{JHEP} {\bf 05} (2024)
+  328}, [\href{https://arxiv.org/abs/2401.00931}{{\tt 2401.00931}}].
+
+\bibitem{DelDuca:2001gu}
+V.~Del~Duca and E.~W.~N. Glover, \emph{{The High-energy limit of QCD at two
+  loops}}, \href{http://dx.doi.org/10.1088/1126-6708/2001/10/035}{\emph{JHEP}
+  {\bf 10} (2001) 035}, [\href{https://arxiv.org/abs/hep-ph/0109028}{{\tt
+  hep-ph/0109028}}].
+
+\bibitem{Bret:2011xm}
+V.~Del~Duca, C.~Duhr, E.~Gardi, L.~Magnea and C.~D. White, \emph{{An infrared
+  approach to Reggeization}},
+  \href{http://dx.doi.org/10.1103/PhysRevD.85.071104}{\emph{Phys. Rev.} {\bf
+  D85} (2012) 071104}, [\href{https://arxiv.org/abs/1108.5947}{{\tt
+  1108.5947}}].
+
+\bibitem{Caron-Huot:2017fxr}
+S.~Caron-Huot, E.~Gardi and L.~Vernazza, \emph{{Two-parton scattering in the
+  high-energy limit}},
+  \href{http://dx.doi.org/10.1007/JHEP06(2017)016}{\emph{JHEP} {\bf 06} (2017)
+  016}, [\href{https://arxiv.org/abs/1701.05241}{{\tt 1701.05241}}].
+
+\bibitem{Caola:2021izf}
+F.~Caola, A.~Chakraborty, G.~Gambuti, A.~von Manteuffel and L.~Tancredi,
+  \emph{{Three-Loop Gluon Scattering in QCD and the Gluon Regge Trajectory}},
+  \href{http://dx.doi.org/10.1103/PhysRevLett.128.212001}{\emph{Phys. Rev.
+  Lett.} {\bf 128} (2022) 212001},
+  [\href{https://arxiv.org/abs/2112.11097}{{\tt 2112.11097}}].
+
+\bibitem{Falcioni:2021dgr}
+G.~Falcioni, E.~Gardi, N.~Maher, C.~Milloy and L.~Vernazza,
+  \emph{{Disentangling the Regge Cut and Regge Pole in Perturbative QCD}},
+  \href{http://dx.doi.org/10.1103/PhysRevLett.128.132001}{\emph{Phys. Rev.
+  Lett.} {\bf 128} (2022) 132001},
+  [\href{https://arxiv.org/abs/2112.11098}{{\tt 2112.11098}}].
+
+\bibitem{Falcioni:2021buo}
+G.~Falcioni, E.~Gardi, N.~Maher, C.~Milloy and L.~Vernazza, \emph{{Scattering
+  amplitudes in the Regge limit and the soft anomalous dimension through four
+  loops}}, \href{http://dx.doi.org/10.1007/JHEP03(2022)053}{\emph{JHEP} {\bf
+  03} (2022) 053}, [\href{https://arxiv.org/abs/2111.10664}{{\tt 2111.10664}}].
+
+\bibitem{Bartels:2008ce}
+J.~Bartels, L.~N. Lipatov and A.~Sabio~Vera, \emph{{BFKL Pomeron, Reggeized
+  gluons and Bern-Dixon-Smirnov amplitudes}},
+  \href{http://dx.doi.org/10.1103/PhysRevD.80.045002}{\emph{Phys. Rev. D} {\bf
+  80} (2009) 045002}, [\href{https://arxiv.org/abs/0802.2065}{{\tt
+  0802.2065}}].
+
+\bibitem{Dixon:2012yy}
+L.~J. Dixon, C.~Duhr and J.~Pennington, \emph{{Single-valued harmonic
+  polylogarithms and the multi-Regge limit}},
+  \href{http://dx.doi.org/10.1007/JHEP10(2012)074}{\emph{JHEP} {\bf 10} (2012)
+  074}, [\href{https://arxiv.org/abs/1207.0186}{{\tt 1207.0186}}].
+
+\bibitem{Caron-Huot:2019vjl}
+S.~Caron-Huot, L.~J. Dixon, F.~Dulat, M.~von Hippel, A.~J. McLeod and
+  G.~Papathanasiou, \emph{{Six-Gluon Amplitudes in Planar $\mathcal{N}=4$
+  Super-Yang--Mills Theory at Six and Seven Loops}},
+  \href{http://dx.doi.org/10.1007/JHEP08(2019)016}{\emph{JHEP} {\bf 08} (2019)
+  016}, [\href{https://arxiv.org/abs/1903.10890}{{\tt 1903.10890}}].
+
+\bibitem{Catani:2011st}
+S.~Catani, D.~de~Florian and G.~Rodrigo, \emph{{Space-like (versus time-like)
+  collinear limits in QCD: Is factorization violated?}},
+  \href{http://dx.doi.org/10.1007/JHEP07(2012)026}{\emph{JHEP} {\bf 07} (2012)
+  026}, [\href{https://arxiv.org/abs/1112.4405}{{\tt 1112.4405}}].
+
+\bibitem{Dixon:2019lnw}
+L.~J. Dixon, E.~Herrmann, K.~Yan and H.~X. Zhu, \emph{{Soft gluon emission at
+  two loops in full color}},
+  \href{http://dx.doi.org/10.1007/JHEP05(2020)135}{\emph{JHEP} {\bf 05} (2020)
+  135}, [\href{https://arxiv.org/abs/1912.09370}{{\tt 1912.09370}}].
+
+\bibitem{Buccioni:2026mfg}
+F.~Buccioni, H.~Fang and K.~Yan, \emph{{Two-Loop Spacelike Splitting Amplitudes
+  in Full-Color QCD}},  \href{https://arxiv.org/abs/2603.27123}{{\tt
+  2603.27123}}.
+
+\bibitem{Becher:2025igg}
+T.~Becher, P.~Hager, S.~Jaskiewicz, M.~Neubert and D.~Schwienbacher,
+  \emph{{Low-energy theory of jet processes and PDF factorization}},
+  \href{http://dx.doi.org/10.1007/JHEP01(2026)024}{\emph{JHEP} {\bf 01} (2026)
+  024}, [\href{https://arxiv.org/abs/2509.07082}{{\tt 2509.07082}}].
+
+\bibitem{Becher:2026kbr}
+T.~Becher, P.~Hager, M.~Neubert and D.~Schwienbacher, \emph{{Factorization
+  Beyond Coherence}},  \href{https://arxiv.org/abs/2603.12383}{{\tt
+  2603.12383}}.
+
+\bibitem{Dasgupta:2025cgl}
+M.~Dasgupta, A.~Fraley, P.~F. Monni and S.~Nabeebaccus, \emph{{Uncharted
+  Logarithmic Structures in QCD Transverse-Energy Flow}},
+  \href{https://arxiv.org/abs/2511.14681}{{\tt 2511.14681}}.
+
+\bibitem{Banfi:2025mra}
+A.~Banfi, J.~R. Forshaw and J.~Holguin, \emph{{One-Jettiness Distribution
+  Contains Super-Super-Leading Logarithms}},
+  \href{http://dx.doi.org/10.1103/flv7-ksvf}{\emph{Phys. Rev. Lett.} {\bf 136}
+  (2026) 221901}, [\href{https://arxiv.org/abs/2511.11799}{{\tt 2511.11799}}].
+
+\bibitem{StacksConormalSequence}
+{{The Stacks Project Authors}}, ``{The Stacks Project, Section 37.63: Exact
+  sequences of differentials and conormal sheaves}.''
+  {\url{https://stacks.math.columbia.edu/tag/06BB}}.
+
+\end{thebibliography}\endgroup

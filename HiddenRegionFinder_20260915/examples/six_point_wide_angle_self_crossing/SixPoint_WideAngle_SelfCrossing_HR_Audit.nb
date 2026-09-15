@@ -1,0 +1,635 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     23674,        625]
+NotebookOptionsPosition[     19329,        550]
+NotebookOutlinePosition[     19780,        567]
+CellTagsIndexPosition[     19737,        564]
+WindowTitle->Six-point wide-angle self-crossing HR audit
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+Six-point twisted hexagon: wide-angle self-crossing hidden region\
+\>", "Title",ExpressionUUID->"2a4912b6-fc47-45a5-881d-eec548614e80"],
+
+Cell["\<\
+This notebook tests whether the one-loop twisted-hexagon hidden regions found \
+in NMRK with zero transverse recoil and in the double spacelike-collinear \
+limit descend from a special wide-angle configuration. The answer is \
+affirmative: the physical 2-to-4 self-crossing surface contains a boundary \
+hidden region, and its two cancellation factors reduce exactly to the factors \
+used in both composite limits.\
+\>", "Text",ExpressionUUID->"a26bb7a1-faba-4874-8ab5-5c7c23e2ba70"],
+
+Cell[CellGroupData[{
+
+Cell["1. Reproducible setup", "Section",ExpressionUUID->"9f3f5e2f-cdac-4f2d-b63d-9c1535354b54"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$HRF6SelfCrossingAuditLibraryOnly", "=", "True"}], ";", 
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], 
+      ",", "\"\<HRF_SixPointWideAngleSelfCrossingAudit.wl\>\""}], "}"}], 
+    "]"}], "]"}], ";", 
+  RowBox[{"audit", "=", 
+   RowBox[{"hrf6SelfCrossingAudit", "[", "]"}]}], ";"}]], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"79405df8-57cb-4b25-8f8f-b11c3fbd066c"],
+
+Cell[BoxData["\<\"[loaded] Example 01 common reporting helpers.\"\>"], "Print",
+ CellChangeTimes->{3.998107728106708*^9},
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"1833045f-e1e3-4e5b-af78-212e9cf256dd"]
+}, Open  ]],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{{3.99810774705984*^9, 3.9981077490430813`*^9}, 
+   3.9981078394381857`*^9},
+ CellLabel->"In[3]:=",ExpressionUUID->"22fd7af6-2b63-4dfa-9f21-9bd4530d2223"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2. Exact physical self-crossing path", "Section",ExpressionUUID->"98029f88-392e-4a80-9f78-d98118df4d1a"],
+
+Cell["\<\
+All momenta are outgoing. The cyclic ordering used by Dixon and Esterlis is \
+(k1,...,k6)=(p3,p6,p1,p5,p4,p2), so p1 and p2 are incoming. The parameter \
+beta is a transverse recoil and eta=beta^2 is the invariant expansion \
+parameter. The fixed rational scattering angle is chosen only to provide a \
+compact exact physical witness; it does not define the cancellation mechanism.\
+\>", "Text",ExpressionUUID->"4f4a2ba8-e5eb-4fb6-a176-3d509976cb20"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     StyleBox["\<\"momentum\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"all-outgoing four-vector\"\>",
+      StripOnInput->False,
+      FontWeight->Bold]},
+    {
+     SubscriptBox["p", "1"], 
+     StyleBox["\<\"{-(1/Sqrt[1 - beta^2]), 0, 0, -(1/Sqrt[1 - beta^2])}\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro"]},
+    {
+     SubscriptBox["p", "2"], 
+     StyleBox["\<\"{-(1/Sqrt[1 - beta^2]), 0, 0, 1/Sqrt[1 - beta^2]}\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro"]},
+    {
+     SubscriptBox["p", "3"], 
+     StyleBox["\<\"{1/(2*Sqrt[1 - beta^2]), 1/2, beta/(2*Sqrt[1 - beta^2]), \
+0}\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro"]},
+    {
+     SubscriptBox["p", "4"], 
+     StyleBox["\<\"{1/(2*Sqrt[1 - beta^2]), -3/10, -1/2*beta/Sqrt[1 - \
+beta^2], -2/5}\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro"]},
+    {
+     SubscriptBox["p", "5"], 
+     StyleBox["\<\"{1/(2*Sqrt[1 - beta^2]), 3/10, -1/2*beta/Sqrt[1 - beta^2], \
+2/5}\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro"]},
+    {
+     SubscriptBox["p", "6"], 
+     StyleBox["\<\"{1/(2*Sqrt[1 - beta^2]), -1/2, beta/(2*Sqrt[1 - beta^2]), \
+0}\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro"]}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       RGBColor[0.94, 0.96, 0.99], None}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.65}}}],
+  "Grid"]], "Output",ExpressionUUID->"9d3fda5b-69fb-4fb3-aaee-b51c69628f44"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"audit", "[", 
+    RowBox[{"\"\<PhysicalKinematics\>\"", ",", "\"\<MassShellValues\>\""}], 
+    "]"}], ",", 
+   RowBox[{"audit", "[", 
+    RowBox[{"\"\<PhysicalKinematics\>\"", ",", "\"\<MomentumSum\>\""}], "]"}],
+    ",", 
+   RowBox[{"audit", "[", 
+    RowBox[{"\"\<PhysicalKinematics\>\"", ",", "\"\<CrossRatios\>\""}], 
+    "]"}]}], "}"}]], "Input",ExpressionUUID->"976e70a9-96e2-47ea-98f1-\
+b735df66517d"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\[LeftAssociation]", 
+    RowBox[{
+     RowBox[{"1", "\[Rule]", "0"}], ",", 
+     RowBox[{"2", "\[Rule]", "0"}], ",", 
+     RowBox[{"3", "\[Rule]", "0"}], ",", 
+     RowBox[{"6", "\[Rule]", "0"}], ",", 
+     RowBox[{"5", "\[Rule]", "0"}], ",", 
+     RowBox[{"4", "\[Rule]", "0"}]}], "\[RightAssociation]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"\[LeftAssociation]", 
+    RowBox[{
+     RowBox[{"uA", "\[Rule]", 
+      FractionBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", "eta"}], ")"}], "2"], 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"1", "+", "eta"}], ")"}], "2"]]}], ",", 
+     RowBox[{"vA", "\[Rule]", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"-", "5"}], "+", 
+        RowBox[{"4", " ", 
+         SqrtBox[
+          RowBox[{"1", "-", "eta"}]]}]}], 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "+", "eta"}], ")"}], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "6"}], "+", 
+          RowBox[{"4", " ", 
+           SqrtBox[
+            RowBox[{"1", "-", "eta"}]]}], "+", "eta"}], ")"}]}]]}], ",", 
+     RowBox[{"wA", "\[Rule]", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"-", "5"}], "+", 
+        RowBox[{"4", " ", 
+         SqrtBox[
+          RowBox[{"1", "-", "eta"}]]}]}], 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "+", "eta"}], ")"}], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "6"}], "+", 
+          RowBox[{"4", " ", 
+           SqrtBox[
+            RowBox[{"1", "-", "eta"}]]}], "+", "eta"}], ")"}]}]]}]}], 
+    "\[RightAssociation]"}]}], "}"}]], "Output",ExpressionUUID->"75aeebda-\
+e130-40f2-a623-b7463a96ca3d"]
+}, Open  ]],
+
+Cell["\<\
+The cross ratios obey v_A=w_A throughout the path, while u_A tends to one \
+from the physical 2-to-4 region. At eta=0 all adjacent invariants remain \
+finite and nonzero, so this is a genuinely wide-angle endpoint rather than a \
+soft or collinear limit.\
+\>", "Text",ExpressionUUID->"5ed2fb36-f204-4693-9667-3c5680a7e6ef"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["3. Boundary Landau locus", "Section",ExpressionUUID->"0806f5a7-59e8-40d0-a147-a3ffed55b4d7"],
+
+Cell["\<\
+The self-crossing pinches the box boundary obtained by contracting x0 and x3. \
+Restricting the complete hexagon polynomial to this boundary gives\
+\>", "Text",ExpressionUUID->"444f9564-1a94-4701-a2e2-c1f87734e0c1"],
+
+Cell[BoxData[
+ TagBox[
+  FormBox[
+   RowBox[{
+    RowBox[{"s145", " ", "x1", " ", "x4"}], "+", 
+    RowBox[{"s245", " ", "x2", " ", "x5"}], "+", 
+    RowBox[{"s36", " ", "x1", " ", "x5"}], "+", 
+    RowBox[{"s45", " ", "x2", " ", "x4"}]}],
+   TraditionalForm],
+  TraditionalForm,
+  Editable->True]], "Output",ExpressionUUID->"3c24160d-79e2-4cb5-9224-\
+502dc27c2c94"],
+
+Cell["On u_A=s36 s45/(s145 s245)=1 it factorises exactly as", "Text",ExpressionUUID->"6b8ce4d3-8375-42fc-89ed-2e8966270264"],
+
+Cell[BoxData[
+ TagBox[
+  FormBox[
+   FractionBox[
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"s145", " ", "x4"}], "+", 
+       RowBox[{"s36", " ", "x5"}]}], ")"}], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"s245", " ", "x2"}], "+", 
+       RowBox[{"s36", " ", "x1"}]}], ")"}]}], "s36"],
+   TraditionalForm],
+  TraditionalForm,
+  Editable->True]], "Output",ExpressionUUID->"38eb2c22-6544-46b8-9325-\
+6ad76a3fd699"],
+
+Cell["\<\
+In the physical 2-to-4 chamber s36 and s45 are positive while s145 and s245 \
+are negative. Both linear factors therefore have positive zeros. At the exact \
+rational witness x1=x2=x4=x5=1 the four active stationary equations vanish:\
+\>", "Text",ExpressionUUID->"f7820b07-e9b7-467a-b888-52105333f67d"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}]], "Output",ExpressionUUID\
+->"225f8289-506c-4f17-9ae9-718dcec2c718"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["4. Core HRF construction", "Section",ExpressionUUID->"0753575e-80ef-4743-99fe-a0824f36e61f"],
+
+Cell["\<\
+At the exact physical endpoint HRF is given only the restricted polynomial, \
+its active variables, the physical first lifting layer and U. No cancellation \
+factor or generator is supplied. The derivative harvest and pairing stages \
+return\
+\>", "Text",ExpressionUUID->"436f48fd-bfd7-4f4f-a15c-2984ebe518f6"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"audit", "[", "\"\<CoreHRF\>\"", "]"}]], "Input",ExpressionUUID->"a9223991-c95e-43b5-a39f-9f7a8fadccd2"],
+
+Cell[BoxData[
+ RowBox[{"\[LeftAssociation]", 
+  RowBox[{
+   RowBox[{"\<\"CancellationFactors\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"x4", "-", "x5"}], ",", 
+      RowBox[{"x1", "-", "x2"}]}], "}"}]}], ",", 
+   RowBox[{"\<\"Generator\"\>", "\[Rule]", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"x1", "-", "x2"}], ")"}], " ", 
+     RowBox[{"(", 
+      RowBox[{"x4", "-", "x5"}], ")"}]}]}], ",", 
+   RowBox[{"\<\"HiddenRegionQ\"\>", "\[Rule]", "True"}], ",", 
+   RowBox[{"\<\"HiddenRegionCount\"\>", "\[Rule]", "1"}], ",", 
+   RowBox[{"\<\"Scaling\"\>", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "1"}], ",", 
+      RowBox[{"-", "1"}], ",", 
+      RowBox[{"-", "1"}], ",", 
+      RowBox[{"-", "1"}]}], "}"}]}], ",", 
+   RowBox[{"\<\"WSL\"\>", "\[Rule]", 
+    RowBox[{"-", "2"}]}], ",", 
+   RowBox[{"\<\"WHR\"\>", "\[Rule]", 
+    RowBox[{"-", "1"}]}], ",", 
+   RowBox[{"\<\"SearchCompleteQ\"\>", "\[Rule]", "True"}], ",", 
+   RowBox[{"\<\"SearchTruncatedQ\"\>", "\[Rule]", "False"}]}], 
+  "\[RightAssociation]"}]], "Output",ExpressionUUID->"6f6c382a-735e-4cda-95fc-\
+4cd851fa61a6"]
+}, Open  ]],
+
+Cell["\<\
+Thus the active edge scaling is (-1,-1,-1,-1), the four monomials in the \
+generator have W_SL=-2, and cancellation promotes their combined contribution \
+to the physical layer W_HR=-1.\
+\>", "Text",ExpressionUUID->"3cae5611-6d12-41fb-92e9-de9697d5329e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["5. Restricted-polynomial dissection and facet certificate", "Section",ExpressionUUID->"847291c9-71e5-4ade-9826-4188f4f93e65"],
+
+Cell["\<\
+The boundary restriction x0=x3=0 is imposed before dissection, while \
+restoring the contracted entries only for reporting gives the \
+original-coordinate vector (x0,...,x5;1)=(0,-1,-1,0,-1,-1;1). Put t1=x1-x2 \
+and t2=x5-x4. The two ordinary dissection charts resolve one normal at a \
+time. The complete restricted LP polynomial through the first physical eta \
+layer gives:\
+\>", "Text",ExpressionUUID->"3ba0f6a4-216b-4a58-a19c-a2ce3e70b600"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     StyleBox["\<\"chart\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"local variables\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"normal\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"leading points\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"affine rank\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"lower facet\"\>",
+      StripOnInput->False,
+      FontWeight->Bold]},
+    {"\<\"t1 resolved\"\>", 
+     StyleBox["\<\"{x2, x4, t1, t2}\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro"], 
+     StyleBox["\<\"{-1, -1, 0, -1, 1}\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro"], "6", "4", "True"},
+    {"\<\"t2 resolved\"\>", 
+     StyleBox["\<\"{x2, x4, t1, t2}\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro"], 
+     StyleBox["\<\"{-1, -1, -1, 0, 1}\"\>",
+      StripOnInput->False,
+      FontFamily->"Source Code Pro"], "6", "4", "True"}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       RGBColor[0.94, 0.96, 0.99], None}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.65}}}],
+  "Grid"]], "Output",ExpressionUUID->"b7b1433c-449c-44f0-b56f-f19f9316e0bd"],
+
+Cell["\<\
+Each chart has affine rank four, the rank required for a codimension-one \
+lower facet in the five-dimensional augmented exponent space of the four \
+active local variables and eta. Higher eta layers cannot undercut the facet \
+because the LP polynomial is at most quadratic in the edge parameters. For \
+unit propagator powers the scalar contribution scales as \
+eta^(D/2-3)=eta^(-1-epsilon) in D=4-2 epsilon.\
+\>", "Text",ExpressionUUID->"ae87b179-b769-412e-97fa-6c876f1a84e5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["6. Descent to the two six-point limits", "Section",ExpressionUUID->"ce961b93-f9c0-4320-893d-b3f94664bdee"],
+
+Cell["The invariant wide-angle factors are", "Text",ExpressionUUID->"2cd9f431-b8b5-4d3e-b550-6b0eabe4e1f1"],
+
+Cell[BoxData[
+ TagBox[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"s245", " ", "x2"}], "+", 
+      RowBox[{"s36", " ", "x1"}]}], ",", 
+     RowBox[{
+      RowBox[{"s145", " ", "x4"}], "+", 
+      RowBox[{"s36", " ", "x5"}]}]}], "}"}],
+   TraditionalForm],
+  TraditionalForm,
+  Editable->True]], "Output",ExpressionUUID->"a24f5d40-9f81-4ab3-ad78-\
+ac467afc388f"],
+
+Cell["\<\
+Substituting the exact NMRK chart, imposing w=z and applying its alignment \
+vector gives the following leading expressions; their nonzero prefactors \
+multiply precisely L2^N and L1^N:\
+\>", "Text",ExpressionUUID->"a83392cb-dc58-4007-b719-aae806100d1a"],
+
+Cell[BoxData[
+ TagBox[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"q1", " ", "q1b", " ", "X34h", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"X45", " ", "X56h", " ", "y1", " ", "z", " ", "zb"}], "-", 
+          RowBox[{"X45", " ", "X56h", " ", "y1", " ", "z"}], "-", 
+          RowBox[{"X45", " ", "X56h", " ", "y1", " ", "zb"}], "+", 
+          RowBox[{"X45", " ", "X56h", " ", "y1"}], "-", 
+          RowBox[{"X45", " ", "y2"}], "-", "y2"}], ")"}]}], ")"}], "/", 
+      RowBox[{"(", 
+       RowBox[{
+        SuperscriptBox["etaN", "3"], " ", 
+        RowBox[{"(", 
+         RowBox[{"z", "-", "1"}], ")"}], " ", 
+        RowBox[{"(", 
+         RowBox[{"zb", "-", "1"}], ")"}]}], ")"}]}], ",", 
+     RowBox[{"-", 
+      FractionBox[
+       RowBox[{"q1", " ", "q1b", " ", "X56h", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"X34h", " ", "X45", " ", "y5"}]}], "+", 
+          RowBox[{"X45", " ", "y4"}], "+", "y4"}], ")"}]}], 
+       SuperscriptBox["etaN", "3"]]}]}], "}"}],
+   TraditionalForm],
+  TraditionalForm,
+  Editable->True]], "Output",ExpressionUUID->"d5e4b31a-77bc-408a-9a48-\
+9fc38feae205"],
+
+Cell["\<\
+The same calculation in the double spacelike-collinear chart gives nonzero \
+prefactors multiplying L2^D and L1^D:\
+\>", "Text",ExpressionUUID->"9d4a61a7-c795-444e-a2f1-0872a1b01d56"],
+
+Cell[BoxData[
+ TagBox[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox[
+       RowBox[{
+        RowBox[{"tau1", " ", "y1"}], "+", 
+        RowBox[{"tau1", " ", "y2"}], "+", "y2"}], 
+       RowBox[{"a", " ", 
+        SuperscriptBox["eps", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{"tau1", "+", "1"}], ")"}], " ", 
+        RowBox[{"(", 
+         RowBox[{"tau2", "+", "1"}], ")"}]}]]}], ",", 
+     RowBox[{"-", 
+      FractionBox[
+       RowBox[{"tau1", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"tau2", " ", "y4"}], "+", "y4", "+", "y5"}], ")"}]}], 
+       RowBox[{"a", " ", 
+        SuperscriptBox["eps", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{"tau1", "+", "1"}], ")"}], " ", 
+        RowBox[{"(", 
+         RowBox[{"tau2", "+", "1"}], ")"}]}]]}]}], "}"}],
+   TraditionalForm],
+  TraditionalForm,
+  Editable->True]], "Output",ExpressionUUID->"03b16614-e962-43f6-85de-\
+93433ea7ede5"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     StyleBox["\<\"limit\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"factor 1 identity\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"factor 2 identity\"\>",
+      StripOnInput->False,
+      FontWeight->Bold], 
+     StyleBox["\<\"result\"\>",
+      StripOnInput->False,
+      FontWeight->Bold]},
+    {"\<\"NMRK with w=z\"\>", "True", 
+     "True", "\<\"aligned leading limits are L2^N and L1^N\"\>"},
+    {"\<\"double spacelike collinear\"\>", "True", 
+     "True", "\<\"aligned leading limits are L2^D and L1^D\"\>"}
+   },
+   AutoDelete->False,
+   GridBoxAlignment->{"Columns" -> {{Left}}},
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       RGBColor[0.94, 0.96, 0.99], None}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+   GridBoxSpacings->{"Columns" -> {{1.}}, "Rows" -> {{0.65}}}],
+  "Grid"]], "Output",ExpressionUUID->"724347f5-513f-4d04-8ee9-b2bbea5fa333"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["7. Conclusion", "Section",ExpressionUUID->"c5abadc3-59e6-4068-a772-d7a8fd12433f"],
+
+Cell["\<\
+The twisted hexagon has no hidden region at generic wide-angle kinematics, \
+but it does have a boundary hidden region on the physical self-crossing \
+surface u_A=1 with v_A=w_A. The zero-recoil NMRK and double \
+spacelike-collinear factors are aligned degenerations of its two wide-angle \
+cancellation factors. The appropriate organizing statement is therefore the \
+same one already found at four and five points: a special wide-angle seed \
+locus supplies cancellation geometry that persists under further kinematic \
+specialization, while the total region vector remains expansion dependent.\
+\>", "Text",ExpressionUUID->"21cc8d85-cc12-4337-ab7e-4a78b85f00d1"],
+
+Cell["\<\
+Reference: L. J. Dixon and I. Esterlis, All orders results for self-crossing \
+Wilson loops mimicking double parton scattering, arXiv:1602.02107.\
+\>", "Text",ExpressionUUID->"ecaf6d99-193d-4097-a759-93ddc51156f7"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1588, 968},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+WindowTitle->"Six-point wide-angle self-crossing HR audit",
+FrontEndVersion->"15.0 for Mac OS X ARM (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"1d4e6b4f-da3d-4d17-8a5e-623be999ff4c"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[633, 23, 145, 2, 235, "Title",ExpressionUUID->"2a4912b6-fc47-45a5-881d-eec548614e80"],
+Cell[781, 27, 493, 7, 116, "Text",ExpressionUUID->"a26bb7a1-faba-4874-8ab5-5c7c23e2ba70"],
+Cell[CellGroupData[{
+Cell[1299, 38, 95, 0, 99, "Section",ExpressionUUID->"9f3f5e2f-cdac-4f2d-b63d-9c1535354b54"],
+Cell[CellGroupData[{
+Cell[1419, 42, 495, 12, 105, "Input",ExpressionUUID->"79405df8-57cb-4b25-8f8f-b11c3fbd066c"],
+Cell[1917, 56, 225, 4, 34, "Print",ExpressionUUID->"1833045f-e1e3-4e5b-af78-212e9cf256dd"]
+}, Open  ]],
+Cell[2157, 63, 218, 3, 74, "Input",ExpressionUUID->"22fd7af6-2b63-4dfa-9f21-9bd4530d2223"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2412, 71, 110, 0, 99, "Section",ExpressionUUID->"98029f88-392e-4a80-9f78-d98118df4d1a"],
+Cell[2525, 73, 460, 6, 116, "Text",ExpressionUUID->"4f4a2ba8-e5eb-4fb6-a176-3d509976cb20"],
+Cell[2988, 81, 1803, 51, 242, "Output",ExpressionUUID->"9d3fda5b-69fb-4fb3-aaee-b51c69628f44"],
+Cell[CellGroupData[{
+Cell[4816, 136, 460, 12, 74, "Input",ExpressionUUID->"976e70a9-96e2-47ea-98f1-b735df66517d"],
+Cell[5279, 150, 1816, 57, 127, "Output",ExpressionUUID->"75aeebda-e130-40f2-a623-b7463a96ca3d"]
+}, Open  ]],
+Cell[7110, 210, 333, 5, 83, "Text",ExpressionUUID->"5ed2fb36-f204-4693-9667-3c5680a7e6ef"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7480, 220, 98, 0, 99, "Section",ExpressionUUID->"0806f5a7-59e8-40d0-a147-a3ffed55b4d7"],
+Cell[7581, 222, 225, 3, 50, "Text",ExpressionUUID->"444f9564-1a94-4701-a2e2-c1f87734e0c1"],
+Cell[7809, 227, 366, 11, 50, "Output",ExpressionUUID->"3c24160d-79e2-4cb5-9224-502dc27c2c94"],
+Cell[8178, 240, 124, 0, 50, "Text",ExpressionUUID->"6b8ce4d3-8375-42fc-89ed-2e8966270264"],
+Cell[8305, 242, 445, 16, 65, "Output",ExpressionUUID->"38eb2c22-6544-46b8-9325-6ad76a3fd699"],
+Cell[8753, 260, 312, 4, 83, "Text",ExpressionUUID->"f7820b07-e9b7-467a-b888-52105333f67d"],
+Cell[9068, 266, 150, 3, 50, "Output",ExpressionUUID->"225f8289-506c-4f17-9ae9-718dcec2c718"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9255, 274, 98, 0, 99, "Section",ExpressionUUID->"0753575e-80ef-4743-99fe-a0824f36e61f"],
+Cell[9356, 276, 320, 5, 83, "Text",ExpressionUUID->"436f48fd-bfd7-4f4f-a15c-2984ebe518f6"],
+Cell[CellGroupData[{
+Cell[9701, 285, 127, 1, 44, "Input",ExpressionUUID->"a9223991-c95e-43b5-a39f-9f7a8fadccd2"],
+Cell[9831, 288, 1126, 30, 80, "Output",ExpressionUUID->"6f6c382a-735e-4cda-95fc-4cd851fa61a6"]
+}, Open  ]],
+Cell[10972, 321, 264, 4, 83, "Text",ExpressionUUID->"3cae5611-6d12-41fb-92e9-de9697d5329e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11273, 330, 131, 0, 99, "Section",ExpressionUUID->"847291c9-71e5-4ade-9826-4188f4f93e65"],
+Cell[11407, 332, 455, 7, 116, "Text",ExpressionUUID->"3ba0f6a4-216b-4a58-a19c-a2ce3e70b600"],
+Cell[11865, 341, 1555, 43, 119, "Output",ExpressionUUID->"b7b1433c-449c-44f0-b56f-f19f9316e0bd"],
+Cell[13423, 386, 489, 7, 116, "Text",ExpressionUUID->"ae87b179-b769-412e-97fa-6c876f1a84e5"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13949, 398, 112, 0, 99, "Section",ExpressionUUID->"ce961b93-f9c0-4320-893d-b3f94664bdee"],
+Cell[14064, 400, 107, 0, 50, "Text",ExpressionUUID->"2cd9f431-b8b5-4d3e-b550-6b0eabe4e1f1"],
+Cell[14174, 402, 387, 14, 50, "Output",ExpressionUUID->"a24f5d40-9f81-4ab3-ad78-ac467afc388f"],
+Cell[14564, 418, 264, 4, 83, "Text",ExpressionUUID->"a83392cb-dc58-4007-b719-aae806100d1a"],
+Cell[14831, 424, 1211, 34, 110, "Output",ExpressionUUID->"d5e4b31a-77bc-408a-9a48-9fc38feae205"],
+Cell[16045, 460, 193, 3, 50, "Text",ExpressionUUID->"9d4a61a7-c795-444e-a2f1-0872a1b01d56"],
+Cell[16241, 465, 955, 31, 70, "Output",ExpressionUUID->"03b16614-e962-43f6-85de-93433ea7ede5"],
+Cell[17199, 498, 1073, 27, 120, "Output",ExpressionUUID->"724347f5-513f-4d04-8ee9-b2bbea5fa333"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18309, 530, 87, 0, 99, "Section",ExpressionUUID->"c5abadc3-59e6-4068-a772-d7a8fd12433f"],
+Cell[18399, 532, 675, 9, 149, "Text",ExpressionUUID->"21cc8d85-cc12-4337-ab7e-4a78b85f00d1"],
+Cell[19077, 543, 224, 3, 50, "Text",ExpressionUUID->"ecaf6d99-193d-4097-a759-93ddc51156f7"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

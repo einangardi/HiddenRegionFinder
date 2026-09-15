@@ -1,0 +1,951 @@
+Notebook[
+ {Cell["How the four-loop No-Crown hidden-region audits were performed", 
+   "Title"], 
+  Cell[
+   "A reproducible guide to the wide-angle and three-channel Regge searches", 
+   "Subtitle"], Cell["Purpose. The two detailed audit notebooks contain a \
+large amount of run history and diagnostic output. This notebook instead \
+presents the mathematical question, one ordinary HRF run, the enumeration of \
+graphs and contraction strata, and the exact shortcuts that made the \
+exhaustive parts feasible. It is intended to be sufficiently precise that the \
+strategy can be reimplemented independently.", "Text"], 
+  CellGroupData[{Cell["1. Question, sample and exact scope", "Section"], 
+    Cell["The sample consists of sixteen massless four-loop 2->2 graphs. Each \
+graph has mixed-sign Schwinger-parameter derivatives, so the elementary \
+necessary test for a cancellation pinch does not exclude it. None contains \
+the three-loop Crown as a contraction minor. The question is whether any \
+graph, in its interior or on a contraction boundary, has a hidden region at \
+wide angle or in one of the three Regge channels.", "Text"], 
+    Cell[BoxData[TagBox[GridBox[{{"\"audit\"", "\"cases\"", "\"HR found\"", 
+          "\"unresolved\"", "\"logical status\""}, 
+         {"\"wide angle: interiors plus all nonempty boundaries\"", "114468", 
+          "0", "0", "\"complete\""}, {"\"Regge: interiors\"", "48", "0", "0", 
+          "\"complete\""}, {"\"Regge: nonempty boundaries\"", "343356", "0", 
+          "0", "\"complete\""}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+        AutoDelete -> False, GridBoxBackground -> {"Columns" -> {{None}}, 
+          "Rows" -> {GrayLevel[0.85], None}}, GridBoxFrame -> 
+         {"Columns" -> {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+         {"Columns" -> {Automatic, Automatic}, "Rows" -> {{Automatic}}}, 
+        BaseStyle -> {FontSize -> 11}], "Grid"]], "Output"], 
+    Cell["Both conclusions are now exhaustive for this sample. At wide angle \
+the earlier record covered the 188 codimension-two strata containing x8; the \
+current generator-first run separately certifies all 1012 complementary \
+strata. Keeping those provenances distinct makes clear which conclusions come \
+from the historical scan and which come from the present exact rerun.", 
+     "Text"], Cell[BoxData[TagBox[GridBox[{{"\"stratum\"", "\"number\"", 
+          "\"wide-angle stored coverage\"", "\"Regge coverage\""}, 
+         {"\"interior\"", "16", "\"all 16\"", 
+          "\"48 graph/channel interiors\""}, {"\"codimension 1\"", "204", 
+          "\"all 204\"", "\"all\""}, {"\"codimension 2\"", "1200", 
+          "\"188 legacy x8 strata plus 1012 current complementary strata\"", 
+          "\"all\""}, {"\"codimension 3\"", "4312", "\"all 4312\"", 
+          "\"all\""}, {"\"codimension 4 through E-2\"", "108736", 
+          "\"all 108736\"", "\"all\""}, {"\"all nonempty boundaries\"", 
+          "114452", "\"all 114452\"", "\"114452 per channel\""}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+        GridBoxBackground -> {"Columns" -> {{None}}, 
+          "Rows" -> {GrayLevel[0.85], None}}, GridBoxFrame -> 
+         {"Columns" -> {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+         {"Columns" -> {Automatic, Automatic}, "Rows" -> {{Automatic}}}, 
+        BaseStyle -> {FontSize -> 11}], "Grid"]], "Output"]}, Open], 
+  CellGroupData[{Cell["2. The HRF decision problem on one stratum", 
+     "Section"], Cell["Fix a graph, a kinematic limit and a contraction set \
+S. Set x_i=0 for i in S and keep all remaining Schwinger parameters positive. \
+In ordinary wide-angle scattering the native leading polynomial F0 is already \
+the correct starting point; no preliminary face selection is required.", 
+     "Text"], Cell["HRF first factorises the mixed-sign derivatives of F0 and \
+identifies compatible polynomial cancellation factors. Admissible products of \
+these factors define candidate generators of the cancellation ideal. Only \
+then does HRF construct decompositions F0=F_SL+F_obs in which F_SL belongs to \
+that ideal. Finally it solves for a scaling vector rho which makes F_SL \
+homogeneous and places F_obs, U and every restored delta layer at strictly \
+higher weight.", "Text"], 
+    Cell[BoxData[TagBox[GridBox[{{"\"condition\"", "\"equation tested\"", 
+          "\"meaning\""}, {"\"positive pinch\"", "\"d_i F_SL=0, x_i>0\"", 
+          "\"first-sheet Landau stationary point on the active stratum\""}, 
+         {"\"face homogeneity\"", "\"rho.(r_a-r_b)=0 for a,b in F_SL\"", 
+          "\"the proposed superleading monomials scale together\""}, 
+         {"\"strict hierarchy\"", "\"rho.(r_c-r_a)+eta_c-eta_a>0\"", "\"all \
+complementary and restored-layer monomials are genuinely later\""}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+        GridBoxBackground -> {"Columns" -> {{None}}, 
+          "Rows" -> {GrayLevel[0.85], None}}, GridBoxFrame -> 
+         {"Columns" -> {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+         {"Columns" -> {Automatic, Automatic}, "Rows" -> {{Automatic}}}, 
+        BaseStyle -> {FontSize -> 11}], "Grid"]], "Output"], 
+    Cell["The positive pinch is tested on the isolated F_SL, not on the \
+unscaled F0. If a scaling solution exists, the monomials of F_SL necessarily \
+form the corresponding lower face after that scaling has been found. This \
+geometric statement certifies the result; it is not the candidate-generation \
+step for an ordinary wide-angle run.", "Text"]}, Open], 
+  CellGroupData[{Cell["3. One ordinary HRF run", "Section"], 
+    Cell["The executable cell below runs only the interior of the first \
+diagram (85774). Its purpose is to display one complete HRF decision with all \
+certification settings exposed; it does not rerun the full sixteen-graph \
+boundary audit. The exhaustive audit is represented later by its compact \
+persisted certificates. The historical discovery runner used a candidate \
+limit of 128; for a new absence claim, the explicit unbounded settings below \
+are preferable.", "Text"], 
+    Cell[BoxData[TagBox[GridBox[{{"\"setting\"", "\"certification value\"", 
+          "\"reason\""}, {"\"GeneratorMode\"", "\"PairSectors\"", 
+          "\"allow the two kinematic sectors of wide-angle 2->2 scattering\""}\
+, {"\"MaxGenerators\"", "2", 
+          "\"one cancellation generator per sector is sufficient for this run \
+mode\""}, {"\"UseExtendedFactors\"", "True", 
+          "\"include polynomial, not only binomial, cancellation factors\""}, 
+         {"\"EnableSignedMonomialPairs\"", "False", 
+          "\"use factors of complete derivatives and channel polynomials\""}, 
+         {"\"StopOnFirstAdmissible\"", "False", 
+          "\"retain every admissible obstruction presentation\""}, 
+         {"\"CandidateGeneratorSetLimit\"", "\[Infinity]", 
+          "\"a finite value can find a witness but cannot prove absence\""}, 
+         {"\"MaxTwoGeneratorUnionTrials\"", "\[Infinity]", 
+          "\"do not truncate two-sector unions\""}, 
+         {"\"PolynomialMaxMonomials\"", "Automatic", "\"derive the complete \
+factor size from the polynomial being audited\""}, 
+         {"\"CoverageScalingMethod\"", "\"ExactCoverage\"", 
+          "\"solve the homogeneous face and strict hierarchy together\""}, 
+         {"\"RequireValidScalingForHiddenRegionQ\"", "True", "\"a \
+cancellation candidate without a positive hierarchy gap is not an HR\""}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+        GridBoxBackground -> {"Columns" -> {{None}}, 
+          "Rows" -> {GrayLevel[0.85], None}}, GridBoxFrame -> 
+         {"Columns" -> {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+         {"Columns" -> {Automatic, Automatic}, "Rows" -> {{Automatic}}}, 
+        BaseStyle -> {FontSize -> 11}], "Grid"]], "Output"], 
+    Cell[BoxData[RowBox[{RowBox[{"SetDirectory", "[", 
+          RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";", 
+        RowBox[{"$HRFRunWideAngle16NoCrownAuditOnLoad", "=", "False"}], ";", 
+        RowBox[{"<<", "\"HRF_WideAngle16NoCrownAudit.wl\""}], ";", 
+        RowBox[{"rec", "=", RowBox[{"First", "[", 
+            RowBox[{"hrfWA16LoadRecords", "[", "]"}], "]"}]}], ";", 
+        RowBox[{"zero", "=", RowBox[{"{", "}"}]}], ";", 
+        RowBox[{"f", "=", RowBox[{"Expand", "[", RowBox[
+             {RowBox[{"rec", "[", "\"F0\"", "]"}], "/.", "\[VeryThinSpace]", 
+              RowBox[{"Thread", "[", RowBox[{"zero", "\[Rule]", "0"}], 
+                "]"}]}], "]"}]}], ";", RowBox[{"u", "=", 
+          RowBox[{"Expand", "[", RowBox[{RowBox[{"rec", "[", "\"U\"", "]"}], 
+              "/.", "\[VeryThinSpace]", RowBox[{"Thread", "[", 
+                RowBox[{"zero", "\[Rule]", "0"}], "]"}]}], "]"}]}], ";", 
+        RowBox[{"fFull", "=", RowBox[{"Expand", "[", 
+            RowBox[{RowBox[{RowBox[{"rec", "[", "\"Data\"", "]"}], "[", 
+                "\"FOnShell\"", "]"}], "/.", "\[VeryThinSpace]", 
+              RowBox[{"Thread", "[", RowBox[{"zero", "\[Rule]", "0"}], 
+                "]"}]}], "]"}]}], ";", RowBox[{"vars", "=", 
+          RowBox[{"Complement", "[", RowBox[{RowBox[{"rec", "[", "\"Vars\"", 
+                "]"}], ",", "zero"}], "]"}]}], ";", 
+        RowBox[{"scan", "=", RowBox[{"findObstructions", "[", 
+            RowBox[{"f", ",", "vars", ",", "KinAssump4ptOnShell", ",", 
+              "KinVars4pt", ",", "20", ",", RowBox[{"\"UseExtendedFactors\"", 
+                "\[Rule]", "True"}], ",", RowBox[{"\"GeneratorMode\"", 
+                "\[Rule]", "\"PairSectors\""}], ",", RowBox[{
+                "\"MaxGenerators\"", "\[Rule]", "2"}], ",", 
+              RowBox[{"\"EnableSignedMonomialPairs\"", "\[Rule]", "False"}], 
+              ",", RowBox[{"\"StopOnFirstAdmissible\"", "\[Rule]", "False"}], 
+              ",", RowBox[{"\"CandidateGeneratorSetLimit\"", "\[Rule]", 
+                "\[Infinity]"}], ",", RowBox[{
+                "\"MaxTwoGeneratorUnionTrials\"", "\[Rule]", "\[Infinity]"}], 
+              ",", RowBox[{"\"PolynomialMaxMonomials\"", "\[Rule]", 
+                "Automatic"}], ",", RowBox[{"\"StoreAllObstructionTrialsQ\"", 
+                "\[Rule]", "False"}], ",", RowBox[{"\"U\"", "\[Rule]", "u"}], 
+              ",", RowBox[{"\"FObsForScaling\"", "\[Rule]", RowBox[
+                 {"Association", "[", RowBox[{"\"DeltaLayers\"", "\[Rule]", 
+                    RowBox[{"hrfDeltaLayerAssociation", "[", RowBox[{"fFull", 
+                        ",", "\[Delta]"}], "]"}]}], "]"}]}], ",", 
+              RowBox[{"\"CoverageScalingMethod\"", "\[Rule]", 
+                "\"ExactCoverage\""}], ",", RowBox[{
+                "\"RequireValidScalingForHiddenRegionQ\"", "\[Rule]", 
+                "True"}]}], "]"}]}], ";", RowBox[{"Association", "[", 
+          RowBox[{RowBox[{"\"DiagramID\"", "\[Rule]", RowBox[{"rec", "[", 
+                "\"ID\"", "]"}]}], ",", RowBox[{"\"ContractedVariables\"", 
+              "\[Rule]", "zero"}], ",", RowBox[{"\"Stratum\"", "\[Rule]", 
+              RowBox[{"If", "[", RowBox[{RowBox[{"zero", "===", RowBox[
+                     {"{", "}"}]}], ",", "\"interior\"", ",", 
+                  "\"boundary\""}], "]"}]}], ",", RowBox[{"\"Conclusion\"", 
+              "\[Rule]", RowBox[{"Which", "[", RowBox[{RowBox[{"TrueQ", "[", 
+                    RowBox[{"scan", "[", "\"HiddenRegionQ\"", "]"}], "]"}], 
+                  ",", "\"hidden region found\"", ",", RowBox[
+                   {RowBox[{"TrueQ", "[", RowBox[{"scan", "[", 
+                        "\"HiddenRegionSearchCompleteQ\"", "]"}], "]"}], 
+                    "&&", RowBox[{"!", RowBox[{"TrueQ", "[", RowBox[{"scan", 
+                          "[", "\"SearchTruncatedQ\"", "]"}], "]"}]}]}], ",", 
+                  "\"complete search: no hidden region\"", ",", "True", ",", 
+                  "\"unresolved\""}], "]"}]}], ",", 
+            RowBox[{"\"HiddenRegionCount\"", "\[Rule]", RowBox[{"scan", "[", 
+                "\"HiddenRegionCount\"", "]"}]}], ",", 
+            RowBox[{"\"CandidateGeneratorCount\"", "\[Rule]", 
+              RowBox[{"scan", "[", "\"CandidateGeneratorCount\"", "]"}]}], 
+            ",", RowBox[{"\"ValidObstructionTrialCount\"", "\[Rule]", 
+              RowBox[{"scan", "[", "\"ValidObstructionTrialCount\"", "]"}]}], 
+            ",", RowBox[{"\"SearchTruncatedQ\"", "\[Rule]", RowBox[{"scan", 
+                "[", "\"SearchTruncatedQ\"", "]"}]}], ",", 
+            RowBox[{"\"HiddenRegionSearchCompleteQ\"", "\[Rule]", 
+              RowBox[{"scan", "[", "\"HiddenRegionSearchCompleteQ\"", 
+                "]"}]}]}], "]"}]}]], "Input"], Cell["The final association is \
+deliberately short. Conclusion equal to \"complete search: no hidden region\" \
+means that the candidate construction and all required decisions completed \
+without truncation. \"Unresolved\" must not be read as NoHR.", "Text"], 
+    Cell["A negative row is reportable only when SearchTruncatedQ is False \
+and all positivity and scaling solves are resolved. A positive witness can be \
+found with finite budgets, but a finite budget cannot certify that no \
+unvisited generator set works.", "Text"], Cell["For the sixteen interiors, \
+the stored scan tried PairSectors, Adaptive and SingleProduct modes. The \
+current complete polynomial-factor construction produces no admissible \
+generator in any interior. The later exposed-face calculation was introduced \
+historically as an independent safeguard when the completeness of the factor \
+harvest was still in question; it is not the preferred HRF workflow after \
+removal of the hard caps.", "Text"]}, Open], 
+  CellGroupData[{Cell["4. Enumerating graphs and contraction boundaries", 
+     "Section"], Cell["The ordered internal-edge list fixes the \
+correspondence x0,x1,... . A boundary stratum is a subset S of these \
+variables, imposed by x_i=0 for i in S. For a graph with E internal edges, \
+codimension k contains Binomial[E,k] strata. The scan stops at k=E-2 because \
+fewer than two active Schwinger parameters cannot support a nontrivial \
+cancellation hypersurface.", "Text"], 
+    Cell[BoxData[RowBox[{RowBox[{"zeroSets", "[", 
+          RowBox[{"rec_", ",", "k_"}], "]"}], ":=", 
+        RowBox[{"Subsets", "[", RowBox[{RowBox[{"rec", "[", "\"Vars\"", 
+              "]"}], ",", RowBox[{"{", "k", "}"}]}], "]"}]}]], "Input"], 
+    Cell["Four graphs have E=12 and twelve have E=13. This gives the counts \
+in Section 1. Graph identity or crossing was used to reduce work only after \
+an explicit variable permutation was shown to transport every polynomial \
+entering the decision problem.", "Text"], 
+    Cell[BoxData[TagBox[GridBox[{{"\"diagram\"", "\"E\"", 
+          "\"ordered internal edges (x0,x1,...)\"", 
+          "\"external attachments\""}, {"85774", "12", 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "4"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"1", ",", "5"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "4"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"2", ",", "6"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "4"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"3", ",", "7"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"5", ",", "8"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"5", ",", "9"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"6", ",", "8"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"6", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"7", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"7", ",", "9"}], 
+                    "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "1"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "2"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "3"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "9"}], "}"}]}], "}"}]}, 
+         {"85775", "12", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "4"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "4"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "4"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "7"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"5", ",", "8"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"5", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"6", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "8"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"7", ",", "9"}], "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "1"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "2"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "9"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "3"}], "}"}]}], "}"}]}, 
+         {"85776", "12", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "4"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "4"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "4"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "7"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"5", ",", "8"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"5", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"6", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "8"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"7", ",", "9"}], "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "1"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "9"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "2"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "3"}], "}"}]}], "}"}]}, 
+         {"85777", "12", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "4"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "4"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "4"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "7"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"5", ",", "8"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"5", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"6", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "8"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"7", ",", "9"}], "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "9"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "1"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "2"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "3"}], "}"}]}], "}"}]}, 
+         {"105230", "13", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "5"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "6"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "5"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "7"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"4", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"4", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "10"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"7", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "10"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"8", ",", "9"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"8", ",", "10"}], 
+                    "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "1"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "2"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "3"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "4"}], "}"}]}], "}"}]}, 
+         {"105231", "13", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "5"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "6"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "5"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "7"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"4", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"4", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "10"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"7", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "10"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"8", ",", "9"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"8", ",", "10"}], 
+                    "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "1"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "2"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "4"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "3"}], "}"}]}], "}"}]}, 
+         {"105232", "13", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "5"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "6"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "5"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "7"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"4", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"4", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "10"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"7", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "10"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"8", ",", "9"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"8", ",", "10"}], 
+                    "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "1"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "4"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "2"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "3"}], "}"}]}], "}"}]}, 
+         {"105233", "13", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "5"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "6"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "5"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "7"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"4", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"4", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "10"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"7", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "10"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"8", ",", "9"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"8", ",", "10"}], 
+                    "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "2"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "1"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "3"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "4"}], "}"}]}], "}"}]}, 
+         {"105234", "13", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "5"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "6"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "5"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "7"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"4", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"4", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "10"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"7", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "10"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"8", ",", "9"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"8", ",", "10"}], 
+                    "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "2"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "1"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "4"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "3"}], "}"}]}], "}"}]}, 
+         {"105235", "13", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "5"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "6"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "5"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "7"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"4", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"4", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "10"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"7", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "10"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"8", ",", "9"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"8", ",", "10"}], 
+                    "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "4"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "1"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "2"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "3"}], "}"}]}], "}"}]}, 
+         {"105236", "13", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "5"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "6"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "5"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "7"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"4", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"4", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "10"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"7", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "10"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"8", ",", "9"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"8", ",", "10"}], 
+                    "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "2"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "3"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "1"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "4"}], "}"}]}], "}"}]}, 
+         {"105237", "13", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "5"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "6"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "5"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "7"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"4", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"4", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "10"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"7", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "10"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"8", ",", "9"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"8", ",", "10"}], 
+                    "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "2"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "4"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "1"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "3"}], "}"}]}], "}"}]}, 
+         {"105238", "13", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "5"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "6"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "5"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "7"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"4", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"4", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "10"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"7", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "10"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"8", ",", "9"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"8", ",", "10"}], 
+                    "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "4"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "2"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "1"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "3"}], "}"}]}], "}"}]}, 
+         {"105239", "13", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "5"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "6"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "5"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "7"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"4", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"4", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "10"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"7", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "10"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"8", ",", "9"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"8", ",", "10"}], 
+                    "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "2"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "3"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "4"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "1"}], "}"}]}], "}"}]}, 
+         {"105240", "13", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "5"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "6"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "5"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "7"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"4", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"4", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "10"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"7", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "10"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"8", ",", "9"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"8", ",", "10"}], 
+                    "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "2"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "4"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "3"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "1"}], "}"}]}], "}"}]}, 
+         {"105241", "13", RowBox[{"{", RowBox[{RowBox[{"{", RowBox[
+                 {"\"0\"", ",", RowBox[{"{", RowBox[{"1", ",", "5"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"1", ",", "6"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"2", ",", "5"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"2", ",", "7"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"3", ",", "5"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"3", ",", "8"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"4", ",", "6"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"4", ",", "9"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"6", ",", "10"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"7", ",", "9"}], 
+                    "}"}]}], "}"}], ",", RowBox[{"{", RowBox[{"\"0\"", ",", 
+                  RowBox[{"{", RowBox[{"7", ",", "10"}], "}"}]}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[
+                     {"8", ",", "9"}], "}"}]}], "}"}], ",", RowBox[{"{", 
+                RowBox[{"\"0\"", ",", RowBox[{"{", RowBox[{"8", ",", "10"}], 
+                    "}"}]}], "}"}]}], "}"}], 
+          RowBox[{"{", RowBox[{RowBox[{"{", RowBox[{"p1", ",", "4"}], "}"}], 
+              ",", RowBox[{"{", RowBox[{"p2", ",", "2"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p3", ",", "3"}], "}"}], ",", 
+              RowBox[{"{", RowBox[{"p4", ",", "1"}], "}"}]}], "}"}]}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+        GridBoxBackground -> {"Columns" -> {{None}}, 
+          "Rows" -> {GrayLevel[0.85], None}}, GridBoxFrame -> 
+         {"Columns" -> {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+         {"Columns" -> {Automatic, Automatic}, "Rows" -> {{Automatic}}}, 
+        BaseStyle -> {FontSize -> 11}], "Grid"]], "Output"], 
+    Cell["Drawings of all sixteen labelled graphs are retained in the two \
+detailed audit notebooks. Here the ordered edge lists are the primary \
+reproducible definitions; the only drawing shown below is the \
+codimension-three near miss used to illustrate the logic.", "Text"]}, Open], 
+  CellGroupData[{Cell["5. Wide-angle search: discovery followed by a \
+presentation-independent audit", "Section"], Cell["The lower-codimension \
+investigation used HRF to harvest cancellation factors, build admissible \
+generator sets, construct F_SL and solve the hierarchy. Cheap support and \
+degree tests rejected impossible factor pairs before polynomial reduction. \
+Every surviving obstruction presentation was checked by exact rational \
+hierarchy inequalities.", "Text"], 
+    Cell[BoxData[TagBox[GridBox[{{"\"stage\"", "\"objects\"", 
+          "\"survivors requiring hierarchy test\"", "\"positive gap\"", 
+          "\"conclusion\""}, {"\"16 interiors\"", "16", "0", "0", 
+          "\"no accepted HR\""}, {"\"all codimension-one strata\"", "204", 
+          "20", "0", "\"no accepted HR\""}, 
+         {"\"codimension two containing x8\"", "188", "40", "0", 
+          "\"no accepted HR in this selected sector\""}, 
+         {"\"complementary codimension-two strata\"", "1012", "0", "0", 
+          "\"complete NoHR: no admissible generator on any stratum\""}, 
+         {"\"all codimension-three strata\"", "4312", "20", "0", 
+          "\"only the {x3,x5,x8} orbit survives; every trial has gap zero\""}\
+, {"\"codimension four through E-2\"", "108736", "0", "0", 
+          "\"every exposed face rejected; no unresolved solve\""}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+        GridBoxBackground -> {"Columns" -> {{None}}, 
+          "Rows" -> {GrayLevel[0.85], None}}, GridBoxFrame -> 
+         {"Columns" -> {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+         {"Columns" -> {Automatic, Automatic}, "Rows" -> {{Automatic}}}, 
+        BaseStyle -> {FontSize -> 11}], "Grid"]], "Output"], 
+    Cell["The formerly missing 1012 codimension-two strata have now been \
+completed by the current uncapped generator-first HRF scan. Every stratum has \
+a readable per-stratum certificate, every search is untruncated, and every \
+result is CompleteNoHR. In fact the complete factor harvest produces no \
+admissible generator on any of these complementary strata, so no F_SL+F_obs \
+decomposition reaches the scaling stage.", "Text"], 
+    Cell[BoxData[TagBox[GridBox[{{"\"codimension-two provenance\"", 
+          "\"strata\"", "\"NoHR\"", "\"HR\"", "\"unresolved\""}, 
+         {"\"legacy sector containing x8\"", "188", "188", "0", "0"}, 
+         {"\"current complementary audit\"", "1012", "1012", "0", "0"}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+        GridBoxBackground -> {"Columns" -> {{None}}, 
+          "Rows" -> {GrayLevel[0.85], None}}, GridBoxFrame -> 
+         {"Columns" -> {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+         {"Columns" -> {Automatic, Automatic}, "Rows" -> {{Automatic}}}, 
+        BaseStyle -> {FontSize -> 11}], "Grid"]], "Output"], 
+    Cell["This optimization belongs only to factor admissibility, before \
+generator construction and before the F_SL+F_obs decomposition. For a \
+kinematics-free, homogeneous, square-free mixed-sign factor, a \
+Newton-polytope vertex-dominance argument proves the existence of a zero in \
+the positive orthant. For two such factors with disjoint Schwinger-variable \
+supports, their positive zeros can be chosen independently, proving \
+simultaneous admissibility. These exact certificates replace the \
+corresponding semialgebraic FindInstance calls. They do not construct or \
+constrain the decomposition: F_obs is still the exact polynomial remainder \
+modulo the candidate generator ideal and F_SL=F-F_obs. Factors outside this \
+narrowly certified class use the general semialgebraic test.", "Text"], 
+    Cell["The closest wide-angle near miss is the orbit with x3=x5=x8=0 in \
+the twelve thirteen-propagator graphs. It has genuine cancellation generators \
+and a valid obstruction decomposition, but all twenty presentations have \
+maximal hierarchy gap zero. Thus the cancellation surface is present without \
+a distinct hidden-region scaling.", "Text"], Cell["The corresponding labelled \
+graph is drawn in the detailed wide-angle notebook; its ordered edge \
+definition is included in Section 4 of this guide.", "Text"], 
+    Cell[BoxData[TagBox[GridBox[{{"\"quantity\"", 
+          "\"representative result\""}, {"\"diagram\"", "105233"}, 
+         {"\"contracted variables\"", RowBox[{"{", RowBox[{"x3", ",", "x5", 
+              ",", "x8"}], "}"}]}, {"\"F_SL\"", 
+          RowBox[{"-", RowBox[{"(", RowBox[{RowBox[{"(", RowBox[{"s12", "+", 
+                    "s23"}], ")"}], " ", RowBox[{"(", RowBox[
+                   {RowBox[{"x0", " ", "x12"}], "-", RowBox[{"x1", " ", 
+                      "x4"}]}], ")"}], " ", RowBox[{"(", RowBox[{"x11", "+", 
+                    "x2", "+", "x4", "+", "x9"}], ")"}], " ", RowBox[
+                 {"(", RowBox[{RowBox[{"x10", " ", "x7"}], "-", RowBox[
+                     {"x6", " ", "x9"}]}], ")"}]}], ")"}]}]}, 
+         {"\"valid obstruction\"", "True"}, {"\"maximal hierarchy gap\"", 
+          "0"}, {"\"strict hidden-region scaling\"", "False"}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+        GridBoxBackground -> {"Columns" -> {{None}}, 
+          "Rows" -> {GrayLevel[0.85], None}}, GridBoxFrame -> 
+         {"Columns" -> {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+         {"Columns" -> {Automatic, Automatic}, "Rows" -> {{Automatic}}}, 
+        BaseStyle -> {FontSize -> 11}], "Grid"]], "Output"], 
+    Cell["At codimension four and deeper, the historical study additionally \
+applied the exposed-face decision procedure of the next section. That \
+independent calculation covers 108736 strata and is insensitive to the \
+then-existing cancellation-factor caps. With the present uncapped \
+polynomial-factor construction, a new scan should retain the generator-first \
+HRF order used above.", "Text"]}, Open], 
+  CellGroupData[
+   {Cell["6. The exposed-face calculation as an independent cross-check", 
+     "Section"], Cell["The following calculation was developed to close a \
+historical loophole: the generator harvest then contained hard caps, so a \
+negative generator search did not by itself establish completeness. \
+Enumerating every exposed face searches a much larger superset of candidate \
+F_SL polynomials. It is mathematically valid as a necessary-condition audit, \
+but it reverses the efficient HRF logic and should not be used as the primary \
+wide-angle algorithm when the complete generator construction is available.", 
+     "Text"], Cell["For every restricted polynomial P_q, the cross-check \
+performed the following operations.", "Text"], Cell["AUDIT-STRATUM(graph, \
+contraction S, kinematic limit)\n  1. Construct U and all delta coefficients \
+after x_i=0 for i in S.\n  2. Let q be the first nonzero delta power and \
+P=P_q.\n  3. If P is zero or has one overall sign, return a negative \
+certificate.\n  4. Enumerate every exposed face of Newton(P) with exact \
+rational polyhedral arithmetic.\n  5. For each face polynomial F_SL:\n       \
+a. reject if one derivative is sign-definite;\n       b. otherwise search for \
+a Farkas separating combination of x_i d_i F_SL;\n       c. otherwise solve \
+the positive Landau equations exactly;\n       d. for every positive \
+solution, solve the oriented hierarchy linear program.\n  6. HR is possible \
+only if a face has both a positive pinch and a strictly positive hierarchy \
+gap.\n  7. Any timeout or failed exact solve is UNRESOLVED, never NO HR.", 
+     "Program"], Cell["The face lattice is obtained from exact cddlib facet \
+incidences. This removes dependence on a chosen generator presentation, but \
+it is substantially more expensive because most faces do not arise from an \
+admissible cancellation ideal. The final hierarchy linear program tests the \
+complement, U and all restored layers.", "Text"], Cell["The Farkas step is \
+especially important. Write L_i=x_i d_i F_SL. If real numbers c_i exist such \
+that the nonzero polynomial sum_i c_i L_i has coefficients of one sign in \
+positive physical coordinates, that polynomial is strictly one-signed for \
+x_i>0. The L_i therefore cannot all vanish. The c_i themselves need not be \
+positive; positivity belongs to the Schwinger parameters and the induced \
+monomial values.", "Text"], Cell["The known Crown is the positive control. \
+The identical algorithm finds one surviving face, a positive pinch and \
+hierarchy gap one.", "Text"], 
+    Cell[BoxData[TagBox[GridBox[{{"\"control\"", "\"faces\"", 
+          "\"positive pinch plus hierarchy\"", "\"gap\""}, 
+         {"\"three-loop Crown\"", "27", "1", "1"}}, GridBoxAlignment -> 
+         {"Columns" -> {{Left}}}, AutoDelete -> False, GridBoxBackground -> 
+         {"Columns" -> {{None}}, "Rows" -> {GrayLevel[0.85], None}}, 
+        GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+        GridBoxItemSize -> {"Columns" -> {Automatic, Automatic}, 
+          "Rows" -> {{Automatic}}}, BaseStyle -> {FontSize -> 11}], "Grid"]], 
+     "Output"], Cell[BoxData[RowBox[
+       {RowBox[{"<<", "\"HRF_WideAngle16FacePinchAudit.wl\""}], ";", 
+        RowBox[{"raw", "=", RowBox[{"First", "[", RowBox[{"Select", "[", 
+              RowBox[{RowBox[{"hrfWA16ParseDiagramRecords", "[", 
+                  RowBox[{"hrfWA16InputFile", "[", "]"}], "]"}], ",", 
+                RowBox[{RowBox[{RowBox[{"#1", "[", "\"ID\"", "]"}], "===", 
+                    "85774"}], "&"}]}], "]"}], "]"}]}], ";", 
+        RowBox[{"auditRecord", "=", RowBox[{"hrfWA16BuildData", "[", "raw", 
+            "]"}]}], ";", RowBox[{"hrfWA16FacePinchAudit", "[", 
+          RowBox[{"auditRecord", ",", RowBox[{"{", RowBox[{"x0", ",", "x3", 
+                ",", "x5", ",", "x6"}], "}"}]}], "]"}]}]], "Input"]}, Open], 
+  CellGroupData[
+   {Cell["7. Regge audit recorded in the historical calculation", "Section"], 
+    Cell["With all momenta algebraically incoming and s13=-s12-s23, the three \
+channels are T23: s23->0 at fixed s12; T12: s12->0 at fixed s23; and T13: \
+s13->0, equivalently s23->-s12. After division by the large invariant, \
+F/s=P_0+delta P_1.", "Text"], Cell["The 48 graph/channel interiors were first \
+grouped by exact graph relabellings and Schwinger-variable permutations. \
+Equality of P_0 up to an overall sign was not sufficient by itself: the \
+exponent supports of U and every suppressed layer also had to map. Twelve \
+exact polynomial triples reduced to six audit classes.", "Text"], 
+    Cell[BoxData[TagBox[GridBox[{{"\"class\"", "\"direct representative\"", 
+          "\"represented graph/channels\"", "\"E\"", 
+          "\"boundaries directly audited\"", "\"HR\"", "\"unresolved\""}, 
+         {"1", RowBox[{"\[LeftAssociation]", RowBox[{RowBox[{"\"ID\"", 
+                "\[Rule]", "85774"}], ",", RowBox[{"\"Channel\"", "\[Rule]", 
+                "\"T23\""}]}], "\[RightAssociation]"}], "6", "12", "4082", 
+          "0", "0"}, {"2", RowBox[{"\[LeftAssociation]", 
+            RowBox[{RowBox[{"\"ID\"", "\[Rule]", "85774"}], ",", 
+              RowBox[{"\"Channel\"", "\[Rule]", "\"T12\""}]}], 
+            "\[RightAssociation]"}], "6", "12", "4082", "0", "0"}, 
+         {"3", RowBox[{"\[LeftAssociation]", RowBox[{RowBox[{"\"ID\"", 
+                "\[Rule]", "105230"}], ",", RowBox[{"\"Channel\"", "\[Rule]", 
+                "\"T23\""}]}], "\[RightAssociation]"}], "6", "13", "8177", 
+          "0", "0"}, {"4", RowBox[{"\[LeftAssociation]", 
+            RowBox[{RowBox[{"\"ID\"", "\[Rule]", "105230"}], ",", 
+              RowBox[{"\"Channel\"", "\[Rule]", "\"T12\""}]}], 
+            "\[RightAssociation]"}], "12", "13", "8177", "0", "0"}, 
+         {"5", RowBox[{"\[LeftAssociation]", RowBox[{RowBox[{"\"ID\"", 
+                "\[Rule]", "105230"}], ",", RowBox[{"\"Channel\"", "\[Rule]", 
+                "\"T13\""}]}], "\[RightAssociation]"}], "12", "13", "8177", 
+          "0", "0"}, {"6", RowBox[{"\[LeftAssociation]", 
+            RowBox[{RowBox[{"\"ID\"", "\[Rule]", "105232"}], ",", 
+              RowBox[{"\"Channel\"", "\[Rule]", "\"T12\""}]}], 
+            "\[RightAssociation]"}], "6", "13", "8177", "0", "0"}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+        GridBoxBackground -> {"Columns" -> {{None}}, 
+          "Rows" -> {GrayLevel[0.85], None}}, GridBoxFrame -> 
+         {"Columns" -> {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+         {"Columns" -> {Automatic, Automatic}, "Rows" -> {{Automatic}}}, 
+        BaseStyle -> {FontSize -> 11}], "Grid"]], "Output"], 
+    Cell["Within this presentation-independent cross-check, a boundary \
+optimization was possible. If P_0 remains nonzero after a contraction S, its \
+exponent support is a coordinate face of the parent support. Every face of \
+that restriction had already been included in the exhaustive parent face \
+enumeration. This is a shortcut inside the face-based cross-check, not the \
+candidate-generation principle of HRF.", "Text"], 
+    Cell["A genuinely new problem occurs only when the contraction \
+annihilates P_0. Then the first nonzero layer is P_q with q>0. Its absolute \
+order must be retained: relative to P_q, U carries delta weight -q. In this \
+sample q=1, and every such first layer is either identically zero after \
+further contraction or subtraction-free up to an overall sign.", "Text"], 
+    Cell[BoxData[TagBox[GridBox[{{"\"channel\"", "\"boundaries\"", 
+          "\"inherited q=0\"", "\"sign-definite q=1\"", "\"trivial\"", 
+          "\"HR\"", "\"unresolved\""}, {"\"T23\"", "114452", "46520", 
+          "12640", "55292", "0", "0"}, {"\"T12\"", "114452", "46520", 
+          "12640", "55292", "0", "0"}, {"\"T13\"", "114452", "46520", 
+          "12640", "55292", "0", "0"}}, GridBoxAlignment -> 
+         {"Columns" -> {{Left}}}, AutoDelete -> False, GridBoxBackground -> 
+         {"Columns" -> {{None}}, "Rows" -> {GrayLevel[0.85], None}}, 
+        GridBoxFrame -> {"Columns" -> {{True}}, "Rows" -> {{True}}}, 
+        GridBoxItemSize -> {"Columns" -> {Automatic, Automatic}, 
+          "Rows" -> {{Automatic}}}, BaseStyle -> {FontSize -> 11}], "Grid"]], 
+     "Output"], Cell["These three mutually exclusive certificates account for \
+every one of the 343356 nonempty Regge boundaries in the recorded face-based \
+audit. A future generator-first implementation may reproduce the same \
+conclusion more economically.", "Text"]}, Open], 
+  CellGroupData[
+   {Cell["8. Safe optimizations for a generator-first implementation", 
+     "Section"], 
+    Cell[BoxData[TagBox[GridBox[{{"\"operation\"", 
+          "\"why it preserves a negative certificate\""}, 
+         {"\"factor complete derivatives and channel polynomials\"", "\"retai\
+ns the full polynomial cancellation factors rather than imposing a \
+monomial-length cutoff\""}, {"\"support and degree incompatibility tests\"", 
+          "\"rejects factor combinations only when their product cannot occur \
+in the multilinear F polynomial\""}, {"\"exact generator deduplication\"", "\
+\"merges literally identical generator polynomials without quotienting \
+distinct cancellation hypersurfaces\""}, 
+         {"\"exact graph/channel permutation\"", "\"the complete tuple \
+(leading polynomial, higher layers, U) is transported by an explicit variable \
+permutation\""}, {"\"checkpoint by graph and codimension\"", "\"changes \
+execution order and storage only, not the set of strata or equations\""}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+        GridBoxBackground -> {"Columns" -> {{None}}, 
+          "Rows" -> {GrayLevel[0.85], None}}, GridBoxFrame -> 
+         {"Columns" -> {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+         {"Columns" -> {Automatic, Automatic}, "Rows" -> {{Automatic}}}, 
+        BaseStyle -> {FontSize -> 11}], "Grid"]], "Output"], 
+    Cell["The following common shortcuts may be useful during discovery, but \
+cannot support a final absence statement.", "Text"], 
+    Cell[BoxData[TagBox[GridBox[{{"\"shortcut\"", 
+          "\"why it is not an absence proof\""}, 
+         {"\"finite generator or union cap\"", 
+          "\"an unvisited cancellation presentation may remain\""}, 
+         {"\"timeout interpreted as False\"", 
+          "\"failure to decide is unresolved, not negative\""}, 
+         {"\"testing only a preferred generator ansatz\"", "\"a different \
+admissible set of cancellation factors may produce another decomposition\""}, 
+         {"\"discarding a valid decomposition before solving its scaling\"", 
+          "\"the positive pinch generally appears only after F_SL has been \
+isolated by the scaling law\""}, 
+         {"\"transferring a wide-angle verdict directly to Regge\"", "\"kinem\
+atic specialization changes the polynomial and its possible cancellation \
+factors\""}}, GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+        AutoDelete -> False, GridBoxBackground -> {"Columns" -> {{None}}, 
+          "Rows" -> {GrayLevel[0.85], None}}, GridBoxFrame -> 
+         {"Columns" -> {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+         {"Columns" -> {Automatic, Automatic}, "Rows" -> {{Automatic}}}, 
+        BaseStyle -> {FontSize -> 11}], "Grid"]], "Output"]}, Open], 
+  CellGroupData[{Cell["9. Reproduction map", "Section"], 
+    Cell["The detailed numerical records remain in \
+WideAngle16_NoCrown_HRF_Audit.nb and WideAngle16_NoCrown_Regge_HRF_Audit.nb. \
+The files below are the smallest implementation map for reproducing the \
+methodology.", "Text"], 
+    Cell[BoxData[TagBox[GridBox[{{"\"role\"", "\"file\""}, 
+         {"\"graph import and one ordinary HRF run\"", 
+          "\"HRF_WideAngle16NoCrownAudit.wl\""}, 
+         {"\"complete codimension-two manifest and one-stratum runner\"", 
+          "\"HRF_WideAngle16Codim2Audit.wl\""}, 
+         {"\"checkpointed codimension-two batch runner\"", 
+          "\"HRF_RunWideAngle16Codim2Batch.wl\""}, 
+         {"\"codimension-two coverage accounting\"", 
+          "\"HRF_WideAngle16Codim2CoverageSummary.wl\""}, 
+         {"\"codimension-two certification regressions\"", 
+          "\"HRF_WideAngle16Codim2RegressionTests.wl\""}, 
+         {"\"wide-angle face, pinch and hierarchy test\"", 
+          "\"HRF_WideAngle16FacePinchAudit.wl\""}, 
+         {"\"wide-angle checkpointed boundary enumeration\"", 
+          "\"run_wa16_face_pinch_depth_batch.wl\""}, 
+         {"\"Regge interior polynomial and face audit\"", 
+          "\"HRF_WideAngle16ReggeInteriorAudit.wl\""}, 
+         {"\"Regge restricted-layer and boundary audit\"", 
+          "\"HRF_WideAngle16ReggeBoundaryAudit.wl\""}, 
+         {"\"Regge interior checkpoint runner\"", 
+          "\"run_wa16_regge_interior_batch.wl\""}, 
+         {"\"Regge class/boundary checkpoint runner\"", 
+          "\"run_wa16_regge_boundary_batch.wl\""}, 
+         {"\"compact persisted results\"", 
+          "\"results/wide_angle_16_* and results/wa16_regge_*\""}}, 
+        GridBoxAlignment -> {"Columns" -> {{Left}}}, AutoDelete -> False, 
+        GridBoxBackground -> {"Columns" -> {{None}}, 
+          "Rows" -> {GrayLevel[0.85], None}}, GridBoxFrame -> 
+         {"Columns" -> {{True}}, "Rows" -> {{True}}}, GridBoxItemSize -> 
+         {"Columns" -> {Automatic, Automatic}, "Rows" -> {{Automatic}}}, 
+        BaseStyle -> {FontSize -> 11}], "Grid"]], "Output"], 
+    Cell["Requirements. Mathematica reconstructs the graph polynomials and \
+solves the algebraic and linear problems. cddexec from cddlib supplies exact \
+rational facet incidences. Batch runners checkpoint after small blocks, so \
+interrupted calculations resume without changing the mathematical sample.", 
+     "Text"], Cell[BoxData[RowBox[{"RunProcess", "[", 
+        RowBox[{"{", RowBox[{"\"wolframscript\"", ",", "\"-file\"", ",", 
+            "\"run_wa16_regge_interior_regression.wl\""}], "}"}], "]"}]], 
+     "Input"], Cell[BoxData[RowBox[{"RunProcess", "[", 
+        RowBox[{"{", RowBox[{"\"wolframscript\"", ",", "\"-file\"", ",", 
+            "\"run_wa16_regge_boundary_regression.wl\""}], "}"}], "]"}]], 
+     "Input"]}, Closed], CellGroupData[{Cell["10. References", "Section"], 
+    Cell["E. Gardi et al., arXiv:2407.13738: the original No-Crown \
+observation, first-sheet parameter-space pinches and dissection.", "Text"], 
+    Cell["E. Gardi et al., arXiv:2607.15126, especially Eqs. (13)-(17): \
+cancellation locus, homogeneous superleading sector and strict hierarchy \
+conditions.", "Text"]}, Closed]}, WindowTitle -> 
+  "Four-loop No-Crown audit guide", Saveable -> True, 
+ StyleDefinitions -> "Default.nb"]

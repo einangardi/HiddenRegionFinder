@@ -1,0 +1,10 @@
+SetDirectory[DirectoryName[$InputFileName]];
+$HRFRunWideAngle16NoCrownAuditOnLoad = False;
+Get["HRF_WideAngle16NoCrownAudit.wl"];
+Get["HRF_WideAngle16ReggeBoundaryAudit.wl"];
+Get["HRF_WideAngle16ReggeBoundaryRegressionTests.wl"];
+result = hrfRunWA16ReggeBoundaryRegressionTests[];
+Export["results/wa16_regge_boundary_v1_regression.wl", result, "Package"];
+Print[InputForm[result["Summary"]]];
+Print[InputForm[Normal[result["Rows"]]]];
+If[result["Summary"]["Failed"] > 0, Exit[1], Exit[0]];
